@@ -17,6 +17,14 @@
 		F46A65B424E1DDA5007CCE6B /* SwiftExampleApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F46A65B224E1DDA5007CCE6B /* SwiftExampleApp.xcdatamodeld */; };
 		F46A65B624E1DDA6007CCE6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F46A65B524E1DDA6007CCE6B /* Assets.xcassets */; };
 		F46A65B924E1DDA6007CCE6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F46A65B724E1DDA6007CCE6B /* LaunchScreen.storyboard */; };
+		F46A65C824E1E0BA007CCE6B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F46A65C724E1E0BA007CCE6B /* AppDelegate.m */; };
+		F46A65CB24E1E0BA007CCE6B /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F46A65CA24E1E0BA007CCE6B /* SceneDelegate.m */; };
+		F46A65CE24E1E0BA007CCE6B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46A65CD24E1E0BA007CCE6B /* ViewController.m */; };
+		F46A65D124E1E0BA007CCE6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F46A65CF24E1E0BA007CCE6B /* Main.storyboard */; };
+		F46A65D424E1E0BA007CCE6B /* ObjCExampleApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F46A65D224E1E0BA007CCE6B /* ObjCExampleApp.xcdatamodeld */; };
+		F46A65D624E1E0BB007CCE6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F46A65D524E1E0BB007CCE6B /* Assets.xcassets */; };
+		F46A65D924E1E0BB007CCE6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F46A65D724E1E0BB007CCE6B /* LaunchScreen.storyboard */; };
+		F46A65DC24E1E0BB007CCE6B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F46A65DB24E1E0BB007CCE6B /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +54,20 @@
 		F46A65B824E1DDA6007CCE6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F46A65BA24E1DDA6007CCE6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F46A65BE24E1DDB9007CCE6B /* SwiftExampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftExampleApp.entitlements; sourceTree = "<group>"; };
+		F46A65C424E1E0BA007CCE6B /* ObjCExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjCExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F46A65C624E1E0BA007CCE6B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F46A65C724E1E0BA007CCE6B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F46A65C924E1E0BA007CCE6B /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		F46A65CA24E1E0BA007CCE6B /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		F46A65CC24E1E0BA007CCE6B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F46A65CD24E1E0BA007CCE6B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F46A65D024E1E0BA007CCE6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F46A65D324E1E0BA007CCE6B /* ObjCExampleApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ObjCExampleApp.xcdatamodel; sourceTree = "<group>"; };
+		F46A65D524E1E0BB007CCE6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F46A65D824E1E0BB007CCE6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F46A65DA24E1E0BB007CCE6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F46A65DB24E1E0BB007CCE6B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F46A65E124E1E130007CCE6B /* ObjCExampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ObjCExampleApp.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +93,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F46A65C124E1E0BA007CCE6B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -80,6 +109,7 @@
 				F46A656824E19DA1007CCE6B /* AASwiftSDK */,
 				F46A657324E19DA1007CCE6B /* AASwiftSDKTests */,
 				F46A65A824E1DDA5007CCE6B /* SwiftExampleApp */,
+				F46A65C524E1E0BA007CCE6B /* ObjCExampleApp */,
 				F46A656724E19DA1007CCE6B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +120,7 @@
 				F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */,
 				F46A656F24E19DA1007CCE6B /* AASwiftSDKTests.xctest */,
 				F46A65A724E1DDA5007CCE6B /* SwiftExampleApp.app */,
+				F46A65C424E1E0BA007CCE6B /* ObjCExampleApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,6 +157,26 @@
 				F46A65B224E1DDA5007CCE6B /* SwiftExampleApp.xcdatamodeld */,
 			);
 			path = SwiftExampleApp;
+			sourceTree = "<group>";
+		};
+		F46A65C524E1E0BA007CCE6B /* ObjCExampleApp */ = {
+			isa = PBXGroup;
+			children = (
+				F46A65E124E1E130007CCE6B /* ObjCExampleApp.entitlements */,
+				F46A65C624E1E0BA007CCE6B /* AppDelegate.h */,
+				F46A65C724E1E0BA007CCE6B /* AppDelegate.m */,
+				F46A65C924E1E0BA007CCE6B /* SceneDelegate.h */,
+				F46A65CA24E1E0BA007CCE6B /* SceneDelegate.m */,
+				F46A65CC24E1E0BA007CCE6B /* ViewController.h */,
+				F46A65CD24E1E0BA007CCE6B /* ViewController.m */,
+				F46A65CF24E1E0BA007CCE6B /* Main.storyboard */,
+				F46A65D524E1E0BB007CCE6B /* Assets.xcassets */,
+				F46A65D724E1E0BB007CCE6B /* LaunchScreen.storyboard */,
+				F46A65DA24E1E0BB007CCE6B /* Info.plist */,
+				F46A65DB24E1E0BB007CCE6B /* main.m */,
+				F46A65D224E1E0BA007CCE6B /* ObjCExampleApp.xcdatamodeld */,
+			);
+			path = ObjCExampleApp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +246,23 @@
 			productReference = F46A65A724E1DDA5007CCE6B /* SwiftExampleApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F46A65C324E1E0BA007CCE6B /* ObjCExampleApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F46A65DF24E1E0BB007CCE6B /* Build configuration list for PBXNativeTarget "ObjCExampleApp" */;
+			buildPhases = (
+				F46A65C024E1E0BA007CCE6B /* Sources */,
+				F46A65C124E1E0BA007CCE6B /* Frameworks */,
+				F46A65C224E1E0BA007CCE6B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ObjCExampleApp;
+			productName = ObjCExampleApp;
+			productReference = F46A65C424E1E0BA007CCE6B /* ObjCExampleApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -212,6 +280,9 @@
 						CreatedOnToolsVersion = 11.6;
 					};
 					F46A65A624E1DDA5007CCE6B = {
+						CreatedOnToolsVersion = 11.6;
+					};
+					F46A65C324E1E0BA007CCE6B = {
 						CreatedOnToolsVersion = 11.6;
 					};
 				};
@@ -232,6 +303,7 @@
 				F46A656524E19DA1007CCE6B /* AASwiftSDK */,
 				F46A656E24E19DA1007CCE6B /* AASwiftSDKTests */,
 				F46A65A624E1DDA5007CCE6B /* SwiftExampleApp */,
+				F46A65C324E1E0BA007CCE6B /* ObjCExampleApp */,
 			);
 		};
 /* End PBXProject section */
@@ -258,6 +330,16 @@
 				F46A65B924E1DDA6007CCE6B /* LaunchScreen.storyboard in Resources */,
 				F46A65B624E1DDA6007CCE6B /* Assets.xcassets in Resources */,
 				F46A65B124E1DDA5007CCE6B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F46A65C224E1E0BA007CCE6B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F46A65D924E1E0BB007CCE6B /* LaunchScreen.storyboard in Resources */,
+				F46A65D624E1E0BB007CCE6B /* Assets.xcassets in Resources */,
+				F46A65D124E1E0BA007CCE6B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +372,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F46A65C024E1E0BA007CCE6B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F46A65DC24E1E0BB007CCE6B /* main.m in Sources */,
+				F46A65CE24E1E0BA007CCE6B /* ViewController.m in Sources */,
+				F46A65C824E1E0BA007CCE6B /* AppDelegate.m in Sources */,
+				F46A65D424E1E0BA007CCE6B /* ObjCExampleApp.xcdatamodeld in Sources */,
+				F46A65CB24E1E0BA007CCE6B /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -313,6 +407,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				F46A65B824E1DDA6007CCE6B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		F46A65CF24E1E0BA007CCE6B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F46A65D024E1E0BA007CCE6B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F46A65D724E1E0BB007CCE6B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F46A65D824E1E0BB007CCE6B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -558,6 +668,42 @@
 			};
 			name = Release;
 		};
+		F46A65DD24E1E0BB007CCE6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ObjCExampleApp/ObjCExampleApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = E4LB8UE2WX;
+				INFOPLIST_FILE = ObjCExampleApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.ObjCExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F46A65DE24E1E0BB007CCE6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ObjCExampleApp/ObjCExampleApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = E4LB8UE2WX;
+				INFOPLIST_FILE = ObjCExampleApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.ObjCExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -597,6 +743,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		F46A65DF24E1E0BB007CCE6B /* Build configuration list for PBXNativeTarget "ObjCExampleApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F46A65DD24E1E0BB007CCE6B /* Debug */,
+				F46A65DE24E1E0BB007CCE6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
@@ -607,6 +762,16 @@
 			);
 			currentVersion = F46A65B324E1DDA5007CCE6B /* SwiftExampleApp.xcdatamodel */;
 			path = SwiftExampleApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		F46A65D224E1E0BA007CCE6B /* ObjCExampleApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F46A65D324E1E0BA007CCE6B /* ObjCExampleApp.xcdatamodel */,
+			);
+			currentVersion = F46A65D324E1E0BA007CCE6B /* ObjCExampleApp.xcdatamodel */;
+			path = ObjCExampleApp.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
