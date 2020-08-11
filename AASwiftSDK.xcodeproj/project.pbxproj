@@ -23,8 +23,16 @@
 		F46A65D124E1E0BA007CCE6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F46A65CF24E1E0BA007CCE6B /* Main.storyboard */; };
 		F46A65D424E1E0BA007CCE6B /* ObjCExampleApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F46A65D224E1E0BA007CCE6B /* ObjCExampleApp.xcdatamodeld */; };
 		F46A65D624E1E0BB007CCE6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F46A65D524E1E0BB007CCE6B /* Assets.xcassets */; };
-		F46A65D924E1E0BB007CCE6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F46A65D724E1E0BB007CCE6B /* LaunchScreen.storyboard */; };
 		F46A65DC24E1E0BB007CCE6B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F46A65DB24E1E0BB007CCE6B /* main.m */; };
+		F4A2046C24E2EFB4003F909D /* cropped-AdAdapted-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A2046B24E2EFB4003F909D /* cropped-AdAdapted-Logo.png */; };
+		F4A2046D24E2EFB4003F909D /* cropped-AdAdapted-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A2046B24E2EFB4003F909D /* cropped-AdAdapted-Logo.png */; };
+		F4A2047224E2F03C003F909D /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2047124E2F03C003F909D /* SearchTextField.swift */; };
+		F4A2047424E2F07C003F909D /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2047324E2F07C003F909D /* LaunchViewController.swift */; };
+		F4A2047624E2F29A003F909D /* DefaultListItems.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4A2047524E2F29A003F909D /* DefaultListItems.plist */; };
+		F4A2047924E3234D003F909D /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A2047824E3234D003F909D /* LaunchViewController.m */; };
+		F4A2047C24E323F8003F909D /* KeywordInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A2047B24E323F8003F909D /* KeywordInterceptor.m */; };
+		F4A2047F24E324C5003F909D /* ObjCSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2047E24E324C5003F909D /* ObjCSearchTextField.swift */; };
+		F4A2048124E3264B003F909D /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2048024E3264B003F909D /* Toast.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,10 +72,20 @@
 		F46A65D024E1E0BA007CCE6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F46A65D324E1E0BA007CCE6B /* ObjCExampleApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ObjCExampleApp.xcdatamodel; sourceTree = "<group>"; };
 		F46A65D524E1E0BB007CCE6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F46A65D824E1E0BB007CCE6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F46A65DA24E1E0BB007CCE6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F46A65DB24E1E0BB007CCE6B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F46A65E124E1E130007CCE6B /* ObjCExampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ObjCExampleApp.entitlements; sourceTree = "<group>"; };
+		F4A2046B24E2EFB4003F909D /* cropped-AdAdapted-Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cropped-AdAdapted-Logo.png"; sourceTree = "<group>"; };
+		F4A2047124E2F03C003F909D /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
+		F4A2047324E2F07C003F909D /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		F4A2047524E2F29A003F909D /* DefaultListItems.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DefaultListItems.plist; sourceTree = "<group>"; };
+		F4A2047724E32329003F909D /* LaunchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
+		F4A2047824E3234D003F909D /* LaunchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
+		F4A2047A24E323DD003F909D /* KeywordInterceptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeywordInterceptor.h; sourceTree = "<group>"; };
+		F4A2047B24E323F8003F909D /* KeywordInterceptor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeywordInterceptor.m; sourceTree = "<group>"; };
+		F4A2047D24E324C4003F909D /* ObjCExampleApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjCExampleApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		F4A2047E24E324C5003F909D /* ObjCSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjCSearchTextField.swift; sourceTree = "<group>"; };
+		F4A2048024E3264B003F909D /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +173,10 @@
 				F46A65B724E1DDA6007CCE6B /* LaunchScreen.storyboard */,
 				F46A65BA24E1DDA6007CCE6B /* Info.plist */,
 				F46A65B224E1DDA5007CCE6B /* SwiftExampleApp.xcdatamodeld */,
+				F4A2046B24E2EFB4003F909D /* cropped-AdAdapted-Logo.png */,
+				F4A2047124E2F03C003F909D /* SearchTextField.swift */,
+				F4A2047324E2F07C003F909D /* LaunchViewController.swift */,
+				F4A2047524E2F29A003F909D /* DefaultListItems.plist */,
 			);
 			path = SwiftExampleApp;
 			sourceTree = "<group>";
@@ -167,14 +189,20 @@
 				F46A65C724E1E0BA007CCE6B /* AppDelegate.m */,
 				F46A65C924E1E0BA007CCE6B /* SceneDelegate.h */,
 				F46A65CA24E1E0BA007CCE6B /* SceneDelegate.m */,
+				F4A2047724E32329003F909D /* LaunchViewController.h */,
+				F4A2047824E3234D003F909D /* LaunchViewController.m */,
 				F46A65CC24E1E0BA007CCE6B /* ViewController.h */,
 				F46A65CD24E1E0BA007CCE6B /* ViewController.m */,
+				F4A2047A24E323DD003F909D /* KeywordInterceptor.h */,
+				F4A2047B24E323F8003F909D /* KeywordInterceptor.m */,
 				F46A65CF24E1E0BA007CCE6B /* Main.storyboard */,
 				F46A65D524E1E0BB007CCE6B /* Assets.xcassets */,
-				F46A65D724E1E0BB007CCE6B /* LaunchScreen.storyboard */,
 				F46A65DA24E1E0BB007CCE6B /* Info.plist */,
 				F46A65DB24E1E0BB007CCE6B /* main.m */,
 				F46A65D224E1E0BA007CCE6B /* ObjCExampleApp.xcdatamodeld */,
+				F4A2047E24E324C5003F909D /* ObjCSearchTextField.swift */,
+				F4A2047D24E324C4003F909D /* ObjCExampleApp-Bridging-Header.h */,
+				F4A2048024E3264B003F909D /* Toast.swift */,
 			);
 			path = ObjCExampleApp;
 			sourceTree = "<group>";
@@ -284,6 +312,7 @@
 					};
 					F46A65C324E1E0BA007CCE6B = {
 						CreatedOnToolsVersion = 11.6;
+						LastSwiftMigration = 1160;
 					};
 				};
 			};
@@ -328,8 +357,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F46A65B924E1DDA6007CCE6B /* LaunchScreen.storyboard in Resources */,
+				F4A2046C24E2EFB4003F909D /* cropped-AdAdapted-Logo.png in Resources */,
 				F46A65B624E1DDA6007CCE6B /* Assets.xcassets in Resources */,
 				F46A65B124E1DDA5007CCE6B /* Main.storyboard in Resources */,
+				F4A2047624E2F29A003F909D /* DefaultListItems.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,7 +368,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F46A65D924E1E0BB007CCE6B /* LaunchScreen.storyboard in Resources */,
+				F4A2046D24E2EFB4003F909D /* cropped-AdAdapted-Logo.png in Resources */,
 				F46A65D624E1E0BB007CCE6B /* Assets.xcassets in Resources */,
 				F46A65D124E1E0BA007CCE6B /* Main.storyboard in Resources */,
 			);
@@ -365,6 +396,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4A2047224E2F03C003F909D /* SearchTextField.swift in Sources */,
+				F4A2047424E2F07C003F909D /* LaunchViewController.swift in Sources */,
 				F46A65AE24E1DDA5007CCE6B /* ViewController.swift in Sources */,
 				F46A65AA24E1DDA5007CCE6B /* AppDelegate.swift in Sources */,
 				F46A65B424E1DDA5007CCE6B /* SwiftExampleApp.xcdatamodeld in Sources */,
@@ -377,10 +410,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F46A65DC24E1E0BB007CCE6B /* main.m in Sources */,
+				F4A2047F24E324C5003F909D /* ObjCSearchTextField.swift in Sources */,
 				F46A65CE24E1E0BA007CCE6B /* ViewController.m in Sources */,
 				F46A65C824E1E0BA007CCE6B /* AppDelegate.m in Sources */,
+				F4A2047C24E323F8003F909D /* KeywordInterceptor.m in Sources */,
 				F46A65D424E1E0BA007CCE6B /* ObjCExampleApp.xcdatamodeld in Sources */,
 				F46A65CB24E1E0BA007CCE6B /* SceneDelegate.m in Sources */,
+				F4A2048124E3264B003F909D /* Toast.swift in Sources */,
+				F4A2047924E3234D003F909D /* LaunchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,14 +454,6 @@
 				F46A65D024E1E0BA007CCE6B /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F46A65D724E1E0BB007CCE6B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F46A65D824E1E0BB007CCE6B /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -672,6 +701,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ObjCExampleApp/ObjCExampleApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E4LB8UE2WX;
@@ -682,6 +712,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.ObjCExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ObjCExampleApp/ObjCExampleApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -690,6 +723,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ObjCExampleApp/ObjCExampleApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E4LB8UE2WX;
@@ -700,6 +734,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.ObjCExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ObjCExampleApp/ObjCExampleApp-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -7,14 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
+//#import <AASDK/AASDK.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (readonly, strong) NSPersistentContainer *persistentContainer;
-
-- (void)saveContext;
-
+@interface AppDelegate : UIResponder <UIApplicationDelegate> //, AASDKObserver>
+@property (strong, nonatomic) UIWindow *window;
 
 @end
 
