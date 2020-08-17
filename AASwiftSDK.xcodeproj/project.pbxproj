@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F467B17C24E43EAE00B89A5F /* AASDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467B17B24E43EAE00B89A5F /* AASDK.swift */; };
+		F467B17E24E45CC700B89A5F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467B17D24E45CC700B89A5F /* Config.swift */; };
+		F467B18024E4790200B89A5F /* InternalProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467B17F24E4790200B89A5F /* InternalProtocols.swift */; };
 		F46A657024E19DA1007CCE6B /* AASwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */; };
 		F46A657524E19DA1007CCE6B /* AASwiftSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46A657424E19DA1007CCE6B /* AASwiftSDKTests.swift */; };
 		F46A657724E19DA1007CCE6B /* AASwiftSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = F46A656924E19DA1007CCE6B /* AASwiftSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -46,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F467B17B24E43EAE00B89A5F /* AASDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AASDK.swift; sourceTree = "<group>"; };
+		F467B17D24E45CC700B89A5F /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		F467B17F24E4790200B89A5F /* InternalProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalProtocols.swift; sourceTree = "<group>"; };
 		F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AASwiftSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F46A656924E19DA1007CCE6B /* AASwiftSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AASwiftSDK.h; sourceTree = "<group>"; };
 		F46A656A24E19DA1007CCE6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -146,8 +152,17 @@
 		F46A656824E19DA1007CCE6B /* AASwiftSDK */ = {
 			isa = PBXGroup;
 			children = (
+				F46DB57E24EADE8200A81CBF /* Public */,
 				F46A656924E19DA1007CCE6B /* AASwiftSDK.h */,
+				F467B17D24E45CC700B89A5F /* Config.swift */,
+				F467B17F24E4790200B89A5F /* InternalProtocols.swift */,
 				F46A656A24E19DA1007CCE6B /* Info.plist */,
+				F46DB57F24EADEC200A81CBF /* AdObjects */,
+				F46DB58224EAE0EE00A81CBF /* Helpers */,
+				F46DB58324EAE2C000A81CBF /* Connection */,
+				F46DB58424EAE2EB00A81CBF /* Requests */,
+				F46DB58E24EAE3FB00A81CBF /* Support */,
+				F46DB59024EAE45200A81CBF /* Frameworks */,
 			);
 			path = AASwiftSDK;
 			sourceTree = "<group>";
@@ -168,6 +183,7 @@
 				F46A65A924E1DDA5007CCE6B /* AppDelegate.swift */,
 				F46A65AB24E1DDA5007CCE6B /* SceneDelegate.swift */,
 				F46A65AD24E1DDA5007CCE6B /* ViewController.swift */,
+				F4A2047324E2F07C003F909D /* LaunchViewController.swift */,
 				F46A65AF24E1DDA5007CCE6B /* Main.storyboard */,
 				F46A65B524E1DDA6007CCE6B /* Assets.xcassets */,
 				F46A65B724E1DDA6007CCE6B /* LaunchScreen.storyboard */,
@@ -175,7 +191,6 @@
 				F46A65B224E1DDA5007CCE6B /* SwiftExampleApp.xcdatamodeld */,
 				F4A2046B24E2EFB4003F909D /* cropped-AdAdapted-Logo.png */,
 				F4A2047124E2F03C003F909D /* SearchTextField.swift */,
-				F4A2047324E2F07C003F909D /* LaunchViewController.swift */,
 				F4A2047524E2F29A003F909D /* DefaultListItems.plist */,
 			);
 			path = SwiftExampleApp;
@@ -205,6 +220,136 @@
 				F4A2048024E3264B003F909D /* Toast.swift */,
 			);
 			path = ObjCExampleApp;
+			sourceTree = "<group>";
+		};
+		F46DB57E24EADE8200A81CBF /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				F467B17B24E43EAE00B89A5F /* AASDK.swift */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		F46DB57F24EADEC200A81CBF /* AdObjects */ = {
+			isa = PBXGroup;
+			children = (
+				F46DB58024EADEE300A81CBF /* AdProviders */,
+				F46DB58124EAE0D600A81CBF /* Popup */,
+			);
+			path = AdObjects;
+			sourceTree = "<group>";
+		};
+		F46DB58024EADEE300A81CBF /* AdProviders */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AdProviders;
+			sourceTree = "<group>";
+		};
+		F46DB58124EAE0D600A81CBF /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
+		F46DB58224EAE0EE00A81CBF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F46DB58324EAE2C000A81CBF /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Connection;
+			sourceTree = "<group>";
+		};
+		F46DB58424EAE2EB00A81CBF /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				F46DB58D24EAE3DF00A81CBF /* Init */,
+				F46DB58C24EAE3DA00A81CBF /* GetAds */,
+				F46DB58B24EAE3D200A81CBF /* UpdateAds */,
+				F46DB58A24EAE3CD00A81CBF /* TrackEvent */,
+				F46DB58924EAE3C400A81CBF /* KeywordIntercept */,
+				F46DB58824EAE3B100A81CBF /* v2Batchable */,
+				F46DB58724EAE39F00A81CBF /* EventCollector */,
+				F46DB58624EAE39000A81CBF /* PayloadService */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		F46DB58624EAE39000A81CBF /* PayloadService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PayloadService;
+			sourceTree = "<group>";
+		};
+		F46DB58724EAE39F00A81CBF /* EventCollector */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EventCollector;
+			sourceTree = "<group>";
+		};
+		F46DB58824EAE3B100A81CBF /* v2Batchable */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = v2Batchable;
+			sourceTree = "<group>";
+		};
+		F46DB58924EAE3C400A81CBF /* KeywordIntercept */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = KeywordIntercept;
+			sourceTree = "<group>";
+		};
+		F46DB58A24EAE3CD00A81CBF /* TrackEvent */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TrackEvent;
+			sourceTree = "<group>";
+		};
+		F46DB58B24EAE3D200A81CBF /* UpdateAds */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UpdateAds;
+			sourceTree = "<group>";
+		};
+		F46DB58C24EAE3DA00A81CBF /* GetAds */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GetAds;
+			sourceTree = "<group>";
+		};
+		F46DB58D24EAE3DF00A81CBF /* Init */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Init;
+			sourceTree = "<group>";
+		};
+		F46DB58E24EAE3FB00A81CBF /* Support */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		F46DB59024EAE45200A81CBF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,6 +448,7 @@
 				TargetAttributes = {
 					F46A656524E19DA1007CCE6B = {
 						CreatedOnToolsVersion = 11.6;
+						LastSwiftMigration = 1160;
 					};
 					F46A656E24E19DA1007CCE6B = {
 						CreatedOnToolsVersion = 11.6;
@@ -381,6 +527,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F467B17C24E43EAE00B89A5F /* AASDK.swift in Sources */,
+				F467B17E24E45CC700B89A5F /* Config.swift in Sources */,
+				F467B18024E4790200B89A5F /* InternalProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,6 +731,7 @@
 		F46A657B24E19DA1007CCE6B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -597,6 +747,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.AASwiftSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -605,6 +756,7 @@
 		F46A657C24E19DA1007CCE6B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -628,6 +780,7 @@
 		F46A657E24E19DA1007CCE6B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AASwiftSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -645,6 +798,7 @@
 		F46A657F24E19DA1007CCE6B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AASwiftSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
