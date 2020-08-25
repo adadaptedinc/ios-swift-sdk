@@ -22,7 +22,7 @@
 //           AASDK_OPTION_KEYWORD_INTERCEPT:@YES
 //       };
 //
-//       [AASDK startSessionWithAppID:@"NWYYODU1Y2JJOWU0" registerListenersFor:self options:options];
+//       [AASDK startSessionWithAppID:@"NWY0NTZIODZHNWY0" registerListenersFor:self options:options];
     
     return YES;
 }

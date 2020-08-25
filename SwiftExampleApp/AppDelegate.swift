@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            as [String : Any]
 
         // iOS api key
-        //AASDK.startSession(withAppID: "NWYYODU1Y2JJOWU0", registerListenersFor: self, options: options)
+        //AASDK.startSession(withAppID: "NWY0NTZIODZHNWY0", registerListenersFor: self, options: options)
 
         return true
     }
