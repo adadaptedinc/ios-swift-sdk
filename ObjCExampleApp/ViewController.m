@@ -8,10 +8,11 @@
 
 #import "ViewController.h"
 #import "ObjCExampleApp-Swift.h"
+@import AASwiftSDK;
 
 @interface ViewController ()
 
-//@property (weak, nonatomic) IBOutlet AAAdAdaptedZoneView *adZone;
+@property (weak, nonatomic) IBOutlet AAAdAdaptedZoneView *adZone;
 @property (weak, nonatomic) IBOutlet ObjCSearchTextField *searchTextField;
 
 @end
@@ -26,52 +27,52 @@
     listTableView.delegate = self;
     _searchTextField.delegate = self;
     
-    //_adZone.zoneOwner = self;
-    //[AASDK registerContentListenersFor:self];
+    [_adZone setZoneOwner:self];
+    [AASDK registerContentListenersFor:self];
     
     _searchTextField.minCharactersNumberToStartFiltering = 3;
     [_searchTextField filterStrings: defaultItems];
     
 }
 
-//- (void)aaContentNotification:(NSNotification*)notification {
-//    NSLog(@"In-app content available");
-//    AAAdContent *adContent = [[notification userInfo] objectForKey:AASDK_KEY_AD_CONTENT];
-//
-//    for (AADetailedListItem *item in adContent.detailedListItems) {
-//        NSLog(@"AADetailedListItem: %@", item.productTitle);
-//        [self insertItemToList:item.productTitle];
-//    }
-//
-//    // Acknowledge the items were added to the list
-//    [adContent acknowledge];
-//}
+- (void)aaContentNotification:(NSNotification*)notification {
+    NSLog(@"In-app content available");
+    AAAdContent *adContent = [[notification userInfo] objectForKey:AASDK.AASDK_KEY_AD_CONTENT];
+
+    for (AADetailedListItem *item in adContent.detailedListItems) {
+        NSLog(@"AADetailedListItem: %@", item.productTitle);
+        [self insertItemToList:item.productTitle];
+    }
+
+    // Acknowledge the items were added to the list
+    [adContent acknowledge];
+}
 
 - (UIViewController *)viewControllerForPresentingModalView {
     return self;
 }
 
-//- (void)zoneViewDidLoadZone:(AAZoneView *)view {
-//    NSLog(@"Zone LOADED");
-//}
-//
-//- (void)zoneViewDidFailToLoadZone:(AAZoneView *)view {
-//    NSLog(@"Zone FAILED TO LOAD");
-//}
-//
-//- (void)aaPayloadNotification:(NSNotification*)notification {
-//    NSLog(@"Out-of-app content available");
-//    NSArray *adPayload = [notification.userInfo objectForKey:AASDK_KEY_CONTENT_PAYLOADS];
-//
-//    for (AAContentPayload* payload in adPayload) {
-//        for (AADetailedListItem *item in payload.detailedListItems) {
-//            NSLog(@"AADetailedListItem: %@", item.productTitle);
-//            [self insertItemToList:item.productTitle];
-//        }
-//
-//        [payload acknowledge];
-//    }
-//}
+- (void)zoneViewDidLoadZone:(AAZoneView *)view {
+    NSLog(@"Zone LOADED");
+}
+
+- (void)zoneViewDidFailToLoadZone:(AAZoneView *)view {
+    NSLog(@"Zone FAILED TO LOAD");
+}
+
+- (void)aaPayloadNotification:(NSNotification*)notification {
+    NSLog(@"Out-of-app content available");
+    NSArray *adPayload = [notification.userInfo objectForKey:AASDK.AASDK_KEY_CONTENT_PAYLOADS];
+
+    for (AAContentPayload* payload in adPayload) {
+        for (AADetailedListItem *item in payload.detailedListItems) {
+            NSLog(@"AADetailedListItem: %@", item.productTitle);
+            [self insertItemToList:item.productTitle];
+        }
+
+        [payload acknowledge];
+    }
+}
 
 //Non AASDK calls
 

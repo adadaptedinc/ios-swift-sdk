@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "KeywordInterceptor.h"
 #import "ObjCExampleApp-Swift.h"
-//#import <AASDK/AASDK.h>
+@import AASwiftSDK;
 
 @interface KeywordInterceptor ()
 
@@ -18,21 +18,21 @@
 @implementation KeywordInterceptor
 
 - (NSString*)getInterceptSuggestions:(NSString*)inputText {
-//    NSDictionary *results = [AASDK keywordInterceptFor: inputText];
-//
-//    if (results) {
-//        NSLog(@"Keyword intercept suggestion available");
-//        NSString *suggestionName = results[AASDK_KEY_KI_REPLACEMENT_TEXT];
-//        NSLog(@"Suggestion item name: %@", suggestionName);
-//        [AASDK keywordInterceptPresented];
-//        return suggestionName;
-//    } else { return nil; }
+    NSDictionary *results = [AASDK keywordInterceptFor: inputText];
+
+    if (results) {
+        NSLog(@"Keyword intercept suggestion available");
+        NSString *suggestionName = results[AASDK.AASDK_KEY_KI_REPLACEMENT_TEXT];
+        NSLog(@"Suggestion item name: %@", suggestionName);
+        [AASDK keywordInterceptPresented];
+        return suggestionName;
+    } else { return nil; }
     
     return nil;
 }
 
 - (void)interceptWasSelected {
-    //[AASDK keywordInterceptSelected];
+    [AASDK keywordInterceptSelected];
 }
 
 @end

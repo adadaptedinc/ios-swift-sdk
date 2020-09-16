@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-//#import <AASDK/AASDK.h>
+@import AASwiftSDK;
 
 @interface AppDelegate ()
 
@@ -17,51 +17,52 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-//    NSDictionary *options = @{
-//           AASDK_OPTION_TEST_MODE:@YES,
-//           AASDK_OPTION_KEYWORD_INTERCEPT:@YES
-//       };
-//
-//       [AASDK startSessionWithAppID:@"NWY0NTZIODZHNWY0" registerListenersFor:self options:options];
+    NSDictionary *options = @{
+        AASDK.AASDK_OPTION_TEST_MODE:@YES,
+        AASDK.AASDK_OPTION_KEYWORD_INTERCEPT:@YES
+       };
+
+    [AASDK initializeSDK];
+    [AASDK startSessionWithAppID:@"NWY0NTZIODZHNWY0" registerListenersFor:self options:options];
     
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
-    //[AASDK linkContentParser:userActivity];
+    [AASDK linkContentParser:userActivity];
     return true;
 }
 
 
-//- (void)aaSDKInitComplete:(nonnull NSNotification *)notification {
-//    NSLog(@"%@", notification);
-//
-//    // Get an array of zone IDs for application
-//       NSArray *ids = [AASDK availableZoneIDs];
-//
-//       // Check for valid zone IDs
-//       if (!ids || !ids.count) {
-//           NSLog(@"No ad zones available");
-//           // Don't try to load any ads
-//       }
-//       else {
-//           // Check valid zone IDs for available ads
-//           for (NSString *zoneId in ids) {
-//               if ([AASDK zoneAvailable: zoneId]) {
-//                   NSLog(@"Zone #%@ has ads available to load", zoneId);
-//                   // Try to load ads...
-//               }
-//           }
-//       }
-//}
+- (void)aaSDKInitComplete:(nonnull NSNotification *)notification {
+    NSLog(@"%@", notification);
 
-//- (void)aaSDKError:(nonnull NSNotification *)error {
-//    NSLog(@"%@", error);
-//}
-//
-//- (void)aaSDKKeywordInterceptInitComplete:(NSNotification *)notification {
-//    NSLog(@"%@", notification);
-//}
+    // Get an array of zone IDs for application
+       NSArray *ids = [AASDK availableZoneIDs];
+
+       // Check for valid zone IDs
+       if (!ids || !ids.count) {
+           NSLog(@"No ad zones available");
+           // Don't try to load any ads
+       }
+       else {
+           // Check valid zone IDs for available ads
+           for (NSString *zoneId in ids) {
+               if ([AASDK zoneAvailable: zoneId]) {
+                   NSLog(@"Zone #%@ has ads available to load", zoneId);
+                   // Try to load ads...
+               }
+           }
+       }
+}
+
+- (void)aaSDKError:(nonnull NSNotification *)error {
+    NSLog(@"%@", error);
+}
+
+- (void)aaSDKKeywordInterceptInitComplete:(NSNotification *)notification {
+    NSLog(@"%@", notification);
+}
 
 
 #pragma mark - UISceneSession lifecycle
