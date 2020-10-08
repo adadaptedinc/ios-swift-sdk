@@ -10,19 +10,19 @@ stages:
 build_project:
   stage: build
   script:
-    - xcodebuild clean -project ProjectName.xcodeproj -scheme SchemeName | xcpretty
-    - xcodebuild test -project ProjectName.xcodeproj -scheme SchemeName -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.3' | xcpretty -s
+    - xcodebuild clean -project AASwiftSDK.xcodeproj -scheme SchemeName | xcpretty
+    - xcodebuild test -project AASwiftSDK.xcodeproj -scheme SchemeName -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.3' | xcpretty -s
 
 archive_project:
   stage: archive
   script:
-    - xcodebuild clean archive -archivePath build/ProjectName -scheme SchemeName
-    - xcodebuild -exportArchive -exportFormat ipa -archivePath "build/ProjectName.xcarchive" -exportPath "build/ProjectName.ipa" -exportProvisioningProfile "ProvisioningProfileName"
+    - xcodebuild clean archive -archivePath build/AASwiftSDK -scheme SchemeName
+    - xcodebuild -exportArchive -exportFormat ipa -archivePath "build/AASwiftSDK.xcarchive" -exportPath "build/AASwiftSDK.ipa" -exportProvisioningProfile "ProvisioningProfileName"
   only:
     - master
   artifacts:
     paths:
-      - build/ProjectName.ipa
+      - build/AASwiftSDK.ipa
   tags:
     - ios_11-3
     - xcode_9-3
