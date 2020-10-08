@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import AASwiftSDK
 
 class ViewController:
     UIViewController,
     UITableViewDataSource,
     UITableViewDelegate,
-    UISearchTextFieldDelegate
-    //AAZoneViewOwner,
-    //AASDKContentDelegate
+    UISearchTextFieldDelegate,
+    AAZoneViewOwner,
+    AASDKContentDelegate
 {
     
-    //@IBOutlet weak var adZoneView: AAAdAdaptedZoneView!
+    @IBOutlet weak var aaAdZoneView: AAAdAdaptedZoneView!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet weak var searchTextField: SearchTextField!
@@ -30,8 +31,8 @@ class ViewController:
         searchTextField.delegate = self
         listTableView.delegate = self
         listTableView.dataSource = self
-        //adZoneView.zoneOwner = self
-        //AASDK.registerContentListeners(for: self)
+        aaAdZoneView.setZoneOwner(self)
+        AASDK.registerContentListeners(for: self)
         
         listData = ["Eggs", "Bread"]
         searchTextField.theme.font = UIFont.systemFont(ofSize: 15)
@@ -41,47 +42,49 @@ class ViewController:
     
     //MARK: AA SDK Calls
     
-    func viewControllerForPresentingModalView() -> UIViewController! {
+    func viewControllerForPresentingModalView() -> UIViewController? {
         return self
     }
     
-//    func aaContentNotification(_ notification: Notification) {
-//           print("In-app content available")
-//           guard let userinfo = notification.userInfo else { return }
-//           guard let adContent = userinfo[AASDK_KEY_AD_CONTENT] as? AAAdContent else { return }
-//
-//           for item in adContent.detailedListItems {
-//               print("AADetailedListItem: ",item.productTitle)
-//            appendListItem(itemName: item.productTitle)
-//           }
-//
-//           // Acknowledge the items were added to the list
-//           adContent.acknowledge()
-//    }
-//
-//    func zoneViewDidLoadZone(_ view: AAZoneView!) {
-//        print("Zone " + view.zoneId + " loaded")
-//    }
-//
-//    func zoneViewDidFail(toLoadZone view: AAZoneView!) {
-//        print("Zone failed to load")
-//    }
+    func aaContentNotification(_ notification: Notification) {
+           print("In-app content available")
+           guard let userinfo = notification.userInfo else { return }
+        guard let adContent = userinfo[AASDK.AASDK_KEY_AD_CONTENT] as? AAAdContent else { return }
+
+           for item in adContent.detailedListItems {
+               print("AADetailedListItem: ",item.productTitle)
+            appendListItem(itemName: item.productTitle)
+           }
+
+           // Acknowledge the items were added to the list
+           adContent.acknowledge()
+    }
+
+    func zoneViewDidLoadZone(_ view: AAZoneView?) {
+        if let zoneId = view?.zoneId {
+            print("Zone " + zoneId + " loaded")
+        }
+    }
+
+    func zoneViewDidFail(toLoadZone view: AAZoneView?) {
+        print("Zone failed to load")
+    }
     
     //Out of App AddIt
-//    func aaPayloadNotification(_ notification: Notification) {
-//        print("Out-of-app content available")
-//        guard let userinfo = notification.userInfo else { return }
-//        guard let adPayload = userinfo[AASDK_KEY_CONTENT_PAYLOADS] as? [AAContentPayload] else { return }
-//
-//        for payload in adPayload {
-//            for item in payload.detailedListItems {
-//                print("AADetailedListItem: ", item.productTitle)
-//                appendListItem(itemName: item.productTitle)
-//            }
-//
-//            payload.acknowledge()
-//        }
-//    }
+    func aaPayloadNotification(_ notification: Notification) {
+        print("Out-of-app content available")
+        guard let userinfo = notification.userInfo else { return }
+        guard let adPayload = userinfo[AASDK.AASDK_KEY_CONTENT_PAYLOADS] as? [AAContentPayload] else { return }
+
+        for payload in adPayload {
+            for item in payload.detailedListItems {
+                print("AADetailedListItem: ", item.productTitle)
+                appendListItem(itemName: item.productTitle)
+            }
+
+            payload.acknowledge()
+        }
+    }
     
     //MARK: Other Calls
     

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <AASDK/AASDK.h>
+@import AASwiftSDK;
+//#import <AASwiftSDK/AASwiftSDK.h>
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchTextFieldDelegate> {//, AAZoneViewOwner, AASDKContentDelegate> {
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchTextFieldDelegate, AAZoneViewOwner, AASDKContentDelegate> {
     IBOutlet UITableView *listTableView;
     NSMutableArray *listData;
     NSMutableArray *defaultItems;

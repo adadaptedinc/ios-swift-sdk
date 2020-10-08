@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tDl-EF-X5m">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tDl-EF-X5m">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,7 +23,7 @@
                                     <constraint firstAttribute="height" constant="44" id="4ad-pq-prn"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
-                                <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" systemColor="systemOrangeColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cropped-AdAdapted-Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="dZl-ZN-ONj">
@@ -30,7 +32,7 @@
                                     <constraint firstAttribute="height" constant="128" id="UOB-51-RCA"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Otr-rK-MW8">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Otr-rK-MW8">
                                 <rect key="frame" x="143" y="433" width="133" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="zNT-xr-hRw"/>
@@ -41,7 +43,7 @@
                                     <segue destination="BYZ-38-t0r" kind="presentation" id="rt3-oc-7rk"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="tT8-wG-fLI">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="tT8-wG-fLI">
                                 <rect key="frame" x="72" y="526" width="271" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Test ListManager Reports"/>
@@ -50,7 +52,8 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="WCC-bM-iFz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="dZl-ZN-ONj" firstAttribute="leading" secondItem="MGN-nX-OIN" secondAttribute="leading" id="6Cc-f7-4g3"/>
                             <constraint firstItem="Otr-rK-MW8" firstAttribute="centerY" secondItem="RyP-YE-Edl" secondAttribute="centerY" id="73a-a6-USg"/>
@@ -65,7 +68,6 @@
                             <constraint firstItem="dZl-ZN-ONj" firstAttribute="top" secondItem="WCC-bM-iFz" secondAttribute="top" constant="22" id="elW-vt-l2h"/>
                             <constraint firstItem="MGN-nX-OIN" firstAttribute="top" secondItem="WCC-bM-iFz" secondAttribute="top" constant="130" id="pWk-sX-FMa"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="WCC-bM-iFz"/>
                     </view>
                     <connections>
                         <outlet property="launchLabel" destination="MGN-nX-OIN" id="urW-YJ-Yhz"/>
@@ -86,7 +88,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleAspectFit" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PRO-hx-G6h">
                                 <rect key="frame" x="20" y="379" width="374" height="483"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Groceries" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TEJ-gT-bMt">
                                 <rect key="frame" x="20" y="344" width="92" height="27"/>
@@ -96,7 +98,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add To List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egb-YW-Iur">
-                                <rect key="frame" x="20" y="193" width="97" height="24"/>
+                                <rect key="frame" x="20" y="193" width="139" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
@@ -111,7 +113,7 @@
                                     <action selector="textFieldChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="lfc-EC-EcK"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KKw-ds-8Ug">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KKw-ds-8Ug">
                                 <rect key="frame" x="311" y="267" width="36" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -120,12 +122,21 @@
                                     <action selector="addItemToList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8p0-Nr-qni"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O5L-XD-uqX" customClass="AAAdAdaptedZoneView" customModule="AASwiftSDK">
+                                <rect key="frame" x="48" y="42" width="319" height="114"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="zoneId" value="101931"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="3JH-oh-p3p"/>
                     <connections>
+                        <outlet property="aaAdZoneView" destination="O5L-XD-uqX" id="Kfc-z4-GSi"/>
                         <outlet property="addButton" destination="KKw-ds-8Ug" id="vNO-Yy-KlN"/>
                         <outlet property="listTableView" destination="PRO-hx-G6h" id="dy1-Oi-I61"/>
                         <outlet property="searchTextField" destination="dWA-FO-Pou" id="jIi-yZ-GF4"/>
@@ -138,5 +149,11 @@
     </scenes>
     <resources>
         <image name="cropped-AdAdapted-Logo.png" width="1538" height="348"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

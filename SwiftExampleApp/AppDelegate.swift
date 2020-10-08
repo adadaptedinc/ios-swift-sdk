@@ -8,58 +8,59 @@
 
 import UIKit
 import CoreData
+import AASwiftSDK
 
 @UIApplicationMain
-//class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver {
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        let options = [
-//            AASDK_OPTION_TEST_MODE:true,
-//            AASDK_OPTION_KEYWORD_INTERCEPT:true]
-//            as [String : Any]
+        let options = [
+            AASDK.AASDK_OPTION_TEST_MODE:true,
+            AASDK.AASDK_OPTION_KEYWORD_INTERCEPT:true]
+            as [String : Any]
 
-        // iOS api key
-        //AASDK.startSession(withAppID: "NWY0NTZIODZHNWY0", registerListenersFor: self, options: options)
-
+         //iOS api key
+        AASDK.initializeSDK()
+        AASDK.startSession(withAppID: "NWY0NTZIODZHNWY0", registerListenersFor: self, options: options)
+        
         return true
     }
     
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        //AASDK.linkContentParser(userActivity)
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, reoptionalstorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        AASDK.linkContentParser(userActivity)
         return true
     }
 
     // MARK: AASDK Calls
     
-//    func aaSDKInitComplete(_ notification: Notification) {
-//        print("init complete")
-//
-//        let ids = AASDK.availableZoneIDs()
-//
-//        // Check for valid zone IDs
-//        if (ids.isEmpty) {
-//            print("No ad zones available")
-//            // Don't try to load any ads
-//        }
-//        else {
-//            // Check valid zone IDs for available ads
-//            for id in ids {
-//                if (AASDK.zoneAvailable(id as! String)) {
-//                    print("Zone \(id) is available")
-//                    // Try to load ads...
-//                }
-//            }
-//        }
-//    }
+    func aaSDKInitComplete(_ notification: Notification) {
+        print("init complete")
 
-//    func aaSDKError(_ error: Notification) {
-//        print("error \(error.debugDescription)")
-//    }
-//
-//    func aaSDKKeywordInterceptInitComplete(_ notification: Notification) {
-//        print(notification)
-//    }
+        let ids = AASDK.availableZoneIDs()
+
+        // Check for valid zone IDs
+        if (ids!.isEmpty) {
+            print("No ad zones available")
+            // Don't try to load any ads
+        }
+        else {
+            // Check valid zone IDs for available ads
+            for id in ids! {
+                if (AASDK.zoneAvailable(id as? String)) {
+                    print("Zone \(id) is available")
+                    // Try to load ads...
+                }
+            }
+        }
+    }
+
+    func aaSDKError(_ error: Notification) {
+        print("error \(error.debugDescription)")
+    }
+
+    func aaSDKKeywordInterceptInitComplete(_ notification: Notification) {
+        print(notification)
+    }
 
     // MARK: UISceneSession Lifecycle
 
