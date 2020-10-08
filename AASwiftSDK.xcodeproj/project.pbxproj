@@ -82,7 +82,7 @@
 		F46A65DC24E1E0BB007CCE6B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F46A65DB24E1E0BB007CCE6B /* main.m */; };
 		F4730AB6252E2ED9003E7C52 /* AASwiftSDK in Resources */ = {isa = PBXBuildFile; fileRef = F4730AB5252E2ED9003E7C52 /* AASwiftSDK */; };
 		F484BA19251CF043007C19DD /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F484BA18251CF043007C19DD /* WebKit.framework */; };
-		F484BAC3251D2D96007C19DD /* AASwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */; };
+		F484BAC3251D2D96007C19DD /* AASwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		F484BAC5251D2DB2007C19DD /* AASwiftSDK in Resources */ = {isa = PBXBuildFile; fileRef = F484BAC4251D2DB2007C19DD /* AASwiftSDK */; };
 		F4A2046C24E2EFB4003F909D /* cropped-AdAdapted-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A2046B24E2EFB4003F909D /* cropped-AdAdapted-Logo.png */; };
 		F4A2046D24E2EFB4003F909D /* cropped-AdAdapted-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A2046B24E2EFB4003F909D /* cropped-AdAdapted-Logo.png */; };
@@ -972,14 +972,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = E4LB8UE2WX;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/AASDK_MIX/SDK/Frameworks",
+					"$(PROJECT_DIR)/AASwiftSDK/Frameworks",
 				);
 				INFOPLIST_FILE = AASwiftSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1001,14 +1004,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = E4LB8UE2WX;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/AASDK_MIX/SDK/Frameworks",
+					"$(PROJECT_DIR)/AASwiftSDK/Frameworks",
 				);
 				INFOPLIST_FILE = AASwiftSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1030,6 +1036,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = E4LB8UE2WX;
 				INFOPLIST_FILE = AASwiftSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1048,6 +1055,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = E4LB8UE2WX;
 				INFOPLIST_FILE = AASwiftSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
