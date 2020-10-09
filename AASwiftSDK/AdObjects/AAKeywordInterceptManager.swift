@@ -28,7 +28,7 @@ class AAKeywordInterceptManager: NSObject, WKUIDelegate {
         if let keywordIntercepts = keywordIntercepts {
             self.keywordIntercepts = keywordIntercepts
         }
-        cacheHTMLAds()
+        //cacheHTMLAds()
         compileCachableAssetsAndNotify()
     }
     
@@ -223,30 +223,28 @@ class AAKeywordInterceptManager: NSObject, WKUIDelegate {
         return nil
     }
     
-    func cacheHTMLAds() {
-        cachingAds = []
-        if let triggeredAds = triggeredAds {
-            for (_, value) in (triggeredAds).enumerated() {
-                guard let ad = value as? AAAd else {
-                    continue
-                }
-                let url = URL(string: ad.adURL ?? "")
-                DispatchQueue.main.async(execute: {
-                    let wv = WKWebView(frame: CGRect(x: 0, y: 0, width: 320, height: 460))
-                    wv.uiDelegate = self
-                    self.cachingAds?.append(wv)
-                    if let url = url {
-                        wv.load(URLRequest(url: url))
-                    }
-                })
-            }
-        }
-        
-        
-    }
+//    func cacheHTMLAds() {
+//        cachingAds = []
+//        if let triggeredAds = triggeredAds {
+//            for (_, value) in (triggeredAds).enumerated() {
+//                guard let ad = value as? AAAd else {
+//                    continue
+//                }
+//                let url = URL(string: ad.adURL ?? "")
+//                DispatchQueue.main.async(execute: {
+//                    let wv = WKWebView(frame: CGRect(x: 0, y: 0, width: 320, height: 460))
+//                    wv.uiDelegate = self
+//                    self.cachingAds?.append(wv)
+//                    if let url = url {
+//                        wv.load(URLRequest(url: url))
+//                    }
+//                })
+//            }
+//        }
+//    }
     
     func compileCachableAssetsAndNotify() {
-        var set = NSMutableSet()
+        let set = NSMutableSet()
         var mdic : [AnyHashable : Any] = [:]
         for ki in keywordIntercepts ?? [] {
             guard let ki = ki as? AAKeywordIntercept else {

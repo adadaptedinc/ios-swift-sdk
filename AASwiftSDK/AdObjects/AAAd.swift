@@ -133,14 +133,6 @@ public class AAAd: NSObject {
                 errorString = "\(errorString)\n\(message)"
             }
         }
-        
-//        ad.adURL = (adDic?["ad_url"] as? String) ?? ""
-//        ad.adHTML = (adDic?["ad_html"] as? String) ?? ""
-//
-//        ad.campaignId = (adDic?["campaign_id"] as? String) ?? ""
-//        ad.advertiserId = (adDic?["advertiser_id"] as? String) ?? ""
-//        ad.creativeId = (adDic?["creative_id"] as? String) ?? ""
-//        ad.trackingHTML = (adDic?["tracking_html"] as? String) ?? ""
 
         var _str = ""
         if let str = adDic?[AA_KEY_ACTION_PATH] as? String {

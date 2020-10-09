@@ -39,13 +39,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver {
         let ids = AASDK.availableZoneIDs()
 
         // Check for valid zone IDs
-        if (ids!.isEmpty) {
+        if (ids.isEmpty) {
             print("No ad zones available")
             // Don't try to load any ads
         }
         else {
             // Check valid zone IDs for available ads
-            for id in ids! {
+            for id in ids {
                 if (AASDK.zoneAvailable(id as? String)) {
                     print("Zone \(id) is available")
                     // Try to load ads...

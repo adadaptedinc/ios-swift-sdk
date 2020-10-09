@@ -23,9 +23,7 @@ public struct Queue<T> {
   public mutating func dequeue() -> T? {
     guard !list.isEmpty, let element = list.first else { return nil }
 
-    list.remove(node: element)
-
-    return element.value
+    return list.remove(node: element)
   }
 
   public func peek() -> T? {

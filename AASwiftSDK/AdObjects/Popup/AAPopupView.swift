@@ -566,7 +566,7 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
                     }
                 }
                 if let url = URL(string: targetURL ?? "") {
-                    UIApplication.shared.openURL(url)
+                    UIApplication.shared.open(url)
                 }
                 decisionHandler(WKNavigationActionPolicy.cancel)
             } else if rawString?.hasPrefix("close:") ?? false {

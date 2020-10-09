@@ -228,10 +228,6 @@ class AAHelper: NSObject {
                 return "c"
         case AASDKActionType.kActionDelegate:
                 return "d"
-            default:
-                //            @throw [NSError errorWithDomain:@"bad action type requested - code is type pased in - should be found in AASDKActionType" code:type userInfo:nil];
-                //print(String(format: "bad action type '%i' requested - should be found in AASDKActionType - returning 'n' for none", type))
-                return "n"
         }
     }
 
@@ -277,8 +273,6 @@ class AAHelper: NSObject {
                 return kEventCustomEvent
         case AAEventType.aa_EVENT_ANOMALY:
                 return kEventAnomaly
-            default:
-                AASDK.consoleLogError(nil, withMessage: "unknown event type passed to AAHelper:stringForEventType \(type)", suppressTracking: true)
         }
     }
 

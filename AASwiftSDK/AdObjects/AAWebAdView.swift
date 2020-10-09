@@ -98,7 +98,7 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
                 withVisualFormat: "V:|-padding-[web]-padding-|",
                 options: [],
                 metrics: metrics,
-                views: viewsDictionary)
+                views: viewsDictionary as [String : Any])
         }
 
         var constraint_POS_H: [NSLayoutConstraint]? = nil
@@ -107,7 +107,7 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
                 withVisualFormat: "H:|-padding-[web]-padding-|",
                 options: [],
                 metrics: metrics,
-                views: viewsDictionary)
+                views: viewsDictionary as [String : Any])
         }
 
         if let constraint_POS_V = constraint_POS_V {

@@ -79,7 +79,7 @@ class AAReportableAnomalyEvent: NSObject {
             if err == nil {
                 setParamValue(payload as NSObject, forKey: AA_KEY_PAYLOAD)
             } else {
-                print("reporting \(AAHelper.string(for: eventType)) failed to attach payload - error from NSJSONSerialization")
+                print("reporting \(String(describing: AAHelper.string(for: eventType))) failed to attach payload - error from NSJSONSerialization")
             }
         }
         if let details = details {

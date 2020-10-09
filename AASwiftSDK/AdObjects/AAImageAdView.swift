@@ -97,7 +97,7 @@ class AAImageAdView: UIImageView {
 
 // MARK: - touch
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first as? UITouch
+        let touch = touches.first
         let touch_point = touch?.location(in: self)
 
         if point(inside: touch_point ?? CGPoint.zero, with: event) {
@@ -106,7 +106,7 @@ class AAImageAdView: UIImageView {
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first as? UITouch
+        let touch = touches.first
         let touch_point = touch?.location(in: self)
 
         if !point(inside: touch_point ?? CGPoint.zero, with: event) {
@@ -118,7 +118,7 @@ class AAImageAdView: UIImageView {
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         AASDK.logDebugMessage("ImageAdView: touchesEnded:withEvent enter", type: AASDK_DEBUG_USER_INTERACTION)
-        let touch = touches.first as? UITouch
+        let touch = touches.first
         let touch_point = touch?.location(in: self)
 
         if point(inside: touch_point ?? CGPoint.zero, with: event) {

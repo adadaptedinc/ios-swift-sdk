@@ -40,7 +40,7 @@ import Foundation
                     guard let item = item as? [AnyHashable : Any] else {
                         continue
                     }
-                    if item != nil && (item is [AnyHashable : Any]) && item.count > 0 {
+                    if item.count > 0 {
                         let dItem = AADetailedListItem.parse(fromItemDictionary: item, forPayload: payloadId ?? "")
                         if dItem != nil {
                             returnItems.append(dItem!)
@@ -50,9 +50,7 @@ import Foundation
                     }
                     // end of items loop
                 }
-                if let returnItems = returnItems as? [AADetailedListItem] {
-                    returnItem.detailedListItems = returnItems
-                }
+                returnItem.detailedListItems = returnItems
                 return returnItem as? Self
             } else {
                 //TODO: - detailed_list_items isn't present

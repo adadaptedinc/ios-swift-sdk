@@ -144,8 +144,7 @@ class AAConnector: NSObject {
             beginBackgroundUpdateTask()
         }
 
-        let holder = immediateQueue?.peek()
-        immediateQueue?.dequeue()
+        let holder = immediateQueue?.dequeue()
         var aaRequest = holder?.request
 
         // Initializing request params
@@ -159,7 +158,7 @@ class AAConnector: NSObject {
             udid = (aaRequest as? AAInitRequest)?.udid()
             sdKversion = (aaRequest as? AAInitRequest)?.sdKversion()
             url = (aaRequest as? AAInitRequest)?.targetURL()
-            print("#D: TEST URLSTRING \(url)") //remove me
+            print("Requesting from URL: \(String(describing: url))")
             methodType = "POST"
 
             // Request is GET request
@@ -200,7 +199,7 @@ class AAConnector: NSObject {
             task = session?.dataTask(with: request as URLRequest, completionHandler: { [self] data, response, error in
                 print("#D - Handling request response...")
                 var JSON: Any? = nil
-                var jsonError: Error? = nil
+                let jsonError: Error? = nil
                 numInFlight -= 1
 
                 do {
@@ -215,7 +214,7 @@ class AAConnector: NSObject {
                     }
                     do {
                         if let data = data {
-                            print("JSON String: \(String(data: data, encoding: .utf8))")
+                            print("JSON String: \(String(describing: String(data: data, encoding: .utf8)))")
                             JSON = try JSONSerialization.jsonObject(with: data)
                         }
                     } catch {

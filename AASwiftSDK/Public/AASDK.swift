@@ -551,7 +551,7 @@ var lastCame: Date?
 
         //NOTE: don't reset location, since they could have passed that in first.
 
-        DispatchQueue.global(qos: .default).async(execute: { [self] in
+        DispatchQueue.global(qos: .default).async(execute: {
             //Background Thread
             AASDK.privateStartSession(
                 withAppID: appID,
@@ -733,7 +733,7 @@ var lastCame: Date?
     /// - Returns: array of strings representing the AdAdapted zones the SDK is aware of.
     /// If AASDK_OPTION_USE_CACHED_IMAGES:YES is set when starting the SDK, then these
     /// images are already downloaded. If NO, then these images are ready to render JIT.
-    @objc public class func availableZoneIDs() -> [AnyHashable]? {
+    @objc public class func availableZoneIDs() -> [AnyHashable] {
         let zones = _aasdk?.zones
         var zoneKeys = [AnyHashable]()
         if ((zones != nil) || zones!.isEmpty == false) {
@@ -880,9 +880,6 @@ var lastCame: Date?
             _aasdk?.connector?.addCollectableEvent(forDispatch: AACollectableEvent.internalEvent(withName: AA_EC_ADDIT_URL_RECEIVED, andPayload: params))
             let components = NSURLComponents(string: url ?? "")
             for item in components?.queryItems ?? [] {
-                guard let item = item as? NSURLQueryItem else {
-                    continue
-                }
                 if item.name == "data" {
                     let decodedData = Data(base64Encoded: item.value ?? "", options: [])
                     var json: Any? = nil
@@ -893,10 +890,10 @@ var lastCame: Date?
                     } catch {
                         AASDK.reportAnomaly(withCode: CODE_UNIVERSAL_LINK_PARSE_ERROR, message: url, params: nil)
                     }
-                    let payload = AAContentPayload.parse(fromDictionary: json as! [AnyHashable : Any])
+                    let payload = AAContentPayload.parse(fromDictionary: json as? [AnyHashable : Any])
                     payload!.payloadType = "universal-link"
                     if let payload = payload {
-                        retArray.append(payload as! AnyHashable)
+                        retArray.append(payload as AnyHashable)
                     }
                 }
             }
@@ -980,7 +977,7 @@ var lastCame: Date?
         _currentState = .kInitializing
 
         // Extracting options
-        if opDic is [AnyHashable : Any] {
+        if opDic != nil {
             let useCached = opDic?[AASDK_OPTION_USE_CACHED_IMAGES] as? NSNumber
             if let useCached = useCached {
                 _aasdk!.shouldUseCachedImages = useCached.boolValue
@@ -1045,7 +1042,7 @@ var lastCame: Date?
             }
 
             let initParams = opDic?[AASDK_OPTION_INIT_PARAMS] as? [AnyHashable : Any]
-            if initParams != nil && (initParams is [AnyHashable : Any]) {
+            if initParams != nil && (initParams != nil) {
                 _aasdk?.appInitParams = initParams
             } else {
                 _aasdk?.appInitParams = nil
@@ -1574,7 +1571,7 @@ extension AASDK {
         if error == nil {
             output = "(\(message ?? ""))"
         } else {
-            output = "\(message ?? ""):\n\((error?.localizedDescription ?? "") )\n\(((error as NSError?)?.localizedFailureReason ?? "") ?? "")\nERROR END"
+            output = "\(message ?? ""):\n\((error?.localizedDescription ?? "") )\n\(((error as NSError?)?.localizedFailureReason ?? "") )\nERROR END"
         }
 
         if !suppress {

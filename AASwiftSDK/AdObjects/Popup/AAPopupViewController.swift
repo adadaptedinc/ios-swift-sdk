@@ -71,7 +71,7 @@ class AAPopupViewController: UIViewController, AAPopupViewDelegate {
                 withVisualFormat: "V:|-padding-[pop]-padding-|",
                 options: [],
                 metrics: metrics,
-                views: viewsDictionary)
+                views: viewsDictionary as [String : Any])
         }
 
         var constraint_POS_H: [NSLayoutConstraint]? = nil
@@ -80,7 +80,7 @@ class AAPopupViewController: UIViewController, AAPopupViewDelegate {
                 withVisualFormat: "H:|-padding-[pop]-padding-|",
                 options: [],
                 metrics: metrics,
-                views: viewsDictionary)
+                views: viewsDictionary as [String : Any])
         }
 
         if let constraint_POS_V = constraint_POS_V {

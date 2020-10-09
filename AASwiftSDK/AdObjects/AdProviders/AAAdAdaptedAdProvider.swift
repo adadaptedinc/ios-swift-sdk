@@ -74,7 +74,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
         }
 
         if oldAd == currentAd && !forceReload {
-            AASDK.logDebugMessage("AdAdapted Zone \(zoneId) reloaded not needed.", type: AASDK_DEBUG_GENERAL)
+            AASDK.logDebugMessage("AdAdapted Zone \(String(describing: zoneId)) reloaded not needed.", type: AASDK_DEBUG_GENERAL)
             AASDK.trackImpressionStarted(for: currentAd)
             //zoneRenderer.handleReload(of: currentAd)
         } else if currentAd != nil {
@@ -86,11 +86,11 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
             case .kAdAdaptedHTMLAd:
                     if currentWebAdView != nil {
                         if oldAd == currentAd {
-                            AASDK.logDebugMessage("Web Zone \(zoneId) being reloaded", type: AASDK_DEBUG_GENERAL)
+                            AASDK.logDebugMessage("Web Zone \(String(describing: zoneId)) being reloaded", type: AASDK_DEBUG_GENERAL)
                         }
                         currentWebAdView?.destroy()
                     } else {
-                        AASDK.logDebugMessage("Web Zone \(zoneId) being loaded", type: AASDK_DEBUG_GENERAL)
+                        AASDK.logDebugMessage("Web Zone \(String(describing: zoneId)) being loaded", type: AASDK_DEBUG_GENERAL)
                     }
 
                     
@@ -214,7 +214,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
 // MARK: - <AAImageAdViewDelegate>
     func takeActionForAd() {
         if let actionType = currentAd?.actionType {
-            AASDK.logDebugMessage("AdAdapted Zone \(zoneId) touched - taking action \(actionType)", type: AASDK_DEBUG_USER_INTERACTION)
+            AASDK.logDebugMessage("AdAdapted Zone \(String(describing: zoneId)) touched - taking action \(actionType)", type: AASDK_DEBUG_USER_INTERACTION)
         }
 
         if isHidden {
@@ -263,7 +263,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
                 }
 
                 allowPopupClose = false
-                AASDK.logDebugMessage("Zone \(zoneId) displaying popup from delegate", type: AASDK_DEBUG_GENERAL)
+            AASDK.logDebugMessage("Zone \(String(describing: zoneId)) displaying popup from delegate", type: AASDK_DEBUG_GENERAL)
             zoneRenderer!.popupWillShow()
                 isDisplayingPopup = true
                 if let popupView = popupView {
@@ -300,7 +300,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
 
 // MARK: - <AAPopupDelegate>
     func dismissPopup(_ popupView: AAPopupViewController?) {
-        AASDK.logDebugMessage("Zone \(zoneId) dismissing popup from delegate", type: AASDK_DEBUG_GENERAL)
+        AASDK.logDebugMessage("Zone \(String(describing: zoneId)) dismissing popup from delegate", type: AASDK_DEBUG_GENERAL)
         isDisplayingPopup = false
         zoneRenderer!.viewControllerForPresentingModalView()!.dismiss(animated: true)
         if let currentAd = currentAd {
@@ -370,7 +370,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
         if (currentAd?.refreshIntervalSeconds ?? 0) < 1 {
             var message: String? = nil
             if let adID = currentAd?.adID {
-                message = "refesh time for ad \(adID) in zone \(zoneId) is zero - using 30s instead"
+                message = "refesh time for ad \(adID) in zone \(String(describing: zoneId)) is zero - using 30s instead"
             }
             AASDK.consoleLogError(nil, withMessage: message, suppressTracking: true)
         }

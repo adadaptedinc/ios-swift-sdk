@@ -317,18 +317,18 @@ public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZ
         advanceToNextAd()
     }
 
-    func aaSDKError(_ error: Notification?) {
+    public func aaSDKError(_ error: Notification) {
         //no-op
     }
 
-    func aaSDKGetAdsComplete(_ notification: Notification?) {
+    public func aaSDKGetAdsComplete(_ notification: Notification) {
         advanceToNextAd()
     }
 
     func aaSDKCacheFailure(_ notification: Notification?) {
     }
 
-    func aaSDKCacheUpdated(_ notification: Notification?) {
+    public func aaSDKCacheUpdated(_ notification: Notification) {
         advanceToNextAd()
     }
 }
