@@ -61,7 +61,7 @@ class AAPayloadPickupRequest: AAGenericRequest {
                         if let dic = payload as? [AnyHashable: Any] {
                             let item = AAContentPayload.parse(fromDictionary: dic)
                                                 if let item = item {
-                                                    retArray.append(item as! AnyHashable)
+                                                    retArray.append(item as AnyHashable)
                                                 }
                         }
                     }

@@ -58,6 +58,10 @@
 		F44F2F772519081A00B96C8C /* AAAbstractAdProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F762519081A00B96C8C /* AAAbstractAdProvider.swift */; };
 		F44F2F87251915D000B96C8C /* AADetailedListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F86251915D000B96C8C /* AADetailedListItem.swift */; };
 		F44F2F9125191F2F00B96C8C /* AAHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F9025191F2F00B96C8C /* AAHelper.swift */; };
+		F45E204A2530AF7C0023F54F /* AASwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */; };
+		F45E204B2530AF7C0023F54F /* AASwiftSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F45E20502530B0080023F54F /* AASwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */; };
+		F45E20512530B0080023F54F /* AASwiftSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F467AE87252B7931003E02DB /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467AE86252B7931003E02DB /* Queue.swift */; };
 		F467AE91252B7C96003E02DB /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467AE90252B7C96003E02DB /* LinkedList.swift */; };
 		F467AE97252B7D74003E02DB /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467AE96252B7D74003E02DB /* Node.swift */; };
@@ -82,7 +86,6 @@
 		F46A65DC24E1E0BB007CCE6B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F46A65DB24E1E0BB007CCE6B /* main.m */; };
 		F4730AB6252E2ED9003E7C52 /* AASwiftSDK in Resources */ = {isa = PBXBuildFile; fileRef = F4730AB5252E2ED9003E7C52 /* AASwiftSDK */; };
 		F484BA19251CF043007C19DD /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F484BA18251CF043007C19DD /* WebKit.framework */; };
-		F484BAC3251D2D96007C19DD /* AASwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		F484BAC5251D2DB2007C19DD /* AASwiftSDK in Resources */ = {isa = PBXBuildFile; fileRef = F484BAC4251D2DB2007C19DD /* AASwiftSDK */; };
 		F4A2046C24E2EFB4003F909D /* cropped-AdAdapted-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A2046B24E2EFB4003F909D /* cropped-AdAdapted-Logo.png */; };
 		F4A2046D24E2EFB4003F909D /* cropped-AdAdapted-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A2046B24E2EFB4003F909D /* cropped-AdAdapted-Logo.png */; };
@@ -96,6 +99,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F45E20522530B0080023F54F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F46A655D24E19DA1007CCE6B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F46A656524E19DA1007CCE6B;
+			remoteInfo = AASwiftSDK;
+		};
 		F46A657124E19DA1007CCE6B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F46A655D24E19DA1007CCE6B /* Project object */;
@@ -104,6 +114,31 @@
 			remoteInfo = AASwiftSDK;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F45E204C2530AF7C0023F54F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F45E204B2530AF7C0023F54F /* AASwiftSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F45E20542530B0080023F54F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F45E20512530B0080023F54F /* AASwiftSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F414EF4B25115E5300F2811C /* AAPayloadTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAPayloadTracker.swift; sourceTree = "<group>"; };
@@ -231,7 +266,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F484BAC3251D2D96007C19DD /* AASwiftSDK.framework in Frameworks */,
+				F45E204A2530AF7C0023F54F /* AASwiftSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +274,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F45E20502530B0080023F54F /* AASwiftSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,6 +630,7 @@
 				F46A65A324E1DDA5007CCE6B /* Sources */,
 				F46A65A424E1DDA5007CCE6B /* Frameworks */,
 				F46A65A524E1DDA5007CCE6B /* Resources */,
+				F45E204C2530AF7C0023F54F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -611,10 +648,12 @@
 				F46A65C024E1E0BA007CCE6B /* Sources */,
 				F46A65C124E1E0BA007CCE6B /* Frameworks */,
 				F46A65C224E1E0BA007CCE6B /* Resources */,
+				F45E20542530B0080023F54F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F45E20532530B0080023F54F /* PBXTargetDependency */,
 			);
 			name = ObjCExampleApp;
 			productName = ObjCExampleApp;
@@ -813,6 +852,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F45E20532530B0080023F54F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F46A656524E19DA1007CCE6B /* AASwiftSDK */;
+			targetProxy = F45E20522530B0080023F54F /* PBXContainerItemProxy */;
+		};
 		F46A657224E19DA1007CCE6B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F46A656524E19DA1007CCE6B /* AASwiftSDK */;
@@ -993,7 +1037,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.AASwiftSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1025,7 +1070,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.AASwiftSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
