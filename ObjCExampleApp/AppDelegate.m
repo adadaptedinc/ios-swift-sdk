@@ -18,11 +18,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     NSDictionary *options = @{
-        AASDK.AASDK_OPTION_TEST_MODE:@YES,
-        AASDK.AASDK_OPTION_KEYWORD_INTERCEPT:@YES
+        AASDK.OPTION_TEST_MODE:@YES,
+        AASDK.OPTION_KEYWORD_INTERCEPT:@YES
        };
 
-    [AASDK initializeSDK];
     [AASDK startSessionWithAppID:@"NWY0NTZIODZHNWY0" registerListenersFor:self options:options];
     
     return YES;

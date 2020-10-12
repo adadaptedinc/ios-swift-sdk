@@ -1,4 +1,3 @@
-//  Converted to Swift 5.2 by Swiftify v5.2.19227 - https://swiftify.com/
 //
 //  AAWebAdView.swift
 //  AASDK

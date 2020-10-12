@@ -12,7 +12,7 @@
 
 @interface ViewController ()
 
-@property (weak, nonatomic) IBOutlet AAAdAdaptedZoneView *adZone;
+@property (weak, nonatomic) IBOutlet AdAdaptedZoneView *adZone;
 @property (weak, nonatomic) IBOutlet ObjCSearchTextField *searchTextField;
 
 @end
@@ -37,7 +37,7 @@
 
 - (void)aaContentNotification:(NSNotification*)notification {
     NSLog(@"In-app content available");
-    AAAdContent *adContent = [[notification userInfo] objectForKey:AASDK.AASDK_KEY_AD_CONTENT];
+    AdContent *adContent = [[notification userInfo] objectForKey:AASDK.KEY_AD_CONTENT];
 
     for (AADetailedListItem *item in adContent.detailedListItems) {
         NSLog(@"AADetailedListItem: %@", item.productTitle);
@@ -52,6 +52,7 @@
     return self;
 }
 
+
 - (void)zoneViewDidLoadZone:(AAZoneView *)view {
     NSLog(@"Zone LOADED");
 }
@@ -62,7 +63,7 @@
 
 - (void)aaPayloadNotification:(NSNotification*)notification {
     NSLog(@"Out-of-app content available");
-    NSArray *adPayload = [notification.userInfo objectForKey:AASDK.AASDK_KEY_CONTENT_PAYLOADS];
+    NSArray *adPayload = [notification.userInfo objectForKey:AASDK.KEY_CONTENT_PAYLOADS];
 
     for (AAContentPayload* payload in adPayload) {
         for (AADetailedListItem *item in payload.detailedListItems) {

@@ -22,7 +22,7 @@
 
     if (results) {
         NSLog(@"Keyword intercept suggestion available");
-        NSString *suggestionName = results[AASDK.AASDK_KEY_KI_REPLACEMENT_TEXT];
+        NSString *suggestionName = results[AASDK.KEY_KI_REPLACEMENT_TEXT];
         NSLog(@"Suggestion item name: %@", suggestionName);
         [AASDK keywordInterceptPresented];
         return suggestionName;

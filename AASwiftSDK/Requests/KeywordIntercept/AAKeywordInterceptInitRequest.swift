@@ -1,4 +1,3 @@
-//  Converted to Swift 5.2 by Swiftify v5.2.23024 - https://swiftify.com/
 //
 //  AAKeywordInterceptRequest.h
 //  AASDK
@@ -43,7 +42,7 @@ class AAKeywordInterceptInitRequest: AAGenericRequest {
                 }
             }
             if (json as? [AnyHashable : Any])?[AA_KEY_KI_SEARCH_ID] != nil {
-                response.searchId = (json as? [AnyHashable : Any])?[AA_KEY_KI_SEARCH_ID] as? String //#D -  I don't think this is ever referenced
+                response.searchId = (json as? [AnyHashable : Any])?[AA_KEY_KI_SEARCH_ID] as? String
             }
             if (json as? [AnyHashable : Any])?[AA_KEY_KI_MIN_MATCH_LENGTH] != nil {
                 response.minMatchLength = ((json as? [AnyHashable : Any])?[AA_KEY_KI_MIN_MATCH_LENGTH] as? NSNumber)?.intValue ?? 0
@@ -51,7 +50,6 @@ class AAKeywordInterceptInitRequest: AAGenericRequest {
             if (json as? [AnyHashable : Any])?[AA_KEY_KI_REFRESH_TIME] != nil {
                 response.refreshSeconds = ((json as? [AnyHashable : Any])?[AA_KEY_KI_REFRESH_TIME] as? NSNumber)?.intValue ?? 0
             }
-            response.triggeredAds = [:]
         }
         return response
     }

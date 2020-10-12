@@ -15,12 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let options = [
-            AASDK.AASDK_OPTION_TEST_MODE:true,
-            AASDK.AASDK_OPTION_KEYWORD_INTERCEPT:true]
+            AASDK.OPTION_TEST_MODE:true,
+            AASDK.OPTION_KEYWORD_INTERCEPT:true]
             as [String : Any]
 
          //iOS api key
-        AASDK.initializeSDK()
         AASDK.startSession(withAppID: "NWY0NTZIODZHNWY0", registerListenersFor: self, options: options)
         
         return true

@@ -495,7 +495,7 @@ import AASwiftSDK
         let results = AASDK.keywordIntercept(for: suggestion) as NSDictionary?
         print("Keyword intercept suggestion available")
         if results != nil {
-            let suggestionName = results![AASDK.AASDK_KEY_KI_REPLACEMENT_TEXT] as? String
+            let suggestionName = results![AASDK.KEY_KI_REPLACEMENT_TEXT] as? String
             let interceptItem = SearchTextFieldItem(title: suggestionName!)
             interceptItem.attributedTitle = NSMutableAttributedString(string: suggestionName!)
             interceptItem.attributedTitle!.setAttributes(highlightAttributes, range: (interceptItem.title as NSString).range(of: suggestionName!, options: comparisonOptions))

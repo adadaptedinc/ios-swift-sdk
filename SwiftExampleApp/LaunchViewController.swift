@@ -50,7 +50,7 @@ class LaunchViewController: UIViewController, WKUIDelegate {
     func aaPayloadNotification(_ notification: Notification) {
         print("Out-of-app content available")
         guard let userinfo = notification.userInfo else { return }
-        guard let adPayload = userinfo[AASDK.AASDK_KEY_CONTENT_PAYLOADS] as? [AAContentPayload] else { return }
+        guard let adPayload = userinfo[AASDK.KEY_CONTENT_PAYLOADS] as? [AAContentPayload] else { return }
 
         for payload in adPayload {
             for item in payload.detailedListItems {

@@ -1,4 +1,3 @@
-//  Converted to Swift 5.2 by Swiftify v5.2.23024 - https://swiftify.com/
 //
 //  AAInitResponse.swift
 //  AASDK
@@ -15,8 +14,4 @@ class AAInitResponse: AAGenericResponse {
     var pollingIntervalMS = 0
     var sessionExpiresAt = 0
     var sessionId: String?
-#if USEMOAT
-    var moatPartnerCode: String?
-
-#endif
 }

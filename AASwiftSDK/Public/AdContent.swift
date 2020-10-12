@@ -6,7 +6,7 @@
 //  Copyright © 2020 AdAdapted. All rights reserved.
 //
 
-@objc public class AAAdContent: NSObject {
+@objc public class AdContent: NSObject {
     /// The ad associated with this ad content
     var ad: Any!
     /// array of items
@@ -17,26 +17,26 @@
             return nil
         }
 
-        var adContent: AAAdContent? = nil
+        var adContent: AdContent? = nil
         
         let items = dictionary?["list-items"] as? [AnyHashable]
         if items != nil && (items != nil) {
-            adContent = AAAdContent.parseBasicListItemsArray(items) as? Self
+            adContent = AdContent.parseBasicListItemsArray(items) as? Self
         }
 
         let itemsDict = dictionary?["list-items"] as? [AnyHashable : Any]
         if itemsDict != nil && (itemsDict != nil) {
-            adContent = AAAdContent.parseBasicListItemsDictionary(itemsDict) as? Self
+            adContent = AdContent.parseBasicListItemsDictionary(itemsDict) as? Self
         }
 
         let richItems = dictionary?["rich-list-items"] as? [AnyHashable]
         if richItems != nil && (richItems != nil) {
-            adContent = AAAdContent.parseRichListItemsDictionary(richItems) as? Self
+            adContent = AdContent.parseRichListItemsDictionary(richItems) as? Self
         }
 
         let detailedItems = dictionary?["detailed_list_items"] as? [AnyHashable]
         if detailedItems != nil && (detailedItems != nil) {
-            adContent = AAAdContent.parseRichListItemsDictionary(detailedItems) as? Self
+            adContent = AdContent.parseRichListItemsDictionary(detailedItems) as? Self
         }
         
         if let adContent = adContent {
@@ -62,15 +62,15 @@
             }
         }
 
-        let content = AAAdContent()
+        let content = AdContent()
         content.detailedListItems = returnItems
         return content as? Self
     }
 
     class func parseBasicListItemsDictionary(_ item: [AnyHashable : Any]?) -> Self? {
-        let dItem = AAAdContent.parseDetailedListItemDictionary(item)!
+        let dItem = AdContent.parseDetailedListItemDictionary(item)!
 
-        let content = AAAdContent()
+        let content = AdContent()
         var items = [AADetailedListItem]()
         items.append(dItem)
         content.detailedListItems = items
@@ -84,13 +84,13 @@
             guard let item = item as? [AnyHashable : Any] else {
                 continue
             }
-            let dItem = AAAdContent.parseDetailedListItemDictionary(item)
+            let dItem = AdContent.parseDetailedListItemDictionary(item)
             if let dItem = dItem {
                 returnItems.append(dItem)
             }
         }
 
-        let content = AAAdContent()
+        let content = AdContent()
         content.detailedListItems = returnItems
         return content as? Self
     }
