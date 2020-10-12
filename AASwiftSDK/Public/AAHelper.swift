@@ -246,7 +246,7 @@ class AAHelper: NSObject {
             return AASDKActionType.kActionContent
         }
 
-        //    @throw [NSError errorWithDomain:[NSString stringWithFormat:@"bad action type string requested '%@' - should be found in AASDKActionType", string] code:42 userInfo:nil];
+        //   @throw [NSError errorWithDomain:[NSString stringWithFormat:@"bad action type string requested '%@' - should be found in AASDKActionType", string] code:42 userInfo:nil];
         print("bad action type string requested '\(string ?? "")' - should be found in AASDKActionType: taking no action")
         return AASDKActionType.kActionNone
     }
