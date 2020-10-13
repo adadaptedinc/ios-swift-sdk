@@ -36,7 +36,7 @@
 		F414F08925115E5400F2811C /* AARequestBlockHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EFA025115E5300F2811C /* AARequestBlockHolder.swift */; };
 		F414F09525115E5400F2811C /* AAContentPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EFAD25115E5300F2811C /* AAContentPayload.swift */; };
 		F414F09B25115E5400F2811C /* AAAdAdaptedJSONZoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EFB325115E5300F2811C /* AAAdAdaptedJSONZoneView.swift */; };
-		F414F09E25115E5400F2811C /* AAAdAdaptedZoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EFB625115E5300F2811C /* AAAdAdaptedZoneView.swift */; };
+		F414F09E25115E5400F2811C /* AdAdaptedZoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EFB625115E5300F2811C /* AdAdaptedZoneView.swift */; };
 		F414F0A425115E5400F2811C /* AAPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EFBC25115E5300F2811C /* AAPopupView.swift */; };
 		F414F0A825115E5400F2811C /* AAUpdateAdsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EFC025115E5300F2811C /* AAUpdateAdsRequest.swift */; };
 		F414F0AC25115E5400F2811C /* AAKeywordInterceptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EFC425115E5300F2811C /* AAKeywordInterceptManager.swift */; };
@@ -53,7 +53,7 @@
 		F414F0D225115E5400F2811C /* AAGenericRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EFEC25115E5300F2811C /* AAGenericRequest.swift */; };
 		F414F0D325115E5400F2811C /* AAInitRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EFED25115E5300F2811C /* AAInitRequest.swift */; };
 		F414F0D825115E5400F2811C /* AAAdAdaptedAdProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EFF225115E5300F2811C /* AAAdAdaptedAdProvider.swift */; };
-		F44F2F6B251900FB00B96C8C /* AAAdContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F6A251900FB00B96C8C /* AAAdContent.swift */; };
+		F44F2F6B251900FB00B96C8C /* AdContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F6A251900FB00B96C8C /* AdContent.swift */; };
 		F44F2F712519078A00B96C8C /* AAZoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F702519078A00B96C8C /* AAZoneView.swift */; };
 		F44F2F772519081A00B96C8C /* AAAbstractAdProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F762519081A00B96C8C /* AAAbstractAdProvider.swift */; };
 		F44F2F87251915D000B96C8C /* AADetailedListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F86251915D000B96C8C /* AADetailedListItem.swift */; };
@@ -66,7 +66,6 @@
 		F467AE91252B7C96003E02DB /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467AE90252B7C96003E02DB /* LinkedList.swift */; };
 		F467AE97252B7D74003E02DB /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467AE96252B7D74003E02DB /* Node.swift */; };
 		F467B17C24E43EAE00B89A5F /* AASDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467B17B24E43EAE00B89A5F /* AASDK.swift */; };
-		F467B17E24E45CC700B89A5F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467B17D24E45CC700B89A5F /* Config.swift */; };
 		F46A657024E19DA1007CCE6B /* AASwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */; };
 		F46A657524E19DA1007CCE6B /* AASwiftSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46A657424E19DA1007CCE6B /* AASwiftSDKTests.swift */; };
 		F46A657724E19DA1007CCE6B /* AASwiftSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = F46A656924E19DA1007CCE6B /* AASwiftSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -170,7 +169,7 @@
 		F414EFA025115E5300F2811C /* AARequestBlockHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AARequestBlockHolder.swift; sourceTree = "<group>"; };
 		F414EFAD25115E5300F2811C /* AAContentPayload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAContentPayload.swift; sourceTree = "<group>"; };
 		F414EFB325115E5300F2811C /* AAAdAdaptedJSONZoneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAAdAdaptedJSONZoneView.swift; sourceTree = "<group>"; };
-		F414EFB625115E5300F2811C /* AAAdAdaptedZoneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAAdAdaptedZoneView.swift; sourceTree = "<group>"; };
+		F414EFB625115E5300F2811C /* AdAdaptedZoneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdAdaptedZoneView.swift; sourceTree = "<group>"; };
 		F414EFBC25115E5300F2811C /* AAPopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAPopupView.swift; sourceTree = "<group>"; };
 		F414EFC025115E5300F2811C /* AAUpdateAdsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAUpdateAdsRequest.swift; sourceTree = "<group>"; };
 		F414EFC425115E5300F2811C /* AAKeywordInterceptManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAKeywordInterceptManager.swift; sourceTree = "<group>"; };
@@ -187,7 +186,7 @@
 		F414EFEC25115E5300F2811C /* AAGenericRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAGenericRequest.swift; sourceTree = "<group>"; };
 		F414EFED25115E5300F2811C /* AAInitRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAInitRequest.swift; sourceTree = "<group>"; };
 		F414EFF225115E5300F2811C /* AAAdAdaptedAdProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAAdAdaptedAdProvider.swift; sourceTree = "<group>"; };
-		F44F2F6A251900FB00B96C8C /* AAAdContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAAdContent.swift; sourceTree = "<group>"; };
+		F44F2F6A251900FB00B96C8C /* AdContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdContent.swift; sourceTree = "<group>"; };
 		F44F2F702519078A00B96C8C /* AAZoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAZoneView.swift; sourceTree = "<group>"; };
 		F44F2F762519081A00B96C8C /* AAAbstractAdProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAAbstractAdProvider.swift; sourceTree = "<group>"; };
 		F44F2F86251915D000B96C8C /* AADetailedListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AADetailedListItem.swift; sourceTree = "<group>"; };
@@ -199,7 +198,6 @@
 		F467AE90252B7C96003E02DB /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		F467AE96252B7D74003E02DB /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		F467B17B24E43EAE00B89A5F /* AASDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AASDK.swift; sourceTree = "<group>"; };
-		F467B17D24E45CC700B89A5F /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AASwiftSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F46A656924E19DA1007CCE6B /* AASwiftSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AASwiftSDK.h; sourceTree = "<group>"; };
 		F46A656A24E19DA1007CCE6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -308,7 +306,6 @@
 			isa = PBXGroup;
 			children = (
 				F46A656924E19DA1007CCE6B /* AASwiftSDK.h */,
-				F467B17D24E45CC700B89A5F /* Config.swift */,
 				F46A656A24E19DA1007CCE6B /* Info.plist */,
 				F46DB57E24EADE8200A81CBF /* Public */,
 				F46DB57F24EADEC200A81CBF /* AdObjects */,
@@ -383,9 +380,9 @@
 			children = (
 				F414EFAD25115E5300F2811C /* AAContentPayload.swift */,
 				F414EFB325115E5300F2811C /* AAAdAdaptedJSONZoneView.swift */,
-				F414EFB625115E5300F2811C /* AAAdAdaptedZoneView.swift */,
+				F414EFB625115E5300F2811C /* AdAdaptedZoneView.swift */,
 				F467B17B24E43EAE00B89A5F /* AASDK.swift */,
-				F44F2F6A251900FB00B96C8C /* AAAdContent.swift */,
+				F44F2F6A251900FB00B96C8C /* AdContent.swift */,
 				F44F2F702519078A00B96C8C /* AAZoneView.swift */,
 				F44F2F86251915D000B96C8C /* AADetailedListItem.swift */,
 			);
@@ -777,10 +774,10 @@
 				F414F09B25115E5400F2811C /* AAAdAdaptedJSONZoneView.swift in Sources */,
 				F414F05825115E5400F2811C /* AACollectableEventRequest.swift in Sources */,
 				F414F0AD25115E5400F2811C /* AAKeywordInterceptInitRequest.swift in Sources */,
-				F414F09E25115E5400F2811C /* AAAdAdaptedZoneView.swift in Sources */,
+				F414F09E25115E5400F2811C /* AdAdaptedZoneView.swift in Sources */,
 				F414F05C25115E5400F2811C /* AAGetAdsResponse.swift in Sources */,
 				F467AE87252B7931003E02DB /* Queue.swift in Sources */,
-				F44F2F6B251900FB00B96C8C /* AAAdContent.swift in Sources */,
+				F44F2F6B251900FB00B96C8C /* AdContent.swift in Sources */,
 				F414F05125115E5400F2811C /* AAPayloadPickupRequest.swift in Sources */,
 				F414F0A825115E5400F2811C /* AAUpdateAdsRequest.swift in Sources */,
 				F414F0CE25115E5400F2811C /* AACollectableEvent.swift in Sources */,
@@ -795,7 +792,6 @@
 				F414F0B425115E5400F2811C /* AAPayloadTrackingRequest.swift in Sources */,
 				F414F05625115E5400F2811C /* AAPayloadPickupResponse.swift in Sources */,
 				F414F0D325115E5400F2811C /* AAInitRequest.swift in Sources */,
-				F467B17E24E45CC700B89A5F /* Config.swift in Sources */,
 				F414F05F25115E5400F2811C /* AAKeywordInterceptInitResponse.swift in Sources */,
 				F467AE97252B7D74003E02DB /* Node.swift in Sources */,
 				F44F2F712519078A00B96C8C /* AAZoneView.swift in Sources */,

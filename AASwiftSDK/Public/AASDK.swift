@@ -84,7 +84,6 @@ let AASDK_KEY_ZONE_VIEW = "ZONE_VIEW"
 let AASDK_KEY_KI_REPLACEMENT_ID = "KI_REPLACEMENT_ID"
 let AASDK_KEY_KI_REPLACEMENT_ICON_URL = "KI_REPLACEMENT_ICON"
 let AASDK_KEY_KI_REPLACEMENT_TAGLINE = "KI_REPLACEMENT_TAGLINE"
-let AASDK_KEY_KI_TRIGGERED_ZONES = "KI_TRIGGERED_ZONES"
 
 /// root of the server the framework talks to - don't allow them to pass in arbitrary ones
 let AA_PROD_ROOT = "https://ads.adadapted.com/v"
@@ -226,11 +225,11 @@ var imagesLoaded = 0
 var lastCame: Date?
 
 @objc public class AASDK: NSObject {
-    @objc public static let AASDK_OPTION_TEST_MODE = "TEST_MODE"
-    @objc public static let AASDK_OPTION_KEYWORD_INTERCEPT = "KEYWORD_INTERCEPT"
-    @objc public static let AASDK_KEY_CONTENT_PAYLOADS = "CONTENT_PAYLOADS"
-    @objc public static let AASDK_KEY_AD_CONTENT = "AD_CONTENT"
-    @objc public static let AASDK_KEY_KI_REPLACEMENT_TEXT = "KI_REPLACEMENT_TEXT"
+    @objc public static let OPTION_TEST_MODE = "TEST_MODE"
+    @objc public static let OPTION_KEYWORD_INTERCEPT = "KEYWORD_INTERCEPT"
+    @objc public static let KEY_CONTENT_PAYLOADS = "CONTENT_PAYLOADS"
+    @objc public static let KEY_AD_CONTENT = "AD_CONTENT"
+    @objc public static let KEY_KI_REPLACEMENT_TEXT = "KI_REPLACEMENT_TEXT"
     
     private var appID: String?
     private var connector: AAConnector?
@@ -516,6 +515,7 @@ var lastCame: Date?
         registerListenersFor observer: AASDKObserver?,
         options opDic: [AnyHashable : Any]?
     ) {
+        initializeSDK()
         _aasdk?.observer = observer
         _aasdk?.options = opDic
         _aasdk?.appID = appID
@@ -756,27 +756,6 @@ var lastCame: Date?
         }
     }
 
-    /// \brief convenience mechanism
-    /// - Returns: array of strings representing the AdAdapted Keyword Intercept zones the SDK is aware of.
-    /// MUST WAIT for KI_INIT_COMPLETE for this to return a non-empty list
-    class func availableKIZoneIDs() -> [AnyHashable] {
-        if _aasdk?.kiManager != nil {
-            return _aasdk?.kiManager?.allAvailableZones() ?? []
-        }
-        return []
-    }
-
-    /// \brief convenience mechanism
-    /// \param zoneId a string value provided by AdAdapted staff.
-    /// - Returns: YES if the SDK is ready to render the given AdAdapted Keyword Intercept ZoneId
-    /// MUST WAIT for KI_INIT_COMPLETE for this to ever return true
-    class func kiZoneAvailable(_ zoneId: String?) -> Bool {
-        if _aasdk?.kiManager != nil {
-            return _aasdk?.kiManager?.hasZone(zoneId) ?? false
-        }
-        return false
-    }
-
 // MARK: - debugging
     /// \brief debugging support
     /// see \ref debugging for more details
@@ -901,7 +880,7 @@ var lastCame: Date?
 
         let userInfo = [
             AASDK_KEY_MESSAGE: "Returning universal link payload item",
-            AASDK.AASDK_KEY_CONTENT_PAYLOADS: retArray
+            AASDK.KEY_CONTENT_PAYLOADS: retArray
         ] as [String : Any]
         let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_CONTENT_PAYLOADS_INBOUND), object: nil, userInfo: userInfo)
 
@@ -923,7 +902,7 @@ var lastCame: Date?
 
     static var initialized = false
 
-    @objc public static func initializeSDK() {
+    internal static func initializeSDK() {
         if !AASDK.initialized {
             AASDK.initialized = true
             _aasdk = AASDK()
@@ -983,7 +962,7 @@ var lastCame: Date?
                 _aasdk!.shouldUseCachedImages = useCached.boolValue
             }
 
-            let testMode = opDic?[AASDK_OPTION_TEST_MODE] as? NSNumber
+            let testMode = opDic?[OPTION_TEST_MODE] as? NSNumber
             if testMode != nil && testMode?.boolValue ?? false == true {
                 _aasdk!.inTestMode = true
             } else {
@@ -1034,7 +1013,7 @@ var lastCame: Date?
                 }
             }
 
-            let keywordIntercept = (opDic?[AASDK_OPTION_KEYWORD_INTERCEPT] ?? false) as! Bool
+            let keywordIntercept = (opDic?[OPTION_KEYWORD_INTERCEPT] ?? false) as! Bool
             if keywordIntercept == true {
                 _aasdk?.isKeywordInterceptOn = true
             } else {
@@ -1110,7 +1089,7 @@ var lastCame: Date?
 
             let keywordInitResponseWasReceivedBlock = { response, forRequest in
                 let initResponse = response as? AAKeywordInterceptInitResponse
-                _aasdk?.kiManager = AAKeywordInterceptManager(connector: _aasdk?.connector, minMatchLength: initResponse!.minMatchLength, triggeredAds: initResponse?.triggeredAds)
+                _aasdk?.kiManager = AAKeywordInterceptManager(connector: _aasdk?.connector, minMatchLength: initResponse!.minMatchLength)
                 AASDK.logDebugMessage("Loading Keyword Intercepts", type: AASDK_DEBUG_GENERAL)
                 _aasdk?.kiManager?.loadKeywordIntercepts(initResponse?.keywordIntercepts)
             } as AAResponseWasReceivedBlock
@@ -1899,14 +1878,14 @@ extension AASDK {
         }
 
         if name == nil || (name?.count ?? 0) == 0 {
-            let adContent = AAAdContent.parse(fromDictionary: content, ad: ad ?? nil)
+            let adContent = AdContent.parse(fromDictionary: content, ad: ad ?? nil)
 
             if let zoneId = ad?.zoneId, let zoneView = zoneView, let adContent = adContent {
                 dic = [
                     AASDK_KEY_TYPE: contentType,
                     AASDK_KEY_ZONE_ID: zoneId,
                     AASDK_KEY_ZONE_VIEW: zoneView,
-                    AASDK.AASDK_KEY_AD_CONTENT: adContent
+                    AASDK.KEY_AD_CONTENT: adContent
                 ]
             }
         } else {
@@ -2030,7 +2009,7 @@ extension AASDK {
                 if let payloads = pickupResponse?.payloads {
                     userInfo = [
                         AASDK_KEY_MESSAGE: "Returning \(Int(pickupResponse?.payloads?.count ?? 0)) payload items",
-                        AASDK_KEY_CONTENT_PAYLOADS: payloads.description
+                        KEY_CONTENT_PAYLOADS: payloads.description
                     ]
                 }
                 let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_CONTENT_PAYLOADS_INBOUND), object: nil, userInfo: userInfo)

@@ -122,7 +122,7 @@
                                     <action selector="addItemToList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8p0-Nr-qni"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O5L-XD-uqX" customClass="AAAdAdaptedZoneView" customModule="AASwiftSDK">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O5L-XD-uqX" customClass="AdAdaptedZoneView" customModule="AASwiftSDK">
                                 <rect key="frame" x="48" y="42" width="319" height="114"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -136,7 +136,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="3JH-oh-p3p"/>
                     <connections>
-                        <outlet property="aaAdZoneView" destination="O5L-XD-uqX" id="Kfc-z4-GSi"/>
+                        <outlet property="adAdaptedZoneView" destination="O5L-XD-uqX" id="Kfc-z4-GSi"/>
                         <outlet property="addButton" destination="KKw-ds-8Ug" id="vNO-Yy-KlN"/>
                         <outlet property="listTableView" destination="PRO-hx-G6h" id="dy1-Oi-I61"/>
                         <outlet property="searchTextField" destination="dWA-FO-Pou" id="jIi-yZ-GF4"/>

@@ -1,4 +1,3 @@
-//  Converted to Swift 5.2 by Swiftify v5.2.19227 - https://swiftify.com/
 //
 //  AAAdAdaptedAdProvider.swift
 //  AASDK
@@ -118,9 +117,6 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
                     if adView != nil {
                         adView?.delegate = self
                         zoneRenderer!.provider(self, didLoadAdView: adView, for: currentAd)
-                    #if USEMOAT
-                        AASDK.moatReportAdImageViewed(adView)
-                    #endif
                     } else {
                         zoneRenderer!.provider(self, didFailToLoadZone: zoneId, ofType: type!, message: "No AdAdapted ad for zone")
                     }

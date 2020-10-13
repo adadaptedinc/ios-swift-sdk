@@ -18,7 +18,7 @@ class ViewController:
     AASDKContentDelegate
 {
     
-    @IBOutlet weak var aaAdZoneView: AAAdAdaptedZoneView!
+    @IBOutlet weak var adAdaptedZoneView: AdAdaptedZoneView!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet weak var searchTextField: SearchTextField!
@@ -31,7 +31,7 @@ class ViewController:
         searchTextField.delegate = self
         listTableView.delegate = self
         listTableView.dataSource = self
-        aaAdZoneView.setZoneOwner(self)
+        adAdaptedZoneView.setZoneOwner(self)
         AASDK.registerContentListeners(for: self)
         
         listData = ["Eggs", "Bread"]
@@ -49,7 +49,7 @@ class ViewController:
     func aaContentNotification(_ notification: Notification) {
            print("In-app content available")
            guard let userinfo = notification.userInfo else { return }
-        guard let adContent = userinfo[AASDK.AASDK_KEY_AD_CONTENT] as? AAAdContent else { return }
+        guard let adContent = userinfo[AASDK.KEY_AD_CONTENT] as? AdContent else { return }
 
            for item in adContent.detailedListItems {
                print("AADetailedListItem: ",item.productTitle)
@@ -74,7 +74,7 @@ class ViewController:
     func aaPayloadNotification(_ notification: Notification) {
         print("Out-of-app content available")
         guard let userinfo = notification.userInfo else { return }
-        guard let adPayload = userinfo[AASDK.AASDK_KEY_CONTENT_PAYLOADS] as? [AAContentPayload] else { return }
+        guard let adPayload = userinfo[AASDK.KEY_CONTENT_PAYLOADS] as? [AAContentPayload] else { return }
 
         for payload in adPayload {
             for item in payload.detailedListItems {

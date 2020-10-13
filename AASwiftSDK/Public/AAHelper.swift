@@ -13,6 +13,7 @@ import CoreTelephony
 import Foundation
 import UIKit
 import CoreTelephony
+import AppTrackingTransparency
 
 // INITIALIZATION
 // #D not sure, i think just json key placeholders
@@ -276,20 +277,20 @@ class AAHelper: NSObject {
         }
     }
 
-    /// Quite literally: [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]
-    /// user specific ID. changes each time device is reset.
-    // see http://developer.apple.com/library/ios/#documentation/AdSupport/Reference/ASIdentifierManager_Ref/ASIdentifierManager.html#//apple_ref/occ/instp/ASIdentifierManager/advertisingIdentifier
+    // Grabs the IDFA if enabled otherwise is all zeros
     class func udid() -> String? {
         return ASIdentifierManager.shared().advertisingIdentifier.uuidString
     }
 
-    /// Quite literally: [[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]
-    /// quite literally [[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]
+    // Checking if ad tracking is enabled on the device
     class func isAdTrackingEnabled() -> Bool {
-        return ASIdentifierManager.shared().isAdvertisingTrackingEnabled
+        if #available(iOS 14, *) {
+            return ATTrackingManager.trackingAuthorizationStatus == .authorized
+        } else {
+            return ASIdentifierManager.shared().isAdvertisingTrackingEnabled
+        }
     }
 
-    //  Converted to Swift 5.3 by Swiftify v5.3.29902 - https://swiftify.com/
     class func safeColor(fromHexString str: String?, fallbackHexString fallback: String?) -> UIColor? {
         var color: UIColor?
         color = UIColor(named: str!)

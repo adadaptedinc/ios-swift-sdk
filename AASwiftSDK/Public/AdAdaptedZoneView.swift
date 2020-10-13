@@ -1,4 +1,3 @@
-//  Converted to Swift 5.2 by Swiftify v5.2.23024 - https://swiftify.com/
 //
 //  AAAdAdaptedZoneView.swift
 //  AASDK
@@ -11,7 +10,7 @@ import UIKit
 
 /// \brief  Subclass of AAZoneView configured for AdAdapted image and html content
 
-public class AAAdAdaptedZoneView: AAZoneView {
+public class AdAdaptedZoneView: AAZoneView {
     /// \brief Constructor 
     /// \param frame where's it goin'
     /// \param zoneId the zone it's for
