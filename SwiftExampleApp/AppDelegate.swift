@@ -24,11 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver {
         
         return true
     }
-    
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, reoptionalstorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        AASDK.linkContentParser(userActivity)
-        return true
-    }
 
     // MARK: AASDK Calls
     
