@@ -8,6 +8,7 @@
 
 #import "SceneDelegate.h"
 #import "AppDelegate.h"
+@import AASwiftSDK;
 
 @interface SceneDelegate ()
 
@@ -22,6 +23,9 @@
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 }
 
+- (void)scene:(UIScene *)scene continueUserActivity:(nonnull NSUserActivity *)userActivity {
+    [AASDK linkContentParser:userActivity];
+}
 
 - (void)sceneDidDisconnect:(UIScene *)scene {
     // Called as the scene is being released by the system.

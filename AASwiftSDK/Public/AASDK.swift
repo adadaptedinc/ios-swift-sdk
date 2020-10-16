@@ -845,7 +845,7 @@ var lastCame: Date?
     @objc public class func linkContentParser(_ userActivity: NSUserActivity?) {
         _aasdk?.connector?.addCollectableEvent(forDispatch: AACollectableEvent.internalEvent(withName: AA_EC_ADDIT_APP_OPENED, andPayload: [:]))
 
-        var retArray = [AnyHashable](repeating: 0, count: 1)
+        var retArray = [AnyHashable]()
         do {
             let url = userActivity?.webpageURL?.absoluteString
             let params = [
@@ -893,7 +893,6 @@ var lastCame: Date?
                     AASDK.cacheItem(item)
                 }
             }
-
             AASDK.notificationCenter().post(notification)
         }
     }

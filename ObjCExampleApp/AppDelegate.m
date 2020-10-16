@@ -27,12 +27,6 @@
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
-    [AASDK linkContentParser:userActivity];
-    return true;
-}
-
-
 - (void)aaSDKInitComplete:(nonnull NSNotification *)notification {
     NSLog(@"%@", notification);
 
