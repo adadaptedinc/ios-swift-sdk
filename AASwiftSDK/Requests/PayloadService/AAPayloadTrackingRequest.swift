@@ -23,7 +23,7 @@ class AAPayloadTrackingRequest: AAGenericRequest {
                         ]
             ]
         }
-        setParamValue(a as NSObject?, forKey: "tracking")
+        setParamValue(a as NSObject?, forKey: "items")
     }
 
     init(payloadRejected payload: AAContentPayload?) {
@@ -38,7 +38,7 @@ class AAPayloadTrackingRequest: AAGenericRequest {
                 "status": "rejected"
             ]]
         }
-        setParamValue(a as NSObject?, forKey: "tracking")
+        setParamValue(a as NSObject?, forKey: "items")
     }
 
     private var payload: AAContentPayload?
@@ -52,7 +52,6 @@ class AAPayloadTrackingRequest: AAGenericRequest {
         setParamValue(AASDK.appId() as NSObject?, forKey: AA_KEY_APP_ID)
         setParamValue(AAHelper.udid() as NSObject?, forKey: AA_KEY_UDID)
         setParamValue(AAHelper.bundleID() as NSObject?, forKey: AA_KEY_BUNDLE_ID)
-        setParamValue(AAHelper.bundleVersion() as NSObject?, forKey: AA_KEY_BUNDLE_VERSION)
         setParamValue(AAHelper.deviceOS() as NSObject?, forKey: AA_KEY_OS_NAME)
         setParamValue(AAHelper.deviceOSVersion() as NSObject?, forKey: AA_KEY_OS_VERSION)
 

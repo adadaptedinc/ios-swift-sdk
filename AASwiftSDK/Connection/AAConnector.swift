@@ -192,7 +192,7 @@ class AAConnector: NSObject {
         request?.httpBody = jsonMessage
 
         print("#D: Making request to \(url?.absoluteString ?? "")")
-
+        
         var task: URLSessionDataTask? = nil
         if let request = request {
             task = session?.dataTask(with: request as URLRequest, completionHandler: { [self] data, response, error in
