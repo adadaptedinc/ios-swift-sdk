@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import AASwiftSDK
 
-class LaunchViewController: UIViewController, WKUIDelegate {
+class LaunchViewController: UIViewController, WKUIDelegate, AASDKContentDelegate {
     @IBOutlet weak var launchLabel: UILabel!
     var webView: WKWebView!
     
@@ -20,6 +20,7 @@ class LaunchViewController: UIViewController, WKUIDelegate {
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.uiDelegate = self
+        AASDK.registerContentListeners(for: self)
     }
     
     @IBAction func testSendListManagerReports(_ sender: Any) {
@@ -38,8 +39,12 @@ class LaunchViewController: UIViewController, WKUIDelegate {
         self.showToast(message: "Reports sent", font: .systemFont(ofSize: 14.0))
     }
     
-    func showToast(message : String, font: UIFont) {
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
+    func aaPayloadNotification(_ notification: Notification) {
+        showToast(message: "Deeplink Payload Received")
+    }
+    
+    func showToast(message : String, font: UIFont = .systemFont(ofSize: 14.0)) {
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 100, y: self.view.frame.size.height-100, width: 200, height: 35))
         toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         toastLabel.textColor = UIColor.white
         toastLabel.font = font
