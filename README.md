@@ -1,4 +1,3 @@
-<br />
 <p align="center">
   <h3 align="center">AdAdapted Swift iOS SDK</h3>
 
@@ -13,7 +12,6 @@
     <a href="https://gitlab.com/adadapted/ios_swift_sdk/-/issues">Request Feature</a>
   </p>
 </p>
-
 
 
 <!-- TABLE OF CONTENTS -->
@@ -65,7 +63,7 @@ target 'AASwiftExampleApp' do
 end
 ```
 
-Then after opening the .xcworkspace version of your project, you should see the newly imported AASwiftSDK within your project structure.
+Then after opening the `.xcworkspace` version of your project, you should see the newly imported AASwiftSDK within your project structure.
 
 <!-- CONTRIBUTING -->
 ## Contributing
