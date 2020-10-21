@@ -40,7 +40,7 @@ AASDK.startSession(withAppID: "YOUR_API_KEY", registerListenersFor: self, option
 ```
 
 <!-- COCOA POD -->
-### CoCoa Pod
+## CoCoa Pod
 
 Alternatively the SDK is available via CoCoa Pod and can be directly imported and used within your own apps. 
 
