@@ -1,0 +1,16 @@
+# This file is a template, and might need editing before it works on your project.
+# Lifted from: https://about.gitlab.com/2016/03/10/setting-up-gitlab-ci-for-ios-projects/
+# This file assumes an own GitLab CI runner, setup on a macOS system.
+#-workspace WorkspaceName.xcworkspace for later use on cocoapods
+stages:
+  - build
+
+build_project:
+  stage: build
+  script:
+    - xcodebuild clean -project AASwiftSDK.xcodeproj -scheme AASwiftSDK | xcpretty
+    - xcodebuild build -project AASwiftSDK.xcodeproj -scheme AASwiftSDK -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.0' | xcpretty -s
+    #- xcodebuild test -project AASwiftSDK.xcodeproj -scheme AASwiftSDK -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.0' | xcpretty -s
+  tags:
+    - ios
+    - swift
