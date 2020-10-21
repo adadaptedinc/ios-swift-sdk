@@ -1,10 +1,5 @@
-<!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
   <h3 align="center">AdAdapted Swift iOS SDK</h3>
 
   <p align="center">
@@ -25,17 +20,11 @@
 ## Table of Contents
 
 * [About the Project](#about-the-project)
-  * [Built With](#built-with)
 * [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Usage](#usage)
-* [Roadmap](#roadmap)
+* [CoCoa Pod](#cocoa-pod)
 * [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
-
 
 
 <!-- ABOUT THE PROJECT -->
@@ -56,6 +45,7 @@ To get a local copy up and running simply download the source code and run it th
 AASDK.startSession(withAppID: "YOUR_API_KEY", registerListenersFor: self, options: options)
 ```
 
+<!-- COCOA POD -->
 ### CoCoa Pod
 
 Alternatively the SDK is available via CoCoa Pod and can be directly imported and used within your own apps. 
