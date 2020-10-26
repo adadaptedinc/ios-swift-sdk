@@ -110,8 +110,8 @@
             filePath = "AASwiftSDK/Public/AASDK.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1024"
-            endingLineNumber = "1024"
+            startingLineNumber = "895"
+            endingLineNumber = "895"
             landmarkName = "privateStartSession(withAppID:registerListenersFor:options:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -190,8 +190,8 @@
             filePath = "AASwiftSDK/Public/AASDK.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1450"
-            endingLineNumber = "1450"
+            startingLineNumber = "1321"
+            endingLineNumber = "1321"
             landmarkName = "fireTrackEventV2Of(_:for:payload:details:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -238,8 +238,8 @@
             filePath = "AASwiftSDK/Public/AASDK.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "958"
-            endingLineNumber = "958"
+            startingLineNumber = "829"
+            endingLineNumber = "829"
             landmarkName = "privateStartSession(withAppID:registerListenersFor:options:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -254,8 +254,8 @@
             filePath = "AASwiftSDK/Public/AASDK.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "567"
-            endingLineNumber = "567"
+            startingLineNumber = "438"
+            endingLineNumber = "438"
             landmarkName = "setDeviceLocation(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -270,8 +270,8 @@
             filePath = "AASwiftSDK/Public/AASDK.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "464"
-            endingLineNumber = "464"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
             landmarkName = "removeContentListeners(for:)"
             landmarkType = "7">
          </BreakpointContent>
