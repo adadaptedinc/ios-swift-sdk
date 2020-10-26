@@ -626,7 +626,7 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
         AASDK.trackAnomalyAdPopupURLLoad(ad, urlString: url, message: error.localizedDescription)
 
         if let adID = ad?.adID, let zoneId = ad?.zoneId {
-            AASDK.consoleLogError(error, withMessage: "popup for ad \(adID) in zone \(zoneId) failed to load \(url) ", suppressTracking: true)
+            Logger.consoleLogError(error, withMessage: "popup for ad \(adID) in zone \(zoneId) failed to load \(url) ", suppressTracking: true)
         }
 
         handleLoadProblem()

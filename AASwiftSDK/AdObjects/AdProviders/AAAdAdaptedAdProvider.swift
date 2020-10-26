@@ -368,7 +368,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
             if let adID = currentAd?.adID {
                 message = "refesh time for ad \(adID) in zone \(String(describing: zoneId)) is zero - using 30s instead"
             }
-            AASDK.consoleLogError(nil, withMessage: message, suppressTracking: true)
+            Logger.consoleLogError(nil, withMessage: message, suppressTracking: true)
         }
 
         let interval = TimeInterval((currentAd?.refreshIntervalSeconds ?? 0) > 0 ? TimeInterval(currentAd?.refreshIntervalSeconds ?? Int(0.0)) : 30)

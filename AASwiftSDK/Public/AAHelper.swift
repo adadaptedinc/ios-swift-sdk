@@ -190,6 +190,10 @@ let kEventAnomaly = "anomaly"
 var _screenSize = CGSize.zero
 
 class AAHelper: NSObject {
+    class func buildVersion() -> String? {
+        return Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
+    }
+    
     class func currentTimezone() -> String? {
         let zone = NSTimeZone.local as NSTimeZone
         return zone.name
@@ -392,6 +396,61 @@ class AAHelper: NSObject {
                     })
                 }
             }).resume()
+        }
+    }
+    
+    class func universalLinkContentParser(_ userActivity: NSUserActivity?, connector: AAConnector?) {
+        connector?.addCollectableEvent(forDispatch: AACollectableEvent.internalEvent(withName: AA_EC_ADDIT_APP_OPENED, andPayload: [:]))
+
+        var retArray = [AnyHashable]()
+        do {
+            let url = userActivity?.webpageURL?.absoluteString
+            let params = [
+                "url": url ?? ""
+            ]
+            if url == nil {
+                connector?.addCollectableError(forDispatch: AACollectableError(code: ADDIT_NO_DEEPLINK_RECEIVED, message: "Did not receive a universal link url.", params: params))
+                return
+            }
+
+            connector?.addCollectableEvent(forDispatch: AACollectableEvent.internalEvent(withName: AA_EC_ADDIT_URL_RECEIVED, andPayload: params))
+            let components = NSURLComponents(string: url ?? "")
+            for item in components?.queryItems ?? [] {
+                if item.name == "data" {
+                    let decodedData = Data(base64Encoded: item.value ?? "", options: [])
+                    var json: Any? = nil
+                    do {
+                        if let decodedData = decodedData {
+                            json = try JSONSerialization.jsonObject(with: decodedData, options: [])
+                        }
+                    } catch {
+                        ReportManager.reportAnomaly(withCode: CODE_UNIVERSAL_LINK_PARSE_ERROR, message: url, params: nil, connector: connector)
+                    }
+                    let payload = AAContentPayload.parse(fromDictionary: json as? [AnyHashable : Any])
+                    payload!.payloadType = "universal-link"
+                    if let payload = payload {
+                        retArray.append(payload as AnyHashable)
+                    }
+                }
+            }
+        }
+
+        let userInfo = [
+            AASDK_KEY_MESSAGE: "Returning universal link payload item",
+            AASDK.KEY_CONTENT_PAYLOADS: retArray
+        ] as [String : Any]
+        let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_CONTENT_PAYLOADS_INBOUND), object: nil, userInfo: userInfo)
+
+        do {
+            for payload in retArray {
+                guard let payload = payload as? AAContentPayload else {
+                    continue
+                }
+                for item in payload.detailedListItems {
+                    AASDK.cacheItem(item)
+                }
+            }
+            AASDK.notificationCenter().post(notification)
         }
     }
 }

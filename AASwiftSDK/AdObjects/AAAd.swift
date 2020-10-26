@@ -107,7 +107,7 @@ public class AAAd: NSObject {
         
         if ad.refreshIntervalSeconds < 1 {
             let message = String(format: "Invalid refresh rate %i - using 30 sec - ad %@ in zone %@", ad.refreshIntervalSeconds, ad.adID ?? "", ad.zoneId ?? "")
-            AASDK.consoleLogError(nil, withMessage: message, suppressTracking: true)
+            Logger.consoleLogError(nil, withMessage: message, suppressTracking: true)
             errorString += "\n\(message)"
             ad.refreshIntervalSeconds = 30
         }
@@ -118,7 +118,7 @@ public class AAAd: NSObject {
             ad.jsonAdPayload = jsonPayload as? [AnyHashable : Any] ?? [:]
             if ad.jsonAdPayload?.count == 0 {
                 let message = "JSON Ad payload contained no items for ad \(ad.adID ?? "") in zone \(ad.zoneId ?? "")"
-                AASDK.consoleLogError(nil, withMessage: message, suppressTracking: true)
+                Logger.consoleLogError(nil, withMessage: message, suppressTracking: true)
                 errorString += "\n\(message)"
             }
         }
@@ -128,7 +128,7 @@ public class AAAd: NSObject {
             ad.jsonContentPayload = jsonPayload as? [AnyHashable : Any] ?? [:]
             if ad.jsonContentPayload?.count == 0 {
                 let message = "JSON content payload contained no items for ad \(ad.adID ?? "") in zone \(ad.zoneId ?? "")"
-                AASDK.consoleLogError(nil, withMessage: message, suppressTracking: true)
+                Logger.consoleLogError(nil, withMessage: message, suppressTracking: true)
                 errorString = "\(errorString)\n\(message)"
             }
         }
@@ -143,7 +143,7 @@ public class AAAd: NSObject {
                 let actionType = AAHelper.actionType(from: ad.actionType ?? "")
                 if (actionType == AASDKActionType.kActionPopup || actionType == AASDKActionType.kActionLink) {
                     let message = "ad \(ad.adID ?? "") in zone \(ad.zoneId ?? "") missing action path"
-                    AASDK.consoleLogError(nil, withMessage: message, suppressTracking: true)
+                    Logger.consoleLogError(nil, withMessage: message, suppressTracking: true)
                     errorString = "\(errorString)\n\(message)"
                 }
             }
@@ -163,7 +163,7 @@ public class AAAd: NSObject {
         
         if ad.type == AdTypeAndSource.kTypeUnsupportedAd {
             let message = "ad \(ad.adID ?? "") in zone \(ad.zoneId ?? "") bad ad type '\(_str)'"
-            AASDK.consoleLogError(nil, withMessage: message, suppressTracking: true)
+            Logger.consoleLogError(nil, withMessage: message, suppressTracking: true)
             errorString = "\(errorString)\n\(message)"
         }
         

@@ -36,7 +36,7 @@ class AAGenericRequest: NSObject, NSCopying {
     func asData() -> Data? {
         if let params = params {
             if !JSONSerialization.isValidJSONObject(params) {
-                AASDK.consoleLogError(nil, withMessage: "AARequest not valid json object \(params )", suppressTracking: true)
+                Logger.consoleLogError(nil, withMessage: "AARequest not valid json object \(params )", suppressTracking: true)
                 return nil
             }
         }
@@ -47,7 +47,7 @@ class AAGenericRequest: NSObject, NSCopying {
                 data = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
             }
         } catch let error {
-            AASDK.consoleLogError(error, withMessage: "asJSON data error for AARequest", suppressTracking: true)
+            Logger.consoleLogError(error, withMessage: "asJSON data error for AARequest", suppressTracking: true)
         }
         return data
     }
@@ -85,6 +85,6 @@ class AAGenericRequest: NSObject, NSCopying {
         params = [:]
         setParamValue(AAHelper.nowAsUTCNumber() as NSNumber?, forKey: AA_KEY_DATETIME)
         setParamValue(AAHelper.udid() as NSObject?, forKey: AA_KEY_UDID)
-        setParamValue(AASDK.buildVersion() as NSObject?, forKey: AA_KEY_SDK_BUNDLE_VERSION)
+        setParamValue(AAHelper.buildVersion() as NSObject?, forKey: AA_KEY_SDK_BUNDLE_VERSION)
     }
 }

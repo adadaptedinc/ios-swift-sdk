@@ -6,8 +6,6 @@
 //  Copyright © 2020 AdAdapted. All rights reserved.
 //
 
-import Foundation
-
 enum AASDKActionType : Int {
     case kActionLink
     case kActionPopup
@@ -48,6 +46,12 @@ enum AdTypeAndSource : Int {
     case kAdAdaptedImageAd = 2
     case kAdAdaptedHTMLAd = 3
 }
+
+let EVENT_COLLECTION_SERVER_ROOT_TEST = "https://sandec.adadapted.com/v/1/ios"
+let EVENT_COLLECTION_SERVER_ROOT_PROD = "https://ec.adadapted.com/v/1/ios"
+
+let PAYLOAD_SERVICE_SERVER_ROOT_TEST = "https://sandpayload.adadapted.com/v/1"
+let PAYLOAD_SERVICE_SERVER_ROOT_PROD = "https://payload.adadapted.com/v/1"
 
 let AD_FADE_SECONDS = 0.2
 
@@ -129,7 +133,4 @@ let CODE_JSON_PARSING_EROR = "JSON_PARSING_ERROR"
 let CODE_API_400 = "API_RETURNED_400_ERROR"
 let CODE_ATL_FAILURE = "ATL_FAILED_TO_ADD_TO_LIST"
 let CODE_UNIVERSAL_LINK_PARSE_ERROR = "UNIVERSAL_LINK_PARSE_ERROR"
-
-public class Constants {
-    
-}
+let ADDIT_NO_DEEPLINK_RECEIVED = "ADDIT_NO_DEEPLINK_RECEIVED"

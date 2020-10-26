@@ -73,12 +73,12 @@ import Foundation
                 }
             }
 
-            AASDK.reportPayloadReceived(self, ontoList: nil)
+            AASDK.reportPayloadReceived(self)
         }
     }
 
     func reportReceivedOntoList(_ list: String?) {
-        AASDK.reportPayloadReceived(self, ontoList: list)
+        AASDK.reportPayloadReceived(self)
     }
 
     func reportRejected() {
