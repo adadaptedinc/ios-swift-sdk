@@ -190,8 +190,8 @@
             filePath = "AASwiftSDK/AdObjects/Popup/AAPopupView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "568"
-            endingLineNumber = "568"
+            startingLineNumber = "576"
+            endingLineNumber = "576"
             landmarkName = "webView(_:decidePolicyFor:decisionHandler:)"
             landmarkType = "7">
          </BreakpointContent>

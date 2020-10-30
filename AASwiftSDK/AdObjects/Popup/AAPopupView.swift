@@ -107,7 +107,11 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
             if ad?.popupBackColor != nil && (ad?.popupBackColor?.count ?? 0) > 2 {
                 _header?.backgroundColor = AAHelper.safeColor(fromHexString: ad?.popupBackColor, fallbackHexString: kHeaderDefaultBackColor)
             } else {
-                _header?.backgroundColor = UIColor(named: kHeaderDefaultBackColor)
+                if #available(iOS 11.0, *) {
+                    _header?.backgroundColor = UIColor(named: kHeaderDefaultBackColor)
+                } else {
+                    _header?.backgroundColor = AAHelper.hexStringToUIColor(hex: kHeaderDefaultBackColor)
+                }
             }
 
             if showCloseButton {
@@ -190,7 +194,11 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
             if ad?.popupTextColor != nil && (ad?.popupTextColor?.count ?? 0) > 2 {
                 _titleLabel?.textColor = AAHelper.safeColor(fromHexString: ad?.popupTextColor, fallbackHexString: kHeaderDefaultTextColor)
             } else {
-                _titleLabel?.textColor = UIColor(named: kHeaderDefaultTextColor)
+                if #available(iOS 11.0, *) {
+                    _titleLabel?.textColor = UIColor(named: kHeaderDefaultTextColor)
+                } else {
+                    _titleLabel?.textColor = AAHelper.hexStringToUIColor(hex: kHeaderDefaultTextColor)
+                }
             }
             _titleLabel?.font = UIFont(name: "Helvetica", size: 20)
         }
