@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F414F03625115E5400F2811C /* AAPayloadTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF4B25115E5300F2811C /* AAPayloadTracker.swift */; };
 		F414F03825115E5400F2811C /* AAAdTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF4D25115E5300F2811C /* AAAdTimeline.swift */; };
 		F414F03B25115E5400F2811C /* AAPayloadTrackingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF5025115E5300F2811C /* AAPayloadTrackingResponse.swift */; };
 		F414F04125115E5400F2811C /* AABatchEventRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF5625115E5300F2811C /* AABatchEventRequest.swift */; };
@@ -66,6 +65,8 @@
 		F467AE91252B7C96003E02DB /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467AE90252B7C96003E02DB /* LinkedList.swift */; };
 		F467AE97252B7D74003E02DB /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467AE96252B7D74003E02DB /* Node.swift */; };
 		F467B17C24E43EAE00B89A5F /* AASDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467B17B24E43EAE00B89A5F /* AASDK.swift */; };
+		F46907F32549D2620097288C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46907F22549D2620097288C /* Logger.swift */; };
+		F46907FB2549F67E0097288C /* ReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46907FA2549F67E0097288C /* ReportManager.swift */; };
 		F46A657024E19DA1007CCE6B /* AASwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */; };
 		F46A657524E19DA1007CCE6B /* AASwiftSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46A657424E19DA1007CCE6B /* AASwiftSDKTests.swift */; };
 		F46A657724E19DA1007CCE6B /* AASwiftSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = F46A656924E19DA1007CCE6B /* AASwiftSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -83,7 +84,10 @@
 		F46A65D424E1E0BA007CCE6B /* ObjCExampleApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F46A65D224E1E0BA007CCE6B /* ObjCExampleApp.xcdatamodeld */; };
 		F46A65D624E1E0BB007CCE6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F46A65D524E1E0BB007CCE6B /* Assets.xcassets */; };
 		F46A65DC24E1E0BB007CCE6B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F46A65DB24E1E0BB007CCE6B /* main.m */; };
+		F46B95C725486EFA0025AC5E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46B95C625486EFA0025AC5E /* Protocols.swift */; };
+		F46B95D92548A0140025AC5E /* Registrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46B95D82548A0140025AC5E /* Registrar.swift */; };
 		F4730AB6252E2ED9003E7C52 /* AASwiftSDK in Resources */ = {isa = PBXBuildFile; fileRef = F4730AB5252E2ED9003E7C52 /* AASwiftSDK */; };
+		F474EEB825474491002439FD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F474EEB725474491002439FD /* Constants.swift */; };
 		F484BA19251CF043007C19DD /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F484BA18251CF043007C19DD /* WebKit.framework */; };
 		F484BAC5251D2DB2007C19DD /* AASwiftSDK in Resources */ = {isa = PBXBuildFile; fileRef = F484BAC4251D2DB2007C19DD /* AASwiftSDK */; };
 		F4A2046C24E2EFB4003F909D /* cropped-AdAdapted-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A2046B24E2EFB4003F909D /* cropped-AdAdapted-Logo.png */; };
@@ -140,7 +144,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F414EF4B25115E5300F2811C /* AAPayloadTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAPayloadTracker.swift; sourceTree = "<group>"; };
 		F414EF4D25115E5300F2811C /* AAAdTimeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAAdTimeline.swift; sourceTree = "<group>"; };
 		F414EF5025115E5300F2811C /* AAPayloadTrackingResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAPayloadTrackingResponse.swift; sourceTree = "<group>"; };
 		F414EF5625115E5300F2811C /* AABatchEventRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AABatchEventRequest.swift; sourceTree = "<group>"; };
@@ -198,6 +201,8 @@
 		F467AE90252B7C96003E02DB /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		F467AE96252B7D74003E02DB /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		F467B17B24E43EAE00B89A5F /* AASDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AASDK.swift; sourceTree = "<group>"; };
+		F46907F22549D2620097288C /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		F46907FA2549F67E0097288C /* ReportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportManager.swift; sourceTree = "<group>"; };
 		F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AASwiftSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F46A656924E19DA1007CCE6B /* AASwiftSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AASwiftSDK.h; sourceTree = "<group>"; };
 		F46A656A24E19DA1007CCE6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -227,7 +232,10 @@
 		F46A65DA24E1E0BB007CCE6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F46A65DB24E1E0BB007CCE6B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F46A65E124E1E130007CCE6B /* ObjCExampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ObjCExampleApp.entitlements; sourceTree = "<group>"; };
+		F46B95C625486EFA0025AC5E /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		F46B95D82548A0140025AC5E /* Registrar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registrar.swift; sourceTree = "<group>"; };
 		F4730AB5252E2ED9003E7C52 /* AASwiftSDK */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AASwiftSDK; sourceTree = SOURCE_ROOT; };
+		F474EEB725474491002439FD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F484BA18251CF043007C19DD /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/iOSSupport/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
 		F484BAC4251D2DB2007C19DD /* AASwiftSDK */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AASwiftSDK; sourceTree = SOURCE_ROOT; };
 		F4A2046B24E2EFB4003F909D /* cropped-AdAdapted-Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cropped-AdAdapted-Logo.png"; sourceTree = "<group>"; };
@@ -306,13 +314,16 @@
 			isa = PBXGroup;
 			children = (
 				F46A656924E19DA1007CCE6B /* AASwiftSDK.h */,
+				F474EEB725474491002439FD /* Constants.swift */,
+				F46907F22549D2620097288C /* Logger.swift */,
+				F46B95C625486EFA0025AC5E /* Protocols.swift */,
+				F46907FA2549F67E0097288C /* ReportManager.swift */,
 				F46A656A24E19DA1007CCE6B /* Info.plist */,
 				F46DB57E24EADE8200A81CBF /* Public */,
 				F46DB57F24EADEC200A81CBF /* AdObjects */,
 				F46DB58224EAE0EE00A81CBF /* Helpers */,
 				F46DB58324EAE2C000A81CBF /* Connection */,
 				F46DB58424EAE2EB00A81CBF /* Requests */,
-				F46DB58E24EAE3FB00A81CBF /* Support */,
 				F46DB59024EAE45200A81CBF /* Frameworks */,
 			);
 			path = AASwiftSDK;
@@ -429,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				F44F2F9025191F2F00B96C8C /* AAHelper.swift */,
+				F46B95D82548A0140025AC5E /* Registrar.swift */,
 				F467AE86252B7931003E02DB /* Queue.swift */,
 				F467AE90252B7C96003E02DB /* LinkedList.swift */,
 				F467AE96252B7D74003E02DB /* Node.swift */,
@@ -467,7 +479,6 @@
 		F46DB58624EAE39000A81CBF /* PayloadService */ = {
 			isa = PBXGroup;
 			children = (
-				F414EF4B25115E5300F2811C /* AAPayloadTracker.swift */,
 				F414EF5025115E5300F2811C /* AAPayloadTrackingResponse.swift */,
 				F414EF6725115E5300F2811C /* AAPayloadPickupRequest.swift */,
 				F414EF6C25115E5300F2811C /* AAPayloadPickupResponse.swift */,
@@ -543,13 +554,6 @@
 				F414EFED25115E5300F2811C /* AAInitRequest.swift */,
 			);
 			path = Init;
-			sourceTree = "<group>";
-		};
-		F46DB58E24EAE3FB00A81CBF /* Support */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Support;
 			sourceTree = "<group>";
 		};
 		F46DB59024EAE45200A81CBF /* Frameworks */ = {
@@ -755,20 +759,23 @@
 				F414F04E25115E5400F2811C /* AACollectableErrorResponse.swift in Sources */,
 				F44F2F772519081A00B96C8C /* AAAbstractAdProvider.swift in Sources */,
 				F414F08925115E5400F2811C /* AARequestBlockHolder.swift in Sources */,
+				F46907F32549D2620097288C /* Logger.swift in Sources */,
 				F414F06725115E5400F2811C /* AAAdZone.swift in Sources */,
 				F467AE91252B7C96003E02DB /* LinkedList.swift in Sources */,
 				F414F07F25115E5400F2811C /* AAInitResponse.swift in Sources */,
 				F44F2F9125191F2F00B96C8C /* AAHelper.swift in Sources */,
+				F46B95C725486EFA0025AC5E /* Protocols.swift in Sources */,
 				F414F04125115E5400F2811C /* AABatchEventRequest.swift in Sources */,
 				F414F07A25115E5400F2811C /* AAReportableSessionEvent.swift in Sources */,
-				F414F03625115E5400F2811C /* AAPayloadTracker.swift in Sources */,
 				F414F04425115E5400F2811C /* AAGenericResponse.swift in Sources */,
 				F414F06125115E5400F2811C /* AAGetAdsRequest.swift in Sources */,
 				F414F0A425115E5400F2811C /* AAPopupView.swift in Sources */,
 				F44F2F87251915D000B96C8C /* AADetailedListItem.swift in Sources */,
 				F414F08125115E5400F2811C /* AAKeywordIntercept.swift in Sources */,
+				F46907FB2549F67E0097288C /* ReportManager.swift in Sources */,
 				F414F0CD25115E5400F2811C /* AACollectableErrorRequest.swift in Sources */,
 				F414F0D225115E5400F2811C /* AAGenericRequest.swift in Sources */,
+				F46B95D92548A0140025AC5E /* Registrar.swift in Sources */,
 				F414F03B25115E5400F2811C /* AAPayloadTrackingResponse.swift in Sources */,
 				F414F0B725115E5400F2811C /* AAKeywordInterceptBatchEventResponse.swift in Sources */,
 				F414F09B25115E5400F2811C /* AAAdAdaptedJSONZoneView.swift in Sources */,
@@ -789,6 +796,7 @@
 				F414F09525115E5400F2811C /* AAContentPayload.swift in Sources */,
 				F414F07625115E5400F2811C /* AAReportableAnomalyEvent.swift in Sources */,
 				F414F04C25115E5400F2811C /* AAErrorResponse.swift in Sources */,
+				F474EEB825474491002439FD /* Constants.swift in Sources */,
 				F414F0B425115E5400F2811C /* AAPayloadTrackingRequest.swift in Sources */,
 				F414F05625115E5400F2811C /* AAPayloadPickupResponse.swift in Sources */,
 				F414F0D325115E5400F2811C /* AAInitRequest.swift in Sources */,
@@ -939,7 +947,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -996,7 +1004,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1026,7 +1034,7 @@
 				);
 				INFOPLIST_FILE = AASwiftSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1036,6 +1044,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1060,7 +1069,7 @@
 				);
 				INFOPLIST_FILE = AASwiftSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1070,6 +1079,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

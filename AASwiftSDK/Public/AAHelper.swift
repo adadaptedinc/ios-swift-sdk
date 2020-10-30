@@ -190,6 +190,10 @@ let kEventAnomaly = "anomaly"
 var _screenSize = CGSize.zero
 
 class AAHelper: NSObject {
+    class func buildVersion() -> String? {
+        return Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
+    }
+    
     class func currentTimezone() -> String? {
         let zone = NSTimeZone.local as NSTimeZone
         return zone.name
@@ -293,8 +297,34 @@ class AAHelper: NSObject {
 
     class func safeColor(fromHexString str: String?, fallbackHexString fallback: String?) -> UIColor? {
         var color: UIColor?
-        color = UIColor(named: str!)
+        if #available(iOS 11.0, *) {
+            color = UIColor(named: str!)
+        } else {
+            color = hexStringToUIColor(hex: str!)
+        }
         return color
+    }
+    
+    class func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+
+        if ((cString.count) != 6) {
+            return UIColor.gray
+        }
+
+        var rgbValue:UInt64 = 0
+        Scanner(string: cString).scanHexInt64(&rgbValue)
+
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
     }
 
     class func bundleID() -> String? {
@@ -392,6 +422,61 @@ class AAHelper: NSObject {
                     })
                 }
             }).resume()
+        }
+    }
+    
+    class func universalLinkContentParser(_ userActivity: NSUserActivity?, connector: AAConnector?) {
+        connector?.addCollectableEvent(forDispatch: AACollectableEvent.internalEvent(withName: AA_EC_ADDIT_APP_OPENED, andPayload: [:]))
+
+        var retArray = [AnyHashable]()
+        do {
+            let url = userActivity?.webpageURL?.absoluteString
+            let params = [
+                "url": url ?? ""
+            ]
+            if url == nil {
+                connector?.addCollectableError(forDispatch: AACollectableError(code: ADDIT_NO_DEEPLINK_RECEIVED, message: "Did not receive a universal link url.", params: params))
+                return
+            }
+
+            connector?.addCollectableEvent(forDispatch: AACollectableEvent.internalEvent(withName: AA_EC_ADDIT_URL_RECEIVED, andPayload: params))
+            let components = NSURLComponents(string: url ?? "")
+            for item in components?.queryItems ?? [] {
+                if item.name == "data" {
+                    let decodedData = Data(base64Encoded: item.value ?? "", options: [])
+                    var json: Any? = nil
+                    do {
+                        if let decodedData = decodedData {
+                            json = try JSONSerialization.jsonObject(with: decodedData, options: [])
+                        }
+                    } catch {
+                        ReportManager.reportAnomaly(withCode: CODE_UNIVERSAL_LINK_PARSE_ERROR, message: url, params: nil, connector: connector)
+                    }
+                    let payload = AAContentPayload.parse(fromDictionary: json as? [AnyHashable : Any])
+                    payload!.payloadType = "universal-link"
+                    if let payload = payload {
+                        retArray.append(payload as AnyHashable)
+                    }
+                }
+            }
+        }
+
+        let userInfo = [
+            AASDK_KEY_MESSAGE: "Returning universal link payload item",
+            AASDK.KEY_CONTENT_PAYLOADS: retArray
+        ] as [String : Any]
+        let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_CONTENT_PAYLOADS_INBOUND), object: nil, userInfo: userInfo)
+
+        do {
+            for payload in retArray {
+                guard let payload = payload as? AAContentPayload else {
+                    continue
+                }
+                for item in payload.detailedListItems {
+                    AASDK.cacheItem(item)
+                }
+            }
+            AASDK.notificationCenter().post(notification)
         }
     }
 }

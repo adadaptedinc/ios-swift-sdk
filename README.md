@@ -1,3 +1,10 @@
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="https://docs.adadapted.com/images/adadapted-logo.svg" alt="Logo" width="80" height="80">
+  </a>
+
 <p align="center">
   <h3 align="center">AdAdapted Swift iOS SDK</h3>
 
@@ -35,7 +42,7 @@ This SDK is used for implementing the AdAdapted ad views, keyword interception, 
 
 To get a local copy up and running simply download the source code and run it through one of the target sample apps (SwiftExample and ObjcExample). You'll also need to input your own API key in the example app AppDelegates respectively. After that, you should start seeing ads and intercepts on the following 'List Page' of the sample apps (assuming your API key has a corresponding ad campaign enabled).
 
-```sh
+```swift
 AASDK.startSession(withAppID: "YOUR_API_KEY", registerListenersFor: self, options: options)
 ```
 
@@ -64,7 +71,7 @@ Then after opening the `.xcworkspace` version of your project, you should see th
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+When contributing please follow the guidelines below:
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -72,11 +79,43 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+##### When a new Pod release is needed, perform the following:
+
+
+Create a new version
+> git tag X.X.X
+
+Push the new version tag
+> git push origin X.X.X
+
+Update the version within the `AASwiftSDK.podspec` 
+```sh
+spec.version      = "X.X.X"
+```
+Push changes
+> pod trunk push
+
 
 <!-- LICENSE -->
 ## License
 
-See `LICENSE` for more information.
+Copyright (c) 2020-present, AdAdapted, Inc. All rights reserved.
+
+You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
+copy, modify, and distribute this software in source code or binary form for use
+in connection with the web services and APIs provided by AdAdapted.
+
+As with any software that integrates with the AdAdapted platform, your use of
+this software is subject to AdAdapted's terms and conditions
+[https://info.adadapted.com/terms]. This copyright notice shall be included
+in all copies or substantial portions of the software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 <!-- CONTACT -->
 ## Contact

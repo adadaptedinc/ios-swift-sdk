@@ -13,7 +13,6 @@ class AAConnector: NSObject {
     private var isOnline = false
     private var numInFlight = 0
 
-    weak var delegate: AAConnectorObserver?
     var inTestMode = false
 
     func dispatchCachedMessages() {
@@ -192,6 +191,7 @@ class AAConnector: NSObject {
         request?.httpBody = jsonMessage
 
         print("#D: Making request to \(url?.absoluteString ?? "")")
+        print("#D: REQ JSON =  \(aaRequest?.asJSON() ?? "")")
         
         var task: URLSessionDataTask? = nil
         if let request = request {
@@ -206,7 +206,7 @@ class AAConnector: NSObject {
                     if response is HTTPURLResponse {
                         let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
                         if statusCode >= 400 {
-                            AASDK.reportAnomaly(withCode: CODE_API_400, message: response.debugDescription, params: nil)
+                            ReportManager.reportAnomaly(withCode: CODE_API_400, message: response.debugDescription, params: nil, connector: self)
                             sendNextMessage()
                             return
                         }

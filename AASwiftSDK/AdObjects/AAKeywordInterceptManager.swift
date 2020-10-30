@@ -139,7 +139,7 @@ class AAKeywordInterceptManager: NSObject, WKUIDelegate {
         let request = AAKeywordInterceptBatchEventRequest(events: events)
          //Add helper
         connector?.enqueueRequest(request, responseWasErrorBlock: { response, forRequest, error in
-            AASDK.consoleLogError(error, withMessage: "AASDK KI events reporting FAILED", suppressTracking: false)
+            Logger.consoleLogError(error, withMessage: "AASDK KI events reporting FAILED", suppressTracking: false)
         }, responseWasReceivedBlock: { response, forRequest in
             self.events?.removeAll()
         })
