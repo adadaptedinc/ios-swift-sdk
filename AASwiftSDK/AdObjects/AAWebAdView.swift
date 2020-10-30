@@ -161,7 +161,7 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
             str = "ERROR - HTML ad: \(adID) in zone: \(zoneId) failed to load: \n\((error as NSError).userInfo)"
         }
 
-        AASDK.consoleLogError(error, withMessage: str, suppressTracking: false)
+        Logger.consoleLogError(error, withMessage: str, suppressTracking: false)
         AASDK.logDebugMessage(str, type: AASDK_DEBUG_GENERAL)
 
         var url = "unkown"
@@ -170,7 +170,7 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
         }
 
         if let adID = ad?.adID, let zoneId = ad?.zoneId {
-            AASDK.consoleLogError(error, withMessage: "HTML ad \(adID) in zone \(zoneId) failed to load \(url) ", suppressTracking: true)
+            Logger.consoleLogError(error, withMessage: "HTML ad \(adID) in zone \(zoneId) failed to load \(url) ", suppressTracking: true)
         }
         AASDK.trackAnomalyAdURLLoad(ad, urlString: url, message: error.localizedDescription)
 

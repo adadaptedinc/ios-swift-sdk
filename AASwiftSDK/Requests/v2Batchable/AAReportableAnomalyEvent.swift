@@ -37,8 +37,7 @@ class AAReportableAnomalyEvent: NSObject {
         setParamValue(AASDK.sessionId() as NSObject?, forKey: AA_KEY_SESSION_ID)
         setParamValue(AASDK.appId() as NSObject?, forKey: AA_KEY_APP_ID)
         setParamValue(AAHelper.udid() as NSObject?, forKey: AA_KEY_UDID)
-        setParamValue(AASDK.buildVersion() as NSObject?, forKey: AA_KEY_SDK_BUNDLE_VERSION)
-        //setParamValue(AASDK.buildSha() as NSObject?, forKey: AA_KEY_SDK_BUNDLE_SHA)
+        setParamValue(AAHelper.buildVersion() as NSObject?, forKey: AA_KEY_SDK_BUNDLE_VERSION)
 
         setParamValue(AAHelper.bundleID() as NSObject?, forKey: AA_KEY_BUNDLE_ID)
         setParamValue(AAHelper.bundleVersion() as NSObject?, forKey: AA_KEY_BUNDLE_VERSION)

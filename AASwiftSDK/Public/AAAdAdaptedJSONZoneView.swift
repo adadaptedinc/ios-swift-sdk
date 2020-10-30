@@ -43,7 +43,7 @@ class AAAdAdaptedJSONZoneView: AAZoneView {
         DispatchQueue.main.async(execute: { [self] in
             if adProvider()?.currentAd()!.jsonAdPayload == nil || adProvider()?.currentAd()?.jsonAdPayload?.count == 0 {
                 let message = "ad \(String(describing: adProvider()?.currentAd()!.adID)) in zone \(String(describing: zoneId)) missing json payload"
-                AASDK.consoleLogError(nil, withMessage: message, suppressTracking: true)
+                Logger.consoleLogError(nil, withMessage: message, suppressTracking: true)
                 AASDK.trackAnomalyAdConfiguration(adProvider()?.currentAd(), message: message)
                 adProvider()?.zoneRenderer!.provider(adProvider(), didFailToLoadZone: zoneId, ofType: AdTypeAndSource.kAdAdaptedJSONAd, message: "JSON ad payload missing")
             } else {

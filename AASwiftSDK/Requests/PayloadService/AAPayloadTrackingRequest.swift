@@ -58,7 +58,7 @@ class AAPayloadTrackingRequest: AAGenericRequest {
         setParamValue(AAHelper.currentTimezone() as NSObject?, forKey: AA_KEY_TIMEZONE)
         setParamValue(AAHelper.deviceLocale() as NSObject?, forKey: AA_KEY_LOCALE)
         setParamValue(AAHelper.deviceModelName() as NSObject?, forKey: AA_KEY_DEVICE_MODEL)
-        setParamValue(AASDK.buildVersion() as NSObject?, forKey: AA_KEY_SDK_BUNDLE_VERSION)
+        setParamValue(AAHelper.buildVersion() as NSObject?, forKey: AA_KEY_SDK_BUNDLE_VERSION)
         setParamValue(NSNumber(value: AAHelper.isAdTrackingEnabled() ? 1 : 0) as NSObject?, forKey: AA_KEY_ALLOW_RETARGETING)
 
         let loc = AASDK.deviceLocationOrNil()

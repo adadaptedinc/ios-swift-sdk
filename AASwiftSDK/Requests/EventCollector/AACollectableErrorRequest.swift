@@ -31,7 +31,7 @@ class AACollectableErrorRequest: AAGenericRequest {
         setParamValue(AAHelper.currentTimezone() as NSObject?, forKey: AA_KEY_TIMEZONE)
         setParamValue(AAHelper.deviceLocale() as NSObject?, forKey: AA_KEY_LOCALE)
         setParamValue(AAHelper.deviceModelName() as NSObject?, forKey: AA_KEY_DEVICE_MODEL)
-        setParamValue(AASDK.buildVersion() as NSObject?, forKey: AA_KEY_SDK_BUNDLE_VERSION)
+        setParamValue(AAHelper.buildVersion() as NSObject?, forKey: AA_KEY_SDK_BUNDLE_VERSION)
         setParamValue(NSNumber(value: AAHelper.isAdTrackingEnabled() ? 1 : 0) as NSObject?, forKey: AA_KEY_ALLOW_RETARGETING)
 
         let loc = AASDK.deviceLocationOrNil()
@@ -66,7 +66,7 @@ class AACollectableErrorRequest: AAGenericRequest {
         payload["errors"] = dics
 
         if !JSONSerialization.isValidJSONObject(payload) {
-            AASDK.consoleLogError(nil, withMessage: "not valid json object: \(payload)", suppressTracking: true)
+            Logger.consoleLogError(nil, withMessage: "not valid json object: \(payload)", suppressTracking: true)
             return nil
         }
 
@@ -81,7 +81,7 @@ class AACollectableErrorRequest: AAGenericRequest {
             err = error
         }
         if let err = err {
-            AASDK.consoleLogError(err, withMessage: "asJSON data error for error events", suppressTracking: true)
+            Logger.consoleLogError(err, withMessage: "asJSON data error for error events", suppressTracking: true)
         }
         return data
     }
