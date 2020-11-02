@@ -12,7 +12,6 @@ import UIKit
 @objcMembers
 class AAAdZone: NSObject {
     var ads: [AnyHashable]?
-    //var timeline: AAAdTimeline?
     var isCacheComplete = false
     var zoneId: String?
     var portZoneWidth: Float = 0.0
@@ -20,7 +19,6 @@ class AAAdZone: NSObject {
     var landZoneWidth: Float = 0.0
     var landZoneHeight: Float = 0.0
 
-    /// this is it's own thing so image loading doesn't happen when the data model is being populated.
     func setupZoneAndShouldUseCachedImages(_ shouldUseCachedImages: Bool) {
         isCacheComplete = false
         self.shouldUseCachedImages = shouldUseCachedImages
@@ -30,7 +28,6 @@ class AAAdZone: NSObject {
             guard let ad = ad as? AAAd else {
                 continue
             }
-            // setup images
             if self.shouldUseCachedImages {
                 if ad.portImgURL != nil && (ad.portImgURL?.count ?? 0) > 0 {
                     AASDK.logDebugMessage("Caching portrait ad \(ad.adID ?? "") with URL \(ad.portImgURL ?? "") for zone \(ad.zoneId ?? "")", type: AASDK_DEBUG_NETWORK)
@@ -77,7 +74,6 @@ class AAAdZone: NSObject {
     }
 
     func remove(_ ad: AAAd?) {
-        // remove it form the timeline, then call nextAd?
         var array: [AnyHashable]? = nil
         if let currentAds = currentAds {
             array = currentAds
@@ -187,31 +183,7 @@ class AAAdZone: NSObject {
     }
     
     func populateCurrentAds() {
-        currentAds = ads //#D - this is the update that worked for ignoring the timeline
+        currentAds = ads
         currentIndex = UInt(currentAds?.count ?? 0)
     }
-
-//    func populateCurrentAds() {
-//        let ids = timeline?.currentlyActiveAdIds()
-//        var array = [AnyHashable](repeating: 0, count: ids?.count ?? 0)
-//
-//        for ad in ads ?? [] {
-//            guard let ad = ad as? AAAd else {
-//                continue
-//            }
-//            for adId in ids ?? [] {
-//                guard let adId = adId as? String else {
-//                    continue
-//                }
-//                if adId == ad.adID {
-//                    array.append(ad)
-//                    break
-//                }
-//            }
-//        }
-//
-//        currentAds = array
-//        nextTimelineEvent = timeline?.nextTimelineEvent()
-//        currentIndex = UInt(currentAds?.count ?? 0)
-//    }
 }

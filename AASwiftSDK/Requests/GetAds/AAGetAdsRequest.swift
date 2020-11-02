@@ -15,7 +15,7 @@ class AAGetAdsRequest: AAGenericRequest {
 
 // MARK: - AARequest Overrides
     override func targetURL() -> URL? {
-        return super.url(forEndpoint: "ad/getAd") //not called?
+        return super.url(forEndpoint: "ad/getAd")
     }
 
     override func parseResponse(fromJSON json: Any?) -> AAGetAdsResponse? {

@@ -25,7 +25,7 @@ class AAKeywordInterceptInitRequest: AAGenericRequest {
 
 // MARK: - AARequest Overrides
     override func targetURL() -> URL? {
-        return super.url(forEndpoint: "intercepts/retrieve") //#D - !request
+        return super.url(forEndpoint: "intercepts/retrieve")
     }
 
     override func parseResponse(fromJSON json: Any?) -> AAKeywordInterceptInitResponse? {

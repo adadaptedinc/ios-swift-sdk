@@ -60,12 +60,10 @@ class AAGenericRequest: NSObject, NSCopying {
         return URL(string: String(AASDK.serverRoot() + "/" + endpoint))
     }
 
-    /// call urlForEndpoint: when implementing this method
     func targetURL() throws -> URL? {
         throw NSError(domain: "AAResponse - You must override targetURL: and call urlForEndpoint: in subclass", code: 42, userInfo: nil)
     }
 
-    /// I really like this pattern - it puts all the logic in the request object, which is convenient.
     func parseResponse(fromJSON json: Any?) throws -> AAGenericResponse? {
         throw NSError(domain: "AAResponse - You must override parseResponseFromJSON: in subclass", code: 42, userInfo: nil)
     }

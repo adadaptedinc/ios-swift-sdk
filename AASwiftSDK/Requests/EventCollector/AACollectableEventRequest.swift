@@ -29,7 +29,6 @@ class AACollectableEventRequest: AAGenericRequest {
         setParamValue(AAHelper.deviceWidthNumber() as NSObject?, forKey: AA_KEY_DEVICE_WIDTH)
         setParamValue(AAHelper.deviceHeightNumber() as NSObject?, forKey: AA_KEY_DEVICE_HEIGHT)
         setParamValue(AAHelper.deviceScreenDensity() as NSObject?, forKey: AA_KEY_DEVICE_DENSITY)
-        
         setParamValue(AAHelper.currentTimezone() as NSObject?, forKey: AA_KEY_TIMEZONE)
         setParamValue(AAHelper.deviceLocale() as NSObject?, forKey: AA_KEY_LOCALE)
         setParamValue(AAHelper.deviceModelName() as NSObject?, forKey: AA_KEY_DEVICE_MODEL)

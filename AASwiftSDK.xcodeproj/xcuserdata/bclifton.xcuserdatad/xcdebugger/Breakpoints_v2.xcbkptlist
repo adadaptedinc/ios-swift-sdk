@@ -23,38 +23,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D9A608EA-8A81-4BB9-B61D-F7B6E61C3D0D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AASwiftSDK/AdObjects/AAAdZone.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
-            landmarkName = "unknown"
-            landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2391FABE-B2E8-4678-8D83-B6A3A66B3622"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AASwiftSDK/AdObjects/AAAdZone.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
-            landmarkName = "unknown"
-            landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "E19AC3F6-8A07-4AF6-9A3F-DDFDDA54E64D"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -62,26 +30,10 @@
             filePath = "AASwiftSDK/AdObjects/AAAdZone.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "unknown"
-            landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "68AA2B4E-2A8D-4982-9969-D44DA1AC77D3"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AASwiftSDK/AdObjects/AAAdZone.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "setupZoneAndShouldUseCachedImages(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -94,10 +46,10 @@
             filePath = "AASwiftSDK/AdObjects/AAAdZone.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "setupZoneAndShouldUseCachedImages(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -270,10 +222,10 @@
             filePath = "AASwiftSDK/AdObjects/AAAdZone.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "nextIndexAndIncrement()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -286,10 +238,10 @@
             filePath = "AASwiftSDK/AdObjects/AAAdZone.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "populateCurrentAds()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

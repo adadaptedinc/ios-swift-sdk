@@ -39,7 +39,6 @@ class AABatchEventRequest: AAGenericRequest {
             default:
                 return super.url(forEndpoint: "ads/events")
         }
-
     }
 
     override func parseResponse(fromJSON json: Any?) -> AABatchEventResponse? {

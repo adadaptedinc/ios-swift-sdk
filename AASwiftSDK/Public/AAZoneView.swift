@@ -9,49 +9,26 @@
 import UIKit
 import WebKit
 
-/// \brief Super class for rendering ads from AdAdapted.
-/// /// Requires a zone id provided from AdAdapted./// \brief implemented by the UIViewController that contains a AAZoneView
 @objc public protocol AAZoneViewOwner: NSObjectProtocol {
-    /// \brief generally returns `self`
-    /// - Returns: a UIViewController object from which the popup may be presented.
     func viewControllerForPresentingModalView() -> UIViewController?
 
-    /// \brief OPTIONAL - Capture URL that user clicked on in popup.
-    /// When User touches an anchor tag in the popup that has the prefix "internal:" this is called
-    /// \param view the object that launched the popup
-    /// \param urlString URL, in the popup, that was clicked. This is interpreted by the delegate app for internal navigation, or what not.
-    /// See \ref popuphooks on how to tailor popup html content to pass data to this method
     @objc optional func zoneView(_ view: AAZoneView?, hadPopupSendURLString urlString: String?)
-    /// \brief OPTIONAL - ad has loaded and rendered
-    /// \param view the AAZoneView sub-class that was loaded
     @objc optional func zoneViewDidLoadZone(_ view: AAZoneView?)
-    /// \brief OPTIONAL - an error occurred
-    /// \param view the AAZoneView sub-class that failed to load an ad
     @objc optional func zoneViewDidFail(toLoadZone view: AAZoneView?)
-    /// \brief OPTIONAL - modal presentation is going to happen, due to user interaction with ad
-    /// \param view the AAZoneView sub-class that was interacted with
     @objc optional func willPresentModalView(forZone view: AAZoneView?)
-    /// \brief OPTIONAL - modal dismissal is going to happen, due to user interaction with popup
-    /// \param view the AAZoneView sub-class that was interacted with
     @objc optional func didDismissModalView(forZone view: AAZoneView?)
-    /// \brief OPTIONAL - the user has interacted with a popup, and your app is going to the background
-    /// \param view the AAZoneView sub-class that was interacted with
     @objc optional func willLeaveApplication(fromZone view: AAZoneView?)
-    /// \brief OPTIONAL - if the zone delegates call to action handling to the client, this will be called.
-    /// NOTE: this is in progress and not supported by the API at this time. To turn on, you should have `@"PRIVATE_CUSTOM_DELEGATE_ZONES_CTA":@[@"ZONEID1",@"ZONEID2"]` in your options dictionary when starting the SDK.
-    /// When the user interacts with these specified zones, this method is called.
     @objc optional func handleCallToAction(forZone view: AAZoneView?)
 }
 
-/// \brief UIView subclass that renders ads
-/// a superclass for convenience classes (that you really should be using)
-/// see \ref zoneusage for detailed usage instructions in both IB and programatically
 @IBDesignable
 public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZoneRenderer {
 
     @IBInspectable public var zoneId: String?
     internal weak var zoneOwner: AAZoneViewOwner?
     private(set) var type: AdTypeAndSource?
+    private var provider: AAAbstractAdProvider?
+    private var currentAdView: UIView?
     
     @objc public func setZoneOwner(_ zoneOwner: AAZoneViewOwner?) {
         setZoneId(nil, zoneType: .kTypeUnsupportedAd, delegate: zoneOwner)
@@ -61,8 +38,6 @@ public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZ
         return self
     }
 
-    /// \brief constructor
-    /// use AAAdAdaptedZoneView and AAMoPubBannerZoneView instead
     init(frame: CGRect, forZone zoneId: String?, zoneType type: AdTypeAndSource, delegate: AAZoneViewOwner?) {
         super.init(frame: frame)
         setZoneId(zoneId, zoneType: type, delegate: delegate)
@@ -70,15 +45,10 @@ public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZ
         AASDK.logDebugFrame(self.frame, message: "AAZoneView \(zoneId ?? "") initWithFrame")
     }
 
-    /// \brief let the AAZoneView know it needs to rotate, and maybe load another ad
-    /// \param newOrientation the new orientation (the one you're going to).
-    /// see \ref zoneusage for more details
     func rotate(to newOrientation: UIInterfaceOrientation) {
         adProvider()?.rotate(to: newOrientation)
     }
 
-    /// \brief the size, according the server, of the content
-    /// - Returns: the size of the ad, as returned from the API
     func adContentViewSize(for orientation: UIInterfaceOrientation) -> CGSize {
         if adProvider() != nil {
             let size = adProvider()?.adSize(for: orientation)
@@ -89,40 +59,20 @@ public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZ
         return CGSize(width: 0, height: 0)
     }
 
-    /// \brief load next ad
-    /// MoPub ads will flicker even if they don't load new content - AdAdapted ZoneView are noop if ad is unchanged
     func advanceToNextAd() {
         if adProvider() != nil {
             adProvider()?.renderNext()
         }
     }
 
-    /// \brief close the zone's popup ad
-    /// - Returns: true if the popup will close in response to this request
-    /// only responds if the AAZoneViewOwner's zoneView:hadPopupSendURLString: method is called. allows the application the ability to close the popup ad once the app has finished doing what it was getting into.
-    //- (CGSize)intrinsicContentSize
-    //{
-    //    CGSize size = [AASDK sizeOfZone:_zoneId forOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
-    //    [AASDK logDebugMessage:[NSString stringWithFormat:@"AAZoneView returning ad size of (%0.0f, %0.0f) in intrinsicContentSize", size.width, size.height] type:AASDK_DEBUG_AD_LAYOUT];
-    //    return size;
-    //}
-
     func closePopup() -> Bool {
         return adProvider()?.closePopup() ?? false
     }
 
-    /// \brief close the zone's popup ad
-    /// \param handler is called once the popup view controller has been removed.
-    /// - Returns: true if the popup will close in response to this request. handler() is called only in the case where the return value is true.
-    /// only responds if the AAZoneViewOwner's zoneView:hadPopupSendURLString: method is called. allows the application the ability to close the popup ad once the app has finished doing what it was getting into.
     func closePopup(withCompletionHandler handler: @escaping () -> Void) -> Bool {
         return adProvider()?.closePopup(withCompletionHandler: handler) ?? false
     }
 
-    /// \brief used by Interface Builder
-    /// \param value an NSNumber that gets converted to AdTypeAndSource
-    /// have to convert from NSNumber to int when setting type from Interface Builder. using AAAdAdaptedZoneView and AAMoPubBannerZoneView means you can ignore this.
-    /// for use in IB only
     func setZoneType(_ value: NSNumber?) {
         if let value = value {
             let ii = value.intValue
@@ -130,8 +80,6 @@ public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZ
         }
     }
 
-    /// \brief in JSON Ads, this hook is how you report user interaction
-    /// since JSON Ads are built by you (the client developer) you need a way to report the user interacted, and the popup (or whatnot) needs to be opened.
     func userInteractedWithAd() {
         AASDK.logDebugMessage("AAZoneView: userInteractedWithAd enter", type: AASDK_DEBUG_USER_INTERACTION)
         if adProvider() != nil {
@@ -141,18 +89,12 @@ public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZ
         }
     }
 
-    /// \brief only to be used when AAZoneView can't be removed, but is no longer visible
-    /// reports an impression has ended. this should only be called if you're obscuring an ad (rather than removing it).
-    /// see \ref zoneusage_zoneLifeCycle
     func wasHidden() {
         if let provider = provider {
             provider.adWasHidden()
         }
     }
 
-    /// \brief only to be used when AAZoneView couldn't be removed, but is no longer obscured
-    /// calling this before wasHidden has no effect. reports an impression has re-started for an ad that wasHidden has been called on. this should only be called if you're obscuring an ad (rather than removing it).
-    /// see \ref zoneusage_zoneLifeCycle
     func wasUnHidden() {
         if let provider = provider {
             if let ad = adProvider()?.currentAd() {
@@ -161,9 +103,6 @@ public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZ
             }
         }
     }
-
-    private var provider: AAAbstractAdProvider?
-    private var currentAdView: UIView?
 
 // MARK: - LIFECYCLE
 
@@ -182,7 +121,6 @@ public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZ
     }
 
     deinit {
-//        adProvider()?.destroy()
         removeListeners()
     }
 
@@ -200,8 +138,6 @@ public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZ
         }
         AASDK.logDebugFrame(frame, message: "AAZoneView \(zoneId ?? "") END layoutSubviews")
     }
-
-// MARK: - PUBLIC
 
 // MARK: - <AAZoneRenderer> used by the AAAbstractAdProvider
     func containerSize() -> CGSize {
@@ -357,7 +293,6 @@ extension AAZoneView {
 
         if adProvider() != nil {
             adProvider()?.destroy()
-            //adProvider() = nil
         }
 
         AASDK.reportZoneLoaded(self.zoneId)

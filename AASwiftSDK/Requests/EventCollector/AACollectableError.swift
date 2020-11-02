@@ -33,7 +33,6 @@ class AACollectableError: NSObject {
         if params != nil && (params?.count ?? 0) > 0 {
             setParamValue(params as NSObject?, forKey: AA_KEY_ERROR_PARAMS)
         }
-        
     }
     
     func setParamValue(_ value: NSObject?, forKey param: String?) {

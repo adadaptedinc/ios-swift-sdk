@@ -134,3 +134,13 @@ let CODE_API_400 = "API_RETURNED_400_ERROR"
 let CODE_ATL_FAILURE = "ATL_FAILED_TO_ADD_TO_LIST"
 let CODE_UNIVERSAL_LINK_PARSE_ERROR = "UNIVERSAL_LINK_PARSE_ERROR"
 let ADDIT_NO_DEEPLINK_RECEIVED = "ADDIT_NO_DEEPLINK_RECEIVED"
+
+/// Product parameter names
+let PRODUCT_IMAGE = "product_image"
+let PRODUCT_TITLE = "product_title"
+let PRODUCT_BARCODE = "product_barcode"
+let PRODUCT_BRAND = "product_brand"
+let PRODUCT_CATEGORY = "product_category"
+let PRODUCT_SKU = "product_sku"
+let AA_KEY_TRACKING_ID = "tracking_id"
+let AA_KEY_PAYLOAD_ID = "payload_id"

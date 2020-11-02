@@ -25,7 +25,6 @@ class AAKeywordInterceptManager: NSObject, WKUIDelegate {
         if let keywordIntercepts = keywordIntercepts {
             self.keywordIntercepts = keywordIntercepts
         }
-        //cacheHTMLAds()
         compileCachableAssetsAndNotify()
     }
     
@@ -100,11 +99,6 @@ class AAKeywordInterceptManager: NSObject, WKUIDelegate {
                     events?.removeAll { $0 as AnyObject === event as AnyObject }
                     break
                 }
-                //for checking events queued when removing characters (leaving out for now to match Android)
-                // if ( [type isEqualToString:event.eventType] && [event.userInput hasPrefix:userInput] ) {
-                //     [self.events removeObject:event];
-                //     break;
-                // }
             }
         }
         
@@ -137,7 +131,6 @@ class AAKeywordInterceptManager: NSObject, WKUIDelegate {
         
         
         let request = AAKeywordInterceptBatchEventRequest(events: events)
-         //Add helper
         connector?.enqueueRequest(request, responseWasErrorBlock: { response, forRequest, error in
             Logger.consoleLogError(error, withMessage: "AASDK KI events reporting FAILED", suppressTracking: false)
         }, responseWasReceivedBlock: { response, forRequest in

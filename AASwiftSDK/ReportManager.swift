@@ -20,8 +20,8 @@ class ReportManager {
 
         let item = AASDK.cachedItem(matching: itemName)
         if let item = item {
-            payload["tracking_id"] = item.trackingId
-            payload["payload_id"] = item.payloadId
+            payload[AA_KEY_TRACKING_ID] = item.trackingId
+            payload[AA_KEY_PAYLOAD_ID] = item.payloadId
         }
 
         let logitem = "ListManager: item interacted: \(itemName)" + " -For Event: " + (eventName ?? "")
@@ -38,8 +38,8 @@ class ReportManager {
 
         let item = AASDK.cachedItem(matching: itemName ?? "")
         if let item = item {
-            payload["tracking_id"] = item.trackingId
-            payload["payload_id"] = item.payloadId
+            payload[AA_KEY_TRACKING_ID] = item.trackingId
+            payload[AA_KEY_PAYLOAD_ID] = item.payloadId
         }
 
         connector?.addCollectableEvent(forDispatch: AACollectableEvent.internalEvent(withName: eventName, andPayload: payload))

@@ -9,15 +9,10 @@
 import Foundation
 
 @objc public class AAContentPayload: NSObject {
-    /// For AdAdapted use
     var payloadId = ""
-    /// Message to display the user
     var payloadMessage: String?
-    /// https image URL
     var payloadImageURL: URL?
-    /// always 'detailed_list_items' at this time
     var payloadType = ""
-    /// array of items
     @objc public var detailedListItems: [AADetailedListItem] = []
     
     class func parse(fromDictionary dictionary: [AnyHashable : Any]?) -> Self? {
@@ -25,7 +20,7 @@ import Foundation
             return nil
         }
 
-        let payloadId = dictionary?["payload_id"] as? String
+        let payloadId = dictionary?[AA_KEY_PAYLOAD_ID] as? String
         if payloadId != nil && (payloadId?.count ?? 0) > 0 {
             let returnItem = AAContentPayload()
             returnItem.payloadId = payloadId ?? ""
@@ -72,7 +67,6 @@ import Foundation
                     AASDK.reportItem(item.productTitle, from: self)
                 }
             }
-
             AASDK.reportPayloadReceived(self)
         }
     }

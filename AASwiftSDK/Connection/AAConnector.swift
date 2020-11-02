@@ -229,7 +229,6 @@ class AAConnector: NSObject {
                         if (aaRequest is AAInitRequest) && (JSON as AnyObject).value(forKeyPath: AA_KEY_SESSION_ID) != nil {
                             sessionID = (JSON as AnyObject).value(forKeyPath: AA_KEY_SESSION_ID) as? String
                             print("SESSIONID =" + sessionID!)
-                            //#D - or include app id and sdk here?
                         }
 
                         if JSON != nil && jsonError == nil {
@@ -316,7 +315,7 @@ class AAConnector: NSObject {
         }
 
         if (eventsV2?.count ?? 0) > 0 {
-            print("\n***************************  events v2  ***************************") //#D - DEBUG
+            print("\n***************************  events v2  ***************************")
 
             let request = AABatchEventRequest(events: eventsV2, forVersion: 2)
             eventsV2?.removeAll()

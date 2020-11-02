@@ -16,10 +16,8 @@ import CoreTelephony
 import AppTrackingTransparency
 
 // INITIALIZATION
-// #D not sure, i think just json key placeholders
 let AA_KEY_ZONE_ID = "zone_id"
 let AA_KEY_ZONES = "zones"
-
 
 // app / user info
 let AA_KEY_APP_ID = "app_id"
@@ -56,8 +54,6 @@ let AA_KEY_EVENT_CARRIER = "carrier"
 let AA_KEY_DATETIME = "created_at"
 let AA_KEY_SDK_BUNDLE_VERSION = "sdk_version"
 let AA_KEY_APP_INIT_PARAMS = "params"
-
-//#define AA_KEY_IOS_SDK_VERSION   @"sdkv"      #d - gone?
 
 // init optional -- #D -- no longer being used? will response handle?
 let AA_KEY_ZONE_SIZE = "size"
@@ -121,7 +117,6 @@ let AA_KEY_ZONE_PORT_HEIGHT = "port_height"
 let AA_KEY_ZONE_LAND_WIDTH = "land_width"
 let AA_KEY_ZONE_LAND_HEIGHT = "land_height"
 
-
 // new in 0.9.1
 let AA_KEY_POLLING_INTERVAL = "polling_interval_ms"
 let AA_KEY_START_TIME = "start_time"
@@ -150,13 +145,10 @@ let AA_KEY_KI_TAGLINE = "tagline"
 let AA_KEY_KI_PRIORITY = "priority"
 let AA_KEY_KI_USER_INPUT = "user_input"
 
-// event collection
 // MARK: - Event Collection Service KEYS
 let AA_KEY_EVENT_TIMESTAMP = "event_timestamp"
 let AA_KEY_EVENT_PARAMS = "event_params"
 let AA_KEY_EVENT_SOURCE = "event_source"
-let AA_KEY_TRACKING_ID = "tracking_id"
-let AA_KEY_PAYLOAD_ID = "payload_id"
 let AA_KEY_ERROR_CODE = "error_code"
 let AA_KEY_ERROR_MESSAGE = "error_message"
 let AA_KEY_ERROR_TIMESTAMP = "error_timestamp"
@@ -219,7 +211,6 @@ class AAHelper: NSObject {
     }
 
     class func actionString(forInt type: AASDKActionType) -> String? {
-        // (l)ink, (p)opup, (a)pp download
         switch type {
         case AASDKActionType.kActionLink:
                 return "l"
@@ -251,7 +242,6 @@ class AAHelper: NSObject {
             return AASDKActionType.kActionContent
         }
 
-        //   @throw [NSError errorWithDomain:[NSString stringWithFormat:@"bad action type string requested '%@' - should be found in AASDKActionType", string] code:42 userInfo:nil];
         print("bad action type string requested '\(string ?? "")' - should be found in AASDKActionType: taking no action")
         return AASDKActionType.kActionNone
     }
@@ -344,22 +334,11 @@ class AAHelper: NSObject {
         return String(bytes: Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
     }
 
-//    class func deviceModelName() -> String? {
-//        var systemInfo: utsname
-//        uname(&systemInfo)
-//
-//        return String(cString: systemInfo.machine, encoding: .utf8) //#D - trying to pull more specific iphone version
-//
-//        // return [[UIDevice currentDevice] model]; //just returns "iPhone"
-//    }
-
     class func deviceIdentifier() -> String? {
         return UIDevice.current.identifierForVendor?.uuidString
     }
 
     class func deviceOS() -> String? {
-        // HACK: iOS 10 changed the name to "iOS" which is more right,
-        // but inconsistent. We're using a string just like Android SDK.
         return "iPhone OS"
     }
 
@@ -370,12 +349,6 @@ class AAHelper: NSObject {
     class func deviceLocale() -> String? {
         return NSLocale.preferredLanguages[0]
     }
-
-//    class func deviceCarrier() -> String? {
-//        let info = CTTelephonyNetworkInfo()
-//        let carrier = info.subscriberCellularProvider
-//        return carrier?.carrierName
-//    }
 
     class func screenSize() -> CGSize {
         if _screenSize.height == 0.0 {
@@ -397,7 +370,7 @@ class AAHelper: NSObject {
     class func deviceScreenDensity() -> String? {
         let scaleFactor = Float(UIScreen.main.scale)
         return String(format: "%0.0f", scaleFactor)
-    } //#D - need to determine when to use number vs string
+    }
 
     class func deviceWidthNumber() -> NSNumber? {
         return NSNumber(value: Int32(Int(AAHelper.screenSize().width)))

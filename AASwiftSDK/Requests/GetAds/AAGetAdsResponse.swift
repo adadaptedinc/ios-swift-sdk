@@ -8,6 +8,5 @@
 
 @objcMembers
 class AAGetAdsResponse: AAGenericResponse {
-    /// ads in a dictionary with zoneId for key, and arrays of ads for values
     var ads: [AnyHashable : Any]?
 }

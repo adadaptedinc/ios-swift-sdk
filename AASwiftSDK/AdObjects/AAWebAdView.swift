@@ -37,11 +37,9 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
         self.ad = ad
 
         sharedInit()
-
         webView?.loadHTMLString(html ?? "", baseURL: nil)
     }
 
-    /// we need to do this in case an html ad is released before it's done loading... I think
     func destroy() {
         AASDK.logDebugMessage("WebAdView: destroy enter", type: AASDK_DEBUG_USER_INTERACTION)
         webView?.stopLoading()

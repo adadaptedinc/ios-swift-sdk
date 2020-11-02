@@ -24,7 +24,6 @@ class AAImageAdView: UIImageView {
     var height: Float = 0.0
     weak var delegate: AAImageAdViewDelegate?
 
-    // only used in image caching
     class func image(with url: URL?, for ad: AAAd?) -> AAImageAdView? {
         let imageView = AAImageAdView.init(frame: .zero)
 
@@ -71,7 +70,7 @@ class AAImageAdView: UIImageView {
     }
 
     deinit {
-//        AASDK.notificationCenter.removeObserver(self)
+        AASDK.notificationCenter().removeObserver(self)
     }
 
     override var intrinsicContentSize: CGSize {
@@ -95,26 +94,6 @@ class AAImageAdView: UIImageView {
     }
 
 // MARK: - touch
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first
-        let touch_point = touch?.location(in: self)
-
-        if point(inside: touch_point ?? CGPoint.zero, with: event) {
-            //        [self enterSelectedState];
-        }
-    }
-
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first
-        let touch_point = touch?.location(in: self)
-
-        if !point(inside: touch_point ?? CGPoint.zero, with: event) {
-            //        [self enterSelectedState];
-        } else {
-            //        [self exitSelectedState];
-        }
-    }
-
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         AASDK.logDebugMessage("ImageAdView: touchesEnded:withEvent enter", type: AASDK_DEBUG_USER_INTERACTION)
         let touch = touches.first
@@ -124,12 +103,10 @@ class AAImageAdView: UIImageView {
             AASDK.logDebugMessage("ImageAdView: touchesEnded:withEvent taking action", type: AASDK_DEBUG_USER_INTERACTION)
             delegate?.takeActionForAd()
         } else {
-            //        [self exitSelectedState];
             AASDK.logDebugMessage("ImageAdView: touchesEnded:withEvent touch outside", type: AASDK_DEBUG_USER_INTERACTION)
         }
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //    [self exitSelectedState];
     }
 }
