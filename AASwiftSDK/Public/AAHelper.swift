@@ -181,6 +181,8 @@ let kEventAnomaly = "anomaly"
 
 var _screenSize = CGSize.zero
 
+extension String: Error {}
+
 class AAHelper: NSObject {
     class func buildVersion() -> String? {
         return Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
@@ -423,7 +425,7 @@ class AAHelper: NSObject {
                             json = try JSONSerialization.jsonObject(with: decodedData, options: [])
                         }
                     } catch {
-                        ReportManager.reportAnomaly(withCode: CODE_UNIVERSAL_LINK_PARSE_ERROR, message: url, params: nil, connector: connector)
+                        ReportManager.getInstance().reportAnomaly(withCode: CODE_UNIVERSAL_LINK_PARSE_ERROR, message: url, params: nil)
                     }
                     let payload = AAContentPayload.parse(fromDictionary: json as? [AnyHashable : Any])
                     payload!.payloadType = "universal-link"
@@ -449,7 +451,7 @@ class AAHelper: NSObject {
                     AASDK.cacheItem(item)
                 }
             }
-            AASDK.notificationCenter().post(notification)
+            NotificationCenterWrapper.notifier.post(notification)
         }
     }
 }

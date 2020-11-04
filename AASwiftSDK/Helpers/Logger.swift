@@ -33,6 +33,6 @@ class Logger {
             object: nil,
             userInfo: payload)
 
-        AASDK.notificationCenter().post(notification)
+        NotificationCenterWrapper.notifier.post(notification)
     }
 }

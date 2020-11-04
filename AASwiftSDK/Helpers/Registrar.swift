@@ -75,14 +75,14 @@ class Registrar {
     }
     
     private class func removeObserver(observerName: Any, notificationName: String) {
-        AASDK.notificationCenter().removeObserver(
+        NotificationCenterWrapper.notifier.removeObserver(
             observerName,
             name: NSNotification.Name(rawValue: notificationName),
             object: nil)
     }
     
     private class func addObserver(observerName: Any, selectorName: Selector, notificationName: String) {
-        AASDK.notificationCenter().addObserver(
+        NotificationCenterWrapper.notifier.addObserver(
             observerName,
             selector: selectorName,
             name: NSNotification.Name(rawValue: notificationName),
