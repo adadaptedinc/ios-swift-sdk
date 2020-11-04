@@ -61,7 +61,7 @@ protocol AASDKObserverInternal: AASDKObserver {
 /// \brief Debugging messaging from SDK.
 /// Provides the developer with detailed messaging around what the SDK is doing.
 /// NOTE: only one AASDKDebugObserver can exist at a time.
-@objc protocol AASDKDebugObserver: NSObjectProtocol {
+@objc public protocol AASDKDebugObserver: NSObjectProtocol {
     /// \brief Debugging notification
     /// \param notification The NSNotification has a `userInfo` dictionary with `AASDK_KEY_MESSAGE` and `AASDK_KEY_TYPE` keys.
     /// e.g. Message can be retrieved with: `NSString *message = [[notification userInfo] objectForKey:AASDK_KEY_MESSAGE];`
