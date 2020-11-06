@@ -244,14 +244,14 @@ class AAConnector: NSObject {
                             if let jsonData = jsonData {
                                 text = String(data: jsonData, encoding: .utf8)
                             }
-                            AASDK.logDebugMessage("RESPONSE JSON from \(request.url?.absoluteString ?? ""):\n\(text ?? "")", type: AASDK_DEBUG_NETWORK_DETAILED)
+                            AASDK.logDebugMessage("RESPONSE JSON from \(request.url?.absoluteString ?? ""):\n\(text ?? "")", type: AASDK.DEBUG_NETWORK_DETAILED)
                             print("RESPONSE JSON from \(request.url?.absoluteString ?? ""):\n\(text ?? "")") //remove me
 
                             let aaResponse = try! holder?.request!.parseResponse(fromJSON: JSON)
 
                             holder?.responseWasReceivedBlock!(aaResponse, holder?.request)
                         } else {
-                            AASDK.logDebugMessage("RESPONSE w/ no BODY from \(request.url?.absoluteString ?? "")", type: AASDK_DEBUG_NETWORK_DETAILED)
+                            AASDK.logDebugMessage("RESPONSE w/ no BODY from \(request.url?.absoluteString ?? "")", type: AASDK.DEBUG_NETWORK_DETAILED)
                         }
 
                         if response is HTTPURLResponse {
@@ -259,12 +259,12 @@ class AAConnector: NSObject {
                             let headers = httpResponse?.allHeaderFields
                             let choosenCamp = headers?["X-Chosen-Campaign"] as? String
                             if let choosenCamp = choosenCamp {
-                                AASDK.logDebugMessage("Chosen Campaign: \(choosenCamp)", type: AASDK_DEBUG_GENERAL)
+                                AASDK.logDebugMessage("Chosen Campaign: \(choosenCamp)", type: AASDK.DEBUG_GENERAL)
                             }
                         }
                     }
                 } else {
-                    AASDK.logDebugMessage("AASDK ERROR AAConnector Error response from \(request.url?.absoluteString ?? ""):\n\(description)\n", type: AASDK_DEBUG_NETWORK_DETAILED)
+                    AASDK.logDebugMessage("AASDK ERROR AAConnector Error response from \(request.url?.absoluteString ?? ""):\n\(description)\n", type: AASDK.DEBUG_NETWORK_DETAILED)
                     let aaResponse = AAErrorResponse()
                     aaResponse.error = error
                     aaResponse.aaRequest = holder?.request

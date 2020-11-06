@@ -6,6 +6,8 @@
 //  Copyright © 2020 AdAdapted. All rights reserved.
 //
 
+import Foundation
+
 /// An informally used protocol to allow the internal
 /// workings to have different exposure to the events dispatched
 protocol AASDKObserverInternal: AASDKObserver {

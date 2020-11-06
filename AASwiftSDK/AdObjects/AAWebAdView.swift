@@ -41,7 +41,7 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
     }
 
     func destroy() {
-        AASDK.logDebugMessage("WebAdView: destroy enter", type: AASDK_DEBUG_USER_INTERACTION)
+        AASDK.logDebugMessage("WebAdView: destroy enter", type: AASDK.DEBUG_USER_INTERACTION)
         webView?.stopLoading()
         webView?.navigationDelegate = nil
         webView?.uiDelegate = nil
@@ -53,7 +53,7 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
     private var webView: WKWebView?
 
     func sharedInit() {
-        AASDK.logDebugMessage("WebAdView: sharedInit enter", type: AASDK_DEBUG_USER_INTERACTION)
+        AASDK.logDebugMessage("WebAdView: sharedInit enter", type: AASDK.DEBUG_USER_INTERACTION)
         webView = WKWebView()
         alpha = 0.0
 
@@ -122,7 +122,7 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
 
 // MARK: - <UIGestureRecognizerDelegate>
     @objc func tapAction(_ sender: UITapGestureRecognizer?) {
-        AASDK.logDebugMessage("WebAdView: tapAction enter", type: AASDK_DEBUG_USER_INTERACTION)
+        AASDK.logDebugMessage("WebAdView: tapAction enter", type: AASDK.DEBUG_USER_INTERACTION)
         delegate?.takeActionForAd()
     }
 
@@ -160,7 +160,7 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
         }
 
         Logger.consoleLogError(error, withMessage: str, suppressTracking: false)
-        AASDK.logDebugMessage(str, type: AASDK_DEBUG_GENERAL)
+        AASDK.logDebugMessage(str, type: AASDK.DEBUG_GENERAL)
 
         var url = "unkown"
         if (error as NSError).userInfo["NSErrorFailingURLStringKey"] != nil {

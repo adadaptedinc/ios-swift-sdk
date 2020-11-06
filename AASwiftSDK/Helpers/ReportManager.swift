@@ -39,7 +39,7 @@ class ReportManager {
         }
 
         let logitem = "ListManager: item interacted: \(itemName)" + " -For Event: " + (eventName ?? "")
-        AASDK.logDebugMessage(logitem, type: AASDK_DEBUG_GENERAL)
+        AASDK.logDebugMessage(logitem, type: AASDK.DEBUG_GENERAL)
         connector.addCollectableEvent(forDispatch: AACollectableEvent.appEvent(withName: eventName, andPayload: payload))
     }
     
@@ -82,7 +82,7 @@ class ReportManager {
     
     func reportPayloadReceived(_ payload: AAContentPayload) {
         let worked = { response, forRequest in
-            AASDK.logDebugMessage("Payload Service Tracked delivery", type: AASDK_DEBUG_GENERAL)
+            AASDK.logDebugMessage("Payload Service Tracked delivery", type: AASDK.DEBUG_GENERAL)
         } as AAResponseWasReceivedBlock
 
         let failed = { response, forRequest, error in
@@ -94,7 +94,7 @@ class ReportManager {
     
     func reportPayloadRejected(_ payload: AAContentPayload) {
         let worked = { response, forRequest in
-            AASDK.logDebugMessage("Payload Service Tracked delivery REJECTION", type: AASDK_DEBUG_GENERAL)
+            AASDK.logDebugMessage("Payload Service Tracked delivery REJECTION", type: AASDK.DEBUG_GENERAL)
         } as AAResponseWasReceivedBlock
 
         let failed = { response, forRequest, error in

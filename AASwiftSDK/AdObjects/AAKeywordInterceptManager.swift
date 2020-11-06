@@ -45,12 +45,12 @@ class AAKeywordInterceptManager: NSObject, WKUIDelegate {
     }
     
     func reportPresented() {
-        AASDK.logDebugMessage("Regeistered KI event: presented", type: AASDK_DEBUG_GENERAL)
+        AASDK.logDebugMessage("Regeistered KI event: presented", type: AASDK.DEBUG_GENERAL)
         fileEvent(forUserInput: lastUserInput, with: lastKeywordIntercept, andType: AASDK_KI_EVENT_TYPE_PRESENTED)
     }
     
     func reportSelected() {
-        AASDK.logDebugMessage("Regeistered KI event: selected", type: AASDK_DEBUG_GENERAL)
+        AASDK.logDebugMessage("Regeistered KI event: selected", type: AASDK.DEBUG_GENERAL)
         fileEvent(forUserInput: lastUserInput, with: lastKeywordIntercept, andType: AASDK_KI_EVENT_TYPE_SELECTED)
     }
     

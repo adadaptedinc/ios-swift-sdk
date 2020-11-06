@@ -95,15 +95,15 @@ class AAImageAdView: UIImageView {
 
 // MARK: - touch
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        AASDK.logDebugMessage("ImageAdView: touchesEnded:withEvent enter", type: AASDK_DEBUG_USER_INTERACTION)
+        AASDK.logDebugMessage("ImageAdView: touchesEnded:withEvent enter", type: AASDK.DEBUG_USER_INTERACTION)
         let touch = touches.first
         let touch_point = touch?.location(in: self)
 
         if point(inside: touch_point ?? CGPoint.zero, with: event) {
-            AASDK.logDebugMessage("ImageAdView: touchesEnded:withEvent taking action", type: AASDK_DEBUG_USER_INTERACTION)
+            AASDK.logDebugMessage("ImageAdView: touchesEnded:withEvent taking action", type: AASDK.DEBUG_USER_INTERACTION)
             delegate?.takeActionForAd()
         } else {
-            AASDK.logDebugMessage("ImageAdView: touchesEnded:withEvent touch outside", type: AASDK_DEBUG_USER_INTERACTION)
+            AASDK.logDebugMessage("ImageAdView: touchesEnded:withEvent touch outside", type: AASDK.DEBUG_USER_INTERACTION)
         }
     }
 

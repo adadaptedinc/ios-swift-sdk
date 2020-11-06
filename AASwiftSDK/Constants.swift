@@ -62,23 +62,6 @@ let AASDK_OPTION_TEST_MODE_UNLOAD_AFTER_ONE = "TEST_MODE_UNLOAD_AFTER_ONE"
 let AASDK_OPTION_DISABLE_ADVERTISING = "DISABLE_ADVERTISING"
 let AASDK_OPTION_INIT_PARAMS = "INIT_PARAMS"
 
-/// Log types to pass into registerDebugListenersFor:forMessageTypes:
-let AASDK_DEBUG_GENERAL = "GENERAL"
-let AASDK_DEBUG_NETWORK = "NETWORK"
-let AASDK_DEBUG_NETWORK_DETAILED = "NETWORK_DETAILED"
-let AASDK_DEBUG_USER_INTERACTION = "USER_INTERACTION"
-let AASDK_DEBUG_AD_LAYOUT = "AD_LAYOUT"
-let AASDK_DEBUG_ALL = "ALL"
-
-/// keys used to report details in NSNotifications
-let AASDK_KEY_ZONE_ID = "ZONE_ID"
-let AASDK_KEY_ZONE_IDS = "ZONE_IDS"
-let AASDK_KEY_ZONE_COUNT = "ZONE_COUNT"
-let AASDK_KEY_MESSAGE = "MESSAGE"
-let AASDK_KEY_TYPE = "TYPE"
-let AASDK_KEY_RECOVERY_SUGGESTION = "RECOVERY_SUGGESTION"
-let AASDK_KEY_ZONE_VIEW = "ZONE_VIEW"
-
 /// keys used to report details in NSNotifications for Keyword Intercepts
 let AASDK_KEY_KI_REPLACEMENT_ID = "KI_REPLACEMENT_ID"
 let AASDK_KEY_KI_REPLACEMENT_ICON_URL = "KI_REPLACEMENT_ICON"
@@ -87,6 +70,7 @@ let AASDK_KEY_KI_REPLACEMENT_TAGLINE = "KI_REPLACEMENT_TAGLINE"
 /// root of the server the framework talks to - don't allow them to pass in arbitrary ones
 let AA_PROD_ROOT = "https://ads.adadapted.com/v"
 let AA_SANDBOX_ROOT = "https://sandbox.adadapted.com/v"
+let AA_UNIVERSAL_LINK_ROOT = "ul.adadapted.com"
 
 /// version of the API. used in conjuntion with AA_SERVER_ROOT to build request base URLs.
 let AA_API_VERSION = "0.9.5"

@@ -6,8 +6,9 @@
 //  Copyright © 2020 AdAdapted. All rights reserved.
 //
 
-@objc
-class AAUpdateAdsResponse: AAGenericResponse {
+import Foundation
+
+@objc class AAUpdateAdsResponse: AAGenericResponse {
     var zones: [AnyHashable : Any]?
     var sessionId: String?
     var pollingIntervalInMS = 0

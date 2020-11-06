@@ -25,6 +25,23 @@ var lastCame: Date?
     @objc public static let KEY_CONTENT_PAYLOADS = "CONTENT_PAYLOADS"
     @objc public static let KEY_AD_CONTENT = "AD_CONTENT"
     @objc public static let KEY_KI_REPLACEMENT_TEXT = "KI_REPLACEMENT_TEXT"
+    @objc public static let KEY_ZONE_VIEW = "ZONE_VIEW"
+    
+    /// Log types to pass into registerDebugListenersFor:forMessageTypes:
+    @objc public static let DEBUG_GENERAL = "GENERAL"
+    @objc public static let DEBUG_NETWORK = "NETWORK"
+    @objc public static let DEBUG_NETWORK_DETAILED = "NETWORK_DETAILED"
+    @objc public static let DEBUG_USER_INTERACTION = "USER_INTERACTION"
+    @objc public static let DEBUG_AD_LAYOUT = "AD_LAYOUT"
+    @objc public static let DEBUG_ALL = "ALL"
+    
+    /// keys used to report details in NSNotifications
+    @objc public static let KEY_ZONE_ID = "ZONE_ID"
+    @objc public static let KEY_ZONE_IDS = "ZONE_IDS"
+    @objc public static let KEY_ZONE_COUNT = "ZONE_COUNT"
+    @objc public static let KEY_MESSAGE = "MESSAGE"
+    @objc public static let KEY_TYPE = "TYPE"
+    @objc public static let KEY_RECOVERY_SUGGESTION = "RECOVERY_SUGGESTION"
     
     private var appID: String?
     private var connector: AAConnector?
@@ -59,7 +76,7 @@ var lastCame: Date?
     private var appInitParams: [AnyHashable : Any]?
     
 // MARK: - notfications
-    class func registerListeners(for observer: AASDKObserver?) {
+    @objc public class func registerListeners(for observer: AASDKObserver?) {
         if observer == nil {
             return
         } else {
@@ -67,7 +84,7 @@ var lastCame: Date?
         }
     }
 
-    class func removeListeners(for observer: AASDKObserver?) {
+    @objc public class func removeListeners(for observer: AASDKObserver?) {
         if observer == nil {
             return
         } else {
@@ -83,7 +100,7 @@ var lastCame: Date?
         }
     }
 
-    class func removeContentListeners(for delegate: AASDKContentDelegate?) {
+    @objc public class func removeContentListeners(for delegate: AASDKContentDelegate?) {
         if delegate == nil {
             return
         } else {
@@ -149,10 +166,10 @@ var lastCame: Date?
 
     class func setDeviceLocation(_ location: CLLocation?) {
         if let location = location {
-            AASDK.logDebugMessage("AASDK location set \(location.coordinate.latitude) \(location.coordinate.longitude)", type: AASDK_DEBUG_GENERAL)
+            AASDK.logDebugMessage("AASDK location set \(location.coordinate.latitude) \(location.coordinate.longitude)", type: DEBUG_GENERAL)
             _aasdk?.deviceLocation = location
         } else {
-            AASDK.logDebugMessage("Location set to nil", type: AASDK_DEBUG_GENERAL)
+            AASDK.logDebugMessage("Location set to nil", type: DEBUG_GENERAL)
             _aasdk?.deviceLocation = nil
         }
     }
@@ -244,7 +261,7 @@ var lastCame: Date?
     }
 
 // MARK: - debugging
-    class func registerDebugListeners(for observer: AASDKDebugObserver?, forMessageTypes types: [AnyHashable]?) {
+    @objc public class func registerDebugListeners(for observer: AASDKDebugObserver?, forMessageTypes types: [AnyHashable]?) {
         if observer == nil {
             return
         }
@@ -254,7 +271,7 @@ var lastCame: Date?
     }
 
     /// \brief removes only the debug observer
-    class func removeDebugListener() {
+    @objc public class func removeDebugListener() {
         if _aasdk?.debugObserver != nil {
             if let debugObserver1 = _aasdk?.debugObserver {
                 NotificationCenterWrapper.notifier.removeObserver(
@@ -340,8 +357,8 @@ var lastCame: Date?
         if _currentState == .kOffline {
             _currentState = .kErrorState
             let userInfo = [
-                AASDK_KEY_MESSAGE: "AASDK ERROR - internet connection not available. Aborting init() attempt.",
-                AASDK_KEY_RECOVERY_SUGGESTION: "Re-connecting to internet will make SDK automatically come back online."
+                KEY_MESSAGE: "AASDK ERROR - internet connection not available. Aborting init() attempt.",
+                KEY_RECOVERY_SUGGESTION: "Re-connecting to internet will make SDK automatically come back online."
             ]
 
             let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_ERROR), object: nil, userInfo: userInfo)
@@ -384,13 +401,13 @@ var lastCame: Date?
             /// "PRIVATE" PARAMS
             let customPopupTarget = opDic?[AASDK_OPTION_PRIVATE_CUSTOM_POPUP_TARGET] as? String
             if customPopupTarget != nil && (customPopupTarget?.count ?? 0) > 0 {
-                AASDK.logDebugMessage("PRIVATE - Using custom popup URL \(customPopupTarget ?? "")", type: AASDK_DEBUG_GENERAL)
+                AASDK.logDebugMessage("PRIVATE - Using custom popup URL \(customPopupTarget ?? "")", type: DEBUG_GENERAL)
                 _aasdk?.customPopupURL = customPopupTarget
             }
 
             let customAdTarget = opDic?[AASDK_OPTION_PRIVATE_CUSTOM_WEBVIEW_AD] as? String
             if customAdTarget != nil && (customAdTarget?.count ?? 0) > 0 {
-                AASDK.logDebugMessage("PRIVATE - Using custom Ad URL \(customAdTarget ?? "")", type: AASDK_DEBUG_GENERAL)
+                AASDK.logDebugMessage("PRIVATE - Using custom Ad URL \(customAdTarget ?? "")", type: DEBUG_GENERAL)
                 _aasdk?.customAdURL = customAdTarget
             }
 
@@ -451,8 +468,8 @@ var lastCame: Date?
             var userInfo: [String : String]? = nil
             if let description = error?.localizedDescription {
                 userInfo = [
-                    AASDK_KEY_MESSAGE: "AASDK ERROR start session returned: \(description)",
-                    AASDK_KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error! as NSError).localizedRecoverySuggestion ?? "")"
+                    KEY_MESSAGE: "AASDK ERROR start session returned: \(description)",
+                    KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error! as NSError).localizedRecoverySuggestion ?? "")"
                 ]
             }
 
@@ -472,7 +489,7 @@ var lastCame: Date?
             let keywordInitResponseWasReceivedBlock = { response, forRequest in
                 let initResponse = response as? AAKeywordInterceptInitResponse
                 _aasdk?.kiManager = AAKeywordInterceptManager(connector: _aasdk?.connector, minMatchLength: initResponse!.minMatchLength)
-                AASDK.logDebugMessage("Loading Keyword Intercepts", type: AASDK_DEBUG_GENERAL)
+                AASDK.logDebugMessage("Loading Keyword Intercepts", type: DEBUG_GENERAL)
                 _aasdk?.kiManager?.loadKeywordIntercepts(initResponse?.keywordIntercepts)
             } as AAResponseWasReceivedBlock
 
@@ -480,8 +497,8 @@ var lastCame: Date?
                 var userInfo: [String : String]? = nil
                 if let description = error?.localizedDescription {
                     userInfo = [
-                        AASDK_KEY_MESSAGE: "AASDK ERROR keyword intercept / INIT returned: \(description)",
-                        AASDK_KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
+                        KEY_MESSAGE: "AASDK ERROR keyword intercept / INIT returned: \(description)",
+                        KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
                     ]
                 }
                 let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_ERROR), object: nil, userInfo: userInfo)
@@ -514,7 +531,7 @@ var lastCame: Date?
 
             let ads_count = getAdResponse?.ads?.count ?? 0
 
-            AASDK.logDebugMessage(String(format: "get ad received response. #ads %lu", ads_count), type: AASDK_DEBUG_NETWORK)
+            AASDK.logDebugMessage(String(format: "get ad received response. #ads %lu", ads_count), type: AASDK.DEBUG_NETWORK)
 
             _aasdk?.cacheAds(inAdsDic: getAdResponse?.ads, completeNotificationName: AASDK_NOTIFICATION_GET_ADS_COMPLETE_NAME, shouldUseCachedImages: AASDK.shouldUseCachedImages() , shouldReplaceCurrent: false)
         } as AAResponseWasReceivedBlock
@@ -529,8 +546,8 @@ var lastCame: Date?
             var userInfo: [String : String]? = nil
             if let description = error?.localizedDescription {
                 userInfo = [
-                    AASDK_KEY_MESSAGE: "AASDK ERROR get ad returned: \(description)",
-                    AASDK_KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
+                    AASDK.KEY_MESSAGE: "AASDK ERROR get ad returned: \(description)",
+                    AASDK.KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
                 ]
             }
 
@@ -544,7 +561,7 @@ var lastCame: Date?
 
     func cacheAds(inAdsDic ads: [AnyHashable : Any]?, completeNotificationName name: String?, shouldUseCachedImages useCached: Bool, shouldReplaceCurrent shouldReplace: Bool) {
         cacheEventName = name
-        AASDK.logDebugMessage("Caching ads for zones", type: AASDK_DEBUG_GENERAL)
+        AASDK.logDebugMessage("Caching ads for zones", type: AASDK.DEBUG_GENERAL)
 
         AASDK.resetImpressionCounters()
 
@@ -588,11 +605,11 @@ var lastCame: Date?
     }
 
     func cacheComplete() {
-        AASDK.logDebugMessage("Cache completed", type: AASDK_DEBUG_GENERAL)
+        AASDK.logDebugMessage("Cache completed", type: AASDK.DEBUG_GENERAL)
 
         let info = [
-            AASDK_KEY_ZONE_IDS: zones!,
-            AASDK_KEY_ZONE_COUNT: NSNumber(value: zones?.count ?? 0)
+            AASDK.KEY_ZONE_IDS: zones!,
+            AASDK.KEY_ZONE_COUNT: NSNumber(value: zones?.count ?? 0)
         ] as [String : Any]
 
         let notification = Notification(name: NSNotification.Name(cacheEventName!), object: nil, userInfo: info)
@@ -735,7 +752,7 @@ var lastCame: Date?
             updateTimerLastFired = now
         }
 
-        AASDK.logDebugMessage("Grabbing updated ads for zones", type: AASDK_DEBUG_GENERAL)
+        AASDK.logDebugMessage("Grabbing updated ads for zones", type: AASDK.DEBUG_GENERAL)
 
         let request = AAUpdateAdsRequest()
 
@@ -754,8 +771,8 @@ var lastCame: Date?
             var userInfo: [String : String]? = nil
             if let description = error?.localizedDescription {
                 userInfo = [
-                    AASDK_KEY_MESSAGE: "AASDK ERROR Update Ads returned: \(description)",
-                    AASDK_KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
+                    AASDK.KEY_MESSAGE: "AASDK ERROR Update Ads returned: \(description)",
+                    AASDK.KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
                 ]
             }
 
@@ -770,7 +787,7 @@ var lastCame: Date?
 
     func checkIfReCacheNeeded(_ zones: [AnyHashable : Any]?) {
         if !((zones as NSDictionary?)?.isEqual(self.zones) ?? false) {
-            AASDK.logDebugMessage("new ad Dictionary doesn't match old one: UPDATE CACHE starting", type: AASDK_DEBUG_NETWORK)
+            AASDK.logDebugMessage("new ad Dictionary doesn't match old one: UPDATE CACHE starting", type: AASDK.DEBUG_NETWORK)
             cacheAds(inAdsDic: zones, completeNotificationName: AASDK_CACHE_UPDATED, shouldUseCachedImages: AASDK.shouldUseCachedImages() , shouldReplaceCurrent: true)
         }
     }
@@ -804,8 +821,8 @@ var lastCame: Date?
             var userInfo: [String : String]? = nil
             if let description = error?.localizedDescription {
                 userInfo = [
-                    AASDK_KEY_MESSAGE: "AASDK ERROR reinit session returned: \(description)",
-                    AASDK_KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
+                    AASDK.KEY_MESSAGE: "AASDK ERROR reinit session returned: \(description)",
+                    AASDK.KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
                 ]
             }
 
@@ -916,7 +933,7 @@ extension AASDK {
             return
         }
 
-        if _aasdk?.userDebugMessageTypes?.contains(AASDK_DEBUG_ALL) ?? false || _aasdk?.userDebugMessageTypes?.contains(type ?? "") ?? false {
+        if _aasdk?.userDebugMessageTypes?.contains(DEBUG_ALL) ?? false || _aasdk?.userDebugMessageTypes?.contains(type ?? "") ?? false {
             Logger.dispatchMessage(message, ofType: type)
         }
     }
@@ -926,8 +943,8 @@ extension AASDK {
             return
         }
 
-        if _aasdk?.userDebugMessageTypes?.contains(AASDK_DEBUG_ALL) ?? false || _aasdk?.userDebugMessageTypes?.contains(AASDK_DEBUG_AD_LAYOUT) ?? false {
-            Logger.dispatchMessage("\(message ?? "")", ofType: AASDK_DEBUG_AD_LAYOUT)
+        if _aasdk?.userDebugMessageTypes?.contains(DEBUG_ALL) ?? false || _aasdk?.userDebugMessageTypes?.contains(DEBUG_AD_LAYOUT) ?? false {
+            Logger.dispatchMessage("\(message ?? "")", ofType: DEBUG_AD_LAYOUT)
         }
     }
 
@@ -1035,7 +1052,7 @@ extension AASDK {
         }
 
         let displayedImagesCount = UInt(_aasdk?.currentlyDisplayedAds?.count ?? 0)
-        AASDK.logDebugMessage(String(format: "Enqueued START tracking for %lu ads", displayedImagesCount), type: AASDK_DEBUG_NETWORK)
+        AASDK.logDebugMessage(String(format: "Enqueued START tracking for %lu ads", displayedImagesCount), type: DEBUG_NETWORK)
     }
 
     class func trackImpressionEndedForAllDisplayedImages() {
@@ -1051,7 +1068,7 @@ extension AASDK {
         }
 
         let displayedImagesCount = UInt(_aasdk?.currentlyDisplayedAds?.count ?? 0)
-        AASDK.logDebugMessage(String(format: "Enqueued END tracking for %lu ads", displayedImagesCount), type: AASDK_DEBUG_NETWORK)
+        AASDK.logDebugMessage(String(format: "Enqueued END tracking for %lu ads", displayedImagesCount), type: DEBUG_NETWORK)
     }
 
     class func trackImpressionStarted(for ad: AAAd?) {
@@ -1189,11 +1206,11 @@ extension AASDK {
 
 // MARK: - content stuff
     class func deliverContent(_ content: [AnyHashable : Any]?, from ad: AAAd?, andZoneView zoneView: AAZoneView?) {
-        let name = content?[AASDK_KEY_TYPE] as? String
+        let name = content?[KEY_TYPE] as? String
         let contentType = "list_items"
         var dic: [AnyHashable : Any]?
 
-        AASDK.logDebugMessage("AASDK: deliverContent:fromAd:andZoneView enter", type: AASDK_DEBUG_USER_INTERACTION)
+        AASDK.logDebugMessage("AASDK: deliverContent:fromAd:andZoneView enter", type: DEBUG_USER_INTERACTION)
 
         if content == nil {
             var message: String? = nil
@@ -1210,9 +1227,9 @@ extension AASDK {
 
             if let zoneId = ad?.zoneId, let zoneView = zoneView, let adContent = adContent {
                 dic = [
-                    AASDK_KEY_TYPE: contentType,
-                    AASDK_KEY_ZONE_ID: zoneId,
-                    AASDK_KEY_ZONE_VIEW: zoneView,
+                    KEY_TYPE: contentType,
+                    KEY_ZONE_ID: zoneId,
+                    KEY_ZONE_VIEW: zoneView,
                     AASDK.KEY_AD_CONTENT: adContent
                 ]
             }
@@ -1225,7 +1242,7 @@ extension AASDK {
             object: nil,
             userInfo: dic)
 
-        AASDK.logDebugMessage("AASDK: deliverContent:fromAd:andZoneView posting content event", type: AASDK_DEBUG_USER_INTERACTION)
+        AASDK.logDebugMessage("AASDK: deliverContent:fromAd:andZoneView posting content event", type: DEBUG_USER_INTERACTION)
         NotificationCenterWrapper.notifier.post(notification)
     }
 
@@ -1294,7 +1311,7 @@ extension AASDK {
         let worked = { response, forRequest in
             let pickupResponse = response as? AAPayloadPickupResponse
 
-            AASDK.logDebugMessage("Payload Service replied", type: AASDK_DEBUG_GENERAL)
+            AASDK.logDebugMessage("Payload Service replied", type: DEBUG_GENERAL)
 
             if pickupResponse?.payloads != nil && (pickupResponse?.payloads?.count ?? 0) > 0 {
                 if let payloads = pickupResponse?.payloads {
@@ -1308,7 +1325,7 @@ extension AASDK {
                 var userInfo: [String : String]? = nil
                 if let payloads = pickupResponse?.payloads {
                     userInfo = [
-                        AASDK_KEY_MESSAGE: "Returning \(Int(pickupResponse?.payloads?.count ?? 0)) payload items",
+                        KEY_MESSAGE: "Returning \(Int(pickupResponse?.payloads?.count ?? 0)) payload items",
                         KEY_CONTENT_PAYLOADS: payloads.description
                     ]
                 }
@@ -1318,7 +1335,7 @@ extension AASDK {
                     if let payloads = pickupResponse?.payloads {
                         for payload in payloads {
                             guard let payload = payload as? AAContentPayload else {
-                                AASDK.logDebugMessage("caught fatal error with payload parsing", type: AASDK_DEBUG_GENERAL)
+                                AASDK.logDebugMessage("caught fatal error with payload parsing", type: DEBUG_GENERAL)
                                 continue
                             }
                             for item in payload.detailedListItems {
@@ -1336,8 +1353,8 @@ extension AASDK {
             var userInfo: [String : String]? = nil
             if let description = error?.localizedDescription {
                 userInfo = [
-                    AASDK_KEY_MESSAGE: "AASDK ERROR Payload Service pickup returned: \(description)",
-                    AASDK_KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
+                    KEY_MESSAGE: "AASDK ERROR Payload Service pickup returned: \(description)",
+                    KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
                 ]
             }
             let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_ERROR), object: nil, userInfo: userInfo)

@@ -68,7 +68,6 @@
 		F46907F32549D2620097288C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46907F22549D2620097288C /* Logger.swift */; };
 		F46907FB2549F67E0097288C /* ReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46907FA2549F67E0097288C /* ReportManager.swift */; };
 		F46A657024E19DA1007CCE6B /* AASwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */; };
-		F46A657724E19DA1007CCE6B /* AASwiftSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = F46A656924E19DA1007CCE6B /* AASwiftSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F46A65AA24E1DDA5007CCE6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46A65A924E1DDA5007CCE6B /* AppDelegate.swift */; };
 		F46A65AC24E1DDA5007CCE6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46A65AB24E1DDA5007CCE6B /* SceneDelegate.swift */; };
 		F46A65AE24E1DDA5007CCE6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46A65AD24E1DDA5007CCE6B /* ViewController.swift */; };
@@ -210,7 +209,6 @@
 		F46907F22549D2620097288C /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		F46907FA2549F67E0097288C /* ReportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportManager.swift; sourceTree = "<group>"; };
 		F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AASwiftSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F46A656924E19DA1007CCE6B /* AASwiftSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AASwiftSDK.h; sourceTree = "<group>"; };
 		F46A656A24E19DA1007CCE6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F46A656F24E19DA1007CCE6B /* AASwiftSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AASwiftSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F46A657624E19DA1007CCE6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -325,7 +323,6 @@
 		F46A656824E19DA1007CCE6B /* AASwiftSDK */ = {
 			isa = PBXGroup;
 			children = (
-				F46A656924E19DA1007CCE6B /* AASwiftSDK.h */,
 				F474EEB725474491002439FD /* Constants.swift */,
 				F46B95C625486EFA0025AC5E /* Protocols.swift */,
 				F46A656A24E19DA1007CCE6B /* Info.plist */,
@@ -607,7 +604,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F46A657724E19DA1007CCE6B /* AASwiftSDK.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

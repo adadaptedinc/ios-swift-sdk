@@ -5,6 +5,7 @@
 //  Created by Brett Clifton on 9/21/20.
 //  Copyright © 2020 AdAdapted. All rights reserved.
 //
+import Foundation
 
 @objc public class AdContent: NSObject {
     var ad: Any!

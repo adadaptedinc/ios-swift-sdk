@@ -230,18 +230,18 @@ public class AAAd: NSObject {
         } else {
             if aaPortImageView != nil {
                 let str = "WARNING - don't have image for landscape orientation with ad \(adID ?? "").  using portrait image instead"
-                AASDK.logDebugMessage(str, type: AASDK_DEBUG_GENERAL)
+                AASDK.logDebugMessage(str, type: AASDK.DEBUG_GENERAL)
                 return aaPortImageView
             }
 
             if aaLandImageView != nil {
                 let str = "WARNING - don't have image for landscape orientation with ad \(adID ?? "").  using portrait image instead"
-                AASDK.logDebugMessage(str, type: AASDK_DEBUG_GENERAL)
+                AASDK.logDebugMessage(str, type: AASDK.DEBUG_GENERAL)
                 return aaLandImageView
             }
         }
         let str = "WARNING - don't have any cached images for ad \(adID ?? "").  returning nil."
-        AASDK.logDebugMessage(str, type: AASDK_DEBUG_GENERAL)
+        AASDK.logDebugMessage(str, type: AASDK.DEBUG_GENERAL)
         return nil
     }
 
@@ -258,18 +258,18 @@ public class AAAd: NSObject {
         } else {
             if portImgURL != nil && (portImgURL?.count ?? 0) > 0 {
                 let str = "WARNING - don't have URL for landscape orientation with ad \(adID ?? "").  using portrait image instead"
-                AASDK.logDebugMessage(str, type: AASDK_DEBUG_GENERAL)
+                AASDK.logDebugMessage(str, type: AASDK.DEBUG_GENERAL)
                 return URL(string: portImgURL ?? "")
             }
 
             if landImgURL != nil && (landImgURL?.count ?? 0) > 0 {
                 let str = "WARNING - don't have URL for landscape orientation with ad \(adID ?? "").  using portrait image instead"
-                AASDK.logDebugMessage(str, type: AASDK_DEBUG_GENERAL)
+                AASDK.logDebugMessage(str, type: AASDK.DEBUG_GENERAL)
                 return URL(string: landImgURL ?? "")
             }
         }
         let str = "WARNING - don't have any URL for ad \(adID ?? "").  returning nil."
-        AASDK.logDebugMessage(str, type: AASDK_DEBUG_GENERAL)
+        AASDK.logDebugMessage(str, type: AASDK.DEBUG_GENERAL)
         return nil
     }
 
