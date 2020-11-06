@@ -34,6 +34,10 @@ public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZ
         setZoneId(nil, zoneType: .kTypeUnsupportedAd, delegate: zoneOwner)
     }
     
+    @objc public func getZoneOwner() -> AAZoneViewOwner? {
+        return zoneOwner
+    }
+    
     public func clientZoneView() -> AAZoneView? {
         return self
     }
@@ -52,10 +56,10 @@ public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZ
     func adContentViewSize(for orientation: UIInterfaceOrientation) -> CGSize {
         if adProvider() != nil {
             let size = adProvider()?.adSize(for: orientation)
-            AASDK.logDebugMessage(String(format: "AAZoneView returning ad size of (%0.0f, %0.0f) in adContentViewSizeForOrientation", size?.width ?? 0.0, size?.height ?? 0.0), type: AASDK_DEBUG_AD_LAYOUT)
+            AASDK.logDebugMessage(String(format: "AAZoneView returning ad size of (%0.0f, %0.0f) in adContentViewSizeForOrientation", size?.width ?? 0.0, size?.height ?? 0.0), type: AASDK.DEBUG_AD_LAYOUT)
             return size ?? CGSize.zero
         }
-        AASDK.logDebugMessage("AAZoneView returning ad size of (0, 0) in adContentViewSizeForOrientation", type: AASDK_DEBUG_AD_LAYOUT)
+        AASDK.logDebugMessage("AAZoneView returning ad size of (0, 0) in adContentViewSizeForOrientation", type: AASDK.DEBUG_AD_LAYOUT)
         return CGSize(width: 0, height: 0)
     }
 
@@ -81,11 +85,11 @@ public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZ
     }
 
     func userInteractedWithAd() {
-        AASDK.logDebugMessage("AAZoneView: userInteractedWithAd enter", type: AASDK_DEBUG_USER_INTERACTION)
+        AASDK.logDebugMessage("AAZoneView: userInteractedWithAd enter", type: AASDK.DEBUG_USER_INTERACTION)
         if adProvider() != nil {
             adProvider()?.userInteractedWithAd()
         } else {
-            AASDK.logDebugMessage("AAZoneView: NO AD PROVIDER", type: AASDK_DEBUG_USER_INTERACTION)
+            AASDK.logDebugMessage("AAZoneView: NO AD PROVIDER", type: AASDK.DEBUG_USER_INTERACTION)
         }
     }
 
@@ -142,7 +146,7 @@ public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZ
 // MARK: - <AAZoneRenderer> used by the AAAbstractAdProvider
     func containerSize() -> CGSize {
         let size = frame.size
-        AASDK.logDebugMessage(String(format: "AAZoneView returning ad size of (%0.0f, %0.0f) in intrinsicContentSize", size.width, size.height), type: AASDK_DEBUG_AD_LAYOUT)
+        AASDK.logDebugMessage(String(format: "AAZoneView returning ad size of (%0.0f, %0.0f) in intrinsicContentSize", size.width, size.height), type: AASDK.DEBUG_AD_LAYOUT)
         return size
     }
 

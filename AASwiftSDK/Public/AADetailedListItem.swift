@@ -6,18 +6,20 @@
 //  Copyright © 2020 AdAdapted. All rights reserved.
 //
 
+import Foundation
+
 @objc public class AADetailedListItem: NSObject {
     var payloadId = ""
     var trackingId = ""
     @objc public var productTitle = ""
-    var productImageURL: URL?
-    var productBrand: String?
-    var productCategory: String?
-    var productBarcode: String?
-    var productDiscount: String?
-    var productDescription: String?
-    var productUpc: String?
-    var retailerSku: String?
+    @objc public var productImageURL: URL?
+    @objc public var productBrand: String?
+    @objc public var productCategory: String?
+    @objc public var productBarcode: String?
+    @objc public var productDiscount: String?
+    @objc public var productDescription: String?
+    @objc public var productUpc: String?
+    @objc public var retailerSku: String?
     
     class func parse(fromItemDictionary dictionary: [AnyHashable : Any]?, forPayload payloadId: String) -> AADetailedListItem? {
         let trackingId = dictionary?[AA_KEY_TRACKING_ID] as? String

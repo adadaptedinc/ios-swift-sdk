@@ -119,12 +119,12 @@ class AAPopupViewController: UIViewController, AAPopupViewDelegate {
     }
 
     func actionTaken(with string: String?) {
-        AASDK.logDebugMessage("PopupVC-action: actionTakenWithString enter", type: AASDK_DEBUG_USER_INTERACTION)
+        AASDK.logDebugMessage("PopupVC-action: actionTakenWithString enter", type: AASDK.DEBUG_USER_INTERACTION)
         delegate?.actionTaken(with: string)
     }
 
     func contentActionTaken(with string: String?) {
-        AASDK.logDebugMessage("PopupVC-content: contentActionTakenWithString enter", type: AASDK_DEBUG_USER_INTERACTION)
+        AASDK.logDebugMessage("PopupVC-content: contentActionTakenWithString enter", type: AASDK.DEBUG_USER_INTERACTION)
         delegate?.contentActionTaken(with: string)
     }
 

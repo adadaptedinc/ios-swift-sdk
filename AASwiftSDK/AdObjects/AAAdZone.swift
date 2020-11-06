@@ -30,12 +30,12 @@ class AAAdZone: NSObject {
             }
             if self.shouldUseCachedImages {
                 if ad.portImgURL != nil && (ad.portImgURL?.count ?? 0) > 0 {
-                    AASDK.logDebugMessage("Caching portrait ad \(ad.adID ?? "") with URL \(ad.portImgURL ?? "") for zone \(ad.zoneId ?? "")", type: AASDK_DEBUG_NETWORK)
+                    AASDK.logDebugMessage("Caching portrait ad \(ad.adID ?? "") with URL \(ad.portImgURL ?? "") for zone \(ad.zoneId ?? "")", type: AASDK.DEBUG_NETWORK)
                     let portImageView = AAImageAdView.image(with: URL(string: ad.portImgURL ?? ""), for: ad)
                     ad.aaPortImageView = portImageView
                 }
                 if ad.landImgURL != nil && (ad.landImgURL?.count ?? 0) > 0 {
-                    AASDK.logDebugMessage("Caching landscape ad \(ad.adID ?? "") with URL \(ad.landImgURL ?? "") for zone \(ad.zoneId ?? "")", type: AASDK_DEBUG_NETWORK)
+                    AASDK.logDebugMessage("Caching landscape ad \(ad.adID ?? "") with URL \(ad.landImgURL ?? "") for zone \(ad.zoneId ?? "")", type: AASDK.DEBUG_NETWORK)
                     let landImageView = AAImageAdView.image(with: URL(string: ad.landImgURL ?? ""), for: ad)
                     ad.aaLandImageView = landImageView
                 }

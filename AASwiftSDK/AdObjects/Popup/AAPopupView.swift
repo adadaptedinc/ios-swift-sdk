@@ -66,7 +66,7 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
     }
 
     func destroy() {
-        AASDK.logDebugMessage("Destroying popup", type: AASDK_DEBUG_GENERAL)
+        AASDK.logDebugMessage("Destroying popup", type: AASDK.DEBUG_GENERAL)
         webView?.removeFromSuperview()
         webView?.navigationDelegate = nil
         webView?.uiDelegate = nil
@@ -510,7 +510,7 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
             url = URL(string: ad?.actionPath?.absoluteString ?? "")
         }
 
-        AASDK.logDebugMessage("Popup loading with URL:'\(url?.absoluteString ?? "")'", type: AASDK_DEBUG_GENERAL)
+        AASDK.logDebugMessage("Popup loading with URL:'\(url?.absoluteString ?? "")'", type: AASDK.DEBUG_GENERAL)
 
         var requestObj: NSMutableURLRequest? = nil
         if let url = url {
@@ -530,7 +530,7 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
         if isVisible {
             delegate?.removePopup(self)
             webView?.stopLoading()
-            AASDK.logDebugMessage("Popup Closed", type: AASDK_DEBUG_USER_INTERACTION)
+            AASDK.logDebugMessage("Popup Closed", type: AASDK.DEBUG_USER_INTERACTION)
             webView?.loadHTMLString("<html><head></head><body></body></html>", baseURL: nil)
             isVisible = false
         }
@@ -557,13 +557,13 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
             // this is entered when you're initially loading the webview
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             if let adID = ad?.adID {
-                AASDK.logDebugMessage("Popup for ad \(adID) navigating to \(navigationAction.request.url?.absoluteString ?? "")", type: AASDK_DEBUG_GENERAL)
+                AASDK.logDebugMessage("Popup for ad \(adID) navigating to \(navigationAction.request.url?.absoluteString ?? "")", type: AASDK.DEBUG_GENERAL)
             }
             decisionHandler(WKNavigationActionPolicy.allow)
         } else {
             let rawString = navigationAction.request.url?.absoluteString
             if rawString?.hasPrefix("external:") ?? false {
-                AASDK.logDebugMessage("User navigating from popup to external link", type: AASDK_DEBUG_USER_INTERACTION)
+                AASDK.logDebugMessage("User navigating from popup to external link", type: AASDK.DEBUG_USER_INTERACTION)
                 let targetURL = (rawString as NSString?)?.substring(from: 9)
                 if let url = URL(string: targetURL ?? "") {
                     if !UIApplication.shared.canOpenURL(url) {
@@ -577,20 +577,20 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
                 }
                 decisionHandler(WKNavigationActionPolicy.cancel)
             } else if rawString?.hasPrefix("close:") ?? false {
-                AASDK.logDebugMessage("User closed popup via internal link", type: AASDK_DEBUG_USER_INTERACTION)
+                AASDK.logDebugMessage("User closed popup via internal link", type: AASDK.DEBUG_USER_INTERACTION)
                 closePopup()
                 decisionHandler(WKNavigationActionPolicy.cancel)
             } else if rawString?.hasPrefix("internal:") ?? false {
-                AASDK.logDebugMessage("User navigating to internal link", type: AASDK_DEBUG_USER_INTERACTION)
+                AASDK.logDebugMessage("User navigating to internal link", type: AASDK.DEBUG_USER_INTERACTION)
                 let targetURL = (rawString as NSString?)?.substring(from: 9)
                 delegate?.userDidInteract(withInternalURLString: targetURL)
                 decisionHandler(WKNavigationActionPolicy.cancel)
             } else if rawString?.hasPrefix("action:") ?? false {
-                AASDK.logDebugMessage("PopupView: Delivering popup ATL content", type: AASDK_DEBUG_USER_INTERACTION)
+                AASDK.logDebugMessage("PopupView: Delivering popup ATL content", type: AASDK.DEBUG_USER_INTERACTION)
                 delegate?.actionTaken(with: (rawString as NSString?)?.substring(from: 7))
                 decisionHandler(WKNavigationActionPolicy.cancel)
             } else if rawString?.hasPrefix("content:") ?? false {
-                AASDK.logDebugMessage("PopupView: Delivering circular content", type: AASDK_DEBUG_USER_INTERACTION)
+                AASDK.logDebugMessage("PopupView: Delivering circular content", type: AASDK.DEBUG_USER_INTERACTION)
                 delegate?.contentActionTaken(with: (rawString as NSString?)?.substring(from: 8))
                 decisionHandler(WKNavigationActionPolicy.cancel)
             } else {

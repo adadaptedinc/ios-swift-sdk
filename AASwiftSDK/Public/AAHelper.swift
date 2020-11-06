@@ -413,6 +413,10 @@ class AAHelper: NSObject {
                 connector?.addCollectableError(forDispatch: AACollectableError(code: ADDIT_NO_DEEPLINK_RECEIVED, message: "Did not receive a universal link url.", params: params))
                 return
             }
+            
+            if (!url!.contains(AA_UNIVERSAL_LINK_ROOT)) {
+                return
+            }
 
             connector?.addCollectableEvent(forDispatch: AACollectableEvent.internalEvent(withName: AA_EC_ADDIT_URL_RECEIVED, andPayload: params))
             let components = NSURLComponents(string: url ?? "")
@@ -437,7 +441,7 @@ class AAHelper: NSObject {
         }
 
         let userInfo = [
-            AASDK_KEY_MESSAGE: "Returning universal link payload item",
+            AASDK.KEY_MESSAGE: "Returning universal link payload item",
             AASDK.KEY_CONTENT_PAYLOADS: retArray
         ] as [String : Any]
         let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_CONTENT_PAYLOADS_INBOUND), object: nil, userInfo: userInfo)

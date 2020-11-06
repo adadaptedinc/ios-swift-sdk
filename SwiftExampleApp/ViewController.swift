@@ -52,7 +52,7 @@ class ViewController:
         guard let adContent = userinfo[AASDK.KEY_AD_CONTENT] as? AdContent else { return }
 
            for item in adContent.detailedListItems {
-               print("AADetailedListItem: ",item.productTitle)
+            print("AADetailedListItem: ",item.productTitle)
             appendListItem(itemName: item.productTitle)
            }
 

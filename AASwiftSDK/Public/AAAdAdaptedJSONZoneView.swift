@@ -22,7 +22,7 @@ class AAAdAdaptedJSONZoneView: AAZoneView {
     /// when the user interacts with your ad, call userInteractedWithAd to activate
     /// the Call To Action, most likely to show a popup.
     override func userInteractedWithAd() {
-        AASDK.logDebugMessage("AAAdAdaptedJSONZoneView: userInteractedWithAd enter", type: AASDK_DEBUG_USER_INTERACTION)
+        AASDK.logDebugMessage("AAAdAdaptedJSONZoneView: userInteractedWithAd enter", type: AASDK.DEBUG_USER_INTERACTION)
         adProvider()?.userInteractedWithAd()
     }
 
