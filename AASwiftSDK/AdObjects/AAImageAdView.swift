@@ -70,7 +70,7 @@ class AAImageAdView: UIImageView {
     }
 
     deinit {
-        AASDK.notificationCenter().removeObserver(self)
+        NotificationCenterWrapper.notifier.removeObserver(self)
     }
 
     override var intrinsicContentSize: CGSize {
@@ -80,17 +80,17 @@ class AAImageAdView: UIImageView {
 // MARK: - factory methods
     class func dispatchStart() {
         let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_WILL_LOAD_IMAGE), object: nil, userInfo: nil)
-        AASDK.notificationCenter().post(notification)
+        NotificationCenterWrapper.notifier.post(notification)
     }
 
     class func dispatchDone() {
         let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_DID_LOAD_IMAGE), object: nil, userInfo: nil)
-        AASDK.notificationCenter().post(notification)
+        NotificationCenterWrapper.notifier.post(notification)
     }
 
     class func dispatchFailed() {
         let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_FAILED_LOAD_IMAGE), object: nil, userInfo: nil)
-        AASDK.notificationCenter().post(notification)
+        NotificationCenterWrapper.notifier.post(notification)
     }
 
 // MARK: - touch

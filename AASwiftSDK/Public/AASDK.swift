@@ -54,7 +54,6 @@ var lastCame: Date?
     private var isKeywordInterceptOn = false
     private var kiManager: AAKeywordInterceptManager?
     private var impressionCounters: [AnyHashable : Any]?
-    var notificationCenter: NotificationCenter = NotificationCenter()
     private var payloadTrackers: [AnyHashable : Any]?
     private var lastPayloadCheck: Date?
     private var appInitParams: [AnyHashable : Any]?
@@ -160,15 +159,15 @@ var lastCame: Date?
 
 // MARK: - Public event reporting
     @objc public class func reportItem(_ itemName: String, addedToList: String?) {
-        ReportManager.reportItemInteraction(itemName, itemList: addedToList, connector: _aasdk?.connector, eventName: AA_EC_USER_ADDED_TO_LIST)
+        ReportManager.getInstance().reportItemInteraction(itemName, itemList: addedToList, eventName: AA_EC_USER_ADDED_TO_LIST)
     }
 
     @objc public class func reportItem(_ itemName: String, crossedOffList: String?) {
-        ReportManager.reportItemInteraction(itemName, itemList: crossedOffList, connector: _aasdk?.connector, eventName: AA_EC_USER_CROSSED_OFF_LIST)
+        ReportManager.getInstance().reportItemInteraction(itemName, itemList: crossedOffList, eventName: AA_EC_USER_CROSSED_OFF_LIST)
     }
 
     @objc public class func reportItem(_ itemName: String, deletedFromList: String?) {
-        ReportManager.reportItemInteraction(itemName, itemList: deletedFromList, connector: _aasdk?.connector, eventName: AA_EC_USER_DELETED_FROM_LIST)
+        ReportManager.getInstance().reportItemInteraction(itemName, itemList: deletedFromList, eventName: AA_EC_USER_DELETED_FROM_LIST)
     }
 
     @objc public class func reportItems(_ items: [String]?, addedToList list: String?) {
@@ -258,7 +257,7 @@ var lastCame: Date?
     class func removeDebugListener() {
         if _aasdk?.debugObserver != nil {
             if let debugObserver1 = _aasdk?.debugObserver {
-                AASDK.notificationCenter().removeObserver(
+                NotificationCenterWrapper.notifier.removeObserver(
                     debugObserver1,
                     name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_DEBUG_MESSAGE),
                     object: nil)
@@ -318,7 +317,14 @@ var lastCame: Date?
             _aasdk?.serverVersion = AA_API_VERSION
             _aasdk?.payloadTrackers = [AnyHashable : Any](minimumCapacity: 0)
             _aasdk?.appInitParams = nil
+            
+            initializeComponents()
         }
+    }
+    
+    private class func initializeComponents() {
+        ReportManager.createInstance(connector: AAConnector())
+        NotificationCenterWrapper.createInstance(notificationCenter: NotificationCenter())
     }
 
 // MARK: - Public start session
@@ -596,19 +602,19 @@ var lastCame: Date?
 
 // MARK: - Async loading Listeners
     func addCacheListeners() {
-        AASDK.notificationCenter().addObserver(
+        NotificationCenterWrapper.notifier.addObserver(
             self,
             selector: #selector(startLoadingImage(_:)),
             name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_WILL_LOAD_IMAGE),
             object: nil)
 
-        AASDK.notificationCenter().addObserver(
+        NotificationCenterWrapper.notifier.addObserver(
             self,
             selector: #selector(doneLoadingImage(_:)),
             name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_DID_LOAD_IMAGE),
             object: nil)
 
-        AASDK.notificationCenter().addObserver(
+        NotificationCenterWrapper.notifier.addObserver(
             self,
             selector: #selector(failedLoadingImage(_:)),
             name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_FAILED_LOAD_IMAGE),
@@ -616,9 +622,9 @@ var lastCame: Date?
     }
 
     func removeCacheListeners() {
-        AASDK.notificationCenter().removeObserver(self, name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_WILL_LOAD_IMAGE), object: nil)
-        AASDK.notificationCenter().removeObserver(self, name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_DID_LOAD_IMAGE), object: nil)
-        AASDK.notificationCenter().removeObserver(self, name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_FAILED_LOAD_IMAGE), object: nil)
+        NotificationCenterWrapper.notifier.removeObserver(self, name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_WILL_LOAD_IMAGE), object: nil)
+        NotificationCenterWrapper.notifier.removeObserver(self, name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_DID_LOAD_IMAGE), object: nil)
+        NotificationCenterWrapper.notifier.removeObserver(self, name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_FAILED_LOAD_IMAGE), object: nil)
     }
 
     @objc func startLoadingImage(_ notification: Notification?) {
@@ -1125,37 +1131,37 @@ extension AASDK {
     }
 
     class func trackAnomalyHiddenInteraction(for ad: AAAd?) {
-        ReportManager.reportAnomaly(withCode: CODE_HIDDEN_INTERACTION, message: nil, params: AASDK.params(for: ad, andDic: nil), connector: _aasdk?.connector)
+        ReportManager.getInstance().reportAnomaly(withCode: CODE_HIDDEN_INTERACTION, message: nil, params: AASDK.params(for: ad, andDic: nil))
     }
 
     class func trackAnomalyAdImgLoad(_ ad: AAAd?, urlString url: String?, message: String?) {
-        ReportManager.reportAnomaly(withCode: CODE_AD_IMAGE_LOAD_FAILED, message: message, params: AASDK.params(for: ad, andDic: ["url": url ?? ""]), connector: _aasdk?.connector)
+        ReportManager.getInstance().reportAnomaly(withCode: CODE_AD_IMAGE_LOAD_FAILED, message: message, params: AASDK.params(for: ad, andDic: ["url": url ?? ""]))
     }
 
     class func trackAnomalyAdURLLoad(_ ad: AAAd?, urlString url: String?, message: String?) {
-        ReportManager.reportAnomaly(withCode: CODE_AD_URL_LOAD_FAILED, message: message, params: AASDK.params(for: ad, andDic: ["url": url ?? ""]), connector: _aasdk?.connector)
+        ReportManager.getInstance().reportAnomaly(withCode: CODE_AD_URL_LOAD_FAILED, message: message, params: AASDK.params(for: ad, andDic: ["url": url ?? ""]))
     }
 
     class func trackAnomalyAdPopupURLLoad(_ ad: AAAd?, urlString url: String?, message: String?) {
-        ReportManager.reportAnomaly(withCode: CODE_POPUP_URL_LOAD_FAILED, message: message, params: AASDK.params(for: ad, andDic: ["url": url ?? ""]), connector: _aasdk?.connector)
+        ReportManager.getInstance().reportAnomaly(withCode: CODE_POPUP_URL_LOAD_FAILED, message: message, params: AASDK.params(for: ad, andDic: ["url": url ?? ""]))
     }
 
     class func trackAnomalyAdConfiguration(_ ad: AAAd?, message: String?) {
-        ReportManager.reportAnomaly(withCode: CODE_AD_CONFIG_ERROR, message: message, params: AASDK.params(for: ad, andDic: nil), connector: _aasdk?.connector)
+        ReportManager.getInstance().reportAnomaly(withCode: CODE_AD_CONFIG_ERROR, message: message, params: AASDK.params(for: ad, andDic: nil))
     }
 
     class func trackAnomalyZoneConfiguration(_ zone: AAAdZone?, message: String?) {
         if let zoneId = zone?.zoneId {
-            ReportManager.reportAnomaly(withCode: CODE_ZONE_CONFIG_ERROR, message: message, params: ["zone_id": zoneId], connector: _aasdk?.connector)
+            ReportManager.getInstance().reportAnomaly(withCode: CODE_ZONE_CONFIG_ERROR, message: message, params: ["zone_id": zoneId])
         }
     }
 
     class func trackAnomalyWithHTMLTracker(for ad: AAAd?, message: String?) {
-        ReportManager.reportAnomaly(withCode: CODE_HTML_TRACKING_ERROR, message: message, params: AASDK.params(for: ad, andDic: nil), connector: _aasdk?.connector)
+        ReportManager.getInstance().reportAnomaly(withCode: CODE_HTML_TRACKING_ERROR, message: message, params: AASDK.params(for: ad, andDic: nil))
     }
 
     class func trackAnomalyGenericErrorMessage(_ message: String?, optionalAd ad: AAAd?) {
-        ReportManager.reportAnomaly(withCode: CODE_ERROR, message: message, params: AASDK.params(for: ad, andDic: nil), connector: _aasdk?.connector)
+        ReportManager.getInstance().reportAnomaly(withCode: CODE_ERROR, message: message, params: AASDK.params(for: ad, andDic: nil))
     }
 
 // MARK: - HTML Tracking
@@ -1220,7 +1226,7 @@ extension AASDK {
             userInfo: dic)
 
         AASDK.logDebugMessage("AASDK: deliverContent:fromAd:andZoneView posting content event", type: AASDK_DEBUG_USER_INTERACTION)
-        AASDK.notificationCenter().post(notification)
+        NotificationCenterWrapper.notifier.post(notification)
     }
 
 // MARK: - added for async stuff
@@ -1250,7 +1256,7 @@ extension AASDK {
 
 // MARK: - Private event reporting
     class func reportItem(_ item: String?, addedToList list: String?, from ad: AAAd?) {
-        ReportManager.reportAcknowledgeItem(item, addedToList: list, from: ad, connector: _aasdk?.connector, eventName: AA_EC_ATL_ADDED_TO_LIST)
+        ReportManager.getInstance().reportAcknowledgeItem(item, addedToList: list, from: ad, eventName: AA_EC_ATL_ADDED_TO_LIST)
     }
 
     class func reportItems(_ items: [AnyHashable]?, addedToList list: String?, from ad: AAAd?) {
@@ -1279,10 +1285,6 @@ extension AASDK {
     }
 
 // MARK: - Internal NSNotificationCenter
-    class func notificationCenter() -> NotificationCenter {
-        return (_aasdk?.notificationCenter)!
-    }
-
     class func checkForPayloads() {
         if _aasdk?.lastPayloadCheck != nil && (abs(Int(_aasdk?.lastPayloadCheck?.timeIntervalSinceNow ?? 0)) < Int(minPayloadIntervalSec)) {
             return
@@ -1325,7 +1327,7 @@ extension AASDK {
                         }
                     }
 
-                    AASDK.notificationCenter().post(notification)
+                    NotificationCenterWrapper.notifier.post(notification)
                 }
             }
         } as AAResponseWasReceivedBlock
@@ -1339,7 +1341,7 @@ extension AASDK {
                 ]
             }
             let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_ERROR), object: nil, userInfo: userInfo)
-            AASDK.notificationCenter().post(notification)
+            NotificationCenterWrapper.notifier.post(notification)
         } as AAResponseWasErrorBlock
 
         let request = AAPayloadPickupRequest()
@@ -1348,11 +1350,11 @@ extension AASDK {
     }
 
     class func reportPayloadReceived(_ payload: AAContentPayload) {
-        ReportManager.reportPayloadReceived(payload, connector: _aasdk?.connector)
+        ReportManager.getInstance().reportPayloadReceived(payload)
     }
 
     class func reportPayloadRejected(_ payload: AAContentPayload) {
-        ReportManager.reportPayloadRejected(payload, connector: _aasdk?.connector)
+        ReportManager.getInstance().reportPayloadRejected(payload)
     }
 
     class func cachedItem(matching string: String) -> AADetailedListItem? {
@@ -1373,12 +1375,12 @@ extension AASDK {
         //#D - does this get used properly? try break point
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
             if let notification = notification {
-                _aasdk?.notificationCenter.post(notification)
+                NotificationCenterWrapper.notifier.post(notification)
             }
         })
     }
 
     class func reportItem(_ itemName: String?, from contentPayload: AAContentPayload?) {
-        ReportManager.reportItemInteractionFromPayload(itemName, from: contentPayload, connector: _aasdk?.connector, eventName: AA_EC_ADDIT_ADDED_TO_LIST)
+        ReportManager.getInstance().reportItemInteractionFromPayload(itemName, from: contentPayload, eventName: AA_EC_ADDIT_ADDED_TO_LIST)
     }
 }

@@ -32,13 +32,13 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
 
         targetOrientation = UIApplication.shared.statusBarOrientation
 
-        AASDK.notificationCenter().addObserver(
+        NotificationCenterWrapper.notifier.addObserver(
             self,
             selector: #selector(going(toBackground:)),
             name: UIApplication.willResignActiveNotification,
             object: nil)
 
-        AASDK.notificationCenter().addObserver(
+        NotificationCenterWrapper.notifier.addObserver(
             self,
             selector: #selector(coming(toForeground:)),
             name: UIApplication.didBecomeActiveNotification,
@@ -155,7 +155,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
         zoneRenderer!.invalidateContentView()
         zoneRenderer = nil
 
-        AASDK.notificationCenter().removeObserver(self)
+        NotificationCenterWrapper.notifier.removeObserver(self)
     }
 
     override func rotate(to newOrientation: UIInterfaceOrientation) {

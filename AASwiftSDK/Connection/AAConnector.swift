@@ -206,7 +206,7 @@ class AAConnector: NSObject {
                     if response is HTTPURLResponse {
                         let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
                         if statusCode >= 400 {
-                            ReportManager.reportAnomaly(withCode: CODE_API_400, message: response.debugDescription, params: nil, connector: self)
+                            ReportManager.getInstance().reportAnomaly(withCode: CODE_API_400, message: response.debugDescription, params: nil)
                             sendNextMessage()
                             return
                         }

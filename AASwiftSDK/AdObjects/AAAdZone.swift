@@ -97,7 +97,7 @@ class AAAdZone: NSObject {
                     currentAds = array
                 }
                 currentIndex = 0
-                AASDK.notificationCenter().post(name: NSNotification.Name(rawValue: AASDK_CACHE_UPDATED), object: nil)
+                NotificationCenterWrapper.notifier.post(name: NSNotification.Name(rawValue: AASDK_CACHE_UPDATED), object: nil)
             }
         }
     }
