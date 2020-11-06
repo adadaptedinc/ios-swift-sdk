@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "KeywordInterceptor.h"
 #import "ObjCExampleApp-Swift.h"
-@import AASwiftSDK;
+#import <AASwiftSDK/AASwiftSDK-Swift.h>
 
 @interface KeywordInterceptor ()
 

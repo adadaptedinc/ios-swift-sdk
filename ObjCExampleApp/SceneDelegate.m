@@ -8,7 +8,6 @@
 
 #import "SceneDelegate.h"
 #import "AppDelegate.h"
-@import AASwiftSDK;
 
 @interface SceneDelegate ()
 

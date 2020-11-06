@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "ObjCExampleApp-Swift.h"
-@import AASwiftSDK;
+#import <AASwiftSDK/AASwiftSDK-Swift.h>
 
 @interface ViewController ()
 

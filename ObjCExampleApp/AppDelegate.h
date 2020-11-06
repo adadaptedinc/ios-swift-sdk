@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@import AASwiftSDK;
+#import <AASwiftSDK/AASwiftSDK-Swift.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, AASDKObserver>
 @property (strong, nonatomic) UIWindow *window;

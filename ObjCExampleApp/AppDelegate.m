@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-@import AASwiftSDK;
+#import <AASwiftSDK/AASwiftSDK-Swift.h>
 
 @interface AppDelegate ()
 

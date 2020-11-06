@@ -8,7 +8,7 @@
 
 #import "LaunchViewController.h"
 #import "ObjCExampleApp-Swift.h"
-@import AASwiftSDK;
+#import <AASwiftSDK/AASwiftSDK-Swift.h>
 
 @interface LaunchViewController ()
 
