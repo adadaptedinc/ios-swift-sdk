@@ -199,7 +199,6 @@
 		F44F2F762519081A00B96C8C /* AAAbstractAdProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAAbstractAdProvider.swift; sourceTree = "<group>"; };
 		F44F2F86251915D000B96C8C /* AADetailedListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AADetailedListItem.swift; sourceTree = "<group>"; };
 		F44F2F9025191F2F00B96C8C /* AAHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AAHelper.swift; path = AASwiftSDK/Public/AAHelper.swift; sourceTree = SOURCE_ROOT; };
-		F454B4942555F9C200A6BB30 /* AASwiftSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AASwiftSDK.h; sourceTree = "<group>"; };
 		F4626470251BABFE004B8176 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F4626471251BAC00004B8176 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F4626472251BAC02004B8176 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -324,7 +323,6 @@
 		F46A656824E19DA1007CCE6B /* AASwiftSDK */ = {
 			isa = PBXGroup;
 			children = (
-				F454B4942555F9C200A6BB30 /* AASwiftSDK.h */,
 				F474EEB725474491002439FD /* Constants.swift */,
 				F46B95C625486EFA0025AC5E /* Protocols.swift */,
 				F46A656A24E19DA1007CCE6B /* Info.plist */,

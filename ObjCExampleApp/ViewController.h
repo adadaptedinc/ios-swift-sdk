@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AASwiftSDK/AASwiftSDK-Swift.h>
+@import AASwiftSDK;
 
 @interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchTextFieldDelegate, AAZoneViewOwner, AASDKContentDelegate> {
     IBOutlet UITableView *listTableView;
