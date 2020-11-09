@@ -22,3 +22,19 @@ class MockAASDKObserver : NSObject, AASDKObserver {
         
     }
 }
+
+class MockAASDKContentDelegate: NSObject, AASDKContentDelegate {
+    func aaContentNotification(_ notification: Notification) {
+        
+    }
+    
+    func aaPayloadNotification(_ notification: Notification) {
+        
+    }
+}
+
+class MockAASDKDebugObserver: NSObject, AASDKDebugObserver {
+    func aaDebugNotification(_ notification: Notification) {
+        
+    }
+}

@@ -11,18 +11,32 @@ import XCTest
 @testable import AASwiftSDK
 
 class RegistrarTests: XCTestCase {
-    let mockNotificationCenter = MockNotificationCenter()
+    var mockNotificationCenter = MockNotificationCenter()
     
     override func setUp() {
         NotificationCenterWrapper.createInstance(notificationCenter: mockNotificationCenter)
     }
     
-    func testAddListeners() {
-        Registrar.addListeners(observer: MockAASDKObserver())
-        let listeningEvents = mockNotificationCenter.storedEvents
+    func testAddAndClearAllListeners() {
+        let testObserver = MockAASDKObserver()
+        let testDelegate = MockAASDKContentDelegate()
+        let testDebugObserver = MockAASDKDebugObserver()
+        Registrar.addListeners(observer: testObserver)
+        Registrar.addContentListeners(delegate: testDelegate)
+        Registrar.addDebugListeners(observer: testDebugObserver)
         
-        XCTAssert(listeningEvents.contains("AASDK_INIT_COMPLETE"))
-        XCTAssert(listeningEvents.count == 3)
+        XCTAssert(mockNotificationCenter.storedEvents.contains("AASDK_INIT_COMPLETE"))
+        XCTAssert(mockNotificationCenter.storedEvents.contains("AASDK_CONTENT_DELIVERY"))
+        XCTAssert(mockNotificationCenter.storedEvents.contains("AASDK_UI_DEBUG_MESSAGE"))
+        XCTAssert(mockNotificationCenter.storedEvents.count == 6)
+        
+        Registrar.clearListeners(observer: testObserver)
+        
+        XCTAssert(!mockNotificationCenter.storedEvents.contains("AASDK_INIT_COMPLETE"))
+        XCTAssert(mockNotificationCenter.storedEvents.contains("AASDK_CONTENT_DELIVERY"))
+        XCTAssert(mockNotificationCenter.storedEvents.count == 3)
+        
+        Registrar.clearContentListeners(delegate: testDelegate)
+        XCTAssert(mockNotificationCenter.storedEvents.count == 1)
     }
-    
 }

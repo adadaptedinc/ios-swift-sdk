@@ -26,10 +26,10 @@ import Foundation
             returnItem.payloadId = payloadId ?? ""
             returnItem.payloadMessage = dictionary?["payload_message"] as? String
             returnItem.payloadImageURL = URL(string: dictionary?["payload_image"] as? String ?? "")
-            let items = dictionary?["detailed_list_items"] as? [AnyHashable]
+            let items = dictionary?[DETAILED_LIST_ITEMS] as? [AnyHashable]
             if items != nil && (items != nil) {
                 var returnItems = [AADetailedListItem]()
-                returnItem.payloadType = "detailed_list_items"
+                returnItem.payloadType = DETAILED_LIST_ITEMS
                 for item in items ?? [] {
                     guard let item = item as? [AnyHashable : Any] else {
                         continue
@@ -52,7 +52,6 @@ import Foundation
         } else {
             //TODO: - no payloadId
         }
-
         return nil
     }
 

@@ -85,6 +85,8 @@
 		F46B151F2559D11900E982FA /* MockAASDKObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46B151E2559D11900E982FA /* MockAASDKObserver.swift */; };
 		F46B95C725486EFA0025AC5E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46B95C625486EFA0025AC5E /* Protocols.swift */; };
 		F46B95D92548A0140025AC5E /* Registrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46B95D82548A0140025AC5E /* Registrar.swift */; };
+		F46C525E255AFC5000339092 /* AAContentPayloadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46C525D255AFC5000339092 /* AAContentPayloadTests.swift */; };
+		F46C5266255B32C700339092 /* AdContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46C5265255B32C700339092 /* AdContentTests.swift */; };
 		F4730AB6252E2ED9003E7C52 /* AASwiftSDK in Resources */ = {isa = PBXBuildFile; fileRef = F4730AB5252E2ED9003E7C52 /* AASwiftSDK */; };
 		F474EEB825474491002439FD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F474EEB725474491002439FD /* Constants.swift */; };
 		F480BDF6255486C40098899A /* NotificationCenterWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480BDF5255486C40098899A /* NotificationCenterWrapper.swift */; };
@@ -239,6 +241,8 @@
 		F46B151E2559D11900E982FA /* MockAASDKObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAASDKObserver.swift; sourceTree = "<group>"; };
 		F46B95C625486EFA0025AC5E /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		F46B95D82548A0140025AC5E /* Registrar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registrar.swift; sourceTree = "<group>"; };
+		F46C525D255AFC5000339092 /* AAContentPayloadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAContentPayloadTests.swift; sourceTree = "<group>"; };
+		F46C5265255B32C700339092 /* AdContentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdContentTests.swift; sourceTree = "<group>"; };
 		F4730AB5252E2ED9003E7C52 /* AASwiftSDK */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AASwiftSDK; sourceTree = SOURCE_ROOT; };
 		F474EEB725474491002439FD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F480BDF5255486C40098899A /* NotificationCenterWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterWrapper.swift; sourceTree = "<group>"; };
@@ -343,6 +347,8 @@
 			children = (
 				F48E009925509FFA00AA8388 /* Mocks */,
 				F48E008F25509E6700AA8388 /* AASDKTests.swift */,
+				F46C525D255AFC5000339092 /* AAContentPayloadTests.swift */,
+				F46C5265255B32C700339092 /* AdContentTests.swift */,
 				F4838C5C25534C7D004E26B4 /* LoggerTests.swift */,
 				F480BE052554A4710098899A /* RegistrarTests.swift */,
 				F48E009525509F1E00AA8388 /* ReportManagerTests.swift */,
@@ -846,10 +852,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F46C5266255B32C700339092 /* AdContentTests.swift in Sources */,
 				F46B151F2559D11900E982FA /* MockAASDKObserver.swift in Sources */,
 				F4838C5D25534C7D004E26B4 /* LoggerTests.swift in Sources */,
 				F480BDFE255493D00098899A /* MockNotificationCenter.swift in Sources */,
 				F48E009025509E6700AA8388 /* AASDKTests.swift in Sources */,
+				F46C525E255AFC5000339092 /* AAContentPayloadTests.swift in Sources */,
 				F480BE062554A4710098899A /* RegistrarTests.swift in Sources */,
 				F48E009625509F1E00AA8388 /* ReportManagerTests.swift in Sources */,
 				F48E009B2550A00B00AA8388 /* MockAAConnector.swift in Sources */,
