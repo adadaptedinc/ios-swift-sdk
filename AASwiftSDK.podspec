@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "AASwiftSDK"
-  spec.version      = "0.0.11"
+  spec.version      = "0.0.12"
   spec.summary      = "Official AdAdapted iOS Swift SDK"
 
   # This description is used to generate tags and improve search results.
