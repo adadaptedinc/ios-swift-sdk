@@ -10,9 +10,14 @@ import Foundation
 
 class MockNotificationCenter: NotificationCenter {
     var storedNotificationPosts = [Notification]()
+    var storedEvents = [String]()
     
     override func post(_ notification: Notification) {
         storedNotificationPosts.append(notification)
+    }
+    
+    override func addObserver(_ observer: Any, selector aSelector: Selector, name aName: NSNotification.Name?, object anObject: Any?) {
+        storedEvents.append(aName.map { $0.rawValue }!)
     }
     
 }

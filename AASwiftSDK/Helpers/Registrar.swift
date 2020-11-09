@@ -20,11 +20,6 @@ class Registrar {
             addObserver(observerName: observer, selectorName: #selector(AASDKObserver.aaSDKError(_:)), notificationName: AASDK_NOTIFICATION_ERROR)
         }
 
-        if observer.responds(to: #selector(AASDKObserver.aaSDKOnline(_:))) {
-            removeObserver(observerName: observer, notificationName: AASDK_NOTIFICATION_IS_ONLINE_NAME)
-            addObserver(observerName: observer, selectorName: #selector(AASDKObserver.aaSDKOnline(_:)), notificationName: AASDK_NOTIFICATION_IS_ONLINE_NAME)
-        }
-
         if observer.responds(to: #selector(AASDKObserver.aaSDKKeywordInterceptInitComplete(_:))) {
             removeObserver(observerName: observer, notificationName: AASDK_NOTIFICATION_KEYWORD_INTERCEPT_INIT_COMPLETE)
             addObserver(observerName: observer, selectorName: #selector(AASDKObserver.aaSDKKeywordInterceptInitComplete(_:)), notificationName: AASDK_NOTIFICATION_KEYWORD_INTERCEPT_INIT_COMPLETE)
@@ -44,7 +39,6 @@ class Registrar {
     class func clearListeners(observer: AASDKObserver) {
         removeObserver(observerName: observer, notificationName: AASDK_NOTIFICATION_INIT_COMPLETE_NAME)
         removeObserver(observerName: observer, notificationName: AASDK_NOTIFICATION_GET_ADS_COMPLETE_NAME)
-        removeObserver(observerName: observer, notificationName: AASDK_NOTIFICATION_IS_ONLINE_NAME)
         removeObserver(observerName: observer, notificationName: AASDK_NOTIFICATION_ERROR)
         removeObserver(observerName: observer, notificationName: AASDK_CACHE_UPDATED)
         removeObserver(observerName: observer, notificationName: AASDK_NOTIFICATION_KEYWORD_INTERCEPT_INIT_COMPLETE)

@@ -7,8 +7,22 @@
 //
 
 import Foundation
+import XCTest
 @testable import AASwiftSDK
 
 class RegistrarTests: XCTestCase {
+    let mockNotificationCenter = MockNotificationCenter()
+    
+    override func setUp() {
+        NotificationCenterWrapper.createInstance(notificationCenter: mockNotificationCenter)
+    }
+    
+    func testAddListeners() {
+        Registrar.addListeners(observer: MockAASDKObserver())
+        let listeningEvents = mockNotificationCenter.storedEvents
+        
+        XCTAssert(listeningEvents.contains("AASDK_INIT_COMPLETE"))
+        XCTAssert(listeningEvents.count == 3)
+    }
     
 }

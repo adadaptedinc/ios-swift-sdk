@@ -32,11 +32,6 @@ protocol AASDKObserverInternal: AASDKObserver {
     @objc optional func aaSDKCacheUpdated(_ notification: Notification)
     @objc optional func aaSDKGetAdsComplete(_ notification: Notification)
 
-    /// optional elements
-    /// \brief SDK is online. Helpful if you desire to know when SDK is back online after disconnect.
-    /// \param notification with userInfo NSDictionary that includes info about the SDK start.
-    /// Notifies the applicaion that the SDK has initialized correctly. Information in the `userInfo` param. Keys: AASDK_KEY_ZONE_COUNT : NSNumber *and AASDK_KEY_ZONE_IDS : NSArray* (of NSString *).
-    @objc optional func aaSDKOnline(_ notification: Notification)
     /// \brief Keyword Intercepts have loaded - a list of assets to cache is available
     /// \param notification with userInfo NSDictionary that includes info about the assets to cache
     /// Notifies the applicaion that the SDK has initialized Keyword Intercept terms. Information in the `userInfo` param. Keys: AASDK_KEY_ASSET_URL_LIST : NSArray* (of NSString *)is an array of URL images you may cache.

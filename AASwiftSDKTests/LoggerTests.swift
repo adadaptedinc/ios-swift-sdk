@@ -41,8 +41,8 @@ class LoggerTests: XCTestCase {
     func testDispatchMessage() {
         Logger.dispatchMessage("testDispatchMessage", ofType: "testDispatchType")
         let result = mockNotificationCenter.storedNotificationPosts.first
-        XCTAssertEqual("testDispatchMessage", result?.userInfo![AASDK_KEY_MESSAGE] as! String)
-        XCTAssertEqual("testDispatchType", result?.userInfo![AASDK_KEY_TYPE] as! String)
+        XCTAssertEqual("testDispatchMessage", result?.userInfo![AASDK.KEY_MESSAGE] as! String)
+        XCTAssertEqual("testDispatchType", result?.userInfo![AASDK.KEY_TYPE] as! String)
     }
     
 }
