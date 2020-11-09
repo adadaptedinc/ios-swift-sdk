@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AASwiftSDK/AASDK.h>
+#import <AASwiftSDK/AASDK-Swift.h>
 
 //! Project version number for AASwiftSDK.
 FOUNDATION_EXPORT double AASwiftSDKVersionNumber;
