@@ -21,10 +21,9 @@ import WebKit
     @objc optional func handleCallToAction(forZone view: AAZoneView?)
 }
 
-@IBDesignable
 public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZoneRenderer {
 
-    @IBInspectable public var zoneId: String?
+    @IBInspectable public var zoneId: String? = ""
     internal weak var zoneOwner: AAZoneViewOwner?
     private(set) var type: AdTypeAndSource?
     private var provider: AAAbstractAdProvider?
@@ -47,6 +46,10 @@ public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZ
         setZoneId(zoneId, zoneType: type, delegate: delegate)
         sharedInit()
         AASDK.logDebugFrame(self.frame, message: "AAZoneView \(zoneId ?? "") initWithFrame")
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
 
     func rotate(to newOrientation: UIInterfaceOrientation) {
