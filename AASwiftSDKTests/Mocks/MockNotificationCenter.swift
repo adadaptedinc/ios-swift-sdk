@@ -20,4 +20,8 @@ class MockNotificationCenter: NotificationCenter {
         storedEvents.append(aName.map { $0.rawValue }!)
     }
     
+    override func removeObserver(_ observer: Any, name aName: NSNotification.Name?, object anObject: Any?) {
+        let rawValue = aName.map { $0.rawValue } ?? ""
+        storedEvents = storedEvents.filter(){ $0 != rawValue }
+    }
 }

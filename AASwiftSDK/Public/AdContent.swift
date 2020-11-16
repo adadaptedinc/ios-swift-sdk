@@ -33,7 +33,7 @@ import Foundation
             adContent = AdContent.parseRichListItemsDictionary(richItems) as? Self
         }
 
-        let detailedItems = dictionary?["detailed_list_items"] as? [AnyHashable]
+        let detailedItems = dictionary?[DETAILED_LIST_ITEMS] as? [AnyHashable]
         if detailedItems != nil && (detailedItems != nil) {
             adContent = AdContent.parseRichListItemsDictionary(detailedItems) as? Self
         }
