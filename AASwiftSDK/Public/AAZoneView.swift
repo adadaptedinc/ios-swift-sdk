@@ -21,7 +21,7 @@ import WebKit
     @objc optional func handleCallToAction(forZone view: AAZoneView?)
 }
 
-public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZoneRenderer {
+@objc public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZoneRenderer {
 
     @IBInspectable public var zoneId: String? = ""
     internal weak var zoneOwner: AAZoneViewOwner?

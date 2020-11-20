@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class AdAdaptedZoneView: AAZoneView {
+@objc public class AdAdaptedZoneView: AAZoneView {
     init(frame: CGRect, forZone zoneId: String?, delegate: AAZoneViewOwner?) {
         super.init(frame: frame, forZone: zoneId, zoneType: .kAdAdaptedImageAd, delegate: delegate)
     }
