@@ -1294,11 +1294,11 @@ extension AASDK {
         let payload = [
             "zone_id": zoneId ?? ""
         ]
-        _aasdk?.connector?.addCollectableEvent(forDispatch: AACollectableEvent.internalEvent(withName: AA_EC_ZONE_LOADED, andPayload: payload))
+        ReportManager.getInstance().reportInternalEvent(eventName: AA_EC_ZONE_LOADED, payload: payload)
     }
 
     class func reportAddToListFailure(withMessage message: String?, from ad: AAAd) {
-        _aasdk?.connector?.addCollectableError(forDispatch: AACollectableError(code: CODE_ATL_FAILURE, message: message, params: ["ad_id": ad.adID!]))
+        ReportManager.getInstance().reportAnomaly(withCode: CODE_ATL_FAILURE, message: message, params: ["ad_id": ad.adID!])
     }
 
 // MARK: - Internal NSNotificationCenter
