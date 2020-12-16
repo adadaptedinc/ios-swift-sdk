@@ -11,8 +11,7 @@ import CoreData
 import AASwiftSDK
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver, AASDKDebugObserver {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let options = [
             AASDK.OPTION_TEST_MODE:true,
@@ -21,6 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver {
 
          //iOS api key
         AASDK.startSession(withAppID: "NWY0NTZIODZHNWY0", registerListenersFor: self, options: options)
+        
+        var debug = [AnyHashable]()
+        debug.append(AASDK.DEBUG_ALL)
+        
+        AASDK.registerDebugListeners(for: self, forMessageTypes: debug)
         
         return true
     }
@@ -46,6 +50,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver {
                 }
             }
         }
+    }
+    
+    func aaDebugNotification(_ notification: Notification) {
+        print("debug: " +  notification.debugDescription)
     }
 
     func aaSDKError(_ error: Notification) {
