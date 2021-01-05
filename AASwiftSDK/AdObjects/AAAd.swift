@@ -10,7 +10,6 @@ import CoreGraphics
 import Foundation
 import UIKit
 
-
 @objcMembers
 public class AAAd: NSObject {
     var aaPortImageView: AAImageAdView?
