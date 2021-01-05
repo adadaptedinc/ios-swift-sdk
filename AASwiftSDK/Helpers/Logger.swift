@@ -6,7 +6,6 @@
 //  Copyright © 2020 AdAdapted. All rights reserved.
 //
 
-
 import Foundation
 
 class Logger {
