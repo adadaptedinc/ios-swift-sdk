@@ -272,10 +272,39 @@ class AAHelper: NSObject {
                 return kEventAnomaly
         }
     }
+    
+    class func storeCurrentSessionId(sessionId: String?) {
+        let preferences = UserDefaults.standard
+        preferences.set(sessionId, forKey: AASDK_SESSION_ID_KEY)
+        preferences.synchronize()
+    }
+    
+    class func getCurrentSessionId() -> String {
+        let preferences = UserDefaults.standard
+        if preferences.object(forKey: AASDK_SESSION_ID_KEY) == nil {
+            return "00000000-0000-0000-0000-000000000000"
+        } else {
+            return preferences.value(forKey: AASDK_SESSION_ID_KEY) as! String
+        }
+    }
+    
+    // checks if IDFA tracking is disabled
+    class func isTrackingDisabled() -> Bool {
+        let preferences = UserDefaults.standard
+        if preferences.object(forKey: AASDK_TRACKING_DISABLED_KEY) == nil {
+            return false
+        } else {
+            return preferences.value(forKey: AASDK_TRACKING_DISABLED_KEY) as! Bool
+        }
+    }
 
-    // Grabs the IDFA if enabled otherwise is all zeros
+    // Grabs the IDFA if enabled otherwise uses the current session ID
     class func udid() -> String? {
-        return ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        if (isTrackingDisabled()) {
+            return getCurrentSessionId()
+        } else {
+            return ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        }
     }
 
     // Checking if ad tracking is enabled on the device
