@@ -228,6 +228,7 @@ class AAConnector: NSObject {
                         // grab session ID and set it
                         if (aaRequest is AAInitRequest) && (JSON as AnyObject).value(forKeyPath: AA_KEY_SESSION_ID) != nil {
                             sessionID = (JSON as AnyObject).value(forKeyPath: AA_KEY_SESSION_ID) as? String
+                            AAHelper.storeCurrentSessionId(sessionId: sessionID)
                             print("SESSIONID =" + sessionID!)
                         }
 

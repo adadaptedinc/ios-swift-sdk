@@ -259,6 +259,18 @@ var lastCame: Date?
             return false
         }
     }
+    
+    @objc public class func disableAdTracking() {
+        let preferences = UserDefaults.standard
+        preferences.set(true, forKey: AASDK_TRACKING_DISABLED_KEY)
+        preferences.synchronize()
+    }
+    
+    @objc public class func enableAdTracking() {
+        let preferences = UserDefaults.standard
+        preferences.set(false, forKey: AASDK_TRACKING_DISABLED_KEY)
+        preferences.synchronize()
+    }
 
 // MARK: - debugging
     @objc public class func registerDebugListeners(for observer: AASDKDebugObserver?, forMessageTypes types: [AnyHashable]?) {

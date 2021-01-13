@@ -54,6 +54,8 @@ let PAYLOAD_SERVICE_SERVER_ROOT_TEST = "https://sandpayload.adadapted.com/v/1"
 let PAYLOAD_SERVICE_SERVER_ROOT_PROD = "https://payload.adadapted.com/v/1"
 
 let AD_FADE_SECONDS = 0.2
+let AASDK_TRACKING_DISABLED_KEY = "adTrackingDisabled"
+let AASDK_SESSION_ID_KEY = "aasdkSessionIdKey"
 
 let AASDK_OPTION_USE_CACHED_IMAGES = "USE_CACHED_IMAGES"
 let AASDK_OPTION_IGNORE_ZONES = "IGNORE_ZONES"
