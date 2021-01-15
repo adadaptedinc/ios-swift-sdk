@@ -126,9 +126,9 @@
             filePath = "AASwiftSDK/Connection/AAConnector.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
-            landmarkName = "sendNextMessageOnThread()"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "sendNextMessage()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -337,6 +337,22 @@
             startingLineNumber = "287"
             endingLineNumber = "287"
             landmarkName = "getCurrentSessionId()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "236C1F39-878B-48D1-80DD-74E3096A0EB0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AASwiftSDK/Requests/GetAds/AAGetAdsRequest.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "targetURL()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

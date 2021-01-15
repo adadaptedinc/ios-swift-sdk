@@ -20,10 +20,8 @@
 		F414F05625115E5400F2811C /* AAPayloadPickupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF6C25115E5300F2811C /* AAPayloadPickupResponse.swift */; };
 		F414F05825115E5400F2811C /* AACollectableEventRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF6E25115E5300F2811C /* AACollectableEventRequest.swift */; };
 		F414F05B25115E5400F2811C /* AAUpdateAdsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF7125115E5300F2811C /* AAUpdateAdsResponse.swift */; };
-		F414F05C25115E5400F2811C /* AAGetAdsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF7225115E5300F2811C /* AAGetAdsResponse.swift */; };
 		F414F05D25115E5400F2811C /* AACollectableEventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF7325115E5300F2811C /* AACollectableEventResponse.swift */; };
 		F414F05F25115E5400F2811C /* AAKeywordInterceptInitResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF7525115E5300F2811C /* AAKeywordInterceptInitResponse.swift */; };
-		F414F06125115E5400F2811C /* AAGetAdsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF7725115E5300F2811C /* AAGetAdsRequest.swift */; };
 		F414F06725115E5400F2811C /* AAAdZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF7D25115E5300F2811C /* AAAdZone.swift */; };
 		F414F07325115E5400F2811C /* AAImageAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF8A25115E5300F2811C /* AAImageAdView.swift */; };
 		F414F07425115E5400F2811C /* AAAdTimelineEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF8B25115E5300F2811C /* AAAdTimelineEntry.swift */; };
@@ -165,10 +163,8 @@
 		F414EF6C25115E5300F2811C /* AAPayloadPickupResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAPayloadPickupResponse.swift; sourceTree = "<group>"; };
 		F414EF6E25115E5300F2811C /* AACollectableEventRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AACollectableEventRequest.swift; sourceTree = "<group>"; };
 		F414EF7125115E5300F2811C /* AAUpdateAdsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAUpdateAdsResponse.swift; sourceTree = "<group>"; };
-		F414EF7225115E5300F2811C /* AAGetAdsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAGetAdsResponse.swift; sourceTree = "<group>"; };
 		F414EF7325115E5300F2811C /* AACollectableEventResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AACollectableEventResponse.swift; sourceTree = "<group>"; };
 		F414EF7525115E5300F2811C /* AAKeywordInterceptInitResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAKeywordInterceptInitResponse.swift; sourceTree = "<group>"; };
-		F414EF7725115E5300F2811C /* AAGetAdsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAGetAdsRequest.swift; sourceTree = "<group>"; };
 		F414EF7D25115E5300F2811C /* AAAdZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAAdZone.swift; sourceTree = "<group>"; };
 		F414EF8A25115E5300F2811C /* AAImageAdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAImageAdView.swift; sourceTree = "<group>"; };
 		F414EF8B25115E5300F2811C /* AAAdTimelineEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAAdTimelineEntry.swift; sourceTree = "<group>"; };
@@ -487,7 +483,6 @@
 				F414EFEC25115E5300F2811C /* AAGenericRequest.swift */,
 				F414EF6225115E5300F2811C /* AAErrorResponse.swift */,
 				F46DB58D24EAE3DF00A81CBF /* Init */,
-				F46DB58C24EAE3DA00A81CBF /* GetAds */,
 				F46DB58B24EAE3D200A81CBF /* UpdateAds */,
 				F46DB58A24EAE3CD00A81CBF /* TrackEvent */,
 				F46DB58924EAE3C400A81CBF /* KeywordIntercept */,
@@ -558,15 +553,6 @@
 				F414EFC025115E5300F2811C /* AAUpdateAdsRequest.swift */,
 			);
 			path = UpdateAds;
-			sourceTree = "<group>";
-		};
-		F46DB58C24EAE3DA00A81CBF /* GetAds */ = {
-			isa = PBXGroup;
-			children = (
-				F414EF7225115E5300F2811C /* AAGetAdsResponse.swift */,
-				F414EF7725115E5300F2811C /* AAGetAdsRequest.swift */,
-			);
-			path = GetAds;
 			sourceTree = "<group>";
 		};
 		F46DB58D24EAE3DF00A81CBF /* Init */ = {
@@ -799,7 +785,6 @@
 				F414F04125115E5400F2811C /* AABatchEventRequest.swift in Sources */,
 				F414F07A25115E5400F2811C /* AAReportableSessionEvent.swift in Sources */,
 				F414F04425115E5400F2811C /* AAGenericResponse.swift in Sources */,
-				F414F06125115E5400F2811C /* AAGetAdsRequest.swift in Sources */,
 				F414F0A425115E5400F2811C /* AAPopupView.swift in Sources */,
 				F44F2F87251915D000B96C8C /* AADetailedListItem.swift in Sources */,
 				F414F08125115E5400F2811C /* AAKeywordIntercept.swift in Sources */,
@@ -813,7 +798,6 @@
 				F414F05825115E5400F2811C /* AACollectableEventRequest.swift in Sources */,
 				F414F0AD25115E5400F2811C /* AAKeywordInterceptInitRequest.swift in Sources */,
 				F414F09E25115E5400F2811C /* AdAdaptedZoneView.swift in Sources */,
-				F414F05C25115E5400F2811C /* AAGetAdsResponse.swift in Sources */,
 				F467AE87252B7931003E02DB /* Queue.swift in Sources */,
 				F44F2F6B251900FB00B96C8C /* AdContent.swift in Sources */,
 				F414F05125115E5400F2811C /* AAPayloadPickupRequest.swift in Sources */,

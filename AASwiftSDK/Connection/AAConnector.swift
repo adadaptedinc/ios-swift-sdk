@@ -81,7 +81,6 @@ class AAConnector: NSObject {
     private var collectableErrorEvents: [AnyHashable]?
     private var backgroundUpdateTask: UIBackgroundTaskIdentifier!
     private var timer: Timer?
-    private var messageQueue: DispatchQueue?
     private var session: URLSession?
 
     override init() {
@@ -91,8 +90,6 @@ class AAConnector: NSObject {
         eventsV2 = [AnyHashable]()
         collectableEvents = [AnyHashable]()
         collectableErrorEvents = [AnyHashable]()
-        messageQueue = DispatchQueue(label: "com.adadapted.iossdk.AACONNECTOR_MESSAGE_QUEUE")
-
         inTestMode = false
         isOnline = false
         numInFlight = 0
@@ -124,22 +121,13 @@ class AAConnector: NSObject {
         return !AASDK.isReadyForUse()
     }
 
-    func sendNextMessageOnThread() {
+    func sendNextMessage() {
         if sendingBlocked() {
             return
         }
 
         if immediateQueue?.hasItems() == false && hasBatchEvents() {
             enqueueBatchEventRequests()
-        }
-
-        if immediateQueue?.hasItems() == false {
-            endBackgroundUpdateTask()
-            return
-        }
-
-        if backgroundUpdateTask == .invalid {
-            beginBackgroundUpdateTask()
         }
 
         let holder = immediateQueue?.dequeue()
@@ -160,7 +148,7 @@ class AAConnector: NSObject {
             methodType = "POST"
 
             // Request is GET request
-        } else if aaRequest is AAGetAdsRequest || aaRequest is AAUpdateAdsRequest || aaRequest is AAKeywordInterceptInitRequest {
+        } else if aaRequest is AAUpdateAdsRequest || aaRequest is AAKeywordInterceptInitRequest {
             print("#D: This is a GET request")
             let tURL = try! aaRequest?.targetURL()
             let qURL = "?aid=\(appID ?? "")&uid=\(udid ?? "")&sid=\(sessionID ?? "")&sdk=\(sdKversion ?? "")"
@@ -288,12 +276,6 @@ class AAConnector: NSObject {
         sendNextMessage()
     }
 
-    func sendNextMessage() {
-        messageQueue?.async(execute: { [self] in
-            sendNextMessageOnThread()
-        })
-    }
-
     func hasBatchEvents() -> Bool {
         return (events?.count ?? 0) > 0 || (eventsV2?.count ?? 0) > 0 || (collectableEvents?.count ?? 0) > 0
     }
@@ -338,22 +320,6 @@ class AAConnector: NSObject {
 
     @objc func timerFired(_ timer: Timer?) {
         sendNextMessage()
-    }
-
-// MARK: - Background
-    func beginBackgroundUpdateTask() {
-        backgroundUpdateTask = UIApplication.shared.beginBackgroundTask(expirationHandler: { [self] in
-            endBackgroundUpdateTask()
-        })
-    }
-
-    func endBackgroundUpdateTask() {
-        if backgroundUpdateTask == .invalid {
-            return
-        }
-
-        UIApplication.shared.endBackgroundTask(backgroundUpdateTask)
-        backgroundUpdateTask = .invalid
     }
 }
 
