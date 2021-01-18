@@ -521,54 +521,9 @@ var lastCame: Date?
         }
     }
 
-// MARK: - Public get Ad inside session
-    class func getAdForZone(_ zoneId: String?) {
-        let request = AAGetAdsRequest(zones: [zoneId])
-        _aasdk?.getAdDispatch(request)
-    }
-
-    class func getAdForZone(_ zoneId: String?, withSize size: CGRect, count: Int, subject: String?, context: String?) {
-        let request = AAGetAdsRequest(zones: [zoneId])
-        _aasdk?.getAdDispatch(request)
-    }
-
 // MARK: - Private instance methods
     class func currentState() -> AASDKState {
         return _currentState!
-    }
-
-    func getAdDispatch(_ request: AAGetAdsRequest?) {
-        let responseWasReceivedBlock = { response, forRequest in
-            let getAdResponse = response as? AAGetAdsResponse
-
-            let ads_count = getAdResponse?.ads?.count ?? 0
-
-            AASDK.logDebugMessage(String(format: "get ad received response. #ads %lu", ads_count), type: AASDK.DEBUG_NETWORK)
-
-            _aasdk?.cacheAds(inAdsDic: getAdResponse?.ads, completeNotificationName: AASDK_NOTIFICATION_GET_ADS_COMPLETE_NAME, shouldUseCachedImages: AASDK.shouldUseCachedImages() , shouldReplaceCurrent: false)
-        } as AAResponseWasReceivedBlock
-
-        let responseWasErrorBlock = { response, forRequest, error in
-            _currentState = .kErrorState
-
-            if _aasdk?.observer == nil {
-                Logger.consoleLogError(error, withMessage: "get/ad", suppressTracking: true)
-            }
-
-            var userInfo: [String : String]? = nil
-            if let description = error?.localizedDescription {
-                userInfo = [
-                    AASDK.KEY_MESSAGE: "AASDK ERROR get ad returned: \(description)",
-                    AASDK.KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
-                ]
-            }
-
-            let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_ERROR), object: nil, userInfo: userInfo)
-
-            AASDK.postDelayedNotification(notification)
-        } as AAResponseWasErrorBlock
-
-        _aasdk?.connector?.enqueueRequest(request, responseWasErrorBlock: responseWasErrorBlock, responseWasReceivedBlock: responseWasReceivedBlock)
     }
 
     func cacheAds(inAdsDic ads: [AnyHashable : Any]?, completeNotificationName name: String?, shouldUseCachedImages useCached: Bool, shouldReplaceCurrent shouldReplace: Bool) {
