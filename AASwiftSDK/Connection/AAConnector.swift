@@ -81,7 +81,6 @@ class AAConnector: NSObject {
     private var collectableErrorEvents: [AnyHashable]?
     private var backgroundUpdateTask: UIBackgroundTaskIdentifier!
     private var timer: Timer?
-    private var messageQueue: DispatchQueue?
     private var session: URLSession?
 
     override init() {
@@ -91,8 +90,6 @@ class AAConnector: NSObject {
         eventsV2 = [AnyHashable]()
         collectableEvents = [AnyHashable]()
         collectableErrorEvents = [AnyHashable]()
-        messageQueue = DispatchQueue(label: "com.adadapted.iossdk.AACONNECTOR_MESSAGE_QUEUE")
-
         inTestMode = false
         isOnline = false
         numInFlight = 0
@@ -124,22 +121,13 @@ class AAConnector: NSObject {
         return !AASDK.isReadyForUse()
     }
 
-    func sendNextMessageOnThread() {
+    func sendNextMessage() {
         if sendingBlocked() {
             return
         }
 
         if immediateQueue?.hasItems() == false && hasBatchEvents() {
             enqueueBatchEventRequests()
-        }
-
-        if immediateQueue?.hasItems() == false {
-            endBackgroundUpdateTask()
-            return
-        }
-
-        if backgroundUpdateTask == .invalid {
-            beginBackgroundUpdateTask()
         }
 
         let holder = immediateQueue?.dequeue()
@@ -160,7 +148,7 @@ class AAConnector: NSObject {
             methodType = "POST"
 
             // Request is GET request
-        } else if aaRequest is AAGetAdsRequest || aaRequest is AAUpdateAdsRequest || aaRequest is AAKeywordInterceptInitRequest {
+        } else if aaRequest is AAUpdateAdsRequest || aaRequest is AAKeywordInterceptInitRequest {
             print("#D: This is a GET request")
             let tURL = try! aaRequest?.targetURL()
             let qURL = "?aid=\(appID ?? "")&uid=\(udid ?? "")&sid=\(sessionID ?? "")&sdk=\(sdKversion ?? "")"
@@ -206,7 +194,7 @@ class AAConnector: NSObject {
                     if response is HTTPURLResponse {
                         let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
                         if statusCode >= 400 {
-                            ReportManager.reportAnomaly(withCode: CODE_API_400, message: response.debugDescription, params: nil, connector: self)
+                            ReportManager.getInstance().reportAnomaly(withCode: CODE_API_400, message: response.debugDescription, params: nil)
                             sendNextMessage()
                             return
                         }
@@ -228,8 +216,8 @@ class AAConnector: NSObject {
                         // grab session ID and set it
                         if (aaRequest is AAInitRequest) && (JSON as AnyObject).value(forKeyPath: AA_KEY_SESSION_ID) != nil {
                             sessionID = (JSON as AnyObject).value(forKeyPath: AA_KEY_SESSION_ID) as? String
+                            AAHelper.storeCurrentSessionId(sessionId: sessionID)
                             print("SESSIONID =" + sessionID!)
-                            //#D - or include app id and sdk here?
                         }
 
                         if JSON != nil && jsonError == nil {
@@ -245,14 +233,14 @@ class AAConnector: NSObject {
                             if let jsonData = jsonData {
                                 text = String(data: jsonData, encoding: .utf8)
                             }
-                            AASDK.logDebugMessage("RESPONSE JSON from \(request.url?.absoluteString ?? ""):\n\(text ?? "")", type: AASDK_DEBUG_NETWORK_DETAILED)
+                            AASDK.logDebugMessage("RESPONSE JSON from \(request.url?.absoluteString ?? ""):\n\(text ?? "")", type: AASDK.DEBUG_NETWORK_DETAILED)
                             print("RESPONSE JSON from \(request.url?.absoluteString ?? ""):\n\(text ?? "")") //remove me
 
                             let aaResponse = try! holder?.request!.parseResponse(fromJSON: JSON)
 
                             holder?.responseWasReceivedBlock!(aaResponse, holder?.request)
                         } else {
-                            AASDK.logDebugMessage("RESPONSE w/ no BODY from \(request.url?.absoluteString ?? "")", type: AASDK_DEBUG_NETWORK_DETAILED)
+                            AASDK.logDebugMessage("RESPONSE w/ no BODY from \(request.url?.absoluteString ?? "")", type: AASDK.DEBUG_NETWORK_DETAILED)
                         }
 
                         if response is HTTPURLResponse {
@@ -260,12 +248,12 @@ class AAConnector: NSObject {
                             let headers = httpResponse?.allHeaderFields
                             let choosenCamp = headers?["X-Chosen-Campaign"] as? String
                             if let choosenCamp = choosenCamp {
-                                AASDK.logDebugMessage("Chosen Campaign: \(choosenCamp)", type: AASDK_DEBUG_GENERAL)
+                                AASDK.logDebugMessage("Chosen Campaign: \(choosenCamp)", type: AASDK.DEBUG_GENERAL)
                             }
                         }
                     }
                 } else {
-                    AASDK.logDebugMessage("AASDK ERROR AAConnector Error response from \(request.url?.absoluteString ?? ""):\n\(description)\n", type: AASDK_DEBUG_NETWORK_DETAILED)
+                    AASDK.logDebugMessage("AASDK ERROR AAConnector Error response from \(request.url?.absoluteString ?? ""):\n\(description)\n", type: AASDK.DEBUG_NETWORK_DETAILED)
                     let aaResponse = AAErrorResponse()
                     aaResponse.error = error
                     aaResponse.aaRequest = holder?.request
@@ -286,12 +274,6 @@ class AAConnector: NSObject {
         task?.resume()
 
         sendNextMessage()
-    }
-
-    func sendNextMessage() {
-        messageQueue?.async(execute: { [self] in
-            sendNextMessageOnThread()
-        })
     }
 
     func hasBatchEvents() -> Bool {
@@ -316,7 +298,7 @@ class AAConnector: NSObject {
         }
 
         if (eventsV2?.count ?? 0) > 0 {
-            print("\n***************************  events v2  ***************************") //#D - DEBUG
+            print("\n***************************  events v2  ***************************")
 
             let request = AABatchEventRequest(events: eventsV2, forVersion: 2)
             eventsV2?.removeAll()
@@ -338,22 +320,6 @@ class AAConnector: NSObject {
 
     @objc func timerFired(_ timer: Timer?) {
         sendNextMessage()
-    }
-
-// MARK: - Background
-    func beginBackgroundUpdateTask() {
-        backgroundUpdateTask = UIApplication.shared.beginBackgroundTask(expirationHandler: { [self] in
-            endBackgroundUpdateTask()
-        })
-    }
-
-    func endBackgroundUpdateTask() {
-        if backgroundUpdateTask == .invalid {
-            return
-        }
-
-        UIApplication.shared.endBackgroundTask(backgroundUpdateTask)
-        backgroundUpdateTask = .invalid
     }
 }
 

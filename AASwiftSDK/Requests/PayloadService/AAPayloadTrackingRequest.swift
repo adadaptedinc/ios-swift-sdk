@@ -5,6 +5,7 @@
 //  Created by Brett Clifton on 9/16/20.
 //  Copyright © 2020 AdAdapted. All rights reserved.
 //
+import Foundation
 
 @objcMembers
 class AAPayloadTrackingRequest: AAGenericRequest {
@@ -17,7 +18,7 @@ class AAPayloadTrackingRequest: AAGenericRequest {
         if let payloadId = payload?.payloadId {
             a = [
                 [
-                            "payload_id": payloadId,
+                    AA_KEY_PAYLOAD_ID: payloadId,
                             "status": "delivered",
                             "event_timestamp": AAHelper.nowAsUTCNumber()
                         ]
@@ -34,7 +35,7 @@ class AAPayloadTrackingRequest: AAGenericRequest {
         var a: [[String : Any?]]? = nil
         if let payloadId = payload?.payloadId {
             a = [[
-                "payload_id": payloadId,
+                AA_KEY_PAYLOAD_ID: payloadId,
                 "status": "rejected"
             ]]
         }
@@ -54,7 +55,6 @@ class AAPayloadTrackingRequest: AAGenericRequest {
         setParamValue(AAHelper.bundleID() as NSObject?, forKey: AA_KEY_BUNDLE_ID)
         setParamValue(AAHelper.deviceOS() as NSObject?, forKey: AA_KEY_OS_NAME)
         setParamValue(AAHelper.deviceOSVersion() as NSObject?, forKey: AA_KEY_OS_VERSION)
-
         setParamValue(AAHelper.currentTimezone() as NSObject?, forKey: AA_KEY_TIMEZONE)
         setParamValue(AAHelper.deviceLocale() as NSObject?, forKey: AA_KEY_LOCALE)
         setParamValue(AAHelper.deviceModelName() as NSObject?, forKey: AA_KEY_DEVICE_MODEL)

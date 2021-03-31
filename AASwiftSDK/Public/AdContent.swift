@@ -5,11 +5,10 @@
 //  Created by Brett Clifton on 9/21/20.
 //  Copyright © 2020 AdAdapted. All rights reserved.
 //
+import Foundation
 
 @objc public class AdContent: NSObject {
-    /// The ad associated with this ad content
     var ad: Any!
-    /// array of items
     @objc public var detailedListItems: [AADetailedListItem] = []
     
     class func parse(fromDictionary dictionary: [AnyHashable : Any]?, ad: AAAd?) -> Self? {
@@ -34,7 +33,7 @@
             adContent = AdContent.parseRichListItemsDictionary(richItems) as? Self
         }
 
-        let detailedItems = dictionary?["detailed_list_items"] as? [AnyHashable]
+        let detailedItems = dictionary?[DETAILED_LIST_ITEMS] as? [AnyHashable]
         if detailedItems != nil && (detailedItems != nil) {
             adContent = AdContent.parseRichListItemsDictionary(detailedItems) as? Self
         }
@@ -99,13 +98,13 @@
         let dItem = AADetailedListItem()
         dItem.productTitle = item?["product-title"] as? String ?? ""
         if dItem.productTitle.isEmpty {
-            dItem.productTitle = item?["product_title"] as! String
+            dItem.productTitle = item?[PRODUCT_TITLE] as! String
         }
 
         if item?["product-image"] != nil {
             dItem.productImageURL = URL(string: (item?["product-image"] as? String) ?? "")
-        } else if item?["product_image"] != nil {
-            dItem.productImageURL = URL(string: (item?["product_image"] as? String) ?? "")
+        } else if item?[PRODUCT_IMAGE] != nil {
+            dItem.productImageURL = URL(string: (item?[PRODUCT_IMAGE] as? String) ?? "")
         }
 
         dItem.productDescription = item?["product-description"] as? String

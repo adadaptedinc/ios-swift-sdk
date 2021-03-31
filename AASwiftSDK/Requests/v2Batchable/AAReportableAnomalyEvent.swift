@@ -19,7 +19,6 @@ class AAReportableAnomalyEvent: NSObject {
         return params
     }
 
-    /// connector needs to set session and app
     func setParamValue(_ value: NSObject?, forKey param: String?) {
         params?[param ?? ""] = value
     }
@@ -38,7 +37,6 @@ class AAReportableAnomalyEvent: NSObject {
         setParamValue(AASDK.appId() as NSObject?, forKey: AA_KEY_APP_ID)
         setParamValue(AAHelper.udid() as NSObject?, forKey: AA_KEY_UDID)
         setParamValue(AAHelper.buildVersion() as NSObject?, forKey: AA_KEY_SDK_BUNDLE_VERSION)
-
         setParamValue(AAHelper.bundleID() as NSObject?, forKey: AA_KEY_BUNDLE_ID)
         setParamValue(AAHelper.bundleVersion() as NSObject?, forKey: AA_KEY_BUNDLE_VERSION)
         setParamValue(AAHelper.deviceOS() as NSObject?, forKey: AA_KEY_OS_NAME)
@@ -47,7 +45,6 @@ class AAReportableAnomalyEvent: NSObject {
         setParamValue(AAHelper.deviceWidth() as NSObject?, forKey: AA_KEY_DEVICE_WIDTH)
         setParamValue(AAHelper.deviceHeight() as NSObject?, forKey: AA_KEY_DEVICE_HEIGHT)
         setParamValue(AAHelper.deviceModelName() as NSObject?, forKey: AA_KEY_DEVICE_MODEL)
-
         setParamValue(NSNumber(value: AAHelper.isAdTrackingEnabled()), forKey: AA_KEY_ALLOW_RETARGETING)
         setParamValue(AAHelper.currentTimezone() as NSObject?, forKey: AA_KEY_TIMEZONE)
 

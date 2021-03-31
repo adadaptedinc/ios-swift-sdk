@@ -9,15 +9,10 @@
 import Foundation
 
 @objc public class AAContentPayload: NSObject {
-    /// For AdAdapted use
     var payloadId = ""
-    /// Message to display the user
-    var payloadMessage: String?
-    /// https image URL
-    var payloadImageURL: URL?
-    /// always 'detailed_list_items' at this time
-    var payloadType = ""
-    /// array of items
+    @objc public var payloadMessage: String?
+    @objc public var payloadImageURL: URL?
+    @objc public var payloadType = ""
     @objc public var detailedListItems: [AADetailedListItem] = []
     
     class func parse(fromDictionary dictionary: [AnyHashable : Any]?) -> Self? {
@@ -25,16 +20,16 @@ import Foundation
             return nil
         }
 
-        let payloadId = dictionary?["payload_id"] as? String
+        let payloadId = dictionary?[AA_KEY_PAYLOAD_ID] as? String
         if payloadId != nil && (payloadId?.count ?? 0) > 0 {
             let returnItem = AAContentPayload()
             returnItem.payloadId = payloadId ?? ""
             returnItem.payloadMessage = dictionary?["payload_message"] as? String
             returnItem.payloadImageURL = URL(string: dictionary?["payload_image"] as? String ?? "")
-            let items = dictionary?["detailed_list_items"] as? [AnyHashable]
+            let items = dictionary?[DETAILED_LIST_ITEMS] as? [AnyHashable]
             if items != nil && (items != nil) {
                 var returnItems = [AADetailedListItem]()
-                returnItem.payloadType = "detailed_list_items"
+                returnItem.payloadType = DETAILED_LIST_ITEMS
                 for item in items ?? [] {
                     guard let item = item as? [AnyHashable : Any] else {
                         continue
@@ -57,7 +52,6 @@ import Foundation
         } else {
             //TODO: - no payloadId
         }
-
         return nil
     }
 
@@ -72,16 +66,15 @@ import Foundation
                     AASDK.reportItem(item.productTitle, from: self)
                 }
             }
-
             AASDK.reportPayloadReceived(self)
         }
     }
 
-    func reportReceivedOntoList(_ list: String?) {
+    @objc public func reportReceivedOntoList(_ list: String?) {
         AASDK.reportPayloadReceived(self)
     }
 
-    func reportRejected() {
+    @objc public func reportRejected() {
         AASDK.reportPayloadRejected(self)
     }
 }

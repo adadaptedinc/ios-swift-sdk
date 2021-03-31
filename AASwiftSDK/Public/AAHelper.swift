@@ -16,10 +16,8 @@ import CoreTelephony
 import AppTrackingTransparency
 
 // INITIALIZATION
-// #D not sure, i think just json key placeholders
 let AA_KEY_ZONE_ID = "zone_id"
 let AA_KEY_ZONES = "zones"
-
 
 // app / user info
 let AA_KEY_APP_ID = "app_id"
@@ -56,8 +54,6 @@ let AA_KEY_EVENT_CARRIER = "carrier"
 let AA_KEY_DATETIME = "created_at"
 let AA_KEY_SDK_BUNDLE_VERSION = "sdk_version"
 let AA_KEY_APP_INIT_PARAMS = "params"
-
-//#define AA_KEY_IOS_SDK_VERSION   @"sdkv"      #d - gone?
 
 // init optional -- #D -- no longer being used? will response handle?
 let AA_KEY_ZONE_SIZE = "size"
@@ -121,7 +117,6 @@ let AA_KEY_ZONE_PORT_HEIGHT = "port_height"
 let AA_KEY_ZONE_LAND_WIDTH = "land_width"
 let AA_KEY_ZONE_LAND_HEIGHT = "land_height"
 
-
 // new in 0.9.1
 let AA_KEY_POLLING_INTERVAL = "polling_interval_ms"
 let AA_KEY_START_TIME = "start_time"
@@ -150,13 +145,10 @@ let AA_KEY_KI_TAGLINE = "tagline"
 let AA_KEY_KI_PRIORITY = "priority"
 let AA_KEY_KI_USER_INPUT = "user_input"
 
-// event collection
 // MARK: - Event Collection Service KEYS
 let AA_KEY_EVENT_TIMESTAMP = "event_timestamp"
 let AA_KEY_EVENT_PARAMS = "event_params"
 let AA_KEY_EVENT_SOURCE = "event_source"
-let AA_KEY_TRACKING_ID = "tracking_id"
-let AA_KEY_PAYLOAD_ID = "payload_id"
 let AA_KEY_ERROR_CODE = "error_code"
 let AA_KEY_ERROR_MESSAGE = "error_message"
 let AA_KEY_ERROR_TIMESTAMP = "error_timestamp"
@@ -189,6 +181,8 @@ let kEventAnomaly = "anomaly"
 
 var _screenSize = CGSize.zero
 
+extension String: Error {}
+
 class AAHelper: NSObject {
     class func buildVersion() -> String? {
         return Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
@@ -219,7 +213,6 @@ class AAHelper: NSObject {
     }
 
     class func actionString(forInt type: AASDKActionType) -> String? {
-        // (l)ink, (p)opup, (a)pp download
         switch type {
         case AASDKActionType.kActionLink:
                 return "l"
@@ -251,7 +244,6 @@ class AAHelper: NSObject {
             return AASDKActionType.kActionContent
         }
 
-        //   @throw [NSError errorWithDomain:[NSString stringWithFormat:@"bad action type string requested '%@' - should be found in AASDKActionType", string] code:42 userInfo:nil];
         print("bad action type string requested '\(string ?? "")' - should be found in AASDKActionType: taking no action")
         return AASDKActionType.kActionNone
     }
@@ -280,10 +272,39 @@ class AAHelper: NSObject {
                 return kEventAnomaly
         }
     }
+    
+    class func storeCurrentSessionId(sessionId: String?) {
+        let preferences = UserDefaults.standard
+        preferences.set(sessionId, forKey: AASDK_SESSION_ID_KEY)
+        preferences.synchronize()
+    }
+    
+    class func getCurrentSessionId() -> String {
+        let preferences = UserDefaults.standard
+        if preferences.object(forKey: AASDK_SESSION_ID_KEY) == nil {
+            return "00000000-0000-0000-0000-000000000000"
+        } else {
+            return preferences.value(forKey: AASDK_SESSION_ID_KEY) as! String
+        }
+    }
+    
+    // checks if IDFA tracking is disabled
+    class func isTrackingDisabled() -> Bool {
+        let preferences = UserDefaults.standard
+        if preferences.object(forKey: AASDK_TRACKING_DISABLED_KEY) == nil {
+            return false
+        } else {
+            return preferences.value(forKey: AASDK_TRACKING_DISABLED_KEY) as! Bool
+        }
+    }
 
-    // Grabs the IDFA if enabled otherwise is all zeros
+    // Grabs the IDFA if enabled otherwise uses the current session ID
     class func udid() -> String? {
-        return ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        if (isTrackingDisabled()) {
+            return getCurrentSessionId()
+        } else {
+            return ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        }
     }
 
     // Checking if ad tracking is enabled on the device
@@ -344,22 +365,11 @@ class AAHelper: NSObject {
         return String(bytes: Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
     }
 
-//    class func deviceModelName() -> String? {
-//        var systemInfo: utsname
-//        uname(&systemInfo)
-//
-//        return String(cString: systemInfo.machine, encoding: .utf8) //#D - trying to pull more specific iphone version
-//
-//        // return [[UIDevice currentDevice] model]; //just returns "iPhone"
-//    }
-
     class func deviceIdentifier() -> String? {
         return UIDevice.current.identifierForVendor?.uuidString
     }
 
     class func deviceOS() -> String? {
-        // HACK: iOS 10 changed the name to "iOS" which is more right,
-        // but inconsistent. We're using a string just like Android SDK.
         return "iPhone OS"
     }
 
@@ -370,12 +380,6 @@ class AAHelper: NSObject {
     class func deviceLocale() -> String? {
         return NSLocale.preferredLanguages[0]
     }
-
-//    class func deviceCarrier() -> String? {
-//        let info = CTTelephonyNetworkInfo()
-//        let carrier = info.subscriberCellularProvider
-//        return carrier?.carrierName
-//    }
 
     class func screenSize() -> CGSize {
         if _screenSize.height == 0.0 {
@@ -397,7 +401,7 @@ class AAHelper: NSObject {
     class func deviceScreenDensity() -> String? {
         let scaleFactor = Float(UIScreen.main.scale)
         return String(format: "%0.0f", scaleFactor)
-    } //#D - need to determine when to use number vs string
+    }
 
     class func deviceWidthNumber() -> NSNumber? {
         return NSNumber(value: Int32(Int(AAHelper.screenSize().width)))
@@ -438,6 +442,10 @@ class AAHelper: NSObject {
                 connector?.addCollectableError(forDispatch: AACollectableError(code: ADDIT_NO_DEEPLINK_RECEIVED, message: "Did not receive a universal link url.", params: params))
                 return
             }
+            
+            if (!url!.contains(AA_UNIVERSAL_LINK_ROOT)) {
+                return
+            }
 
             connector?.addCollectableEvent(forDispatch: AACollectableEvent.internalEvent(withName: AA_EC_ADDIT_URL_RECEIVED, andPayload: params))
             let components = NSURLComponents(string: url ?? "")
@@ -450,7 +458,7 @@ class AAHelper: NSObject {
                             json = try JSONSerialization.jsonObject(with: decodedData, options: [])
                         }
                     } catch {
-                        ReportManager.reportAnomaly(withCode: CODE_UNIVERSAL_LINK_PARSE_ERROR, message: url, params: nil, connector: connector)
+                        ReportManager.getInstance().reportAnomaly(withCode: CODE_UNIVERSAL_LINK_PARSE_ERROR, message: url, params: nil)
                     }
                     let payload = AAContentPayload.parse(fromDictionary: json as? [AnyHashable : Any])
                     payload!.payloadType = "universal-link"
@@ -462,7 +470,7 @@ class AAHelper: NSObject {
         }
 
         let userInfo = [
-            AASDK_KEY_MESSAGE: "Returning universal link payload item",
+            AASDK.KEY_MESSAGE: "Returning universal link payload item",
             AASDK.KEY_CONTENT_PAYLOADS: retArray
         ] as [String : Any]
         let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_CONTENT_PAYLOADS_INBOUND), object: nil, userInfo: userInfo)
@@ -476,7 +484,7 @@ class AAHelper: NSObject {
                     AASDK.cacheItem(item)
                 }
             }
-            AASDK.notificationCenter().post(notification)
+            NotificationCenterWrapper.notifier.post(notification)
         }
     }
 }

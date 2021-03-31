@@ -9,28 +9,20 @@
 import Foundation
 import UIKit
 
-/// \brief each natively rendered is (or contains) a sub-class of this
-/// using this class ensures reporting of impressions is correct, and 
-/// that Call To Actions are handled correctly.
-
 class AAAdAdaptedJSONZoneView: AAZoneView {
-    /// \brief constructor
     init(frame: CGRect, forZone zoneId: String?, delegate: AAZoneViewOwner?) {
         super.init(frame: frame, forZone: zoneId, zoneType: .kAdAdaptedJSONAd, delegate: delegate)
     }
 
-    /// \brief MUST OVERRIDE IN SUBCLASS
-    /// \param adAssets the raw data about the Ad.
-    /// NOTE: this is called on the main thread so you can more easily update UI elements.
     func layoutAssets(_ adAssets: [AnyHashable : Any]?) {
         
     }
 
     /// \brief DO NOT OVERRIDE
-    /// when the user interacts with your ad, call [self userInteractedWithAd] to activate 
+    /// when the user interacts with your ad, call userInteractedWithAd to activate
     /// the Call To Action, most likely to show a popup.
     override func userInteractedWithAd() {
-        AASDK.logDebugMessage("AAAdAdaptedJSONZoneView: userInteractedWithAd enter", type: AASDK_DEBUG_USER_INTERACTION)
+        AASDK.logDebugMessage("AAAdAdaptedJSONZoneView: userInteractedWithAd enter", type: AASDK.DEBUG_USER_INTERACTION)
         adProvider()?.userInteractedWithAd()
     }
 

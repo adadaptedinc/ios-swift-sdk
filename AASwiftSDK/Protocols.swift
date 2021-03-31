@@ -6,6 +6,8 @@
 //  Copyright © 2020 AdAdapted. All rights reserved.
 //
 
+import Foundation
+
 /// An informally used protocol to allow the internal
 /// workings to have different exposure to the events dispatched
 protocol AASDKObserverInternal: AASDKObserver {
@@ -30,11 +32,6 @@ protocol AASDKObserverInternal: AASDKObserver {
     @objc optional func aaSDKCacheUpdated(_ notification: Notification)
     @objc optional func aaSDKGetAdsComplete(_ notification: Notification)
 
-    /// optional elements
-    /// \brief SDK is online. Helpful if you desire to know when SDK is back online after disconnect.
-    /// \param notification with userInfo NSDictionary that includes info about the SDK start.
-    /// Notifies the applicaion that the SDK has initialized correctly. Information in the `userInfo` param. Keys: AASDK_KEY_ZONE_COUNT : NSNumber *and AASDK_KEY_ZONE_IDS : NSArray* (of NSString *).
-    @objc optional func aaSDKOnline(_ notification: Notification)
     /// \brief Keyword Intercepts have loaded - a list of assets to cache is available
     /// \param notification with userInfo NSDictionary that includes info about the assets to cache
     /// Notifies the applicaion that the SDK has initialized Keyword Intercept terms. Information in the `userInfo` param. Keys: AASDK_KEY_ASSET_URL_LIST : NSArray* (of NSString *)is an array of URL images you may cache.
@@ -61,7 +58,7 @@ protocol AASDKObserverInternal: AASDKObserver {
 /// \brief Debugging messaging from SDK.
 /// Provides the developer with detailed messaging around what the SDK is doing.
 /// NOTE: only one AASDKDebugObserver can exist at a time.
-@objc protocol AASDKDebugObserver: NSObjectProtocol {
+@objc public protocol AASDKDebugObserver: NSObjectProtocol {
     /// \brief Debugging notification
     /// \param notification The NSNotification has a `userInfo` dictionary with `AASDK_KEY_MESSAGE` and `AASDK_KEY_TYPE` keys.
     /// e.g. Message can be retrieved with: `NSString *message = [[notification userInfo] objectForKey:AASDK_KEY_MESSAGE];`

@@ -51,5 +51,3 @@ class AAReportableSessionEvent: NSObject {
         params?[param ?? ""] = value
     }
 }
-
-/// class to hold data for Batch Event Reporting

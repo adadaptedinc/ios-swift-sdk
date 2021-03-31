@@ -32,13 +32,13 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
 
         targetOrientation = UIApplication.shared.statusBarOrientation
 
-        AASDK.notificationCenter().addObserver(
+        NotificationCenterWrapper.notifier.addObserver(
             self,
             selector: #selector(going(toBackground:)),
             name: UIApplication.willResignActiveNotification,
             object: nil)
 
-        AASDK.notificationCenter().addObserver(
+        NotificationCenterWrapper.notifier.addObserver(
             self,
             selector: #selector(coming(toForeground:)),
             name: UIApplication.didBecomeActiveNotification,
@@ -73,7 +73,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
         }
 
         if oldAd == currentAd && !forceReload {
-            AASDK.logDebugMessage("AdAdapted Zone \(String(describing: zoneId)) reloaded not needed.", type: AASDK_DEBUG_GENERAL)
+            AASDK.logDebugMessage("AdAdapted Zone \(String(describing: zoneId)) reloaded not needed.", type: AASDK.DEBUG_GENERAL)
             AASDK.trackImpressionStarted(for: currentAd)
             //zoneRenderer.handleReload(of: currentAd)
         } else if currentAd != nil {
@@ -85,11 +85,11 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
             case .kAdAdaptedHTMLAd:
                     if currentWebAdView != nil {
                         if oldAd == currentAd {
-                            AASDK.logDebugMessage("Web Zone \(String(describing: zoneId)) being reloaded", type: AASDK_DEBUG_GENERAL)
+                            AASDK.logDebugMessage("Web Zone \(String(describing: zoneId)) being reloaded", type: AASDK.DEBUG_GENERAL)
                         }
                         currentWebAdView?.destroy()
                     } else {
-                        AASDK.logDebugMessage("Web Zone \(String(describing: zoneId)) being loaded", type: AASDK_DEBUG_GENERAL)
+                        AASDK.logDebugMessage("Web Zone \(String(describing: zoneId)) being loaded", type: AASDK.DEBUG_GENERAL)
                     }
 
                     
@@ -155,7 +155,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
         zoneRenderer!.invalidateContentView()
         zoneRenderer = nil
 
-        AASDK.notificationCenter().removeObserver(self)
+        NotificationCenterWrapper.notifier.removeObserver(self)
     }
 
     override func rotate(to newOrientation: UIInterfaceOrientation) {
@@ -181,7 +181,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
     }
 
     override func userInteractedWithAd() {
-        AASDK.logDebugMessage("AdProvider: userInteractedWithAd enter", type: AASDK_DEBUG_USER_INTERACTION)
+        AASDK.logDebugMessage("AdProvider: userInteractedWithAd enter", type: AASDK.DEBUG_USER_INTERACTION)
         takeActionForAd()
     }
 
@@ -210,7 +210,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
 // MARK: - <AAImageAdViewDelegate>
     func takeActionForAd() {
         if let actionType = currentAd?.actionType {
-            AASDK.logDebugMessage("AdAdapted Zone \(String(describing: zoneId)) touched - taking action \(actionType)", type: AASDK_DEBUG_USER_INTERACTION)
+            AASDK.logDebugMessage("AdAdapted Zone \(String(describing: zoneId)) touched - taking action \(actionType)", type: AASDK.DEBUG_USER_INTERACTION)
         }
 
         if isHidden {
@@ -234,7 +234,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
         case AASDKActionType.kActionAppDownload, AASDKActionType.kActionLink:
             zoneRenderer!.userLeavingApplication()
                 if let actionPath = currentAd?.actionPath {
-                    AASDK.logDebugMessage("Opening external URL: \(actionPath)", type: AASDK_DEBUG_GENERAL)
+                    AASDK.logDebugMessage("Opening external URL: \(actionPath)", type: AASDK.DEBUG_GENERAL)
                 }
                 if let actionPath = currentAd?.actionPath {
                     if !UIApplication.shared.canOpenURL(actionPath) {
@@ -259,7 +259,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
                 }
 
                 allowPopupClose = false
-            AASDK.logDebugMessage("Zone \(String(describing: zoneId)) displaying popup from delegate", type: AASDK_DEBUG_GENERAL)
+            AASDK.logDebugMessage("Zone \(String(describing: zoneId)) displaying popup from delegate", type: AASDK.DEBUG_GENERAL)
             zoneRenderer!.popupWillShow()
                 isDisplayingPopup = true
                 if let popupView = popupView {
@@ -296,7 +296,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
 
 // MARK: - <AAPopupDelegate>
     func dismissPopup(_ popupView: AAPopupViewController?) {
-        AASDK.logDebugMessage("Zone \(String(describing: zoneId)) dismissing popup from delegate", type: AASDK_DEBUG_GENERAL)
+        AASDK.logDebugMessage("Zone \(String(describing: zoneId)) dismissing popup from delegate", type: AASDK.DEBUG_GENERAL)
         isDisplayingPopup = false
         zoneRenderer!.viewControllerForPresentingModalView()!.dismiss(animated: true)
         if let currentAd = currentAd {
@@ -322,7 +322,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
 
     func contentActionTaken(with string: String?) {
         allowPopupClose = true
-        AASDK.logDebugMessage("contentActionTakenWithString: b64", type: AASDK_DEBUG_USER_INTERACTION)
+        AASDK.logDebugMessage("contentActionTakenWithString: b64", type: AASDK.DEBUG_USER_INTERACTION)
         let decodedData = Data(base64Encoded: string ?? "", options: [])
         var contentJson: [AnyHashable : Any]? = nil
         do {

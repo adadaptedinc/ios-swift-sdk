@@ -26,13 +26,13 @@ class Logger {
     class func dispatchMessage(_ message: String?, ofType type: String?) {
         var payload = [AnyHashable : Any](minimumCapacity: 2)
 
-        payload[AASDK_KEY_TYPE] = type
-        payload[AASDK_KEY_MESSAGE] = message
+        payload[AASDK.KEY_TYPE] = type
+        payload[AASDK.KEY_MESSAGE] = message
         let notification = Notification(
             name: Notification.Name(rawValue: AASDK_NOTIFICATION_DEBUG_MESSAGE),
             object: nil,
             userInfo: payload)
 
-        AASDK.notificationCenter().post(notification)
+        NotificationCenterWrapper.notifier.post(notification)
     }
 }

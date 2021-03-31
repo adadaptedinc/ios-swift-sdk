@@ -8,15 +8,8 @@
 
 import UIKit
 
-/// \brief  Subclass of AAZoneView configured for AdAdapted image and html content
-
-public class AdAdaptedZoneView: AAZoneView {
-    /// \brief Constructor 
-    /// \param frame where's it goin'
-    /// \param zoneId the zone it's for
-    /// \param delegate the owner that implements AAZoneViewOwner
-    /// - Returns: a configured object
-    init(frame: CGRect, forZone zoneId: String?, delegate: AAZoneViewOwner?) {
+@objc public class AdAdaptedZoneView: AAZoneView {
+    @objc public init(frame: CGRect, forZone zoneId: String?, delegate: AAZoneViewOwner?) {
         super.init(frame: frame, forZone: zoneId, zoneType: .kAdAdaptedImageAd, delegate: delegate)
     }
 

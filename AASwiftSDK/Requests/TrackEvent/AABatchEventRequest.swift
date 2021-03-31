@@ -5,6 +5,7 @@
 //  Created by Brett Clifton on 9/16/20.
 //  Copyright © 2020 AdAdapted. All rights reserved.
 //
+import Foundation
 
 @objcMembers
 class AABatchEventRequest: AAGenericRequest {
@@ -39,7 +40,6 @@ class AABatchEventRequest: AAGenericRequest {
             default:
                 return super.url(forEndpoint: "ads/events")
         }
-
     }
 
     override func parseResponse(fromJSON json: Any?) -> AABatchEventResponse? {

@@ -25,6 +25,23 @@ var lastCame: Date?
     @objc public static let KEY_CONTENT_PAYLOADS = "CONTENT_PAYLOADS"
     @objc public static let KEY_AD_CONTENT = "AD_CONTENT"
     @objc public static let KEY_KI_REPLACEMENT_TEXT = "KI_REPLACEMENT_TEXT"
+    @objc public static let KEY_ZONE_VIEW = "ZONE_VIEW"
+    
+    /// Log types to pass into registerDebugListenersFor:forMessageTypes:
+    @objc public static let DEBUG_GENERAL = "GENERAL"
+    @objc public static let DEBUG_NETWORK = "NETWORK"
+    @objc public static let DEBUG_NETWORK_DETAILED = "NETWORK_DETAILED"
+    @objc public static let DEBUG_USER_INTERACTION = "USER_INTERACTION"
+    @objc public static let DEBUG_AD_LAYOUT = "AD_LAYOUT"
+    @objc public static let DEBUG_ALL = "ALL"
+    
+    /// keys used to report details in NSNotifications
+    @objc public static let KEY_ZONE_ID = "ZONE_ID"
+    @objc public static let KEY_ZONE_IDS = "ZONE_IDS"
+    @objc public static let KEY_ZONE_COUNT = "ZONE_COUNT"
+    @objc public static let KEY_MESSAGE = "MESSAGE"
+    @objc public static let KEY_TYPE = "TYPE"
+    @objc public static let KEY_RECOVERY_SUGGESTION = "RECOVERY_SUGGESTION"
     
     private var appID: String?
     private var connector: AAConnector?
@@ -54,13 +71,12 @@ var lastCame: Date?
     private var isKeywordInterceptOn = false
     private var kiManager: AAKeywordInterceptManager?
     private var impressionCounters: [AnyHashable : Any]?
-    var notificationCenter: NotificationCenter = NotificationCenter()
     private var payloadTrackers: [AnyHashable : Any]?
     private var lastPayloadCheck: Date?
     private var appInitParams: [AnyHashable : Any]?
     
 // MARK: - notfications
-    class func registerListeners(for observer: AASDKObserver?) {
+    @objc public class func registerListeners(for observer: AASDKObserver?) {
         if observer == nil {
             return
         } else {
@@ -68,7 +84,7 @@ var lastCame: Date?
         }
     }
 
-    class func removeListeners(for observer: AASDKObserver?) {
+    @objc public class func removeListeners(for observer: AASDKObserver?) {
         if observer == nil {
             return
         } else {
@@ -84,7 +100,7 @@ var lastCame: Date?
         }
     }
 
-    class func removeContentListeners(for delegate: AASDKContentDelegate?) {
+    @objc public class func removeContentListeners(for delegate: AASDKContentDelegate?) {
         if delegate == nil {
             return
         } else {
@@ -150,25 +166,25 @@ var lastCame: Date?
 
     class func setDeviceLocation(_ location: CLLocation?) {
         if let location = location {
-            AASDK.logDebugMessage("AASDK location set \(location.coordinate.latitude) \(location.coordinate.longitude)", type: AASDK_DEBUG_GENERAL)
+            AASDK.logDebugMessage("AASDK location set \(location.coordinate.latitude) \(location.coordinate.longitude)", type: DEBUG_GENERAL)
             _aasdk?.deviceLocation = location
         } else {
-            AASDK.logDebugMessage("Location set to nil", type: AASDK_DEBUG_GENERAL)
+            AASDK.logDebugMessage("Location set to nil", type: DEBUG_GENERAL)
             _aasdk?.deviceLocation = nil
         }
     }
 
 // MARK: - Public event reporting
     @objc public class func reportItem(_ itemName: String, addedToList: String?) {
-        ReportManager.reportItemInteraction(itemName, itemList: addedToList, connector: _aasdk?.connector, eventName: AA_EC_USER_ADDED_TO_LIST)
+        ReportManager.getInstance().reportItemInteraction(itemName, itemList: addedToList, eventName: AA_EC_USER_ADDED_TO_LIST)
     }
 
     @objc public class func reportItem(_ itemName: String, crossedOffList: String?) {
-        ReportManager.reportItemInteraction(itemName, itemList: crossedOffList, connector: _aasdk?.connector, eventName: AA_EC_USER_CROSSED_OFF_LIST)
+        ReportManager.getInstance().reportItemInteraction(itemName, itemList: crossedOffList, eventName: AA_EC_USER_CROSSED_OFF_LIST)
     }
 
     @objc public class func reportItem(_ itemName: String, deletedFromList: String?) {
-        ReportManager.reportItemInteraction(itemName, itemList: deletedFromList, connector: _aasdk?.connector, eventName: AA_EC_USER_DELETED_FROM_LIST)
+        ReportManager.getInstance().reportItemInteraction(itemName, itemList: deletedFromList, eventName: AA_EC_USER_DELETED_FROM_LIST)
     }
 
     @objc public class func reportItems(_ items: [String]?, addedToList list: String?) {
@@ -243,9 +259,21 @@ var lastCame: Date?
             return false
         }
     }
+    
+    @objc public class func disableAdTracking() {
+        let preferences = UserDefaults.standard
+        preferences.set(true, forKey: AASDK_TRACKING_DISABLED_KEY)
+        preferences.synchronize()
+    }
+    
+    @objc public class func enableAdTracking() {
+        let preferences = UserDefaults.standard
+        preferences.set(false, forKey: AASDK_TRACKING_DISABLED_KEY)
+        preferences.synchronize()
+    }
 
 // MARK: - debugging
-    class func registerDebugListeners(for observer: AASDKDebugObserver?, forMessageTypes types: [AnyHashable]?) {
+    @objc public class func registerDebugListeners(for observer: AASDKDebugObserver?, forMessageTypes types: [AnyHashable]?) {
         if observer == nil {
             return
         }
@@ -255,10 +283,10 @@ var lastCame: Date?
     }
 
     /// \brief removes only the debug observer
-    class func removeDebugListener() {
+    @objc public class func removeDebugListener() {
         if _aasdk?.debugObserver != nil {
             if let debugObserver1 = _aasdk?.debugObserver {
-                AASDK.notificationCenter().removeObserver(
+                NotificationCenterWrapper.notifier.removeObserver(
                     debugObserver1,
                     name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_DEBUG_MESSAGE),
                     object: nil)
@@ -318,7 +346,14 @@ var lastCame: Date?
             _aasdk?.serverVersion = AA_API_VERSION
             _aasdk?.payloadTrackers = [AnyHashable : Any](minimumCapacity: 0)
             _aasdk?.appInitParams = nil
+            
+            initializeComponents()
         }
+    }
+    
+    private class func initializeComponents() {
+        ReportManager.createInstance(connector: AAConnector())
+        NotificationCenterWrapper.createInstance(notificationCenter: NotificationCenter())
     }
 
 // MARK: - Public start session
@@ -334,8 +369,8 @@ var lastCame: Date?
         if _currentState == .kOffline {
             _currentState = .kErrorState
             let userInfo = [
-                AASDK_KEY_MESSAGE: "AASDK ERROR - internet connection not available. Aborting init() attempt.",
-                AASDK_KEY_RECOVERY_SUGGESTION: "Re-connecting to internet will make SDK automatically come back online."
+                KEY_MESSAGE: "AASDK ERROR - internet connection not available. Aborting init() attempt.",
+                KEY_RECOVERY_SUGGESTION: "Re-connecting to internet will make SDK automatically come back online."
             ]
 
             let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_ERROR), object: nil, userInfo: userInfo)
@@ -378,13 +413,13 @@ var lastCame: Date?
             /// "PRIVATE" PARAMS
             let customPopupTarget = opDic?[AASDK_OPTION_PRIVATE_CUSTOM_POPUP_TARGET] as? String
             if customPopupTarget != nil && (customPopupTarget?.count ?? 0) > 0 {
-                AASDK.logDebugMessage("PRIVATE - Using custom popup URL \(customPopupTarget ?? "")", type: AASDK_DEBUG_GENERAL)
+                AASDK.logDebugMessage("PRIVATE - Using custom popup URL \(customPopupTarget ?? "")", type: DEBUG_GENERAL)
                 _aasdk?.customPopupURL = customPopupTarget
             }
 
             let customAdTarget = opDic?[AASDK_OPTION_PRIVATE_CUSTOM_WEBVIEW_AD] as? String
             if customAdTarget != nil && (customAdTarget?.count ?? 0) > 0 {
-                AASDK.logDebugMessage("PRIVATE - Using custom Ad URL \(customAdTarget ?? "")", type: AASDK_DEBUG_GENERAL)
+                AASDK.logDebugMessage("PRIVATE - Using custom Ad URL \(customAdTarget ?? "")", type: DEBUG_GENERAL)
                 _aasdk?.customAdURL = customAdTarget
             }
 
@@ -445,8 +480,8 @@ var lastCame: Date?
             var userInfo: [String : String]? = nil
             if let description = error?.localizedDescription {
                 userInfo = [
-                    AASDK_KEY_MESSAGE: "AASDK ERROR start session returned: \(description)",
-                    AASDK_KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error! as NSError).localizedRecoverySuggestion ?? "")"
+                    KEY_MESSAGE: "AASDK ERROR start session returned: \(description)",
+                    KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error! as NSError).localizedRecoverySuggestion ?? "")"
                 ]
             }
 
@@ -466,7 +501,7 @@ var lastCame: Date?
             let keywordInitResponseWasReceivedBlock = { response, forRequest in
                 let initResponse = response as? AAKeywordInterceptInitResponse
                 _aasdk?.kiManager = AAKeywordInterceptManager(connector: _aasdk?.connector, minMatchLength: initResponse!.minMatchLength)
-                AASDK.logDebugMessage("Loading Keyword Intercepts", type: AASDK_DEBUG_GENERAL)
+                AASDK.logDebugMessage("Loading Keyword Intercepts", type: DEBUG_GENERAL)
                 _aasdk?.kiManager?.loadKeywordIntercepts(initResponse?.keywordIntercepts)
             } as AAResponseWasReceivedBlock
 
@@ -474,8 +509,8 @@ var lastCame: Date?
                 var userInfo: [String : String]? = nil
                 if let description = error?.localizedDescription {
                     userInfo = [
-                        AASDK_KEY_MESSAGE: "AASDK ERROR keyword intercept / INIT returned: \(description)",
-                        AASDK_KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
+                        KEY_MESSAGE: "AASDK ERROR keyword intercept / INIT returned: \(description)",
+                        KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
                     ]
                 }
                 let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_ERROR), object: nil, userInfo: userInfo)
@@ -486,59 +521,14 @@ var lastCame: Date?
         }
     }
 
-// MARK: - Public get Ad inside session
-    class func getAdForZone(_ zoneId: String?) {
-        let request = AAGetAdsRequest(zones: [zoneId])
-        _aasdk?.getAdDispatch(request)
-    }
-
-    class func getAdForZone(_ zoneId: String?, withSize size: CGRect, count: Int, subject: String?, context: String?) {
-        let request = AAGetAdsRequest(zones: [zoneId])
-        _aasdk?.getAdDispatch(request)
-    }
-
 // MARK: - Private instance methods
     class func currentState() -> AASDKState {
         return _currentState!
     }
 
-    func getAdDispatch(_ request: AAGetAdsRequest?) {
-        let responseWasReceivedBlock = { response, forRequest in
-            let getAdResponse = response as? AAGetAdsResponse
-
-            let ads_count = getAdResponse?.ads?.count ?? 0
-
-            AASDK.logDebugMessage(String(format: "get ad received response. #ads %lu", ads_count), type: AASDK_DEBUG_NETWORK)
-
-            _aasdk?.cacheAds(inAdsDic: getAdResponse?.ads, completeNotificationName: AASDK_NOTIFICATION_GET_ADS_COMPLETE_NAME, shouldUseCachedImages: AASDK.shouldUseCachedImages() , shouldReplaceCurrent: false)
-        } as AAResponseWasReceivedBlock
-
-        let responseWasErrorBlock = { response, forRequest, error in
-            _currentState = .kErrorState
-
-            if _aasdk?.observer == nil {
-                Logger.consoleLogError(error, withMessage: "get/ad", suppressTracking: true)
-            }
-
-            var userInfo: [String : String]? = nil
-            if let description = error?.localizedDescription {
-                userInfo = [
-                    AASDK_KEY_MESSAGE: "AASDK ERROR get ad returned: \(description)",
-                    AASDK_KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
-                ]
-            }
-
-            let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_ERROR), object: nil, userInfo: userInfo)
-
-            AASDK.postDelayedNotification(notification)
-        } as AAResponseWasErrorBlock
-
-        _aasdk?.connector?.enqueueRequest(request, responseWasErrorBlock: responseWasErrorBlock, responseWasReceivedBlock: responseWasReceivedBlock)
-    }
-
     func cacheAds(inAdsDic ads: [AnyHashable : Any]?, completeNotificationName name: String?, shouldUseCachedImages useCached: Bool, shouldReplaceCurrent shouldReplace: Bool) {
         cacheEventName = name
-        AASDK.logDebugMessage("Caching ads for zones", type: AASDK_DEBUG_GENERAL)
+        AASDK.logDebugMessage("Caching ads for zones", type: AASDK.DEBUG_GENERAL)
 
         AASDK.resetImpressionCounters()
 
@@ -582,11 +572,11 @@ var lastCame: Date?
     }
 
     func cacheComplete() {
-        AASDK.logDebugMessage("Cache completed", type: AASDK_DEBUG_GENERAL)
+        AASDK.logDebugMessage("Cache completed", type: AASDK.DEBUG_GENERAL)
 
         let info = [
-            AASDK_KEY_ZONE_IDS: zones!,
-            AASDK_KEY_ZONE_COUNT: NSNumber(value: zones?.count ?? 0)
+            AASDK.KEY_ZONE_IDS: zones!,
+            AASDK.KEY_ZONE_COUNT: NSNumber(value: zones?.count ?? 0)
         ] as [String : Any]
 
         let notification = Notification(name: NSNotification.Name(cacheEventName!), object: nil, userInfo: info)
@@ -596,19 +586,19 @@ var lastCame: Date?
 
 // MARK: - Async loading Listeners
     func addCacheListeners() {
-        AASDK.notificationCenter().addObserver(
+        NotificationCenterWrapper.notifier.addObserver(
             self,
             selector: #selector(startLoadingImage(_:)),
             name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_WILL_LOAD_IMAGE),
             object: nil)
 
-        AASDK.notificationCenter().addObserver(
+        NotificationCenterWrapper.notifier.addObserver(
             self,
             selector: #selector(doneLoadingImage(_:)),
             name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_DID_LOAD_IMAGE),
             object: nil)
 
-        AASDK.notificationCenter().addObserver(
+        NotificationCenterWrapper.notifier.addObserver(
             self,
             selector: #selector(failedLoadingImage(_:)),
             name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_FAILED_LOAD_IMAGE),
@@ -616,9 +606,9 @@ var lastCame: Date?
     }
 
     func removeCacheListeners() {
-        AASDK.notificationCenter().removeObserver(self, name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_WILL_LOAD_IMAGE), object: nil)
-        AASDK.notificationCenter().removeObserver(self, name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_DID_LOAD_IMAGE), object: nil)
-        AASDK.notificationCenter().removeObserver(self, name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_FAILED_LOAD_IMAGE), object: nil)
+        NotificationCenterWrapper.notifier.removeObserver(self, name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_WILL_LOAD_IMAGE), object: nil)
+        NotificationCenterWrapper.notifier.removeObserver(self, name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_DID_LOAD_IMAGE), object: nil)
+        NotificationCenterWrapper.notifier.removeObserver(self, name: NSNotification.Name(rawValue: AASDK_NOTIFICATION_FAILED_LOAD_IMAGE), object: nil)
     }
 
     @objc func startLoadingImage(_ notification: Notification?) {
@@ -729,7 +719,7 @@ var lastCame: Date?
             updateTimerLastFired = now
         }
 
-        AASDK.logDebugMessage("Grabbing updated ads for zones", type: AASDK_DEBUG_GENERAL)
+        AASDK.logDebugMessage("Grabbing updated ads for zones", type: AASDK.DEBUG_GENERAL)
 
         let request = AAUpdateAdsRequest()
 
@@ -748,8 +738,8 @@ var lastCame: Date?
             var userInfo: [String : String]? = nil
             if let description = error?.localizedDescription {
                 userInfo = [
-                    AASDK_KEY_MESSAGE: "AASDK ERROR Update Ads returned: \(description)",
-                    AASDK_KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
+                    AASDK.KEY_MESSAGE: "AASDK ERROR Update Ads returned: \(description)",
+                    AASDK.KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
                 ]
             }
 
@@ -764,7 +754,7 @@ var lastCame: Date?
 
     func checkIfReCacheNeeded(_ zones: [AnyHashable : Any]?) {
         if !((zones as NSDictionary?)?.isEqual(self.zones) ?? false) {
-            AASDK.logDebugMessage("new ad Dictionary doesn't match old one: UPDATE CACHE starting", type: AASDK_DEBUG_NETWORK)
+            AASDK.logDebugMessage("new ad Dictionary doesn't match old one: UPDATE CACHE starting", type: AASDK.DEBUG_NETWORK)
             cacheAds(inAdsDic: zones, completeNotificationName: AASDK_CACHE_UPDATED, shouldUseCachedImages: AASDK.shouldUseCachedImages() , shouldReplaceCurrent: true)
         }
     }
@@ -798,8 +788,8 @@ var lastCame: Date?
             var userInfo: [String : String]? = nil
             if let description = error?.localizedDescription {
                 userInfo = [
-                    AASDK_KEY_MESSAGE: "AASDK ERROR reinit session returned: \(description)",
-                    AASDK_KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
+                    AASDK.KEY_MESSAGE: "AASDK ERROR reinit session returned: \(description)",
+                    AASDK.KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
                 ]
             }
 
@@ -910,7 +900,7 @@ extension AASDK {
             return
         }
 
-        if _aasdk?.userDebugMessageTypes?.contains(AASDK_DEBUG_ALL) ?? false || _aasdk?.userDebugMessageTypes?.contains(type ?? "") ?? false {
+        if _aasdk?.userDebugMessageTypes?.contains(DEBUG_ALL) ?? false || _aasdk?.userDebugMessageTypes?.contains(type ?? "") ?? false {
             Logger.dispatchMessage(message, ofType: type)
         }
     }
@@ -920,8 +910,8 @@ extension AASDK {
             return
         }
 
-        if _aasdk?.userDebugMessageTypes?.contains(AASDK_DEBUG_ALL) ?? false || _aasdk?.userDebugMessageTypes?.contains(AASDK_DEBUG_AD_LAYOUT) ?? false {
-            Logger.dispatchMessage("\(message ?? "")", ofType: AASDK_DEBUG_AD_LAYOUT)
+        if _aasdk?.userDebugMessageTypes?.contains(DEBUG_ALL) ?? false || _aasdk?.userDebugMessageTypes?.contains(DEBUG_AD_LAYOUT) ?? false {
+            Logger.dispatchMessage("\(message ?? "")", ofType: DEBUG_AD_LAYOUT)
         }
     }
 
@@ -1029,7 +1019,7 @@ extension AASDK {
         }
 
         let displayedImagesCount = UInt(_aasdk?.currentlyDisplayedAds?.count ?? 0)
-        AASDK.logDebugMessage(String(format: "Enqueued START tracking for %lu ads", displayedImagesCount), type: AASDK_DEBUG_NETWORK)
+        AASDK.logDebugMessage(String(format: "Enqueued START tracking for %lu ads", displayedImagesCount), type: DEBUG_NETWORK)
     }
 
     class func trackImpressionEndedForAllDisplayedImages() {
@@ -1045,7 +1035,7 @@ extension AASDK {
         }
 
         let displayedImagesCount = UInt(_aasdk?.currentlyDisplayedAds?.count ?? 0)
-        AASDK.logDebugMessage(String(format: "Enqueued END tracking for %lu ads", displayedImagesCount), type: AASDK_DEBUG_NETWORK)
+        AASDK.logDebugMessage(String(format: "Enqueued END tracking for %lu ads", displayedImagesCount), type: DEBUG_NETWORK)
     }
 
     class func trackImpressionStarted(for ad: AAAd?) {
@@ -1125,37 +1115,37 @@ extension AASDK {
     }
 
     class func trackAnomalyHiddenInteraction(for ad: AAAd?) {
-        ReportManager.reportAnomaly(withCode: CODE_HIDDEN_INTERACTION, message: nil, params: AASDK.params(for: ad, andDic: nil), connector: _aasdk?.connector)
+        ReportManager.getInstance().reportAnomaly(withCode: CODE_HIDDEN_INTERACTION, message: nil, params: AASDK.params(for: ad, andDic: nil))
     }
 
     class func trackAnomalyAdImgLoad(_ ad: AAAd?, urlString url: String?, message: String?) {
-        ReportManager.reportAnomaly(withCode: CODE_AD_IMAGE_LOAD_FAILED, message: message, params: AASDK.params(for: ad, andDic: ["url": url ?? ""]), connector: _aasdk?.connector)
+        ReportManager.getInstance().reportAnomaly(withCode: CODE_AD_IMAGE_LOAD_FAILED, message: message, params: AASDK.params(for: ad, andDic: ["url": url ?? ""]))
     }
 
     class func trackAnomalyAdURLLoad(_ ad: AAAd?, urlString url: String?, message: String?) {
-        ReportManager.reportAnomaly(withCode: CODE_AD_URL_LOAD_FAILED, message: message, params: AASDK.params(for: ad, andDic: ["url": url ?? ""]), connector: _aasdk?.connector)
+        ReportManager.getInstance().reportAnomaly(withCode: CODE_AD_URL_LOAD_FAILED, message: message, params: AASDK.params(for: ad, andDic: ["url": url ?? ""]))
     }
 
     class func trackAnomalyAdPopupURLLoad(_ ad: AAAd?, urlString url: String?, message: String?) {
-        ReportManager.reportAnomaly(withCode: CODE_POPUP_URL_LOAD_FAILED, message: message, params: AASDK.params(for: ad, andDic: ["url": url ?? ""]), connector: _aasdk?.connector)
+        ReportManager.getInstance().reportAnomaly(withCode: CODE_POPUP_URL_LOAD_FAILED, message: message, params: AASDK.params(for: ad, andDic: ["url": url ?? ""]))
     }
 
     class func trackAnomalyAdConfiguration(_ ad: AAAd?, message: String?) {
-        ReportManager.reportAnomaly(withCode: CODE_AD_CONFIG_ERROR, message: message, params: AASDK.params(for: ad, andDic: nil), connector: _aasdk?.connector)
+        ReportManager.getInstance().reportAnomaly(withCode: CODE_AD_CONFIG_ERROR, message: message, params: AASDK.params(for: ad, andDic: nil))
     }
 
     class func trackAnomalyZoneConfiguration(_ zone: AAAdZone?, message: String?) {
         if let zoneId = zone?.zoneId {
-            ReportManager.reportAnomaly(withCode: CODE_ZONE_CONFIG_ERROR, message: message, params: ["zone_id": zoneId], connector: _aasdk?.connector)
+            ReportManager.getInstance().reportAnomaly(withCode: CODE_ZONE_CONFIG_ERROR, message: message, params: ["zone_id": zoneId])
         }
     }
 
     class func trackAnomalyWithHTMLTracker(for ad: AAAd?, message: String?) {
-        ReportManager.reportAnomaly(withCode: CODE_HTML_TRACKING_ERROR, message: message, params: AASDK.params(for: ad, andDic: nil), connector: _aasdk?.connector)
+        ReportManager.getInstance().reportAnomaly(withCode: CODE_HTML_TRACKING_ERROR, message: message, params: AASDK.params(for: ad, andDic: nil))
     }
 
     class func trackAnomalyGenericErrorMessage(_ message: String?, optionalAd ad: AAAd?) {
-        ReportManager.reportAnomaly(withCode: CODE_ERROR, message: message, params: AASDK.params(for: ad, andDic: nil), connector: _aasdk?.connector)
+        ReportManager.getInstance().reportAnomaly(withCode: CODE_ERROR, message: message, params: AASDK.params(for: ad, andDic: nil))
     }
 
 // MARK: - HTML Tracking
@@ -1183,11 +1173,11 @@ extension AASDK {
 
 // MARK: - content stuff
     class func deliverContent(_ content: [AnyHashable : Any]?, from ad: AAAd?, andZoneView zoneView: AAZoneView?) {
-        let name = content?[AASDK_KEY_TYPE] as? String
+        let name = content?[KEY_TYPE] as? String
         let contentType = "list_items"
         var dic: [AnyHashable : Any]?
 
-        AASDK.logDebugMessage("AASDK: deliverContent:fromAd:andZoneView enter", type: AASDK_DEBUG_USER_INTERACTION)
+        AASDK.logDebugMessage("AASDK: deliverContent:fromAd:andZoneView enter", type: DEBUG_USER_INTERACTION)
 
         if content == nil {
             var message: String? = nil
@@ -1204,9 +1194,9 @@ extension AASDK {
 
             if let zoneId = ad?.zoneId, let zoneView = zoneView, let adContent = adContent {
                 dic = [
-                    AASDK_KEY_TYPE: contentType,
-                    AASDK_KEY_ZONE_ID: zoneId,
-                    AASDK_KEY_ZONE_VIEW: zoneView,
+                    KEY_TYPE: contentType,
+                    KEY_ZONE_ID: zoneId,
+                    KEY_ZONE_VIEW: zoneView,
                     AASDK.KEY_AD_CONTENT: adContent
                 ]
             }
@@ -1219,8 +1209,8 @@ extension AASDK {
             object: nil,
             userInfo: dic)
 
-        AASDK.logDebugMessage("AASDK: deliverContent:fromAd:andZoneView posting content event", type: AASDK_DEBUG_USER_INTERACTION)
-        AASDK.notificationCenter().post(notification)
+        AASDK.logDebugMessage("AASDK: deliverContent:fromAd:andZoneView posting content event", type: DEBUG_USER_INTERACTION)
+        NotificationCenterWrapper.notifier.post(notification)
     }
 
 // MARK: - added for async stuff
@@ -1250,7 +1240,7 @@ extension AASDK {
 
 // MARK: - Private event reporting
     class func reportItem(_ item: String?, addedToList list: String?, from ad: AAAd?) {
-        ReportManager.reportAcknowledgeItem(item, addedToList: list, from: ad, connector: _aasdk?.connector, eventName: AA_EC_ATL_ADDED_TO_LIST)
+        ReportManager.getInstance().reportAcknowledgeItem(item, addedToList: list, from: ad, eventName: AA_EC_ATL_ADDED_TO_LIST)
     }
 
     class func reportItems(_ items: [AnyHashable]?, addedToList list: String?, from ad: AAAd?) {
@@ -1271,18 +1261,14 @@ extension AASDK {
         let payload = [
             "zone_id": zoneId ?? ""
         ]
-        _aasdk?.connector?.addCollectableEvent(forDispatch: AACollectableEvent.internalEvent(withName: AA_EC_ZONE_LOADED, andPayload: payload))
+        ReportManager.getInstance().reportInternalEvent(eventName: AA_EC_ZONE_LOADED, payload: payload)
     }
 
     class func reportAddToListFailure(withMessage message: String?, from ad: AAAd) {
-        _aasdk?.connector?.addCollectableError(forDispatch: AACollectableError(code: CODE_ATL_FAILURE, message: message, params: ["ad_id": ad.adID!]))
+        ReportManager.getInstance().reportAnomaly(withCode: CODE_ATL_FAILURE, message: message, params: ["ad_id": ad.adID!])
     }
 
 // MARK: - Internal NSNotificationCenter
-    class func notificationCenter() -> NotificationCenter {
-        return (_aasdk?.notificationCenter)!
-    }
-
     class func checkForPayloads() {
         if _aasdk?.lastPayloadCheck != nil && (abs(Int(_aasdk?.lastPayloadCheck?.timeIntervalSinceNow ?? 0)) < Int(minPayloadIntervalSec)) {
             return
@@ -1292,7 +1278,7 @@ extension AASDK {
         let worked = { response, forRequest in
             let pickupResponse = response as? AAPayloadPickupResponse
 
-            AASDK.logDebugMessage("Payload Service replied", type: AASDK_DEBUG_GENERAL)
+            AASDK.logDebugMessage("Payload Service replied", type: DEBUG_GENERAL)
 
             if pickupResponse?.payloads != nil && (pickupResponse?.payloads?.count ?? 0) > 0 {
                 if let payloads = pickupResponse?.payloads {
@@ -1306,7 +1292,7 @@ extension AASDK {
                 var userInfo: [String : String]? = nil
                 if let payloads = pickupResponse?.payloads {
                     userInfo = [
-                        AASDK_KEY_MESSAGE: "Returning \(Int(pickupResponse?.payloads?.count ?? 0)) payload items",
+                        KEY_MESSAGE: "Returning \(Int(pickupResponse?.payloads?.count ?? 0)) payload items",
                         KEY_CONTENT_PAYLOADS: payloads.description
                     ]
                 }
@@ -1316,7 +1302,7 @@ extension AASDK {
                     if let payloads = pickupResponse?.payloads {
                         for payload in payloads {
                             guard let payload = payload as? AAContentPayload else {
-                                AASDK.logDebugMessage("caught fatal error with payload parsing", type: AASDK_DEBUG_GENERAL)
+                                AASDK.logDebugMessage("caught fatal error with payload parsing", type: DEBUG_GENERAL)
                                 continue
                             }
                             for item in payload.detailedListItems {
@@ -1325,7 +1311,7 @@ extension AASDK {
                         }
                     }
 
-                    AASDK.notificationCenter().post(notification)
+                    NotificationCenterWrapper.notifier.post(notification)
                 }
             }
         } as AAResponseWasReceivedBlock
@@ -1334,12 +1320,12 @@ extension AASDK {
             var userInfo: [String : String]? = nil
             if let description = error?.localizedDescription {
                 userInfo = [
-                    AASDK_KEY_MESSAGE: "AASDK ERROR Payload Service pickup returned: \(description)",
-                    AASDK_KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
+                    KEY_MESSAGE: "AASDK ERROR Payload Service pickup returned: \(description)",
+                    KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
                 ]
             }
             let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_ERROR), object: nil, userInfo: userInfo)
-            AASDK.notificationCenter().post(notification)
+            NotificationCenterWrapper.notifier.post(notification)
         } as AAResponseWasErrorBlock
 
         let request = AAPayloadPickupRequest()
@@ -1348,11 +1334,11 @@ extension AASDK {
     }
 
     class func reportPayloadReceived(_ payload: AAContentPayload) {
-        ReportManager.reportPayloadReceived(payload, connector: _aasdk?.connector)
+        ReportManager.getInstance().reportPayloadReceived(payload)
     }
 
     class func reportPayloadRejected(_ payload: AAContentPayload) {
-        ReportManager.reportPayloadRejected(payload, connector: _aasdk?.connector)
+        ReportManager.getInstance().reportPayloadRejected(payload)
     }
 
     class func cachedItem(matching string: String) -> AADetailedListItem? {
@@ -1373,12 +1359,12 @@ extension AASDK {
         //#D - does this get used properly? try break point
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
             if let notification = notification {
-                _aasdk?.notificationCenter.post(notification)
+                NotificationCenterWrapper.notifier.post(notification)
             }
         })
     }
 
     class func reportItem(_ itemName: String?, from contentPayload: AAContentPayload?) {
-        ReportManager.reportItemInteractionFromPayload(itemName, from: contentPayload, connector: _aasdk?.connector, eventName: AA_EC_ADDIT_ADDED_TO_LIST)
+        ReportManager.getInstance().reportItemInteractionFromPayload(itemName, from: contentPayload, eventName: AA_EC_ADDIT_ADDED_TO_LIST)
     }
 }
