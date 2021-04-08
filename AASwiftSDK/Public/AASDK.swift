@@ -1356,7 +1356,6 @@ extension AASDK {
     }
 
     class func postDelayedNotification(_ notification: Notification?) {
-        //#D - does this get used properly? try break point
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
             if let notification = notification {
                 NotificationCenterWrapper.notifier.post(notification)

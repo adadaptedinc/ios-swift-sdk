@@ -37,7 +37,6 @@ class AAReportableSessionEvent: NSObject {
             setParamValue(AASDK.impressionString(forId: ad.impressionID, forImpressionType: eventType) as NSObject?, forKey: AA_KEY_IMPRESSION_ID)
         }
 
-        //#D - below methods aren't used?
         if let eventPath = eventPath {
             setParamValue(eventPath as NSObject, forKey: AA_KEY_EVENT_PATH)
         }

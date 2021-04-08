@@ -55,7 +55,6 @@ let AA_KEY_DATETIME = "created_at"
 let AA_KEY_SDK_BUNDLE_VERSION = "sdk_version"
 let AA_KEY_APP_INIT_PARAMS = "params"
 
-// init optional -- #D -- no longer being used? will response handle?
 let AA_KEY_ZONE_SIZE = "size"
 let AA_KEY_LONGITUDE = "long"
 let AA_KEY_LATITUDE = "lat"
@@ -101,7 +100,6 @@ let AA_KEY_TITLE_TEXT = "title_text"
 let AA_KEY_TEXT_COLOR = "text_color"
 let AA_KEY_BACK_COLOR = "background_color"
 
-//#D - fixing for 0.9.5
 let AA_KEY_HIDE_NAV = "hide_browser_nav"
 let AA_KEY_HIDE_CLOSE = "hide_close_btn"
 let AA_KEY_POPUP_TYPE = "type"
@@ -111,7 +109,6 @@ let AA_KEY_AD_TYPE = "type"
 let AA_KEY_AD_URL = "creative_url"
 let AA_KEY_TRACKING_HTML = "tracking_html"
 
-//#D -  now using int instead
 let AA_KEY_ZONE_PORT_WIDTH = "port_width"
 let AA_KEY_ZONE_PORT_HEIGHT = "port_height"
 let AA_KEY_ZONE_LAND_WIDTH = "land_width"
@@ -132,7 +129,7 @@ let AA_KEY_TEST_MODE = "test_mode"
 let AA_KEY_EVENT_NAME = "event_name"
 let AA_KEY_SDK_BUNDLE_SHA = "sha"
 
-//#D -  KEYWORD STUFF
+// MARK: - Keyword Intercept
 let AA_KEY_KI_SEARCH_ID = "search_id"
 let AA_KEY_KI_MIN_MATCH_LENGTH = "min_match_length"
 let AA_KEY_KI_REFRESH_TIME = "refresh_time"
