@@ -1289,11 +1289,11 @@ extension AASDK {
                         payload.payloadType = "payload"
                     }
                 }
-                var userInfo: [String : String]? = nil
+                var userInfo: [String : AnyHashable]? = nil
                 if let payloads = pickupResponse?.payloads {
                     userInfo = [
                         KEY_MESSAGE: "Returning \(Int(pickupResponse?.payloads?.count ?? 0)) payload items",
-                        KEY_CONTENT_PAYLOADS: payloads.description
+                        KEY_CONTENT_PAYLOADS: payloads
                     ]
                 }
                 let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_CONTENT_PAYLOADS_INBOUND), object: nil, userInfo: userInfo)
