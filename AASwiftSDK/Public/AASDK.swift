@@ -1310,8 +1310,9 @@ extension AASDK {
                             }
                         }
                     }
-
-                    NotificationCenterWrapper.notifier.post(notification)
+                    DispatchQueue.main.async {
+                        NotificationCenterWrapper.notifier.post(notification)
+                    }
                 }
             }
         } as AAResponseWasReceivedBlock
