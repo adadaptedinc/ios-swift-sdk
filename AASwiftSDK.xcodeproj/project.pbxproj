@@ -571,8 +571,8 @@
 				F4626471251BAC00004B8176 /* Foundation.framework */,
 				F4626472251BAC02004B8176 /* UIKit.framework */,
 			);
-			name = Frameworks;
-			path = ../../../../../../../../../Users/matthewkruk/Documents/iOS_Swift_SDK/ios_swift_sdk/AASwiftSDK/Frameworks;
+			path = Frameworks;
+			sourceTree = "<group>";
 			sourceTree = SDKROOT;
 		};
 		F484BA17251CF043007C19DD /* Frameworks */ = {
