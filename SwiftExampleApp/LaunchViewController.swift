@@ -40,7 +40,16 @@ class LaunchViewController: UIViewController, WKUIDelegate, AASDKContentDelegate
     }
     
     func aaPayloadNotification(_ notification: Notification) {
-        showToast(message: "Deeplink Payload Received")
+        print("*******Deeplink Payload Received*********")
+        guard let userinfo = notification.userInfo else { return }
+        let adPayload = userinfo[AASDK.KEY_CONTENT_PAYLOADS] as? [AAContentPayload]
+
+        for payload in adPayload ?? [] {
+               for item in payload.detailedListItems {
+                   print("From Payload -> AADetailedListItem: ", item.productTitle)
+               }
+               //payload.acknowledge()
+           }
     }
     
     func showToast(message : String, font: UIFont = .systemFont(ofSize: 14.0)) {

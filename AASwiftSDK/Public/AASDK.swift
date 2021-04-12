@@ -1289,11 +1289,11 @@ extension AASDK {
                         payload.payloadType = "payload"
                     }
                 }
-                var userInfo: [String : String]? = nil
+                var userInfo: [String : AnyHashable]? = nil
                 if let payloads = pickupResponse?.payloads {
                     userInfo = [
                         KEY_MESSAGE: "Returning \(Int(pickupResponse?.payloads?.count ?? 0)) payload items",
-                        KEY_CONTENT_PAYLOADS: payloads.description
+                        KEY_CONTENT_PAYLOADS: payloads
                     ]
                 }
                 let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_CONTENT_PAYLOADS_INBOUND), object: nil, userInfo: userInfo)
@@ -1310,8 +1310,9 @@ extension AASDK {
                             }
                         }
                     }
-
-                    NotificationCenterWrapper.notifier.post(notification)
+                    DispatchQueue.main.async {
+                        NotificationCenterWrapper.notifier.post(notification)
+                    }
                 }
             }
         } as AAResponseWasReceivedBlock
@@ -1356,7 +1357,6 @@ extension AASDK {
     }
 
     class func postDelayedNotification(_ notification: Notification?) {
-        //#D - does this get used properly? try break point
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
             if let notification = notification {
                 NotificationCenterWrapper.notifier.post(notification)
