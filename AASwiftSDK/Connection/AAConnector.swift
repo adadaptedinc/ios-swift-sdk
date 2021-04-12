@@ -137,23 +137,20 @@ class AAConnector: NSObject {
         var url: URL?
         var methodType: String?
 
-        print("#D: Preparing to make request: \(type(of: aaRequest))")
         // Request is init POST request
         if aaRequest is AAInitRequest {
             appID = (aaRequest as? AAInitRequest)?.appID()
             udid = (aaRequest as? AAInitRequest)?.udid()
             sdKversion = (aaRequest as? AAInitRequest)?.sdKversion()
             url = (aaRequest as? AAInitRequest)?.targetURL()
-            print("Requesting from URL: \(String(describing: url))")
             methodType = "POST"
 
             // Request is GET request
         } else if aaRequest is AAUpdateAdsRequest || aaRequest is AAKeywordInterceptInitRequest {
-            print("#D: This is a GET request")
             let tURL = try! aaRequest?.targetURL()
             let qURL = "?aid=\(appID ?? "")&uid=\(udid ?? "")&sid=\(sessionID ?? "")&sdk=\(sdKversion ?? "")"
             url = URL(string: (tURL?.absoluteString ?? "") + qURL)
-            aaRequest = nil //#D -  drop request body
+            aaRequest = nil //drop request body
             methodType = "GET"
 
             // Request is other POST request
@@ -164,7 +161,7 @@ class AAConnector: NSObject {
             url = try! aaRequest?.targetURL()
             methodType = "POST"
         }
-
+        
         if inTestMode && !(aaRequest is AACollectableEventRequest) {
             aaRequest?.setParamValue(NSNumber(value: true), forKey: AA_KEY_TEST_MODE)
         }
@@ -177,14 +174,10 @@ class AAConnector: NSObject {
         request?.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request?.httpMethod = methodType ?? ""
         request?.httpBody = jsonMessage
-
-        print("#D: Making request to \(url?.absoluteString ?? "")")
-        print("#D: REQ JSON =  \(aaRequest?.asJSON() ?? "")")
         
         var task: URLSessionDataTask? = nil
         if let request = request {
             task = session?.dataTask(with: request as URLRequest, completionHandler: { [self] data, response, error in
-                print("#D - Handling request response...")
                 var JSON: Any? = nil
                 let jsonError: Error? = nil
                 numInFlight -= 1
@@ -201,7 +194,6 @@ class AAConnector: NSObject {
                     }
                     do {
                         if let data = data {
-                            print("JSON String: \(String(describing: String(data: data, encoding: .utf8)))")
                             JSON = try JSONSerialization.jsonObject(with: data)
                         }
                     } catch {
@@ -210,14 +202,13 @@ class AAConnector: NSObject {
                 }
 
                 if JSON == nil || jsonError != nil {
-                    print("#D *************************** no JSON or some error ***************************")
+                    print(jsonError != nil ? "JSON Error: \(String(describing: jsonError?.localizedDescription))" : "JSON Empty")
                 } else if error == nil {
                     do {
                         // grab session ID and set it
                         if (aaRequest is AAInitRequest) && (JSON as AnyObject).value(forKeyPath: AA_KEY_SESSION_ID) != nil {
                             sessionID = (JSON as AnyObject).value(forKeyPath: AA_KEY_SESSION_ID) as? String
                             AAHelper.storeCurrentSessionId(sessionId: sessionID)
-                            print("SESSIONID =" + sessionID!)
                         }
 
                         if JSON != nil && jsonError == nil {
@@ -234,7 +225,6 @@ class AAConnector: NSObject {
                                 text = String(data: jsonData, encoding: .utf8)
                             }
                             AASDK.logDebugMessage("RESPONSE JSON from \(request.url?.absoluteString ?? ""):\n\(text ?? "")", type: AASDK.DEBUG_NETWORK_DETAILED)
-                            print("RESPONSE JSON from \(request.url?.absoluteString ?? ""):\n\(text ?? "")") //remove me
 
                             let aaResponse = try! holder?.request!.parseResponse(fromJSON: JSON)
 
@@ -265,8 +255,6 @@ class AAConnector: NSObject {
                     holder?.requestWasErrorBlock!(aaResponse, holder?.request, error)
                     sendNextMessage()
                 }
-
-                print("#D - Done handling request response")
             })
         }
 
@@ -298,8 +286,6 @@ class AAConnector: NSObject {
         }
 
         if (eventsV2?.count ?? 0) > 0 {
-            print("\n***************************  events v2  ***************************")
-
             let request = AABatchEventRequest(events: eventsV2, forVersion: 2)
             eventsV2?.removeAll()
             enqueueRequest(request, responseWasErrorBlock: responseWasErrorBlock, responseWasReceivedBlock: responseWasReceivedBlock)

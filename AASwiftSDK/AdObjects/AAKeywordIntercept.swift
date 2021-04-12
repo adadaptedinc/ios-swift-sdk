@@ -19,7 +19,6 @@ class AAKeywordIntercept: NSObject {
     var priority = 0
 
     class func keywordIntercepts(fromJSONDic dic: [AnyHashable]?, withSearchId searchId: String?) -> [AnyHashable]? {
-        print("#D - KI JSON DICT")
         var array = [AnyHashable](repeating: 0, count: 10)
         
         for term in dic ?? [] {
