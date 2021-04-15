@@ -23,7 +23,7 @@ let AA_KEY_ZONES = "zones"
 let AA_KEY_APP_ID = "app_id"
 let AA_KEY_UDID = "udid"
 let AA_KEY_BUNDLE_ID = "bundle_id"
-let AA_KEY_BUNDLE_VERSION = "bundle_version"
+let AA_KEY_SDK_BUNDLE_VERSION = "sdk_version"
 let AA_KEY_ALLOW_RETARGETING = "allow_retargeting"
 
 // device info
@@ -52,7 +52,6 @@ let AA_KEY_EVENT_CARRIER = "carrier"
 
 // from Generic Request
 let AA_KEY_DATETIME = "created_at"
-let AA_KEY_SDK_BUNDLE_VERSION = "sdk_version"
 let AA_KEY_APP_INIT_PARAMS = "params"
 
 let AA_KEY_ZONE_SIZE = "size"
@@ -182,7 +181,7 @@ extension String: Error {}
 
 class AAHelper: NSObject {
     class func buildVersion() -> String? {
-        return Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
+        return Bundle(identifier: "com.adadapted.AASwiftSDK")?.infoDictionary!["CFBundleShortVersionString"] as? String
     }
     
     class func currentTimezone() -> String? {
@@ -346,13 +345,7 @@ class AAHelper: NSObject {
     }
 
     class func bundleID() -> String? {
-        return Bundle.main.bundleIdentifier
-    }
-
-    class func bundleVersion() -> String? {
-        let info = Bundle.main.infoDictionary
-        let version = info?["CFBundleShortVersionString"] as? String
-        return version
+        return Bundle(identifier: "com.adadapted.AASwiftSDK")?.bundleIdentifier
     }
     
     class func deviceModelName() -> String {
