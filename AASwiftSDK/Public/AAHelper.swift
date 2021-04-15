@@ -23,7 +23,7 @@ let AA_KEY_ZONES = "zones"
 let AA_KEY_APP_ID = "app_id"
 let AA_KEY_UDID = "udid"
 let AA_KEY_BUNDLE_ID = "bundle_id"
-let AA_KEY_SDK_BUNDLE_VERSION = "sdk_version"
+let AA_KEY_SDK_VERSION = "sdk_version"
 let AA_KEY_ALLOW_RETARGETING = "allow_retargeting"
 
 // device info

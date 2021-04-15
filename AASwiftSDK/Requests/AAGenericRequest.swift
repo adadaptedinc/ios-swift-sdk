@@ -83,6 +83,6 @@ class AAGenericRequest: NSObject, NSCopying {
         params = [:]
         setParamValue(AAHelper.nowAsUTCNumber() as NSNumber?, forKey: AA_KEY_DATETIME)
         setParamValue(AAHelper.udid() as NSObject?, forKey: AA_KEY_UDID)
-        setParamValue(AAHelper.buildVersion() as NSObject?, forKey: AA_KEY_SDK_BUNDLE_VERSION)
+        setParamValue(AAHelper.buildVersion() as NSObject?, forKey: AA_KEY_SDK_VERSION)
     }
 }
