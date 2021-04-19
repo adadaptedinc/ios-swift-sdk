@@ -573,7 +573,6 @@
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
-			sourceTree = SDKROOT;
 		};
 		F484BA17251CF043007C19DD /* Frameworks */ = {
 			isa = PBXGroup;
