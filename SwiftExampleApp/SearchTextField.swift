@@ -123,7 +123,7 @@ import AASwiftSDK
     open var startSuggestingImmediately = false
     
     /// Allow to decide the comparision options
-    open var comparisonOptions: NSString.CompareOptions = [.caseInsensitive]
+    open var comparisonOptions: NSString.CompareOptions = [.anchored, .caseInsensitive]
     
     /// Set the results list's header
     open var resultsListHeader: UIView?

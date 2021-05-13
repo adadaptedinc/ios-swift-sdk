@@ -25,6 +25,7 @@ class RegistrarTests: XCTestCase {
         Registrar.addContentListeners(delegate: testDelegate)
         Registrar.addDebugListeners(observer: testDebugObserver)
         
+        print(mockNotificationCenter.storedEvents)
         XCTAssert(mockNotificationCenter.storedEvents.contains("AASDK_INIT_COMPLETE"))
         XCTAssert(mockNotificationCenter.storedEvents.contains("AASDK_CONTENT_DELIVERY"))
         XCTAssert(mockNotificationCenter.storedEvents.contains("AASDK_UI_DEBUG_MESSAGE"))

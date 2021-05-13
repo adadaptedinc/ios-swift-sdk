@@ -180,7 +180,7 @@ var _screenSize = CGSize.zero
 extension String: Error {}
 
 class AAHelper: NSObject {
-    class func buildVersion() -> String? {
+    class func sdkVersion() -> String? {
         return Bundle(identifier: "com.adadapted.AASwiftSDK")?.infoDictionary!["CFBundleShortVersionString"] as? String
     }
     
@@ -474,7 +474,9 @@ class AAHelper: NSObject {
                     AASDK.cacheItem(item)
                 }
             }
-            NotificationCenterWrapper.notifier.post(notification)
+            DispatchQueue.main.async {
+                NotificationCenterWrapper.notifier.post(notification)
+            }
         }
     }
 }
