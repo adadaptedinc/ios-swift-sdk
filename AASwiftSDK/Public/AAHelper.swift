@@ -181,7 +181,7 @@ extension String: Error {}
 
 class AAHelper: NSObject {
     class func sdkVersion() -> String? {
-        return Bundle(identifier: "com.adadapted.AASwiftSDK")?.infoDictionary!["CFBundleShortVersionString"] as? String
+        return Bundle(for: self).infoDictionary!["CFBundleShortVersionString"] as? String
     }
     
     class func currentTimezone() -> String? {
@@ -345,7 +345,7 @@ class AAHelper: NSObject {
     }
 
     class func bundleID() -> String? {
-        return Bundle(identifier: "com.adadapted.AASwiftSDK")?.bundleIdentifier
+        return Bundle(for: self).bundleIdentifier
     }
     
     class func deviceModelName() -> String {
