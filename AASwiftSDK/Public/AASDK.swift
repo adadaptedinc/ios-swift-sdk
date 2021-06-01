@@ -122,7 +122,7 @@ var lastCame: Date?
         registerListenersFor observer: AASDKObserver?,
         options opDic: [AnyHashable : Any]?
     ) {
-        NSLog("AdAdapted iOS SDK v\(AAHelper.buildVersion() ?? "") initialized.")
+        NSLog("AdAdapted iOS SDK v\(AAHelper.sdkVersion() ?? "") initialized.")
         initializeSDK()
         _aasdk?.observer = observer
         _aasdk?.options = opDic
@@ -146,7 +146,6 @@ var lastCame: Date?
             using: { note in
                 _aasdk?.going(toBackground: note)
             })
-
 
         NotificationCenter.default.addObserver(
             forName: UIApplication.didBecomeActiveNotification,
@@ -447,9 +446,9 @@ var lastCame: Date?
         if _aasdk?.disableAdvertising ?? false {
             _aasdk?.cacheAds(inAdsDic: [:], completeNotificationName: AASDK_NOTIFICATION_INIT_COMPLETE_NAME, shouldUseCachedImages: false, shouldReplaceCurrent: false)
             _currentState = .kIdle
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1.0 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+            DispatchQueue.main.async {
                 AASDK.checkForPayloads()
-            })
+            }
             return
         }
 
@@ -461,12 +460,10 @@ var lastCame: Date?
             let initResponse = response as! AAInitResponse
             _aasdk?.sessionExpiresAtUTC = initResponse.sessionExpiresAt 
             _aasdk?.pollingIntervalInMS = initResponse.pollingIntervalMS
-            _aasdk?.cacheAds(inAdsDic: initResponse.zones, completeNotificationName: AASDK_NOTIFICATION_INIT_COMPLETE_NAME, shouldUseCachedImages: AASDK.shouldUseCachedImages() , shouldReplaceCurrent: true)
+            _aasdk?.cacheAds(inAdsDic: initResponse.zones, completeNotificationName: AASDK_NOTIFICATION_INIT_COMPLETE_NAME, shouldUseCachedImages: AASDK.shouldUseCachedImages(), shouldReplaceCurrent: true)
             _aasdk?.startUpdateTimer()
+            AASDK.checkForPayloads()
             AASDK.initKeywordIntercept()
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1.0 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-                AASDK.checkForPayloads()
-            })
 
             _currentState = .kIdle
         } as AAResponseWasReceivedBlock

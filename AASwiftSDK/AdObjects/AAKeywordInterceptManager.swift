@@ -68,7 +68,7 @@ class AAKeywordInterceptManager: NSObject, WKUIDelegate {
             guard let intercept = intercept as? AAKeywordIntercept else {
                 continue
             }
-            if (intercept.term as NSString?)?.range(of: userInput ?? "", options: .caseInsensitive).location != NSNotFound {
+            if (intercept.term as NSString?)?.range(of: userInput ?? "", options: [.anchored, .caseInsensitive]).location != NSNotFound {
                 return intercept
             }
         }

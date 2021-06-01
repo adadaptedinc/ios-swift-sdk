@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class AAConnector: NSObject {
+class AAConnector: NSObject, URLSessionDelegate {
     private var isOnline = false
     private var numInFlight = 0
 
@@ -73,7 +73,6 @@ class AAConnector: NSObject {
     private var udid: String?
     private var appID: String?
     private var sessionID: String?
-    private var sdKversion: String?
     private var immediateQueue: Queue<AARequestBlockHolder>?
     private var events: [AnyHashable]?
     private var eventsV2: [AnyHashable]?
@@ -97,7 +96,7 @@ class AAConnector: NSObject {
         backgroundUpdateTask = .invalid
 
         let sessionConfig = URLSessionConfiguration.default
-        session = URLSession(configuration: sessionConfig)
+        session = URLSession(configuration: sessionConfig, delegate: self, delegateQueue: OperationQueue.main)
 
         timer = Timer.scheduledTimer(
             timeInterval: TimeInterval(kDefaultBatchDispatchIntervalSeconds),
@@ -141,14 +140,13 @@ class AAConnector: NSObject {
         if aaRequest is AAInitRequest {
             appID = (aaRequest as? AAInitRequest)?.appID()
             udid = (aaRequest as? AAInitRequest)?.udid()
-            sdKversion = (aaRequest as? AAInitRequest)?.sdKversion()
             url = (aaRequest as? AAInitRequest)?.targetURL()
             methodType = "POST"
 
             // Request is GET request
         } else if aaRequest is AAUpdateAdsRequest || aaRequest is AAKeywordInterceptInitRequest {
             let tURL = try! aaRequest?.targetURL()
-            let qURL = "?aid=\(appID ?? "")&uid=\(udid ?? "")&sid=\(sessionID ?? "")&sdk=\(sdKversion ?? "")"
+            let qURL = "?aid=\(appID ?? "")&uid=\(udid ?? "")&sid=\(sessionID ?? "")&sdk=\(AAHelper.sdkVersion() ?? "")"
             url = URL(string: (tURL?.absoluteString ?? "") + qURL)
             aaRequest = nil //drop request body
             methodType = "GET"
