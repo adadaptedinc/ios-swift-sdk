@@ -7,45 +7,19 @@
 //
 import Foundation
 
+public enum PayloadStatus {
+    case delivered
+    case rejected
+}
+
 @objcMembers
 class AAPayloadTrackingRequest: AAGenericRequest {
-    init(payloadDelivered payload: AAContentPayload?) {
-        super.init()
-        self.payload = payload
-        sharedInit()
-
-        var a: [[String : Any?]]? = nil
-        if let payloadId = payload?.payloadId {
-            a = [
-                [
-                    AA_KEY_PAYLOAD_ID: payloadId,
-                            "status": "delivered",
-                            "event_timestamp": AAHelper.nowAsUTCNumber()
-                        ]
-            ]
-        }
-        setParamValue(a as NSObject?, forKey: "items")
-    }
-
-    init(payloadRejected payload: AAContentPayload?) {
-        super.init()
-        self.payload = payload
-        sharedInit()
-
-        var a: [[String : Any?]]? = nil
-        if let payloadId = payload?.payloadId {
-            a = [[
-                AA_KEY_PAYLOAD_ID: payloadId,
-                "status": "rejected"
-            ]]
-        }
-        setParamValue(a as NSObject?, forKey: "items")
-    }
-
     private var payload: AAContentPayload?
 
-    func sharedInit() {
-
+    init(payload: AAContentPayload?, status: PayloadStatus) {
+        super.init()
+        self.payload = payload
+        
         removeParamValue(forKey: AA_KEY_DATETIME)
         if AASDK.sessionId() != nil {
             setParamValue(AASDK.sessionId() as NSObject?, forKey: AA_KEY_SESSION_ID)
@@ -60,17 +34,34 @@ class AAPayloadTrackingRequest: AAGenericRequest {
         setParamValue(AAHelper.deviceModelName() as NSObject?, forKey: AA_KEY_DEVICE_MODEL)
         setParamValue(AAHelper.sdkVersion() as NSObject?, forKey: AA_KEY_SDK_VERSION)
         setParamValue(NSNumber(value: AAHelper.isAdTrackingEnabled() ? 1 : 0) as NSObject?, forKey: AA_KEY_ALLOW_RETARGETING)
+        setParamValue(AAHelper.nowAsUTCNumber(), forKey: "timestamp")
 
-        let loc = AASDK.deviceLocationOrNil()
-        if let loc = loc {
-            setParamValue(NSNumber(value: loc.coordinate.longitude), forKey: AA_KEY_LONGITUDE)
-            setParamValue(NSNumber(value: loc.coordinate.latitude), forKey: AA_KEY_LATITUDE)
+        var array = [[String: Any]]()
+        
+        switch status {
+        case .delivered:
+            if let payloadId = payload?.payloadId {
+                var items = [String: Any]()
+                items[AA_KEY_PAYLOAD_ID] = payloadId
+                items["status"] = "delivered"
+                items["event_timestamp"] = AAHelper.nowAsUTCNumber()
+                array.append(items)
+            }
+        case .rejected:
+            if let payloadId = payload?.payloadId {
+                var items = [String: Any]()
+                items[AA_KEY_PAYLOAD_ID] = payloadId
+                items ["status"] = "rejected"
+                array.append(items)
+            }
         }
+        setParamValue(array as NSObject?, forKey: "tracking")
+        print(self.params as Any)
     }
 
 // MARK: - AARequest Overrides
     override func url(forEndpoint endpoint: String = "") -> URL? {
-        return URL(string: String(AASDK.payloadServiceServerRoot() + "/" + endpoint))
+        return URL(string: "\(AASDK.payloadServiceServerRoot())/\(endpoint)")
     }
 
     override func targetURL() -> URL? {

@@ -47,7 +47,7 @@ var lastCame: Date?
     private var connector: AAConnector?
     private var closeImage: UIImageView?
     private var currentlyDisplayedAds: [AnyHashable]?
-    private var zones: [AnyHashable : Any]?
+    private var zones: [AnyHashable: Any]?
     private var pollingIntervalInMS = 0
     private var updateTimer: Timer?
     private var zonesToIgnore: [AnyHashable]?
@@ -58,7 +58,7 @@ var lastCame: Date?
     
     var shouldUseCachedImages = false
     private weak var observer: AASDKObserver?
-    private var options: [AnyHashable : Any]?
+    private var options: [AnyHashable: Any]?
     private weak var debugObserver: AASDKDebugObserver?
     private var sessionExpiresAtUTC = 0
     private var updateTimerLastFired = 0
@@ -70,10 +70,10 @@ var lastCame: Date?
     private var unloadAdAfterOne = false
     private var isKeywordInterceptOn = false
     private var kiManager: AAKeywordInterceptManager?
-    private var impressionCounters: [AnyHashable : Any]?
-    private var payloadTrackers: [AnyHashable : Any]?
+    private var impressionCounters: [AnyHashable: Any]?
+    private var payloadTrackers: [AnyHashable: Any]?
     private var lastPayloadCheck: Date?
-    private var appInitParams: [AnyHashable : Any]?
+    private var appInitParams: [AnyHashable: Any]?
     
 // MARK: - notfications
     @objc public class func registerListeners(for observer: AASDKObserver?) {
@@ -462,7 +462,9 @@ var lastCame: Date?
             _aasdk?.pollingIntervalInMS = initResponse.pollingIntervalMS
             _aasdk?.cacheAds(inAdsDic: initResponse.zones, completeNotificationName: AASDK_NOTIFICATION_INIT_COMPLETE_NAME, shouldUseCachedImages: AASDK.shouldUseCachedImages(), shouldReplaceCurrent: true)
             _aasdk?.startUpdateTimer()
-            AASDK.checkForPayloads()
+            DispatchQueue.main.async {
+                AASDK.checkForPayloads()
+            }
             AASDK.initKeywordIntercept()
 
             _currentState = .kIdle
@@ -1287,14 +1289,14 @@ extension AASDK {
                         payload.payloadType = "payload"
                     }
                 }
-                var userInfo: [String : AnyHashable]? = nil
+                var userInfo: [String: AnyHashable]?
                 if let payloads = pickupResponse?.payloads {
                     userInfo = [
                         KEY_MESSAGE: "Returning \(Int(pickupResponse?.payloads?.count ?? 0)) payload items",
                         KEY_CONTENT_PAYLOADS: payloads
                     ]
                 }
-                let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_CONTENT_PAYLOADS_INBOUND), object: nil, userInfo: userInfo)
+                let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_CONTENT_PAYLOADS_INBOUND), userInfo: userInfo)
 
                 do {
                     if let payloads = pickupResponse?.payloads {
@@ -1316,15 +1318,17 @@ extension AASDK {
         } as AAResponseWasReceivedBlock
 
         let failed = { response, forRequest, error in
-            var userInfo: [String : String]? = nil
+            var userInfo: [String: String]?
             if let description = error?.localizedDescription {
                 userInfo = [
                     KEY_MESSAGE: "AASDK ERROR Payload Service pickup returned: \(description)",
                     KEY_RECOVERY_SUGGESTION: "RECOVERY suggestion -> \((error as NSError?)?.localizedRecoverySuggestion ?? "")"
                 ]
             }
-            let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_ERROR), object: nil, userInfo: userInfo)
-            NotificationCenterWrapper.notifier.post(notification)
+            let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_ERROR), userInfo: userInfo)
+            DispatchQueue.main.async {
+                NotificationCenterWrapper.notifier.post(notification)
+            }
         } as AAResponseWasErrorBlock
 
         let request = AAPayloadPickupRequest()

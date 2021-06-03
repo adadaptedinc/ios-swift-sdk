@@ -13,6 +13,9 @@ import WebKit
 class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WKNavigationDelegate, WKUIDelegate {
     weak var delegate: AAImageAdViewDelegate?
     weak var ad: AAAd?
+    
+    private var url: URL?
+    private var webView: WKWebView?
 
     init(url: URL?, with delegate: AAImageAdViewDelegate?, ad: AAAd?) {
         super.init(frame: .zero)
@@ -22,10 +25,12 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
 
         sharedInit()
 
-        var requestObj: URLRequest? = nil
+        var requestObj: URLRequest?
+        
         if let url = url {
             requestObj = URLRequest(url: url)
         }
+        
         if let requestObj = requestObj {
             webView?.load(requestObj)
         }
@@ -37,26 +42,24 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
         self.ad = ad
 
         sharedInit()
-        webView?.loadHTMLString(html ?? "", baseURL: nil)
+        DispatchQueue.main.async {
+            self.webView?.loadHTMLString(html ?? "", baseURL: nil)
+        }
     }
-
-    func destroy() {
-        AASDK.logDebugMessage("WebAdView: destroy enter", type: AASDK.DEBUG_USER_INTERACTION)
-        webView?.stopLoading()
-        webView?.navigationDelegate = nil
-        webView?.uiDelegate = nil
-        webView = nil
-        url = nil
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
-
-    private var url: URL?
-    private var webView: WKWebView?
 
     func sharedInit() {
         AASDK.logDebugMessage("WebAdView: sharedInit enter", type: AASDK.DEBUG_USER_INTERACTION)
         webView = WKWebView()
         alpha = 0.0
 
+        if let webView = webView {
+            addSubview(webView)
+        }
+        
         webView?.isUserInteractionEnabled = true
         webView?.scrollView.isScrollEnabled = false
         webView?.scrollView.bounces = false
@@ -75,11 +78,8 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
         tap.numberOfTapsRequired = 1
         tap.delegate = self
         webView?.addGestureRecognizer(tap)
-        if let webView = webView {
-            addSubview(webView)
-        }
 
-        var viewsDictionary: [String : WKWebView?]? = nil
+        var viewsDictionary: [String: WKWebView?]?
         if let webView = webView {
             viewsDictionary = [
                 "web": webView
@@ -89,22 +89,22 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
             "padding": NSNumber(value: 0)
         ]
 
-        var constraint_POS_V: [NSLayoutConstraint]? = nil
+        var constraint_POS_V: [NSLayoutConstraint]?
         if let viewsDictionary = viewsDictionary {
             constraint_POS_V = NSLayoutConstraint.constraints(
                 withVisualFormat: "V:|-padding-[web]-padding-|",
                 options: [],
                 metrics: metrics,
-                views: viewsDictionary as [String : Any])
+                views: viewsDictionary as [String: Any])
         }
 
-        var constraint_POS_H: [NSLayoutConstraint]? = nil
+        var constraint_POS_H: [NSLayoutConstraint]?
         if let viewsDictionary = viewsDictionary {
             constraint_POS_H = NSLayoutConstraint.constraints(
                 withVisualFormat: "H:|-padding-[web]-padding-|",
                 options: [],
                 metrics: metrics,
-                views: viewsDictionary as [String : Any])
+                views: viewsDictionary as [String: Any])
         }
 
         if let constraint_POS_V = constraint_POS_V {
@@ -113,6 +113,15 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
         if let constraint_POS_H = constraint_POS_H {
             addConstraints(constraint_POS_H)
         }
+    }
+    
+    func destroy() {
+        AASDK.logDebugMessage("WebAdView: destroy enter", type: AASDK.DEBUG_USER_INTERACTION)
+        webView?.stopLoading()
+        webView?.navigationDelegate = nil
+        webView?.uiDelegate = nil
+        webView = nil
+        url = nil
     }
 
 // MARK: - <UIScrollViewDelegate>
@@ -174,9 +183,4 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
 
         delegate?.adFailed(toLoad: error)
     }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
 }
-

@@ -11,8 +11,7 @@ import Foundation
 typealias AAResponseWasErrorBlock = (AAErrorResponse?, AAGenericRequest?, Error?) -> Void
 typealias AAResponseWasReceivedBlock = (AAGenericResponse?, AAGenericRequest?) -> Void
 
-@objcMembers
-class AARequestBlockHolder: NSObject {
+class AARequestBlockHolder {
     var request: AAGenericRequest?
     var requestWasErrorBlock: AAResponseWasErrorBlock?
     var responseWasReceivedBlock: AAResponseWasReceivedBlock?

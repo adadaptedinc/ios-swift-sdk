@@ -47,9 +47,17 @@ class ViewController:
     }
     
     func aaContentNotification(_ notification: Notification) {
-           print("In-app content available")
-           guard let userinfo = notification.userInfo else { return }
-        guard let adContent = userinfo[AASDK.KEY_AD_CONTENT] as? AdContent else { return }
+        print("In-app content available")
+        
+        guard let userinfo = notification.userInfo else {
+            print("userinfo is nil")
+            return
+        }
+        
+        guard let adContent = userinfo[AASDK.KEY_AD_CONTENT] as? AdContent else {
+            print("userinfo[AASDK.KEY_AD_CONTENT] is nil")
+            return
+        }
 
            for item in adContent.detailedListItems {
             print("AADetailedListItem: ",item.productTitle)

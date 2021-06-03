@@ -463,7 +463,7 @@ class AAHelper: NSObject {
             AASDK.KEY_MESSAGE: "Returning universal link payload item",
             AASDK.KEY_CONTENT_PAYLOADS: retArray
         ] as [String : Any]
-        let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_CONTENT_PAYLOADS_INBOUND), object: nil, userInfo: userInfo)
+        let notification = Notification(name: Notification.Name(rawValue: AASDK_NOTIFICATION_CONTENT_PAYLOADS_INBOUND), userInfo: userInfo)
 
         do {
             for payload in retArray {

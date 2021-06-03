@@ -10,6 +10,16 @@ import Foundation
 
 @objcMembers
 class AAGenericRequest: NSObject, NSCopying {
+    var params: [AnyHashable: Any]?
+    
+    override init() {
+        super.init()
+        params = [:]
+        setParamValue(AAHelper.nowAsUTCNumber() as NSNumber?, forKey: AA_KEY_DATETIME)
+        setParamValue(AAHelper.udid() as NSObject?, forKey: AA_KEY_UDID)
+        setParamValue(AAHelper.sdkVersion() as NSObject?, forKey: AA_KEY_SDK_VERSION)
+    }
+    
     func setParamValue(_ value: NSObject?, forKey param: String?) {
         if value == nil || param == nil {
             return
@@ -52,7 +62,7 @@ class AAGenericRequest: NSObject, NSCopying {
         return data
     }
 
-    func asDictionary() -> [AnyHashable : Any]? {
+    func asDictionary() -> [AnyHashable: Any]? {
         return params
     }
 
@@ -73,16 +83,5 @@ class AAGenericRequest: NSObject, NSCopying {
         let request = self
         request.params = params
         return request
-    }
-
-    private var params: [AnyHashable : Any]? = nil
-
-// MARK: - Private
-    override init() {
-        super.init()
-        params = [:]
-        setParamValue(AAHelper.nowAsUTCNumber() as NSNumber?, forKey: AA_KEY_DATETIME)
-        setParamValue(AAHelper.udid() as NSObject?, forKey: AA_KEY_UDID)
-        setParamValue(AAHelper.sdkVersion() as NSObject?, forKey: AA_KEY_SDK_VERSION)
     }
 }

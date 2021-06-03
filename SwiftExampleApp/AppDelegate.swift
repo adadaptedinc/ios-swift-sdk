@@ -6,9 +6,11 @@
 //  Copyright © 2020 AdAdapted. All rights reserved.
 //
 
-import UIKit
-import CoreData
 import AASwiftSDK
+import AppTrackingTransparency
+import CoreData
+import UIKit
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver, AASDKDebugObserver {
@@ -19,6 +21,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver, AASDKDebug
             AASDK.OPTION_KEYWORD_INTERCEPT:true]
             as [String : Any]
 
+        // Ad tracking dialog
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization { status in
+                switch status {
+                case .notDetermined:
+                    break
+                case .restricted:
+                    break
+                case .denied:
+                    break
+                case .authorized:
+                    break
+                @unknown default:
+                    break
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+            return true
+        }
+        
          //iOS api key
         AASDK.startSession(withAppID: "NWY0NTZIODZHNWY0", registerListenersFor: self, options: options)
         

@@ -60,8 +60,6 @@
 		F45E20502530B0080023F54F /* AASwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */; };
 		F45E20512530B0080023F54F /* AASwiftSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F467AE87252B7931003E02DB /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467AE86252B7931003E02DB /* Queue.swift */; };
-		F467AE91252B7C96003E02DB /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467AE90252B7C96003E02DB /* LinkedList.swift */; };
-		F467AE97252B7D74003E02DB /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467AE96252B7D74003E02DB /* Node.swift */; };
 		F467B17C24E43EAE00B89A5F /* AASDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467B17B24E43EAE00B89A5F /* AASDK.swift */; };
 		F46907F32549D2620097288C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46907F22549D2620097288C /* Logger.swift */; };
 		F46907FB2549F67E0097288C /* ReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46907FA2549F67E0097288C /* ReportManager.swift */; };
@@ -202,8 +200,6 @@
 		F4626471251BAC00004B8176 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F4626472251BAC02004B8176 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F467AE86252B7931003E02DB /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
-		F467AE90252B7C96003E02DB /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
-		F467AE96252B7D74003E02DB /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		F467B17B24E43EAE00B89A5F /* AASDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AASDK.swift; sourceTree = "<group>"; };
 		F46907F22549D2620097288C /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		F46907FA2549F67E0097288C /* ReportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportManager.swift; sourceTree = "<group>"; };
@@ -460,8 +456,6 @@
 				F46B95D82548A0140025AC5E /* Registrar.swift */,
 				F46907FA2549F67E0097288C /* ReportManager.swift */,
 				F467AE86252B7931003E02DB /* Queue.swift */,
-				F467AE90252B7C96003E02DB /* LinkedList.swift */,
-				F467AE96252B7D74003E02DB /* Node.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -778,7 +772,6 @@
 				F414F08925115E5400F2811C /* AARequestBlockHolder.swift in Sources */,
 				F46907F32549D2620097288C /* Logger.swift in Sources */,
 				F414F06725115E5400F2811C /* AAAdZone.swift in Sources */,
-				F467AE91252B7C96003E02DB /* LinkedList.swift in Sources */,
 				F414F07F25115E5400F2811C /* AAInitResponse.swift in Sources */,
 				F44F2F9125191F2F00B96C8C /* AAHelper.swift in Sources */,
 				F46B95C725486EFA0025AC5E /* Protocols.swift in Sources */,
@@ -816,7 +809,6 @@
 				F414F05625115E5400F2811C /* AAPayloadPickupResponse.swift in Sources */,
 				F414F0D325115E5400F2811C /* AAInitRequest.swift in Sources */,
 				F414F05F25115E5400F2811C /* AAKeywordInterceptInitResponse.swift in Sources */,
-				F467AE97252B7D74003E02DB /* Node.swift in Sources */,
 				F44F2F712519078A00B96C8C /* AAZoneView.swift in Sources */,
 				F414F0C225115E5400F2811C /* AACollectableError.swift in Sources */,
 				F414F05525115E5400F2811C /* AAPopupViewController.swift in Sources */,
