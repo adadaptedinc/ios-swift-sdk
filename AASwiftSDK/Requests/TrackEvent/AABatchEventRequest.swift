@@ -9,26 +9,29 @@ import Foundation
 
 @objcMembers
 class AABatchEventRequest: AAGenericRequest {
-    convenience init(events: [AnyHashable]?) {
-        self.init(events: events, forVersion: 1)
-    }
+    private var version = 0
     
     init(events: [AnyHashable]?, forVersion version: Int) {
         super.init()
         self.version = version
-        var dics : [Any] = []
+        var dics: [Any] = []
+        
         for event in events ?? [] {
             guard let event = event as? AAReportableSessionEvent else {
                 continue
             }
+            
             if let dict = event.asDictionary() {
                 dics.append(dict)
             }
         }
+        
         setParamValue(dics as NSObject, forKey: "events")
     }
-
-    private var version = 0
+    
+    convenience init(events: [AnyHashable]?) {
+        self.init(events: events, forVersion: 1)
+    }
 
 // MARK: - AARequest Overrides
     override func targetURL() -> URL? {

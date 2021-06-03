@@ -10,25 +10,13 @@ import Foundation
 
 @objcMembers
 class AAReportableSessionEvent: NSObject {
-    class func reportableEventOf(_ type: AAEventType, for ad: AAAd?, session: String?) -> AAReportableSessionEvent? {
-        return AAReportableSessionEvent(eventType: type, for: ad, session: session, eventPath: nil, detailedName: nil)
-    }
-
-    class func reportableEventOf(_ type: AAEventType, for ad: AAAd?, session: String?, eventPath: String?, detailedName: String?) -> AAReportableSessionEvent? {
-        return AAReportableSessionEvent(eventType: type, for: ad, session: session, eventPath: eventPath, detailedName: detailedName)
-    }
-
-    func asDictionary() -> [AnyHashable : Any]? {
-        return params
-    }
-
     private var type: AAEventType?
     private var ad: AAAd?
     private var params: [AnyHashable : Any]?
 
     init(eventType: AAEventType, for ad: AAAd?, session: String?, eventPath: String?, detailedName: String?) {
         super.init()
-        params = [AnyHashable : Any](minimumCapacity: 10)
+        params = [AnyHashable: Any](minimumCapacity: 10)
         setParamValue(AAHelper.nowAsUTCNumber(), forKey: AA_KEY_DATETIME)
         setParamValue(AAHelper.string(for: eventType) as NSObject?, forKey: AA_KEY_EVENT_TYPE)
 
@@ -44,6 +32,18 @@ class AAReportableSessionEvent: NSObject {
         if let detailedName = detailedName {
             setParamValue(detailedName as NSObject, forKey: AA_KEY_EVENT_NAME)
         }
+    }
+    
+    class func reportableEventOf(_ type: AAEventType, for ad: AAAd?, session: String?) -> AAReportableSessionEvent? {
+        return AAReportableSessionEvent(eventType: type, for: ad, session: session, eventPath: nil, detailedName: nil)
+    }
+
+    class func reportableEventOf(_ type: AAEventType, for ad: AAAd?, session: String?, eventPath: String?, detailedName: String?) -> AAReportableSessionEvent? {
+        return AAReportableSessionEvent(eventType: type, for: ad, session: session, eventPath: eventPath, detailedName: detailedName)
+    }
+
+    func asDictionary() -> [AnyHashable: Any]? {
+        return params
     }
 
     func setParamValue(_ value: NSObject?, forKey param: String?) {

@@ -10,11 +10,36 @@ import Foundation
 import UIKit
 
 class AAConnector: NSObject, URLSessionDelegate {
-    private var isOnline = false
-    private var numInFlight = 0
-
+    let kDefaultBatchDispatchIntervalSeconds = 10.0
+    
     var inTestMode = false
+    private var isOnline = false
+    private var udid: String?
+    private var appID: String?
+    private var sessionID: String?
+    private var immediateQueue = Queue<AARequestBlockHolder>()
+    private var events = [AnyHashable]()
+    private var eventsV2 = [AnyHashable]()
+    private var collectableEvents: [AnyHashable]?
+    private var collectableErrorEvents = [AnyHashable]()
+    private var backgroundUpdateTask: UIBackgroundTaskIdentifier! = .invalid
+    private var timer: Timer?
+    private var session: URLSession?
 
+    override init() {
+        super.init()
+
+        let sessionConfig = URLSessionConfiguration.default
+        session = URLSession(configuration: sessionConfig, delegate: self, delegateQueue: OperationQueue.main)
+
+        timer = Timer.scheduledTimer(
+            timeInterval: TimeInterval(kDefaultBatchDispatchIntervalSeconds),
+            target: self,
+            selector: #selector(timerFired(_:)),
+            userInfo: nil,
+            repeats: true)
+    }
+    
     func dispatchCachedMessages() {
         sendNextMessage()
     }
@@ -29,14 +54,14 @@ class AAConnector: NSObject, URLSessionDelegate {
             holder.request = aaRequest
             holder.responseWasReceivedBlock = responseWasReceivedBlock
             holder.requestWasErrorBlock = responseWasErrorBlock
-            immediateQueue?.enqueue(holder)
+            immediateQueue.enqueue(holder)
             sendNextMessage()
         }
     }
 
     func addEvent(forBatchDispatch event: AAReportableSessionEvent?) {
         if let event = event {
-            events?.append(event)
+            events.append(event)
         }
     }
 
@@ -50,7 +75,7 @@ class AAConnector: NSObject, URLSessionDelegate {
         }
 
         if let event = event {
-            eventsV2?.append(event)
+            eventsV2.append(event)
         }
     }
 
@@ -62,7 +87,7 @@ class AAConnector: NSObject, URLSessionDelegate {
 
     func addCollectableError(forDispatch event: AACollectableError?) {
         if let event = event {
-            collectableErrorEvents?.append(event)
+            collectableErrorEvents.append(event)
         }
     }
 
@@ -70,48 +95,12 @@ class AAConnector: NSObject, URLSessionDelegate {
         return sessionID
     }
 
-    private var udid: String?
-    private var appID: String?
-    private var sessionID: String?
-    private var immediateQueue: Queue<AARequestBlockHolder>?
-    private var events: [AnyHashable]?
-    private var eventsV2: [AnyHashable]?
-    private var collectableEvents: [AnyHashable]?
-    private var collectableErrorEvents: [AnyHashable]?
-    private var backgroundUpdateTask: UIBackgroundTaskIdentifier!
-    private var timer: Timer?
-    private var session: URLSession?
-
-    override init() {
-        super.init()
-        immediateQueue = Queue<AARequestBlockHolder>()
-        events = [AnyHashable]()
-        eventsV2 = [AnyHashable]()
-        collectableEvents = [AnyHashable]()
-        collectableErrorEvents = [AnyHashable]()
-        inTestMode = false
-        isOnline = false
-        numInFlight = 0
-
-        backgroundUpdateTask = .invalid
-
-        let sessionConfig = URLSessionConfiguration.default
-        session = URLSession(configuration: sessionConfig, delegate: self, delegateQueue: OperationQueue.main)
-
-        timer = Timer.scheduledTimer(
-            timeInterval: TimeInterval(kDefaultBatchDispatchIntervalSeconds),
-            target: self,
-            selector: #selector(timerFired(_:)),
-            userInfo: nil,
-            repeats: true)
-    }
-
 // MARK: - Private
     func sendingBlocked() -> Bool {
-        if numInFlight > kMaxInFlight {
+        if immediateQueue.isEmpty {
             return true
-        } else if (immediateQueue?.hasItems() ?? false) {
-            let holder = immediateQueue?.peek()
+        } else if (immediateQueue.size() < 2) {
+            let holder = immediateQueue.peek()
             let aaRequest = holder?.request
             if aaRequest is AAInitRequest {
                 return false
@@ -125,11 +114,11 @@ class AAConnector: NSObject, URLSessionDelegate {
             return
         }
 
-        if immediateQueue?.hasItems() == false && hasBatchEvents() {
+        if hasBatchEvents() {
             enqueueBatchEventRequests()
         }
 
-        let holder = immediateQueue?.dequeue()
+        let holder = immediateQueue.dequeue()
         var aaRequest = holder?.request
 
         // Initializing request params
@@ -163,9 +152,9 @@ class AAConnector: NSObject, URLSessionDelegate {
         if inTestMode && !(aaRequest is AACollectableEventRequest) {
             aaRequest?.setParamValue(NSNumber(value: true), forKey: AA_KEY_TEST_MODE)
         }
-        
+                
         let jsonMessage = aaRequest?.asData()
-        var request: URLRequest? = nil
+        var request: URLRequest?
         if let url = url {
             request = URLRequest(url: url)
         }
@@ -173,20 +162,18 @@ class AAConnector: NSObject, URLSessionDelegate {
         request?.httpMethod = methodType ?? ""
         request?.httpBody = jsonMessage
         
-        var task: URLSessionDataTask? = nil
+        var task: URLSessionDataTask?
         if let request = request {
-            task = session?.dataTask(with: request as URLRequest, completionHandler: { [self] data, response, error in
-                var JSON: Any? = nil
-                let jsonError: Error? = nil
-                numInFlight -= 1
-
+            task = session?.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                var JSON: Any?
+                
                 do {
                     // Check for HTTP error first
                     if response is HTTPURLResponse {
                         let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
                         if statusCode >= 400 {
                             ReportManager.getInstance().reportAnomaly(withCode: CODE_API_400, message: response.debugDescription, params: nil)
-                            sendNextMessage()
+                            self.sendNextMessage()
                             return
                         }
                     }
@@ -199,18 +186,21 @@ class AAConnector: NSObject, URLSessionDelegate {
                     }
                 }
 
-                if JSON == nil || jsonError != nil {
-                    print(jsonError != nil ? "JSON Error: \(String(describing: jsonError?.localizedDescription))" : "JSON Empty")
+                if JSON == nil {
+                    AASDK.logDebugMessage("JSON Empty", type: AASDK.DEBUG_NETWORK)
                 } else if error == nil {
                     do {
                         // grab session ID and set it
                         if (aaRequest is AAInitRequest) && (JSON as AnyObject).value(forKeyPath: AA_KEY_SESSION_ID) != nil {
-                            sessionID = (JSON as AnyObject).value(forKeyPath: AA_KEY_SESSION_ID) as? String
-                            AAHelper.storeCurrentSessionId(sessionId: sessionID)
+                            self.sessionID = (JSON as AnyObject).value(forKeyPath: AA_KEY_SESSION_ID) as? String
+                            AAHelper.storeCurrentSessionId(sessionId: self.sessionID)
                         }
 
-                        if JSON != nil && jsonError == nil {
-                            var jsonData: Data? = nil
+                        if JSON != nil {
+                            let aaResponse = try! holder?.request!.parseResponse(fromJSON: JSON)
+                            var jsonData: Data?
+                            var text: String?
+
                             do {
                                 if let JSON = JSON {
                                     jsonData = try JSONSerialization.data(withJSONObject: JSON, options: .prettyPrinted)
@@ -218,14 +208,12 @@ class AAConnector: NSObject, URLSessionDelegate {
                             } catch {
                                 AASDK.trackAnomalyGenericErrorMessage(error.localizedDescription, optionalAd: nil)
                             }
-                            var text: String? = nil
+
                             if let jsonData = jsonData {
-                                text = String(data: jsonData, encoding: .utf8)
+                                text = String(decoding: jsonData, as: UTF8.self)
                             }
+
                             AASDK.logDebugMessage("RESPONSE JSON from \(request.url?.absoluteString ?? ""):\n\(text ?? "")", type: AASDK.DEBUG_NETWORK_DETAILED)
-
-                            let aaResponse = try! holder?.request!.parseResponse(fromJSON: JSON)
-
                             holder?.responseWasReceivedBlock!(aaResponse, holder?.request)
                         } else {
                             AASDK.logDebugMessage("RESPONSE w/ no BODY from \(request.url?.absoluteString ?? "")", type: AASDK.DEBUG_NETWORK_DETAILED)
@@ -241,7 +229,7 @@ class AAConnector: NSObject, URLSessionDelegate {
                         }
                     }
                 } else {
-                    AASDK.logDebugMessage("AASDK ERROR AAConnector Error response from \(request.url?.absoluteString ?? ""):\n\(description)\n", type: AASDK.DEBUG_NETWORK_DETAILED)
+                    AASDK.logDebugMessage("AASDK ERROR AAConnector Error response from \(request.url?.absoluteString ?? ""):\n\(self.description)\n", type: AASDK.DEBUG_NETWORK_DETAILED)
                     let aaResponse = AAErrorResponse()
                     aaResponse.error = error
                     aaResponse.aaRequest = holder?.request
@@ -251,19 +239,17 @@ class AAConnector: NSObject, URLSessionDelegate {
                         aaResponse.nsHTTPURLResponse = httpResponse
                     }
                     holder?.requestWasErrorBlock!(aaResponse, holder?.request, error)
-                    sendNextMessage()
+                    self.sendNextMessage()
                 }
             })
         }
-
-        numInFlight += 1
+        
         task?.resume()
-
         sendNextMessage()
     }
 
     func hasBatchEvents() -> Bool {
-        return (events?.count ?? 0) > 0 || (eventsV2?.count ?? 0) > 0 || (collectableEvents?.count ?? 0) > 0
+        return (events.count ) > 0 || (eventsV2.count ) > 0 || (collectableEvents?.count ?? 0) > 0
     }
 
     func enqueueBatchEventRequests() {
@@ -277,15 +263,15 @@ class AAConnector: NSObject, URLSessionDelegate {
         let responseWasErrorBlock = { response, forRequest, error in
         } as AAResponseWasErrorBlock
 
-        if (events?.count ?? 0) > 0 {
+        if (events.count) > 0 {
             let request = AABatchEventRequest(events: events)
-            events?.removeAll()
+            events.removeAll()
             enqueueRequest(request, responseWasErrorBlock: responseWasErrorBlock, responseWasReceivedBlock: responseWasReceivedBlock)
         }
 
-        if (eventsV2?.count ?? 0) > 0 {
+        if (eventsV2.count ) > 0 {
             let request = AABatchEventRequest(events: eventsV2, forVersion: 2)
-            eventsV2?.removeAll()
+            eventsV2.removeAll()
             enqueueRequest(request, responseWasErrorBlock: responseWasErrorBlock, responseWasReceivedBlock: responseWasReceivedBlock)
         }
 
@@ -295,9 +281,9 @@ class AAConnector: NSObject, URLSessionDelegate {
             enqueueRequest(request, responseWasErrorBlock: responseWasErrorBlock, responseWasReceivedBlock: responseWasReceivedBlock)
         }
 
-        if (collectableErrorEvents?.count ?? 0) > 0 {
+        if (collectableErrorEvents.count ) > 0 {
             let request = AACollectableErrorRequest(events: collectableErrorEvents)
-            collectableErrorEvents?.removeAll()
+            collectableErrorEvents.removeAll()
             enqueueRequest(request, responseWasErrorBlock: responseWasErrorBlock, responseWasReceivedBlock: responseWasReceivedBlock)
         }
     }
@@ -306,6 +292,3 @@ class AAConnector: NSObject, URLSessionDelegate {
         sendNextMessage()
     }
 }
-
-let kDefaultBatchDispatchIntervalSeconds = 10.0
-let kMaxInFlight = 1

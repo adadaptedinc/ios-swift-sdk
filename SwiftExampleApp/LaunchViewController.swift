@@ -48,7 +48,7 @@ class LaunchViewController: UIViewController, WKUIDelegate, AASDKContentDelegate
                for item in payload.detailedListItems {
                    print("From Payload -> AADetailedListItem: ", item.productTitle)
                }
-               //payload.acknowledge()
+               payload.acknowledge()
            }
     }
     

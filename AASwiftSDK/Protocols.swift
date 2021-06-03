@@ -40,7 +40,7 @@ protocol AASDKObserverInternal: AASDKObserver {
 }
 
 /// \brief Content delivery delegate.
-/// Supports the delivery of content to the clien application.
+/// Supports the delivery of content to the client application.
 /// See: \ref ad_content for more details.
 @objc public protocol AASDKContentDelegate: NSObjectProtocol {
     /// \brief Ad-based Content delivery notification

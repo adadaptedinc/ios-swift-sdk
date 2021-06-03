@@ -28,7 +28,7 @@ class ReportManagerTests: XCTestCase {
         
         ReportManager.getInstance().reportItemInteractionFromPayload("testName", from: testPayload, eventName: "testEvent")
         let result = mockConnector.storedCollectableEvents.first??.asDictionary()
-        let eventParams = result!["event_params"] as! [AnyHashable : Any]?
+        let eventParams = result!["event_params"] as! [AnyHashable: Any]?
         let payloadSource = eventParams!["source"]
         XCTAssertEqual("testEvent", result!["event_name"] as! String)
         XCTAssertEqual("test", payloadSource as! String)
@@ -39,7 +39,7 @@ class ReportManagerTests: XCTestCase {
         testAd.adID = "testAdId"
         ReportManager.getInstance().reportAcknowledgeItem("testName", addedToList: "testList", from: testAd, eventName: "testEvent")
         let result = mockConnector.storedCollectableEvents.first??.asDictionary()
-        let eventParams = result!["event_params"] as! [AnyHashable : Any]?
+        let eventParams = result!["event_params"] as! [AnyHashable: Any]?
         let adId = eventParams!["ad_id"]
         XCTAssertEqual("testEvent", result!["event_name"] as! String)
         XCTAssertEqual("testAdId", adId as! String)
@@ -50,7 +50,7 @@ class ReportManagerTests: XCTestCase {
         testContentPayload.payloadId = "testPayloadId"
         ReportManager.getInstance().reportPayloadReceived(testContentPayload)
         let result = (mockConnector.storedRequests.first as! AAPayloadTrackingRequest).asDictionary()
-        let params = result!["items"] as! [[String : Any?]]?
+        let params = result!["tracking"] as! [[String: Any?]]?
         let payloadId = (params?.last?["payload_id"])! as! String
         XCTAssertEqual("testPayloadId", payloadId)
     }
@@ -60,7 +60,7 @@ class ReportManagerTests: XCTestCase {
         testContentPayload.payloadId = "testPayloadId"
         ReportManager.getInstance().reportPayloadRejected(testContentPayload)
         let result = (mockConnector.storedRequests.first as! AAPayloadTrackingRequest).asDictionary()
-        let params = result!["items"] as! [[String : Any?]]?
+        let params = result!["tracking"] as! [[String: Any?]]?
         let payloadId = (params?.last?["payload_id"])! as! String
         XCTAssertEqual("testPayloadId", payloadId)
     }
@@ -73,9 +73,9 @@ class ReportManagerTests: XCTestCase {
     }
     
     func testReportInternalEvent() {
-        ReportManager.getInstance().reportInternalEvent(eventName: "testEvent", payload: ["test" : "testValue"])
+        ReportManager.getInstance().reportInternalEvent(eventName: "testEvent", payload: ["test": "testValue"])
         let result = mockConnector.storedCollectableEvents.first??.asDictionary()
-        let eventParams = result!["event_params"] as! [AnyHashable : Any]?
+        let eventParams = result!["event_params"] as! [AnyHashable: Any]?
         let payload = eventParams!["test"] as! String
         XCTAssertEqual("testValue", payload)
     }
