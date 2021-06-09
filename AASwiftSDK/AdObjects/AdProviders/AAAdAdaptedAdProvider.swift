@@ -283,7 +283,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
                     AASDK.trackAnomalyAdConfiguration(currentAd, message: message)
                 }
         }
-
+        renderNextForceReload(true)
     }
 
     func webAdLoaded() {
@@ -303,6 +303,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
             AASDK.trackPopupEnded(for: currentAd)
         }
         zoneRenderer!.popupDidHide()
+        renderNextForceReload(true)
     }
 
     func userDidInteract(withInternalURLString url: String?) {
