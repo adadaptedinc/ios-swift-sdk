@@ -93,6 +93,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.source_files  = "Classes", "AASwiftSDK/**/*.{h,m,swift}"
+  spec.info_plist = { 'CFBundleIdentifier' => 'com.adadapted.AASwiftSDK', 'CFBundleShortVersionString' => "#{spec.version}" }
   # spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"

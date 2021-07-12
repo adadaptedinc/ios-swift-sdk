@@ -28,18 +28,6 @@ import WebKit
     private(set) var type: AdTypeAndSource?
     private var provider: AAAbstractAdProvider?
     private var currentAdView: UIView?
-    
-    @objc public func setZoneOwner(_ zoneOwner: AAZoneViewOwner?) {
-        setZoneId(nil, zoneType: .kTypeUnsupportedAd, delegate: zoneOwner)
-    }
-    
-    @objc public func getZoneOwner() -> AAZoneViewOwner? {
-        return zoneOwner
-    }
-    
-    public func clientZoneView() -> AAZoneView? {
-        return self
-    }
 
     init(frame: CGRect, forZone zoneId: String?, zoneType type: AdTypeAndSource, delegate: AAZoneViewOwner?) {
         super.init(frame: frame)
@@ -50,6 +38,51 @@ import WebKit
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+
+        sharedInit()
+        AASDK.logDebugFrame(frame, message: "AAZoneView initWithCoder")
+    }
+    
+    deinit {
+        removeListeners()
+    }
+
+    public override func awakeFromNib() {
+        super.awakeFromNib()
+        if let type1 = AdTypeAndSource(rawValue: -1) {
+            setZoneId(nil, zoneType: type1, delegate: nil)
+        }
+    }
+
+    public override func layoutSubviews() {
+        backgroundColor = UIColor.clear
+        AASDK.logDebugFrame(frame, message: "AAZoneView \(zoneId ?? "") START layoutSubviews")
+        super.layoutSubviews()
+        if let currentAdView = currentAdView {
+            currentAdView.frame = bounds
+            AASDK.logDebugFrame(frame, message: "AAZoneView \(zoneId ?? "") updated child Ad UIView's frame to")
+        }
+        AASDK.logDebugFrame(frame, message: "AAZoneView \(zoneId ?? "") END layoutSubviews")
+    }
+
+    func sharedInit() {
+        registerListeners()
+    }
+
+    @objc public func setZoneOwner(_ zoneOwner: AAZoneViewOwner?) {
+        setZoneId(nil, zoneType: .kTypeUnsupportedAd, delegate: zoneOwner)
+    }
+
+    @objc public func getZoneOwner() -> AAZoneViewOwner? {
+        return zoneOwner
+    }
+
+    public func clientZoneView() -> AAZoneView? {
+        return self
     }
 
     func rotate(to newOrientation: UIInterfaceOrientation) {
@@ -109,41 +142,6 @@ import WebKit
                 provider.adWasUnHidden()
             }
         }
-    }
-
-// MARK: - LIFECYCLE
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-
-        sharedInit()
-        AASDK.logDebugFrame(frame, message: "AAZoneView initWithCoder")
-    }
-
-    public override func awakeFromNib() {
-        super.awakeFromNib()
-        if let type1 = AdTypeAndSource(rawValue: -1) {
-            setZoneId(nil, zoneType: type1, delegate: nil)
-        }
-    }
-
-    deinit {
-        removeListeners()
-    }
-
-    func sharedInit() {
-        registerListeners()
-    }
-
-    public override func layoutSubviews() {
-        backgroundColor = UIColor.clear
-        AASDK.logDebugFrame(frame, message: "AAZoneView \(zoneId ?? "") START layoutSubviews")
-        super.layoutSubviews()
-        if let currentAdView = currentAdView {
-            currentAdView.frame = bounds
-            AASDK.logDebugFrame(frame, message: "AAZoneView \(zoneId ?? "") updated child Ad UIView's frame to")
-        }
-        AASDK.logDebugFrame(frame, message: "AAZoneView \(zoneId ?? "") END layoutSubviews")
     }
 
 // MARK: - <AAZoneRenderer> used by the AAAbstractAdProvider

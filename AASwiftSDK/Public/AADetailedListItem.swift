@@ -16,7 +16,7 @@ import Foundation
     @objc public var productBrand: String?
     @objc public var productCategory: String?
     @objc public var productBarcode: String?
-    @objc public var productDiscount: String?
+    @objc public var retailerId: String?
     @objc public var productDescription: String?
     @objc public var productUpc: String?
     @objc public var retailerSku: String?
@@ -64,8 +64,8 @@ import Foundation
         if (retailerSku != nil) {
             item[PRODUCT_SKU] = retailerSku
         }
-        if (productDiscount != nil) {
-            item["product_discount"] = productDiscount
+        if (retailerId != nil) {
+            item["product_discount"] = retailerId
         }
         if (productImageURL != nil) {
             item[PRODUCT_IMAGE] = productImageURL?.absoluteString

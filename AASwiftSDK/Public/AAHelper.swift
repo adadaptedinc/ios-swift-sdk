@@ -177,8 +177,6 @@ let kEventAnomaly = "anomaly"
 
 var _screenSize = CGSize.zero
 
-extension String: Error {}
-
 class AAHelper: NSObject {
     class func sdkVersion() -> String? {
         return Bundle(for: self).infoDictionary!["CFBundleShortVersionString"] as? String
@@ -480,3 +478,5 @@ class AAHelper: NSObject {
         }
     }
 }
+
+extension String: Error {}

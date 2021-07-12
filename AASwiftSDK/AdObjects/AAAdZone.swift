@@ -19,6 +19,21 @@ class AAAdZone: NSObject {
     var landZoneWidth: Float = 0.0
     var landZoneHeight: Float = 0.0
 
+    var currentIndex: UInt = 0
+    private var currentAds: [AnyHashable]?
+    private var availableAdIds: [AnyHashable]?
+    private var nextTimelineEvent: Date?
+    private var shouldUseCachedImages = false
+    private var orientations: UIInterfaceOrientationMask!
+
+    override init() {
+        super.init()
+
+        isCacheComplete = false
+        shouldUseCachedImages = false
+        orientations = UIInterfaceOrientationMask.init(rawValue: UInt(UIInterfaceOrientation.unknown.rawValue))
+    }
+
     func setupZoneAndShouldUseCachedImages(_ shouldUseCachedImages: Bool) {
         isCacheComplete = false
         self.shouldUseCachedImages = shouldUseCachedImages
@@ -149,21 +164,6 @@ class AAAdZone: NSObject {
 
     func supportsPortrait() -> Bool {
         return (orientations.rawValue != 0 & UIInterfaceOrientationMask.portrait.rawValue)
-    }
-
-    var currentIndex: UInt = 0
-    private var currentAds: [AnyHashable]?
-    private var availableAdIds: [AnyHashable]?
-    private var nextTimelineEvent: Date?
-    private var shouldUseCachedImages = false
-    private var orientations: UIInterfaceOrientationMask!
-
-    override init() {
-        super.init()
-
-        isCacheComplete = false
-        shouldUseCachedImages = false
-        orientations = UIInterfaceOrientationMask.init(rawValue: UInt(UIInterfaceOrientation.unknown.rawValue))
     }
 
     override func isEqual(_ object: Any?) -> Bool {

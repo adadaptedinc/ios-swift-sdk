@@ -23,6 +23,23 @@ class AAImageAdView: UIImageView {
     var width: Float = 0.0
     var height: Float = 0.0
     weak var delegate: AAImageAdViewDelegate?
+    private var backupURL: URL?
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.isUserInteractionEnabled = true
+        self.contentMode = .scaleAspectFit
+        self.contentScaleFactor = UIScreen.main.scale
+        self.isUserInteractionEnabled = true
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    deinit {
+        NotificationCenterWrapper.notifier.removeObserver(self)
+    }
 
     class func image(with url: URL?, for ad: AAAd?) -> AAImageAdView? {
         let imageView = AAImageAdView.init(frame: .zero)
@@ -53,24 +70,6 @@ class AAImageAdView: UIImageView {
         let url = ad?.url(for: orientation)
         backupURL = url
         AAHelper.setImageFor(self, from: url)
-    }
-
-    private var backupURL: URL?
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.isUserInteractionEnabled = true
-        self.contentMode = .scaleAspectFit
-        self.contentScaleFactor = UIScreen.main.scale
-        self.isUserInteractionEnabled = true
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
-    deinit {
-        NotificationCenterWrapper.notifier.removeObserver(self)
     }
 
     override var intrinsicContentSize: CGSize {
