@@ -31,7 +31,7 @@ class AAContentPayloadTests: XCTestCase {
     func testToDictionaryReturnsNil() {
         let testContentPayload = AAContentPayload()
         let dictionary = testContentPayload.toDictionary()
-        XCTAssert(dictionary == nil)
+        XCTAssertNotNil(dictionary)
     }
     
     func testAcknowledgePayloadReceived() {

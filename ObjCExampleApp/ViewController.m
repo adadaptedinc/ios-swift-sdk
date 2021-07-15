@@ -35,13 +35,22 @@
     
 }
 
-- (void)aaContentNotification:(NSNotification*)notification {
+- (void)aaContentNotification: (NSNotification*) notification {
     NSLog(@"In-app content available");
-    AdContent *adContent = [[notification userInfo] objectForKey:AASDK.KEY_AD_CONTENT];
+    NSString* adType = [[notification userInfo] objectForKey: AASDK.KEY_TYPE];
+    NSString* zoneId = [[notification userInfo] objectForKey: AASDK.KEY_ZONE_ID];
+    AdContent *adContent = [[notification userInfo] objectForKey: AASDK.KEY_AD_CONTENT];
 
+    NSLog(@"AdType: %@", adType);
+    NSLog(@"AdZone: %@", zoneId);
     for (AADetailedListItem *item in adContent.detailedListItems) {
-        NSLog(@"AADetailedListItem: %@", item.productTitle);
-        [self insertItemToList:item.productTitle];
+        NSLog(@"Item Name: %@", item.productTitle);
+        NSLog(@"Item Brand: %@", item.productBrand);
+        NSLog(@"Item UPC: %@", item.productUpc);
+        NSLog(@"Item Sku: %@", item.retailerSku);
+        NSLog(@"Item Retailer ID: %@", item.retailerId);
+        NSLog(@"Item Desc: %@", item.productDescription);
+        [self insertItemToList: item.productTitle];
     }
 
     // Acknowledge the items were added to the list
@@ -67,7 +76,11 @@
 
     for (AAContentPayload* payload in adPayload) {
         for (AADetailedListItem *item in payload.detailedListItems) {
-            NSLog(@"AADetailedListItem: %@", item.productTitle);
+            NSLog(@"********* AADetailedListItem: %@", item.productTitle);
+            NSLog(@"%@", item.productCategory);
+            NSLog(@"%@", item.productUpc);
+            NSLog(@"%@", item.retailerId);
+            NSLog(@"%@ ********", item.productDescription);
             [self insertItemToList:item.productTitle];
         }
 

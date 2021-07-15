@@ -46,7 +46,7 @@ class LaunchViewController: UIViewController, WKUIDelegate, AASDKContentDelegate
 
         for payload in adPayload ?? [] {
                for item in payload.detailedListItems {
-                   print("From Payload -> AADetailedListItem: ", item.productTitle)
+                print("From Payload -> AADetailedListItem: \(item.productTitle), \(String(describing: item.productBrand)), \(String(describing: item.productUpc)), \(String(describing: item.retailerSku)), \(String(describing: item.retailerId)), \(String(describing: item.productDescription))")
                }
                payload.acknowledge()
            }

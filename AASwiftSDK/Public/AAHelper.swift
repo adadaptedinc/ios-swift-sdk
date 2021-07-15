@@ -468,9 +468,7 @@ class AAHelper: NSObject {
                 guard let payload = payload as? AAContentPayload else {
                     continue
                 }
-                for item in payload.detailedListItems {
-                    AASDK.cacheItem(item)
-                }
+                AASDK.cacheItems(payload)
             }
             DispatchQueue.main.async {
                 NotificationCenterWrapper.notifier.post(notification)

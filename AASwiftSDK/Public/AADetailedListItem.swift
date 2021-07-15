@@ -65,7 +65,7 @@ import Foundation
             item[PRODUCT_SKU] = retailerSku
         }
         if (retailerId != nil) {
-            item["product_discount"] = retailerId
+            item[RETAILER_ID] = retailerId
         }
         if (productImageURL != nil) {
             item[PRODUCT_IMAGE] = productImageURL?.absoluteString

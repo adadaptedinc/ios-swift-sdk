@@ -11,19 +11,19 @@ import Foundation
     var ad: Any!
     @objc public var detailedListItems: [AADetailedListItem] = []
     
-    class func parse(fromDictionary dictionary: [AnyHashable : Any]?, ad: AAAd?) -> Self? {
+    class func parse(fromDictionary dictionary: [AnyHashable: Any]?, ad: AAAd?) -> Self? {
         if dictionary == nil {
             return nil
         }
 
-        var adContent: AdContent? = nil
+        var adContent: AdContent?
         
         let items = dictionary?["list-items"] as? [AnyHashable]
         if items != nil && (items != nil) {
             adContent = AdContent.parseBasicListItemsArray(items) as? Self
         }
 
-        let itemsDict = dictionary?["list-items"] as? [AnyHashable : Any]
+        let itemsDict = dictionary?["list-items"] as? [AnyHashable: Any]
         if itemsDict != nil && (itemsDict != nil) {
             adContent = AdContent.parseBasicListItemsDictionary(itemsDict) as? Self
         }
@@ -66,7 +66,7 @@ import Foundation
         return content as? Self
     }
 
-    class func parseBasicListItemsDictionary(_ item: [AnyHashable : Any]?) -> Self? {
+    class func parseBasicListItemsDictionary(_ item: [AnyHashable: Any]?) -> Self? {
         let dItem = AdContent.parseDetailedListItemDictionary(item)!
 
         let content = AdContent()
@@ -80,7 +80,7 @@ import Foundation
         var returnItems = [AADetailedListItem]()
 
         for item in items ?? [] {
-            guard let item = item as? [AnyHashable : Any] else {
+            guard let item = item as? [AnyHashable: Any] else {
                 continue
             }
             let dItem = AdContent.parseDetailedListItemDictionary(item)
@@ -94,20 +94,24 @@ import Foundation
         return content as? Self
     }
 
-    class func parseDetailedListItemDictionary(_ item: [AnyHashable : Any]?) -> AADetailedListItem? {
+    class func parseDetailedListItemDictionary(_ item: [AnyHashable: Any]?) -> AADetailedListItem? {
         let dItem = AADetailedListItem()
-        dItem.productTitle = item?["product-title"] as? String ?? ""
-        if dItem.productTitle.isEmpty {
-            dItem.productTitle = item?[PRODUCT_TITLE] as! String
-        }
+        dItem.productTitle = item?[PRODUCT_TITLE] as? String ?? ""
 
-        if item?["product-image"] != nil {
-            dItem.productImageURL = URL(string: (item?["product-image"] as? String) ?? "")
+        if item?[PRODUCT_IMAGE] != nil {
+            dItem.productImageURL = URL(string: (item?[PRODUCT_IMAGE] as? String) ?? "")
         } else if item?[PRODUCT_IMAGE] != nil {
             dItem.productImageURL = URL(string: (item?[PRODUCT_IMAGE] as? String) ?? "")
         }
 
-        dItem.productDescription = item?["product-description"] as? String
+        dItem.productDescription = item?[PRODUCT_DESCRIPTION] as? String
+        dItem.productBrand = item?[PRODUCT_BRAND] as? String
+        dItem.productCategory = item?[PRODUCT_CATEGORY] as? String
+        dItem.productBarcode = item?[PRODUCT_BARCODE] as? String
+        dItem.productUpc = item?[PRODUCT_BARCODE] as? String
+        dItem.retailerSku = item?[PRODUCT_SKU] as? String
+        dItem.retailerId = item?[RETAILER_ID] as? String
+
         return dItem
     }
     

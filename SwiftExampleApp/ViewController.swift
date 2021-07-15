@@ -59,13 +59,13 @@ class ViewController:
             return
         }
 
-           for item in adContent.detailedListItems {
-            print("AADetailedListItem: ",item.productTitle)
+        for item in adContent.detailedListItems {
+            print("AADetailedListItem: \(item.productTitle), \(String(describing: item.productBrand)), \(String(describing: item.productUpc)), \(String(describing: item.retailerId)), \(String(describing: item.productCategory)), \(String(describing: item.productDescription))")
             appendListItem(itemName: item.productTitle)
-           }
+        }
 
-           // Acknowledge the items were added to the list
-           adContent.acknowledge()
+        // Acknowledge the items were added to the list
+        adContent.acknowledge()
     }
 
     func zoneViewDidLoadZone(_ view: AAZoneView?) {
