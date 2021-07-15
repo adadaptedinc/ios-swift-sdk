@@ -1172,15 +1172,15 @@ extension AASDK {
     }
 
 // MARK: - content stuff
-    class func deliverContent(_ content: [AnyHashable : Any]?, from ad: AAAd?, andZoneView zoneView: AAZoneView?) {
+    class func deliverContent(_ content: [AnyHashable: Any]?, from ad: AAAd?, andZoneView zoneView: AAZoneView?) {
         let name = content?[KEY_TYPE] as? String
         let contentType = "list_items"
-        var dic: [AnyHashable : Any]?
+        var dic: [AnyHashable: Any]?
 
         AASDK.logDebugMessage("AASDK: deliverContent:fromAd:andZoneView enter", type: DEBUG_USER_INTERACTION)
 
         if content == nil {
-            var message: String? = nil
+            var message: String?
             if let adID = ad?.adID {
                 message = "Ad \(adID) content payload empty - no action taken"
             }
@@ -1305,9 +1305,7 @@ extension AASDK {
                                 AASDK.logDebugMessage("caught fatal error with payload parsing", type: DEBUG_GENERAL)
                                 continue
                             }
-                            for item in payload.detailedListItems {
-                                AASDK.cacheItem(item)
-                            }
+                            AASDK.cacheItems(payload)
                         }
                     }
                     DispatchQueue.main.async {
@@ -1348,8 +1346,8 @@ extension AASDK {
         return _aasdk?.payloadTrackers?[string] as? AADetailedListItem
     }
 
-    class func cacheItem(_ item: AADetailedListItem) {
-        _aasdk?.payloadTrackers?[item.productTitle] = item
+    class func cacheItems(_ items: AAContentPayload) {
+        _aasdk?.payloadTrackers = items.toDictionary()
     }
 
     class func uncacheItem(_ item: AADetailedListItem?) {

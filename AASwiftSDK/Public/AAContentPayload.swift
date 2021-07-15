@@ -15,7 +15,7 @@ import Foundation
     @objc public var payloadType = ""
     @objc public var detailedListItems: [AADetailedListItem] = []
     
-    class func parse(fromDictionary dictionary: [AnyHashable : Any]?) -> Self? {
+    class func parse(fromDictionary dictionary: [AnyHashable: Any]?) -> Self? {
         if dictionary == nil {
             return nil
         }
@@ -31,7 +31,7 @@ import Foundation
                 var returnItems = [AADetailedListItem]()
                 returnItem.payloadType = DETAILED_LIST_ITEMS
                 for item in items ?? [] {
-                    guard let item = item as? [AnyHashable : Any] else {
+                    guard let item = item as? [AnyHashable: Any] else {
                         continue
                     }
                     if item.count > 0 {
@@ -55,8 +55,40 @@ import Foundation
         return nil
     }
 
-    func toDictionary() -> [AnyHashable : Any]? {
-        return nil
+    func toDictionary() -> [AnyHashable: Any]? {
+        var items = [AnyHashable: Any]()
+
+        for item in detailedListItems {
+
+            if !item.trackingId.isEmpty {
+                items[AA_KEY_TRACKING_ID] = item.trackingId
+            }
+            if !item.productTitle.isEmpty {
+                items[PRODUCT_TITLE] = item.productTitle
+            }
+            if (item.productBrand != nil) {
+                items[PRODUCT_BRAND] = item.productBrand
+            }
+            if (item.productCategory != nil) {
+                items[PRODUCT_CATEGORY] = item.productCategory
+            }
+            if (item.productBarcode != nil) {
+                items[PRODUCT_BARCODE] = item.productBarcode
+            }
+            if (item.productUpc != nil) {
+                items[PRODUCT_BARCODE] = item.productUpc
+            }
+            if (item.retailerSku != nil) {
+                items[PRODUCT_SKU] = item.retailerSku
+            }
+            if (item.retailerId != nil) {
+                items[RETAILER_ID] = item.retailerId
+            }
+            if (item.productImageURL != nil) {
+                items[PRODUCT_IMAGE] = item.productImageURL?.absoluteString
+            }
+        }
+        return items
     }
 
     @objc public func acknowledge() {

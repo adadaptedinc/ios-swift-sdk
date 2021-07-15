@@ -22,7 +22,7 @@ class AdContentTests: XCTestCase {
     }
     
     func testParseBasicListItemsArray() {
-        var itemsArray = [AnyHashable : Any]()
+        var itemsArray = [AnyHashable: Any]()
         var basicListItems = [AnyHashable]()
         basicListItems.append("testBasicItem")
         itemsArray["list-items"] = basicListItems
@@ -34,11 +34,11 @@ class AdContentTests: XCTestCase {
     }
     
     func testParseBasicListItemsDictionary() {
-        var itemsArray = [AnyHashable : Any]()
+        var itemsArray = [AnyHashable: Any]()
         var basicListItemsDic = [AnyHashable : Any]()
-        basicListItemsDic["product-title"] = "testDetailItemTitle"
-        basicListItemsDic["product-image"] = "testDetailItemImage"
-        basicListItemsDic["product-description"] = "testDetailItemImage"
+        basicListItemsDic[PRODUCT_TITLE] = "testDetailItemTitle"
+        basicListItemsDic[PRODUCT_IMAGE] = "testDetailItemImage"
+        basicListItemsDic[PRODUCT_DESCRIPTION] = "testDetailItemImage"
         itemsArray["list-items"] = basicListItemsDic
         
         let resultAdContent = AdContent.parse(fromDictionary: itemsArray, ad: mockAAAd)
@@ -49,11 +49,11 @@ class AdContentTests: XCTestCase {
     }
     
     func testParseRichListItemsDictionary() {
-        var itemsArray = [AnyHashable : Any]()
+        var itemsArray = [AnyHashable: Any]()
         var basicListItems = [AnyHashable]()
-        let richItem = ["product-title" : "testDetailItemTitle",
-                        "product-image" : "testDetailItemImage",
-                        "product-description" : "testDetailItemImage"]
+        let richItem = [PRODUCT_TITLE: "testDetailItemTitle",
+                        PRODUCT_IMAGE: "testDetailItemImage",
+                        PRODUCT_DESCRIPTION: "testDetailItemImage"]
         
         basicListItems.append(richItem)
         itemsArray["rich-list-items"] = basicListItems
@@ -66,11 +66,11 @@ class AdContentTests: XCTestCase {
     }
     
     func testParseDetailedListItemsDictionary() {
-        var itemsArray = [AnyHashable : Any]()
+        var itemsArray = [AnyHashable: Any]()
         var basicListItems = [AnyHashable]()
-        let richItem = ["product-title" : "testDetailItemTitle",
-                        "product-image" : "testDetailItemImage",
-                        "product-description" : "testDetailItemImage"]
+        let richItem = [PRODUCT_TITLE: "testDetailItemTitle",
+                        PRODUCT_IMAGE: "testDetailItemImage",
+                        PRODUCT_DESCRIPTION: "testDetailItemImage"]
         
         basicListItems.append(richItem)
         itemsArray[DETAILED_LIST_ITEMS] = basicListItems
@@ -85,7 +85,7 @@ class AdContentTests: XCTestCase {
     func testAcknowledge() {
         let mockConnector = MockAAConnector()
         ReportManager.createInstance(connector: mockConnector)
-        var itemsArray = [AnyHashable : Any]()
+        var itemsArray = [AnyHashable: Any]()
         var basicListItems = [AnyHashable]()
         basicListItems.append("testBasicItem")
         itemsArray["list-items"] = basicListItems
@@ -93,7 +93,7 @@ class AdContentTests: XCTestCase {
         let resultAdContent = AdContent.parse(fromDictionary: itemsArray, ad: mockAAAd)
         resultAdContent?.acknowledge()
         let result = mockConnector.storedCollectableEvents.first??.asDictionary()
-        let eventParams = result!["event_params"] as! [AnyHashable : Any]?
+        let eventParams = result!["event_params"] as! [AnyHashable: Any]?
         let adId = eventParams!["ad_id"] as! String
         
         XCTAssertEqual("testAdId", adId)
@@ -102,7 +102,7 @@ class AdContentTests: XCTestCase {
     func testFailure() {
         let mockConnector = MockAAConnector()
         ReportManager.createInstance(connector: mockConnector)
-        var itemsArray = [AnyHashable : Any]()
+        var itemsArray = [AnyHashable: Any]()
         var basicListItems = [AnyHashable]()
         basicListItems.append("testBasicItem")
         itemsArray["list-items"] = basicListItems
