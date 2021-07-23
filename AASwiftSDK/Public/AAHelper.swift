@@ -24,6 +24,7 @@ let AA_KEY_APP_ID = "app_id"
 let AA_KEY_UDID = "udid"
 let AA_KEY_BUNDLE_ID = "bundle_id"
 let AA_KEY_SDK_VERSION = "sdk_version"
+let AA_KEY_BUNDLE_VERSION = "bundle_version"
 let AA_KEY_ALLOW_RETARGETING = "allow_retargeting"
 
 // device info
@@ -180,6 +181,10 @@ var _screenSize = CGSize.zero
 class AAHelper: NSObject {
     class func sdkVersion() -> String? {
         return Bundle(for: self).infoDictionary!["CFBundleShortVersionString"] as? String
+    }
+
+    class func bundleVersion() -> String? {
+        return Bundle(for: self).infoDictionary!["CFBundleVersion"] as? String
     }
     
     class func currentTimezone() -> String? {
