@@ -73,7 +73,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
         }
 
         if oldAd == currentAd && !forceReload {
-            AASDK.logDebugMessage("AdAdapted Zone \(String(describing: zoneId)) reloaded not needed.", type: AASDK.DEBUG_GENERAL)
+            AASDK.logDebugMessage("AdAdapted Zone \(String(describing: zoneId)) reload not needed.", type: AASDK.DEBUG_GENERAL)
             AASDK.trackImpressionStarted(for: currentAd)
             //zoneRenderer.handleReload(of: currentAd)
         } else if currentAd != nil {
@@ -283,7 +283,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
                     AASDK.trackAnomalyAdConfiguration(currentAd, message: message)
                 }
         }
-        renderNextForceReload(true)
+        renderNext()
     }
 
     func webAdLoaded() {
@@ -303,7 +303,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
             AASDK.trackPopupEnded(for: currentAd)
         }
         zoneRenderer!.popupDidHide()
-        renderNextForceReload(true)
+        renderNext()
     }
 
     func userDidInteract(withInternalURLString url: String?) {

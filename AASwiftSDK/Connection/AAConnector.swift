@@ -249,7 +249,7 @@ class AAConnector: NSObject, URLSessionDelegate {
     }
 
     func hasBatchEvents() -> Bool {
-        return (events.count ) > 0 || (eventsV2.count ) > 0 || (collectableEvents?.count ?? 0) > 0
+        return (events.count) > 0 || (eventsV2.count) > 0 || (collectableEvents?.count ?? 0) > 0
     }
 
     func enqueueBatchEventRequests() {

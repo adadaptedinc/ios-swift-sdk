@@ -24,6 +24,7 @@ class AACollectableEventRequest: AAGenericRequest {
         setParamValue(AAHelper.udid() as NSObject?, forKey: AA_KEY_UDID)
         setParamValue(AAHelper.bundleID() as NSObject?, forKey: AA_KEY_BUNDLE_ID)
         setParamValue(AAHelper.sdkVersion() as NSObject?, forKey: AA_KEY_SDK_VERSION)
+        setParamValue(AAHelper.bundleVersion() as NSObject?, forKey: AA_KEY_BUNDLE_VERSION)
         setParamValue(AAHelper.deviceOS() as NSObject?, forKey: AA_KEY_OS_NAME)
         setParamValue(AAHelper.deviceOSVersion() as NSObject?, forKey: AA_KEY_OS_VERSION)
         setParamValue(AAHelper.deviceWidthNumber() as NSObject?, forKey: AA_KEY_DEVICE_WIDTH)

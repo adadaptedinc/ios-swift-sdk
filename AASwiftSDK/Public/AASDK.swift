@@ -122,7 +122,7 @@ var lastCame: Date?
         registerListenersFor observer: AASDKObserver?,
         options opDic: [AnyHashable : Any]?
     ) {
-        NSLog("AdAdapted iOS SDK v\(AAHelper.sdkVersion() ?? "") initialized.")
+        print("AdAdapted iOS SDK v\(AAHelper.sdkVersion() ?? "") initialized.")
         initializeSDK()
         _aasdk?.observer = observer
         _aasdk?.options = opDic
