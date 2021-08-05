@@ -20,7 +20,7 @@ class AAConnector: NSObject, URLSessionDelegate {
     private var immediateQueue = Queue<AARequestBlockHolder>()
     private var events = [AnyHashable]()
     private var eventsV2 = [AnyHashable]()
-    private var collectableEvents: [AnyHashable]?
+    private var collectableEvents = [AnyHashable]()
     private var collectableErrorEvents = [AnyHashable]()
     private var backgroundUpdateTask: UIBackgroundTaskIdentifier! = .invalid
     private var timer: Timer?
@@ -81,7 +81,7 @@ class AAConnector: NSObject, URLSessionDelegate {
 
     func addCollectableEvent(forDispatch event: AACollectableEvent?) {
         if let event = event {
-            collectableEvents?.append(event)
+            collectableEvents.append(event)
         }
     }
 
@@ -97,7 +97,7 @@ class AAConnector: NSObject, URLSessionDelegate {
 
 // MARK: - Private
     func sendingBlocked() -> Bool {
-        if immediateQueue.isEmpty {
+        if immediateQueue.isEmpty && !hasBatchEvents() {
             return true
         } else if (immediateQueue.size() < 2) {
             let holder = immediateQueue.peek()
@@ -249,7 +249,7 @@ class AAConnector: NSObject, URLSessionDelegate {
     }
 
     func hasBatchEvents() -> Bool {
-        return (events.count) > 0 || (eventsV2.count) > 0 || (collectableEvents?.count ?? 0) > 0
+        return (events.count) > 0 || (eventsV2.count) > 0 || (collectableEvents.count) > 0
     }
 
     func enqueueBatchEventRequests() {
@@ -269,19 +269,19 @@ class AAConnector: NSObject, URLSessionDelegate {
             enqueueRequest(request, responseWasErrorBlock: responseWasErrorBlock, responseWasReceivedBlock: responseWasReceivedBlock)
         }
 
-        if (eventsV2.count ) > 0 {
+        if (eventsV2.count) > 0 {
             let request = AABatchEventRequest(events: eventsV2, forVersion: 2)
             eventsV2.removeAll()
             enqueueRequest(request, responseWasErrorBlock: responseWasErrorBlock, responseWasReceivedBlock: responseWasReceivedBlock)
         }
 
-        if (collectableEvents?.count ?? 0) > 0 {
+        if (collectableEvents.count) > 0 {
             let request = AACollectableEventRequest(events: collectableEvents)
-            collectableEvents?.removeAll()
+            collectableEvents.removeAll()
             enqueueRequest(request, responseWasErrorBlock: responseWasErrorBlock, responseWasReceivedBlock: responseWasReceivedBlock)
         }
 
-        if (collectableErrorEvents.count ) > 0 {
+        if (collectableErrorEvents.count) > 0 {
             let request = AACollectableErrorRequest(events: collectableErrorEvents)
             collectableErrorEvents.removeAll()
             enqueueRequest(request, responseWasErrorBlock: responseWasErrorBlock, responseWasReceivedBlock: responseWasReceivedBlock)
