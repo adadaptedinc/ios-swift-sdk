@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -603,7 +603,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F46A657A24E19DA1007CCE6B /* Build configuration list for PBXNativeTarget "AASwiftSDK" */;
 			buildPhases = (
-				DF6CFCA526AB156F005477DF /* Generate Symantic Version */,
 				F46A656124E19DA1007CCE6B /* Headers */,
 				F46A656224E19DA1007CCE6B /* Sources */,
 				F46A656324E19DA1007CCE6B /* Frameworks */,
@@ -760,28 +759,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		DF6CFCA526AB156F005477DF /* Generate Symantic Version */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Generate Symantic Version";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#! /bin/bash\n\necho \"Updating version/build number from git...\"\nplist=${PROJECT_DIR}/${INFOPLIST_FILE}\n\nversionnum=`git describe | awk '{split($0,a,\"-\"); print a[1]}'`\nbuildnum=`git describe | awk '{split($0,a,\"-\"); print a[1] \"-\" a[2]}'`\nbundleid=\"com.adadapted.AASwiftSDK\"\nif [[ \"${versionnum}\" == \"\" ]]; then\n    echo \"No version number from git\"\n    exit 2\nfi\n\nif [[ \"${buildnum}\" == \"\" ]]; then\n    echo \"No build number from git\"\n    exit 2\nfi\n\n/usr/libexec/Plistbuddy -c \"Set CFBundleShortVersionString $versionnum\" \"${plist}\"\necho \"Updated version number to $versionnum\"\n/usr/libexec/Plistbuddy -c \"Set CFBundleVersion $buildnum\" \"${plist}\"\necho \"Updated build number to $buildnum\"\n/usr/libexec/Plistbuddy -c \"Set CFBundleIdentifier $bundleid\" \"${plist}\"\necho \"Updated bundle id to $bundleid\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F46A656224E19DA1007CCE6B /* Sources */ = {
