@@ -184,7 +184,11 @@ class AAHelper: NSObject {
     }
 
     class func bundleVersion() -> String? {
-        return Bundle(for: self).infoDictionary!["CFBundleShortVersionString"] as? String
+        return Bundle(for: self).infoDictionary!["CFBundleVersion"] as? String
+    }
+
+    class func bundleID() -> String? {
+        return Bundle(for: self).bundleIdentifier
     }
     
     class func currentTimezone() -> String? {
@@ -345,10 +349,6 @@ class AAHelper: NSObject {
             blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0)
         )
-    }
-
-    class func bundleID() -> String? {
-        return Bundle(for: self).bundleIdentifier
     }
     
     class func deviceModelName() -> String {
