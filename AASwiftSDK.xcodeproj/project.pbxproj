@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -604,6 +604,7 @@
 			buildConfigurationList = F46A657A24E19DA1007CCE6B /* Build configuration list for PBXNativeTarget "AASwiftSDK" */;
 			buildPhases = (
 				F46A656124E19DA1007CCE6B /* Headers */,
+				DFAA529A26C2D2D50039C15C /* Generate version number */,
 				F46A656224E19DA1007CCE6B /* Sources */,
 				F46A656324E19DA1007CCE6B /* Frameworks */,
 				F46A656424E19DA1007CCE6B /* Resources */,
@@ -759,6 +760,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DFAA529A26C2D2D50039C15C /* Generate version number */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate version number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Updating sdk version number from git...\"\nplist=${PROJECT_DIR}/${INFOPLIST_FILE}\n\nversionnum=`git describe | awk '{split($0,a,\"-\"); print a[1]}'`\nif [[ \"${versionnum}\" == \"\" ]]; then\n    echo \"No version number from git\"\n    exit 2\nfi\n\n/usr/libexec/Plistbuddy -c \"Set CFBundleShortVersionString $versionnum\" \"${plist}\"\necho \"Updated version number to $versionnum\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F46A656224E19DA1007CCE6B /* Sources */ = {
@@ -1056,7 +1079,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.20;
+				MARKETING_VERSION = 0.1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.AASwiftSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = NO;
@@ -1092,7 +1115,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.20;
+				MARKETING_VERSION = 0.1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.AASwiftSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = NO;
