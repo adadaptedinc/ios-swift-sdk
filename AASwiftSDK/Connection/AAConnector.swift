@@ -99,7 +99,7 @@ class AAConnector: NSObject, URLSessionDelegate {
     func sendingBlocked() -> Bool {
         if immediateQueue.isEmpty && !hasBatchEvents() {
             return true
-        } else if (immediateQueue.size() < 2) {
+        } else if (immediateQueue.size() > 0) {
             let holder = immediateQueue.peek()
             let aaRequest = holder?.request
             if aaRequest is AAInitRequest {
