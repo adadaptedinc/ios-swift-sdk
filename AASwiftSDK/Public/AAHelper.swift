@@ -175,6 +175,7 @@ let kEventAppEnter = "app_enter"
 let kEventAppExit = "app_exit"
 let kEventCustomEvent = "custom"
 let kEventAnomaly = "anomaly"
+let kEventInvisibleImpression = "invisible_impression"
 
 var _screenSize = CGSize.zero
 
@@ -217,34 +218,34 @@ class AAHelper: NSObject {
 
     class func actionString(forInt type: AASDKActionType) -> String? {
         switch type {
-        case AASDKActionType.kActionLink:
-                return "l"
-        case AASDKActionType.kActionAppDownload:
-                return "a"
-        case AASDKActionType.kActionPopup:
-                return "p"
-        case AASDKActionType.kActionNone:
-                return "n"
-        case AASDKActionType.kActionContent:
-                return "c"
-        case AASDKActionType.kActionDelegate:
-                return "d"
+        case .kActionLink:
+            return "l"
+        case .kActionAppDownload:
+            return "a"
+        case .kActionPopup:
+            return "p"
+        case .kActionNone:
+            return "n"
+        case .kActionContent:
+            return "c"
+        case .kActionDelegate:
+            return "d"
         }
     }
 
     class func actionType(from string: String?) -> AASDKActionType {
         if string == "l" || string == "e" {
-            return AASDKActionType.kActionLink
+            return .kActionLink
         } else if string == "a" {
-            return AASDKActionType.kActionAppDownload
+            return .kActionAppDownload
         } else if string == "p" {
-            return AASDKActionType.kActionPopup
+            return .kActionPopup
         } else if string == "n" {
-            return AASDKActionType.kActionNone
+            return .kActionNone
         } else if string == "d" {
-            return AASDKActionType.kActionDelegate
+            return .kActionDelegate
         } else if string == "c" {
-            return AASDKActionType.kActionContent
+            return .kActionContent
         }
 
         print("bad action type string requested '\(string ?? "")' - should be found in AASDKActionType: taking no action")
@@ -253,26 +254,28 @@ class AAHelper: NSObject {
 
     class func string(for type: AAEventType) -> String? {
         switch type {
-        case AAEventType.aa_EVENT_EVENT:
-                return kEventEvent
-        case AAEventType.aa_EVENT_INTERACTION:
-                return kEventInteraction
-        case AAEventType.aa_EVENT_IMPRESSION_STARTED:
-                return kEventImpressionStarted
-        case AAEventType.aa_EVENT_IMPRESSION_END:
-                return kEventImpressionEnd
-        case AAEventType.aa_EVENT_POPUP_BEGIN:
-                return kEventPopupBegin
-        case AAEventType.aa_EVENT_POPUP_END:
-                return kEventPopupEnd
-        case AAEventType.aa_EVENT_APP_ENTER:
-                return kEventAppEnter
-        case AAEventType.aa_EVENT_APP_EXIT:
-                return kEventAppExit
-        case AAEventType.aa_EVENT_CUSTOM_EVENT:
-                return kEventCustomEvent
-        case AAEventType.aa_EVENT_ANOMALY:
-                return kEventAnomaly
+        case .aa_EVENT_EVENT:
+            return kEventEvent
+        case .aa_EVENT_INTERACTION:
+            return kEventInteraction
+        case .aa_EVENT_IMPRESSION_STARTED:
+            return kEventImpressionStarted
+        case .aa_EVENT_IMPRESSION_END:
+            return kEventImpressionEnd
+        case .aa_EVENT_POPUP_BEGIN:
+            return kEventPopupBegin
+        case .aa_EVENT_POPUP_END:
+            return kEventPopupEnd
+        case .aa_EVENT_APP_ENTER:
+            return kEventAppEnter
+        case .aa_EVENT_APP_EXIT:
+            return kEventAppExit
+        case .aa_EVENT_CUSTOM_EVENT:
+            return kEventCustomEvent
+        case .aa_EVENT_ANOMALY:
+            return kEventAnomaly
+        case .aa_EVENT_INSIVIBLE_IMPRESSION:
+            return kEventInvisibleImpression
         }
     }
     

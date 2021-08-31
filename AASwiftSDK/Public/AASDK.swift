@@ -1046,6 +1046,14 @@ extension AASDK {
         AASDK.add(toCurrentlyDisplayedImages: ad)
     }
 
+    class func trackInvisibleImpression(for ad: AAAd?) {
+        if ad == nil {
+            return
+        }
+        print("")
+        _aasdk?.fireTrackEventOf(.aa_EVENT_INSIVIBLE_IMPRESSION, for: ad)
+    }
+
     class func trackInteraction(with ad: AAAd?, withPath eventPath: String?) {
         if ad == nil {
             return

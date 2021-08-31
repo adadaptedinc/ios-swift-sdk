@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF33FD5726DE99AE00AC9A68 /* AAZoneViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF33FD5626DE99AE00AC9A68 /* AAZoneViewTests.swift */; };
+		DF3F97DE26DE8F93000240FD /* OffScreenAdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3F97DD26DE8F93000240FD /* OffScreenAdController.swift */; };
 		F414F03825115E5400F2811C /* AAAdTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF4D25115E5300F2811C /* AAAdTimeline.swift */; };
 		F414F03B25115E5400F2811C /* AAPayloadTrackingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF5025115E5300F2811C /* AAPayloadTrackingResponse.swift */; };
 		F414F04125115E5400F2811C /* AABatchEventRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF5625115E5300F2811C /* AABatchEventRequest.swift */; };
@@ -148,6 +150,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DF33FD5626DE99AE00AC9A68 /* AAZoneViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAZoneViewTests.swift; sourceTree = "<group>"; };
+		DF3F97DD26DE8F93000240FD /* OffScreenAdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffScreenAdController.swift; sourceTree = "<group>"; };
 		F414EF4D25115E5300F2811C /* AAAdTimeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAAdTimeline.swift; sourceTree = "<group>"; };
 		F414EF5025115E5300F2811C /* AAPayloadTrackingResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAPayloadTrackingResponse.swift; sourceTree = "<group>"; };
 		F414EF5625115E5300F2811C /* AABatchEventRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AABatchEventRequest.swift; sourceTree = "<group>"; };
@@ -321,15 +325,15 @@
 		F46A656824E19DA1007CCE6B /* AASwiftSDK */ = {
 			isa = PBXGroup;
 			children = (
-				F474EEB725474491002439FD /* Constants.swift */,
-				F46B95C625486EFA0025AC5E /* Protocols.swift */,
-				F46A656A24E19DA1007CCE6B /* Info.plist */,
-				F46DB57E24EADE8200A81CBF /* Public */,
 				F46DB57F24EADEC200A81CBF /* AdObjects */,
-				F46DB58224EAE0EE00A81CBF /* Helpers */,
 				F46DB58324EAE2C000A81CBF /* Connection */,
-				F46DB58424EAE2EB00A81CBF /* Requests */,
+				F474EEB725474491002439FD /* Constants.swift */,
 				F46DB59024EAE45200A81CBF /* Frameworks */,
+				F46DB58224EAE0EE00A81CBF /* Helpers */,
+				F46A656A24E19DA1007CCE6B /* Info.plist */,
+				F46B95C625486EFA0025AC5E /* Protocols.swift */,
+				F46DB57E24EADE8200A81CBF /* Public */,
+				F46DB58424EAE2EB00A81CBF /* Requests */,
 			);
 			path = AASwiftSDK;
 			sourceTree = "<group>";
@@ -337,14 +341,15 @@
 		F46A657324E19DA1007CCE6B /* AASwiftSDKTests */ = {
 			isa = PBXGroup;
 			children = (
-				F48E009925509FFA00AA8388 /* Mocks */,
-				F48E008F25509E6700AA8388 /* AASDKTests.swift */,
 				F46C525D255AFC5000339092 /* AAContentPayloadTests.swift */,
+				F48E008F25509E6700AA8388 /* AASDKTests.swift */,
+				DF33FD5626DE99AE00AC9A68 /* AAZoneViewTests.swift */,
 				F46C5265255B32C700339092 /* AdContentTests.swift */,
+				F46A657624E19DA1007CCE6B /* Info.plist */,
 				F4838C5C25534C7D004E26B4 /* LoggerTests.swift */,
+				F48E009925509FFA00AA8388 /* Mocks */,
 				F480BE052554A4710098899A /* RegistrarTests.swift */,
 				F48E009525509F1E00AA8388 /* ReportManagerTests.swift */,
-				F46A657624E19DA1007CCE6B /* Info.plist */,
 			);
 			path = AASwiftSDKTests;
 			sourceTree = "<group>";
@@ -353,19 +358,20 @@
 			isa = PBXGroup;
 			children = (
 				F484BAC4251D2DB2007C19DD /* AASwiftSDK */,
-				F46A65BE24E1DDB9007CCE6B /* SwiftExampleApp.entitlements */,
 				F46A65A924E1DDA5007CCE6B /* AppDelegate.swift */,
-				F46A65AB24E1DDA5007CCE6B /* SceneDelegate.swift */,
-				F46A65AD24E1DDA5007CCE6B /* ViewController.swift */,
+				F46A65B524E1DDA6007CCE6B /* Assets.xcassets */,
+				F4A2046B24E2EFB4003F909D /* cropped-AdAdapted-Logo.png */,
+				F4A2047524E2F29A003F909D /* DefaultListItems.plist */,
+				F46A65BA24E1DDA6007CCE6B /* Info.plist */,
+				F46A65B724E1DDA6007CCE6B /* LaunchScreen.storyboard */,
 				F4A2047324E2F07C003F909D /* LaunchViewController.swift */,
 				F46A65AF24E1DDA5007CCE6B /* Main.storyboard */,
-				F46A65B524E1DDA6007CCE6B /* Assets.xcassets */,
-				F46A65B724E1DDA6007CCE6B /* LaunchScreen.storyboard */,
-				F46A65BA24E1DDA6007CCE6B /* Info.plist */,
-				F46A65B224E1DDA5007CCE6B /* SwiftExampleApp.xcdatamodeld */,
-				F4A2046B24E2EFB4003F909D /* cropped-AdAdapted-Logo.png */,
+				DF3F97DD26DE8F93000240FD /* OffScreenAdController.swift */,
+				F46A65AB24E1DDA5007CCE6B /* SceneDelegate.swift */,
 				F4A2047124E2F03C003F909D /* SearchTextField.swift */,
-				F4A2047524E2F29A003F909D /* DefaultListItems.plist */,
+				F46A65BE24E1DDB9007CCE6B /* SwiftExampleApp.entitlements */,
+				F46A65B224E1DDA5007CCE6B /* SwiftExampleApp.xcdatamodeld */,
+				F46A65AD24E1DDA5007CCE6B /* ViewController.swift */,
 			);
 			path = SwiftExampleApp;
 			sourceTree = "<group>";
@@ -374,25 +380,25 @@
 			isa = PBXGroup;
 			children = (
 				F4730AB5252E2ED9003E7C52 /* AASwiftSDK */,
-				F46A65E124E1E130007CCE6B /* ObjCExampleApp.entitlements */,
 				F46A65C624E1E0BA007CCE6B /* AppDelegate.h */,
 				F46A65C724E1E0BA007CCE6B /* AppDelegate.m */,
-				F46A65C924E1E0BA007CCE6B /* SceneDelegate.h */,
-				F46A65CA24E1E0BA007CCE6B /* SceneDelegate.m */,
-				F4A2047724E32329003F909D /* LaunchViewController.h */,
-				F4A2047824E3234D003F909D /* LaunchViewController.m */,
-				F46A65CC24E1E0BA007CCE6B /* ViewController.h */,
-				F46A65CD24E1E0BA007CCE6B /* ViewController.m */,
-				F4A2047A24E323DD003F909D /* KeywordInterceptor.h */,
-				F4A2047B24E323F8003F909D /* KeywordInterceptor.m */,
-				F46A65CF24E1E0BA007CCE6B /* Main.storyboard */,
 				F46A65D524E1E0BB007CCE6B /* Assets.xcassets */,
 				F46A65DA24E1E0BB007CCE6B /* Info.plist */,
+				F4A2047A24E323DD003F909D /* KeywordInterceptor.h */,
+				F4A2047B24E323F8003F909D /* KeywordInterceptor.m */,
+				F4A2047724E32329003F909D /* LaunchViewController.h */,
+				F4A2047824E3234D003F909D /* LaunchViewController.m */,
 				F46A65DB24E1E0BB007CCE6B /* main.m */,
+				F46A65CF24E1E0BA007CCE6B /* Main.storyboard */,
+				F4A2047D24E324C4003F909D /* ObjCExampleApp-Bridging-Header.h */,
+				F46A65E124E1E130007CCE6B /* ObjCExampleApp.entitlements */,
 				F46A65D224E1E0BA007CCE6B /* ObjCExampleApp.xcdatamodeld */,
 				F4A2047E24E324C5003F909D /* ObjCSearchTextField.swift */,
-				F4A2047D24E324C4003F909D /* ObjCExampleApp-Bridging-Header.h */,
+				F46A65C924E1E0BA007CCE6B /* SceneDelegate.h */,
+				F46A65CA24E1E0BA007CCE6B /* SceneDelegate.m */,
 				F4A2048024E3264B003F909D /* Toast.swift */,
+				F46A65CC24E1E0BA007CCE6B /* ViewController.h */,
+				F46A65CD24E1E0BA007CCE6B /* ViewController.m */,
 			);
 			path = ObjCExampleApp;
 			sourceTree = "<group>";
@@ -400,13 +406,13 @@
 		F46DB57E24EADE8200A81CBF /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				F414EFAD25115E5300F2811C /* AAContentPayload.swift */,
 				F414EFB325115E5300F2811C /* AAAdAdaptedJSONZoneView.swift */,
-				F414EFB625115E5300F2811C /* AdAdaptedZoneView.swift */,
-				F467B17B24E43EAE00B89A5F /* AASDK.swift */,
-				F44F2F6A251900FB00B96C8C /* AdContent.swift */,
-				F44F2F702519078A00B96C8C /* AAZoneView.swift */,
+				F414EFAD25115E5300F2811C /* AAContentPayload.swift */,
 				F44F2F86251915D000B96C8C /* AADetailedListItem.swift */,
+				F467B17B24E43EAE00B89A5F /* AASDK.swift */,
+				F44F2F702519078A00B96C8C /* AAZoneView.swift */,
+				F414EFB625115E5300F2811C /* AdAdaptedZoneView.swift */,
+				F44F2F6A251900FB00B96C8C /* AdContent.swift */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -432,8 +438,8 @@
 		F46DB58024EADEE300A81CBF /* AdProviders */ = {
 			isa = PBXGroup;
 			children = (
-				F414EFF225115E5300F2811C /* AAAdAdaptedAdProvider.swift */,
 				F44F2F762519081A00B96C8C /* AAAbstractAdProvider.swift */,
+				F414EFF225115E5300F2811C /* AAAdAdaptedAdProvider.swift */,
 			);
 			path = AdProviders;
 			sourceTree = "<group>";
@@ -441,8 +447,8 @@
 		F46DB58124EAE0D600A81CBF /* Popup */ = {
 			isa = PBXGroup;
 			children = (
-				F414EF6B25115E5300F2811C /* AAPopupViewController.swift */,
 				F414EFBC25115E5300F2811C /* AAPopupView.swift */,
+				F414EF6B25115E5300F2811C /* AAPopupViewController.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -453,9 +459,9 @@
 				F44F2F9025191F2F00B96C8C /* AAHelper.swift */,
 				F46907F22549D2620097288C /* Logger.swift */,
 				F480BDF5255486C40098899A /* NotificationCenterWrapper.swift */,
+				F467AE86252B7931003E02DB /* Queue.swift */,
 				F46B95D82548A0140025AC5E /* Registrar.swift */,
 				F46907FA2549F67E0097288C /* ReportManager.swift */,
-				F467AE86252B7931003E02DB /* Queue.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -472,17 +478,17 @@
 		F46DB58424EAE2EB00A81CBF /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				F414EF9125115E5300F2811C /* AAReportableSessionEvent.swift */,
-				F414EF5A25115E5300F2811C /* AAGenericResponse.swift */,
-				F414EFEC25115E5300F2811C /* AAGenericRequest.swift */,
 				F414EF6225115E5300F2811C /* AAErrorResponse.swift */,
-				F46DB58D24EAE3DF00A81CBF /* Init */,
-				F46DB58B24EAE3D200A81CBF /* UpdateAds */,
-				F46DB58A24EAE3CD00A81CBF /* TrackEvent */,
-				F46DB58924EAE3C400A81CBF /* KeywordIntercept */,
-				F46DB58824EAE3B100A81CBF /* v2Batchable */,
+				F414EFEC25115E5300F2811C /* AAGenericRequest.swift */,
+				F414EF5A25115E5300F2811C /* AAGenericResponse.swift */,
+				F414EF9125115E5300F2811C /* AAReportableSessionEvent.swift */,
 				F46DB58724EAE39F00A81CBF /* EventCollector */,
+				F46DB58D24EAE3DF00A81CBF /* Init */,
+				F46DB58924EAE3C400A81CBF /* KeywordIntercept */,
 				F46DB58624EAE39000A81CBF /* PayloadService */,
+				F46DB58A24EAE3CD00A81CBF /* TrackEvent */,
+				F46DB58B24EAE3D200A81CBF /* UpdateAds */,
+				F46DB58824EAE3B100A81CBF /* v2Batchable */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -490,10 +496,10 @@
 		F46DB58624EAE39000A81CBF /* PayloadService */ = {
 			isa = PBXGroup;
 			children = (
-				F414EF5025115E5300F2811C /* AAPayloadTrackingResponse.swift */,
 				F414EF6725115E5300F2811C /* AAPayloadPickupRequest.swift */,
 				F414EF6C25115E5300F2811C /* AAPayloadPickupResponse.swift */,
 				F414EFCC25115E5300F2811C /* AAPayloadTrackingRequest.swift */,
+				F414EF5025115E5300F2811C /* AAPayloadTrackingResponse.swift */,
 			);
 			path = PayloadService;
 			sourceTree = "<group>";
@@ -501,12 +507,12 @@
 		F46DB58724EAE39F00A81CBF /* EventCollector */ = {
 			isa = PBXGroup;
 			children = (
-				F414EF6425115E5300F2811C /* AACollectableErrorResponse.swift */,
-				F414EF6E25115E5300F2811C /* AACollectableEventRequest.swift */,
-				F414EF7325115E5300F2811C /* AACollectableEventResponse.swift */,
 				F414EFDA25115E5300F2811C /* AACollectableError.swift */,
 				F414EFE725115E5300F2811C /* AACollectableErrorRequest.swift */,
+				F414EF6425115E5300F2811C /* AACollectableErrorResponse.swift */,
 				F414EFE825115E5300F2811C /* AACollectableEvent.swift */,
+				F414EF6E25115E5300F2811C /* AACollectableEventRequest.swift */,
+				F414EF7325115E5300F2811C /* AACollectableEventResponse.swift */,
 			);
 			path = EventCollector;
 			sourceTree = "<group>";
@@ -522,11 +528,11 @@
 		F46DB58924EAE3C400A81CBF /* KeywordIntercept */ = {
 			isa = PBXGroup;
 			children = (
-				F414EF7525115E5300F2811C /* AAKeywordInterceptInitResponse.swift */,
-				F414EFC525115E5300F2811C /* AAKeywordInterceptInitRequest.swift */,
 				F414EFCB25115E5300F2811C /* AAKeywordInterceptBatchEventRequest.swift */,
 				F414EFCF25115E5300F2811C /* AAKeywordInterceptBatchEventResponse.swift */,
 				F414EFD525115E5300F2811C /* AAKeywordInterceptEvent.swift */,
+				F414EFC525115E5300F2811C /* AAKeywordInterceptInitRequest.swift */,
+				F414EF7525115E5300F2811C /* AAKeywordInterceptInitResponse.swift */,
 			);
 			path = KeywordIntercept;
 			sourceTree = "<group>";
@@ -543,8 +549,8 @@
 		F46DB58B24EAE3D200A81CBF /* UpdateAds */ = {
 			isa = PBXGroup;
 			children = (
-				F414EF7125115E5300F2811C /* AAUpdateAdsResponse.swift */,
 				F414EFC025115E5300F2811C /* AAUpdateAdsRequest.swift */,
+				F414EF7125115E5300F2811C /* AAUpdateAdsResponse.swift */,
 			);
 			path = UpdateAds;
 			sourceTree = "<group>";
@@ -552,8 +558,8 @@
 		F46DB58D24EAE3DF00A81CBF /* Init */ = {
 			isa = PBXGroup;
 			children = (
-				F414EF9625115E5300F2811C /* AAInitResponse.swift */,
 				F414EFED25115E5300F2811C /* AAInitRequest.swift */,
+				F414EF9625115E5300F2811C /* AAInitResponse.swift */,
 			);
 			path = Init;
 			sourceTree = "<group>";
@@ -580,8 +586,8 @@
 			isa = PBXGroup;
 			children = (
 				F48E009A2550A00B00AA8388 /* MockAAConnector.swift */,
-				F480BDFD255493D00098899A /* MockNotificationCenter.swift */,
 				F46B151E2559D11900E982FA /* MockAASDKObserver.swift */,
+				F480BDFD255493D00098899A /* MockNotificationCenter.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -857,6 +863,7 @@
 				F480BDFE255493D00098899A /* MockNotificationCenter.swift in Sources */,
 				F48E009025509E6700AA8388 /* AASDKTests.swift in Sources */,
 				F46C525E255AFC5000339092 /* AAContentPayloadTests.swift in Sources */,
+				DF33FD5726DE99AE00AC9A68 /* AAZoneViewTests.swift in Sources */,
 				F480BE062554A4710098899A /* RegistrarTests.swift in Sources */,
 				F48E009625509F1E00AA8388 /* ReportManagerTests.swift in Sources */,
 				F48E009B2550A00B00AA8388 /* MockAAConnector.swift in Sources */,
@@ -868,6 +875,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4A2047224E2F03C003F909D /* SearchTextField.swift in Sources */,
+				DF3F97DE26DE8F93000240FD /* OffScreenAdController.swift in Sources */,
 				F4A2047424E2F07C003F909D /* LaunchViewController.swift in Sources */,
 				F46A65AE24E1DDA5007CCE6B /* ViewController.swift in Sources */,
 				F46A65AA24E1DDA5007CCE6B /* AppDelegate.swift in Sources */,
