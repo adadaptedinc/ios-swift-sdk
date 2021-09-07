@@ -24,6 +24,7 @@ import WebKit
 @objc public class AAZoneView: UIView, AASDKObserver, UIGestureRecognizerDelegate, AAZoneRenderer {
 
     @IBInspectable public var zoneId: String? = ""
+    var isAdVisible = true
     internal weak var zoneOwner: AAZoneViewOwner?
     private(set) var type: AdTypeAndSource?
     private var provider: AAAbstractAdProvider?
@@ -144,6 +145,10 @@ import WebKit
         }
     }
 
+    public func setAdZoneVisibility(isViewable: Bool) {
+        isAdVisible = isViewable
+    }
+
 // MARK: - <AAZoneRenderer> used by the AAAbstractAdProvider
     func containerSize() -> CGSize {
         let size = frame.size
@@ -158,6 +163,11 @@ import WebKit
     func provider(_ provider: AAAbstractAdProvider?, didLoadAdView adView: UIView?, for ad: AAAd?) {
         pointView(to: adView)
         AASDK.fireHTMLTracker(incomingAd: ad, incomingView: zoneOwner?.viewControllerForPresentingModalView()?.view)
+        if !isAdVisible {
+            AASDK.trackInvisibleImpression(for: ad)
+        } else {
+            AASDK.trackImpressionStarted(for: ad)
+        }
         if zoneOwner?.responds(to: #selector(AAZoneViewOwner.zoneViewDidLoadZone(_:))) ?? false {
             zoneOwner?.zoneViewDidLoadZone?(self)
         }

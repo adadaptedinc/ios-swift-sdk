@@ -74,7 +74,6 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
 
         if oldAd == currentAd && !forceReload {
             AASDK.logDebugMessage("AdAdapted Zone \(String(describing: zoneId)) reload not needed.", type: AASDK.DEBUG_GENERAL)
-            AASDK.trackImpressionStarted(for: currentAd)
             //zoneRenderer.handleReload(of: currentAd)
         } else if currentAd != nil {
 
@@ -123,7 +122,6 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
                 default:
                     zoneRenderer!.provider(self, didFailToLoadZone: zoneId, ofType: type!, message: "Unknown AdAdapted ad type")
             }
-            AASDK.trackImpressionStarted(for: currentAd)
         } else {
             if AASDK.isReadyForUse() {
                 zoneRenderer?.provider(self, didFailToLoadZone: zoneId, ofType: type!, message: "No AdAdapted ad for zone")
@@ -350,8 +348,12 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
 
     @objc func coming(toForeground notification: Notification?) {
         if !isHidden {
-            if let currentAd = currentAd {
-                AASDK.trackImpressionStarted(for: currentAd)
+            if let currentAd = currentAd, let zoneView = zoneView {
+                if !zoneView.isAdVisible {
+                    AASDK.trackInvisibleImpression(for: currentAd)
+                } else {
+                    AASDK.trackImpressionStarted(for: currentAd)
+                }
             }
         }
         fireTimer()
