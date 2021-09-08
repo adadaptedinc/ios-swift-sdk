@@ -65,6 +65,9 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
         currentAd = AASDK.ad(forZone: zoneId, withAltImage: nil)
 
         if let oldAd = oldAd {
+            if zoneView?.isAdVisible == false {
+                AASDK.trackInvisibleImpression(for: oldAd)
+            }
             AASDK.trackImpressionEnded(for: oldAd)
         }
 
@@ -133,6 +136,9 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
 
     override func destroy() {
         stopTimer()
+        if zoneView?.isAdVisible == false {
+            AASDK.trackInvisibleImpression(for: currentAd)
+        }
         AASDK.trackImpressionEnded(for: currentAd)
 
         if currentAd?.type == AdTypeAndSource.kAdAdaptedHTMLAd && currentWebAdView != nil {
@@ -186,6 +192,9 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
     override func adWasHidden() {
         isHidden = true
         if let currentAd = currentAd {
+            if zoneView?.isAdVisible == false {
+                AASDK.trackInvisibleImpression(for: currentAd)
+            }
             AASDK.trackImpressionEnded(for: currentAd)
         }
         stopTimer()
@@ -340,6 +349,9 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
     @objc func going(toBackground notification: Notification?) {
         if !isHidden {
             if let currentAd = currentAd {
+                if zoneView?.isAdVisible == false {
+                    AASDK.trackInvisibleImpression(for: currentAd)
+                }
                 AASDK.trackImpressionEnded(for: currentAd)
             }
         }
