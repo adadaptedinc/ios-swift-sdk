@@ -25,6 +25,7 @@ import WebKit
 
     @IBInspectable public var zoneId: String? = ""
     var isAdVisible = true
+    var impressionTracked = false
     internal weak var zoneOwner: AAZoneViewOwner?
     private(set) var type: AdTypeAndSource?
     private var provider: AAAbstractAdProvider?
@@ -145,8 +146,19 @@ import WebKit
         }
     }
 
-    public func setAdZoneVisibility(isViewable: Bool) {
+    @objc public func setAdZoneVisibility(isViewable: Bool) {
         isAdVisible = isViewable
+
+        if isAdVisible {
+            adBecameVisible()
+        }
+    }
+
+    func adBecameVisible() {
+        if !impressionTracked {
+            AASDK.trackImpressionStarted(for: provider?.currentAd())
+            impressionTracked = true
+        }
     }
 
 // MARK: - <AAZoneRenderer> used by the AAAbstractAdProvider
@@ -163,9 +175,9 @@ import WebKit
     func provider(_ provider: AAAbstractAdProvider?, didLoadAdView adView: UIView?, for ad: AAAd?) {
         pointView(to: adView)
         AASDK.fireHTMLTracker(incomingAd: ad, incomingView: zoneOwner?.viewControllerForPresentingModalView()?.view)
-        if !isAdVisible {
-            AASDK.trackInvisibleImpression(for: ad)
-        } else {
+        impressionTracked = false
+
+        if isAdVisible {
             AASDK.trackImpressionStarted(for: ad)
         }
         if zoneOwner?.responds(to: #selector(AAZoneViewOwner.zoneViewDidLoadZone(_:))) ?? false {
