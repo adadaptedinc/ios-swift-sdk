@@ -192,9 +192,6 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
     override func adWasHidden() {
         isHidden = true
         if let currentAd = currentAd {
-            if zoneView?.isAdVisible == false {
-                AASDK.trackInvisibleImpression(for: currentAd)
-            }
             AASDK.trackImpressionEnded(for: currentAd)
         }
         stopTimer()
@@ -349,9 +346,6 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
     @objc func going(toBackground notification: Notification?) {
         if !isHidden {
             if let currentAd = currentAd {
-                if zoneView?.isAdVisible == false {
-                    AASDK.trackInvisibleImpression(for: currentAd)
-                }
                 AASDK.trackImpressionEnded(for: currentAd)
             }
         }
@@ -360,12 +354,8 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
 
     @objc func coming(toForeground notification: Notification?) {
         if !isHidden {
-            if let currentAd = currentAd, let zoneView = zoneView {
-                if !zoneView.isAdVisible {
-                    AASDK.trackInvisibleImpression(for: currentAd)
-                } else {
+            if let currentAd = currentAd {
                     AASDK.trackImpressionStarted(for: currentAd)
-                }
             }
         }
         fireTimer()
