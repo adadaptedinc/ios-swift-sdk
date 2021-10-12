@@ -686,7 +686,7 @@ var lastCame: Date?
             if appID != nil && (appID?.count ?? 0) > 0 {
                 if updateTimer == nil {
                     updateTimer = Timer.scheduledTimer(
-                        timeInterval: 30,
+                        timeInterval: 300,
                         target: self,
                         selector: #selector(updateTimerFired),
                         userInfo: nil,
