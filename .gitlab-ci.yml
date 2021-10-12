@@ -9,7 +9,7 @@ build_project:
   stage: build
   script:
     - xcodebuild clean -project AASwiftSDK.xcodeproj -scheme AASwiftSDK | xcpretty
-    - xcodebuild build -project AASwiftSDK.xcodeproj -scheme AASwiftSDK -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.4' | xcpretty -s
+    - xcodebuild build -project AASwiftSDK.xcodeproj -scheme AASwiftSDK -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.5' | xcpretty -s
     #- xcodebuild test -project AASwiftSDK.xcodeproj -scheme AASwiftSDK -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.0' | xcpretty -s
   tags:
     - ios
