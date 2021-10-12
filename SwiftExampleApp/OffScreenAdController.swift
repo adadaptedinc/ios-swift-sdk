@@ -18,6 +18,7 @@ class OffScreenAdContoller: UIViewController, UIScrollViewDelegate, AAZoneViewOw
         super.viewDidLoad()
         offScreenScrollView.delegate = self
         offScreenZoneView.setZoneOwner(self)
+        offScreenZoneView.setAdZoneVisibility(isViewable: false)
     }
 
     func viewControllerForPresentingModalView() -> UIViewController? {
