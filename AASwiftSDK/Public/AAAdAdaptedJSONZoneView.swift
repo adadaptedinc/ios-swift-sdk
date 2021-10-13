@@ -15,7 +15,7 @@ class AAAdAdaptedJSONZoneView: AAZoneView {
     }
 
     func layoutAssets(_ adAssets: [AnyHashable : Any]?) {
-        
+
     }
 
     /// \brief DO NOT OVERRIDE
@@ -33,13 +33,13 @@ class AAAdAdaptedJSONZoneView: AAZoneView {
 
     override func deliverAdPayload() {
         DispatchQueue.main.async(execute: { [self] in
-            if adProvider()?.currentAd()!.jsonAdPayload == nil || adProvider()?.currentAd()?.jsonAdPayload?.count == 0 {
-                let message = "ad \(String(describing: adProvider()?.currentAd()!.adID)) in zone \(String(describing: zoneId)) missing json payload"
+            if adProvider()?.getCurrentAd()!.jsonAdPayload == nil || adProvider()?.getCurrentAd()?.jsonAdPayload?.count == 0 {
+                let message = "ad \(String(describing: adProvider()?.getCurrentAd()!.adID)) in zone \(String(describing: zoneId)) missing json payload"
                 Logger.consoleLogError(nil, withMessage: message, suppressTracking: true)
-                AASDK.trackAnomalyAdConfiguration(adProvider()?.currentAd(), message: message)
+                AASDK.trackAnomalyAdConfiguration(adProvider()?.getCurrentAd(), message: message)
                 adProvider()?.zoneRenderer!.provider(adProvider(), didFailToLoadZone: zoneId, ofType: AdTypeAndSource.kAdAdaptedJSONAd, message: "JSON ad payload missing")
             } else {
-                layoutAssets(adProvider()?.currentAd()!.jsonAdPayload)
+                layoutAssets(adProvider()?.getCurrentAd()!.jsonAdPayload)
             }
 
         })

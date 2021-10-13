@@ -58,7 +58,6 @@
 		F414F0D825115E5400F2811C /* AAAdAdaptedAdProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EFF225115E5300F2811C /* AAAdAdaptedAdProvider.swift */; };
 		F44F2F6B251900FB00B96C8C /* AdContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F6A251900FB00B96C8C /* AdContent.swift */; };
 		F44F2F712519078A00B96C8C /* AAZoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F702519078A00B96C8C /* AAZoneView.swift */; };
-		F44F2F772519081A00B96C8C /* AAAbstractAdProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F762519081A00B96C8C /* AAAbstractAdProvider.swift */; };
 		F44F2F87251915D000B96C8C /* AADetailedListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F86251915D000B96C8C /* AADetailedListItem.swift */; };
 		F44F2F9125191F2F00B96C8C /* AAHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F9025191F2F00B96C8C /* AAHelper.swift */; };
 		F45E204A2530AF7C0023F54F /* AASwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */; };
@@ -203,7 +202,6 @@
 		F414EFF225115E5300F2811C /* AAAdAdaptedAdProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAAdAdaptedAdProvider.swift; sourceTree = "<group>"; };
 		F44F2F6A251900FB00B96C8C /* AdContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdContent.swift; sourceTree = "<group>"; };
 		F44F2F702519078A00B96C8C /* AAZoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAZoneView.swift; sourceTree = "<group>"; };
-		F44F2F762519081A00B96C8C /* AAAbstractAdProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAAbstractAdProvider.swift; sourceTree = "<group>"; };
 		F44F2F86251915D000B96C8C /* AADetailedListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AADetailedListItem.swift; sourceTree = "<group>"; };
 		F44F2F9025191F2F00B96C8C /* AAHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AAHelper.swift; path = AASwiftSDK/Public/AAHelper.swift; sourceTree = SOURCE_ROOT; };
 		F4626470251BABFE004B8176 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -444,19 +442,10 @@
 				F414EF9825115E5300F2811C /* AAKeywordIntercept.swift */,
 				F414EFC425115E5300F2811C /* AAKeywordInterceptManager.swift */,
 				F414EF8C25115E5300F2811C /* AAWebAdView.swift */,
-				F46DB58024EADEE300A81CBF /* AdProviders */,
+				F414EFF225115E5300F2811C /* AAAdAdaptedAdProvider.swift */,
 				F46DB58124EAE0D600A81CBF /* Popup */,
 			);
 			path = AdObjects;
-			sourceTree = "<group>";
-		};
-		F46DB58024EADEE300A81CBF /* AdProviders */ = {
-			isa = PBXGroup;
-			children = (
-				F44F2F762519081A00B96C8C /* AAAbstractAdProvider.swift */,
-				F414EFF225115E5300F2811C /* AAAdAdaptedAdProvider.swift */,
-			);
-			path = AdProviders;
 			sourceTree = "<group>";
 		};
 		F46DB58124EAE0D600A81CBF /* Popup */ = {
@@ -816,7 +805,6 @@
 				F414F05B25115E5400F2811C /* AAUpdateAdsResponse.swift in Sources */,
 				F414F07525115E5400F2811C /* AAWebAdView.swift in Sources */,
 				F414F04E25115E5400F2811C /* AACollectableErrorResponse.swift in Sources */,
-				F44F2F772519081A00B96C8C /* AAAbstractAdProvider.swift in Sources */,
 				F414F08925115E5400F2811C /* AARequestBlockHolder.swift in Sources */,
 				F46907F32549D2620097288C /* Logger.swift in Sources */,
 				F414F06725115E5400F2811C /* AAAdZone.swift in Sources */,
