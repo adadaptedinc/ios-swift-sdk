@@ -22,9 +22,10 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
     private var targetOrientation: UIInterfaceOrientation!
 
 // MARK: - Overriding Abstract Methods
-    override init(zoneRenderer: AAZoneRenderer?, zone zoneId: String?, andType type: AdTypeAndSource) {
-        super.init(zoneRenderer: zoneRenderer, zone: zoneId, andType: type)
-        // depandcy injection would be cleaner here
+    override init(zoneRenderer: AAZoneRenderer?, zone zoneId: String?, andType type: AdTypeAndSource, zoneView: AAZoneView?) {
+        super.init(zoneRenderer: zoneRenderer, zone: zoneId, andType: type, zoneView: zoneView)
+
+        self.zoneView = zoneView
         useCachedImages = AASDK.shouldUseCachedImages()
         adLoaded = false
         isHidden = false
@@ -224,7 +225,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
             }
         }
 
-        if currentAd != nil && currentAd?.hideAfterInteraction != nil {
+        if currentAd != nil && currentAd?.hideAfterInteraction == true {
             if let currentAd = currentAd {
                 AASDK.remove(currentAd, fromZone: zoneId)
             }

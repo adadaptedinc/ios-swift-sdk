@@ -25,5 +25,4 @@ class MockAAConnector: AAConnector {
     override func addCollectableError(forDispatch event: AACollectableError?) {
         storedCollectableErrors.append(event)
     }
-    
 }

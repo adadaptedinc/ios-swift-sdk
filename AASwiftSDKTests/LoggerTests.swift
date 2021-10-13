@@ -9,9 +9,9 @@
 import XCTest
 @testable import AASwiftSDK
 
-class LoggerTests: XCTestCase {
-    let mockConnector = MockAAConnector()
-    let mockNotificationCenter = MockNotificationCenter()
+final class LoggerTests: XCTestCase {
+    private let mockConnector = MockAAConnector()
+    private let mockNotificationCenter = MockNotificationCenter()
     
     override func setUp() {
         ReportManager.createInstance(connector: mockConnector)
@@ -22,6 +22,7 @@ class LoggerTests: XCTestCase {
         Logger.consoleLogError(NSCocoaErrorDomain, withMessage: "testMessage", suppressTracking: false)
         let result = mockConnector.storedCollectableErrors.first??.asDictionary()
         let errorMessage = result!["error_message"] as! String
+
         XCTAssert(errorMessage.contains("testMessage"))
     }
     
@@ -29,20 +30,22 @@ class LoggerTests: XCTestCase {
         Logger.consoleLogError(nil, withMessage: "testMessage", suppressTracking: false)
         let result = mockConnector.storedCollectableErrors.first??.asDictionary()
         let errorMessage = result!["error_message"] as! String
+
         XCTAssert(errorMessage.contains("testMessage"))
     }
     
     func testConsoleDoesNotLogError() {
         Logger.consoleLogError(NSCocoaErrorDomain, withMessage: "testMessageSuppressed", suppressTracking: true)
+
         XCTAssert(mockConnector.storedCollectableErrors.isEmpty)
     }
     
     
     func testDispatchMessage() {
         Logger.dispatchMessage("testDispatchMessage", ofType: "testDispatchType")
-        let result = mockNotificationCenter.storedNotificationPosts.first
-        XCTAssertEqual("testDispatchMessage", result?.userInfo![AASDK.KEY_MESSAGE] as! String)
-        XCTAssertEqual("testDispatchType", result?.userInfo![AASDK.KEY_TYPE] as! String)
+        let result = mockNotificationCenter.storedNotificationPosts?.first
+
+        XCTAssertEqual("testDispatchMessage", result?.userInfo![AASDK.KEY_MESSAGE] as? String)
+        XCTAssertEqual("testDispatchType", result?.userInfo![AASDK.KEY_TYPE] as? String)
     }
-    
 }

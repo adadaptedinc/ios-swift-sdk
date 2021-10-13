@@ -9,19 +9,19 @@
 import Foundation
 
 class MockNotificationCenter: NotificationCenter {
-    var storedNotificationPosts = [Notification]()
-    var storedEvents = [String]()
+    var storedNotificationPosts: [Notification]? = [Notification]()
+    var storedEvents: [String]? = [String]()
     
     override func post(_ notification: Notification) {
-        storedNotificationPosts.append(notification)
+        storedNotificationPosts?.append(notification)
     }
     
     override func addObserver(_ observer: Any, selector aSelector: Selector, name aName: NSNotification.Name?, object anObject: Any?) {
-        storedEvents.append(aName.map { $0.rawValue }!)
+        storedEvents?.append(aName.map { $0.rawValue }!)
     }
     
     override func removeObserver(_ observer: Any, name aName: NSNotification.Name?, object anObject: Any?) {
-        let rawValue = aName.map { $0.rawValue } ?? ""
-        storedEvents = storedEvents.filter(){ $0 != rawValue }
+        let rawValue = aName?.rawValue
+        storedEvents = storedEvents?.filter { $0 != rawValue }
     }
 }

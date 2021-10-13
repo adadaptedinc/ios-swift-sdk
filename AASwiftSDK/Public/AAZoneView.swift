@@ -156,7 +156,7 @@ import WebKit
 
     func adBecameVisible() {
         if !impressionTracked {
-            AASDK.trackImpressionStarted(for: provider?.currentAd())
+            AASDK.trackImpressionStarted(for: AASDK.ad(forZone: zoneId, withAltImage: nil))
             impressionTracked = true
         }
     }
@@ -326,7 +326,7 @@ extension AAZoneView {
 
         switch self.type {
             case .kAdAdaptedImageAd, .kAdAdaptedJSONAd:
-                provider = AAAdAdaptedAdProvider(zoneRenderer: self, zone: self.zoneId, andType: self.type!)
+            self.setAdProvider(AAAdAdaptedAdProvider(zoneRenderer: self, zone: self.zoneId, andType: self.type!, zoneView: self))
                 advanceToNextAd()
             default:
                 break

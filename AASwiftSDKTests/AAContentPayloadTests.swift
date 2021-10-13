@@ -9,7 +9,12 @@
 import XCTest
 @testable import AASwiftSDK
 
-class AAContentPayloadTests: XCTestCase {
+final class AAContentPayloadTests: XCTestCase {
+    let mockConnector = MockAAConnector()
+
+    override func setUp() {
+        ReportManager.createInstance(connector: mockConnector)
+    }
 
     func testParseAAContentPayload() {
         let resultPayload = buildTestPayload()
@@ -36,9 +41,6 @@ class AAContentPayloadTests: XCTestCase {
     
     func testAcknowledgePayloadReceived() {
         let resultPayload = buildTestPayload()
-        let mockConnector = MockAAConnector()
-        ReportManager.createInstance(connector: mockConnector)
-        
         resultPayload.acknowledge()
         
         let result = mockConnector.storedCollectableEvents.first??.asDictionary()
@@ -50,27 +52,23 @@ class AAContentPayloadTests: XCTestCase {
     
     func testReportReceivedOntoList() {
         let resultPayload = buildTestPayload()
-        let mockConnector = MockAAConnector()
-        ReportManager.createInstance(connector: mockConnector)
-        
         resultPayload.reportReceivedOntoList("testList")
         
         let result = (mockConnector.storedRequests.first as! AAPayloadTrackingRequest).asDictionary()
         let params = result!["tracking"] as! [[String: Any?]]?
         let payloadId = (params?.last?["payload_id"])! as! String
+
         XCTAssertEqual("test_payloadId", payloadId)
     }
     
     func testReportRejected() {
         let resultPayload = buildTestPayload()
-        let mockConnector = MockAAConnector()
-        ReportManager.createInstance(connector: mockConnector)
-        
         resultPayload.reportRejected()
         
         let result = (mockConnector.storedRequests.first as! AAPayloadTrackingRequest).asDictionary()
         let params = result!["tracking"] as! [[String: Any?]]?
         let payloadId = (params?.last?["payload_id"])! as! String
+
         XCTAssertEqual("test_payloadId", payloadId)
     }
     

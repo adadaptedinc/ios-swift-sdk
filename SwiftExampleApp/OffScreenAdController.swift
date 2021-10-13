@@ -13,9 +13,10 @@ class OffScreenAdContoller: UIViewController, UIScrollViewDelegate, AAZoneViewOw
 
     @IBOutlet weak var offScreenScrollView: UIScrollView!
     @IBOutlet weak var offScreenZoneView: AdAdaptedZoneView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
         offScreenScrollView.delegate = self
         offScreenZoneView.setZoneOwner(self)
         offScreenZoneView.setAdZoneVisibility(isViewable: false)

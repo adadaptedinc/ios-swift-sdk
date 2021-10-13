@@ -35,7 +35,7 @@ class AAAbstractAdProvider: NSObject {
     weak var zoneView: AAZoneView?
     var type: AdTypeAndSource?
 
-    init(zoneRenderer: AAZoneRenderer?, zone zoneId: String?, andType type: AdTypeAndSource) {
+    init(zoneRenderer: AAZoneRenderer?, zone zoneId: String?, andType type: AdTypeAndSource, zoneView: AAZoneView?) {
         super.init()
         if zoneId == nil || (zoneId?.count ?? 0) == 0 {
             print("Error - attempting to create AAAbstractAdProvider with nil or empty zoneId.")
