@@ -66,11 +66,11 @@ class AAInitRequest: AAGenericRequest {
         let response = AAInitResponse()
         if let json = json {
             response.zones = AAAd.dicOfZonesWithAds(fromJSONDic: (json as AnyObject).value(forKey: AA_KEY_ZONES) as? [AnyHashable: Any])
-            response.pollingIntervalMS = ((json as AnyObject).value(forKey: AA_KEY_POLLING_INTERVAL) as? NSString)?.integerValue ?? 0
+            response.pollingIntervalMS = ((json as AnyObject).value(forKey: AA_KEY_POLLING_INTERVAL) as? NSInteger) ?? 0
             if response.pollingIntervalMS < 1000 {
                 response.pollingIntervalMS = 30000
             }
-            response.sessionExpiresAt = ((json as AnyObject).value(forKey: AA_KEY_SESSION_EXPIRES) as? NSString)?.integerValue ?? 0
+            response.sessionExpiresAt = ((json as AnyObject).value(forKey: AA_KEY_SESSION_EXPIRES) as? NSInteger) ?? 0
         }
         return response
     }

@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF047432270B8DBF0007BBF8 /* mock_init_response.json in Resources */ = {isa = PBXBuildFile; fileRef = DF047431270B8DBF0007BBF8 /* mock_init_response.json */; };
+		DF047434270B8E4C0007BBF8 /* mock_init_request.json in Resources */ = {isa = PBXBuildFile; fileRef = DF047433270B8E4C0007BBF8 /* mock_init_request.json */; };
+		DF05DC7D270F823D00AEF1E0 /* MockAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF05DC7C270F823D00AEF1E0 /* MockAd.swift */; };
 		DF33FD5726DE99AE00AC9A68 /* AAZoneViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF33FD5626DE99AE00AC9A68 /* AAZoneViewTests.swift */; };
 		DF3F97DE26DE8F93000240FD /* OffScreenAdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3F97DD26DE8F93000240FD /* OffScreenAdController.swift */; };
+		DF79442926FA663F00CBBDFE /* MockNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480BDFD255493D00098899A /* MockNotificationCenter.swift */; };
 		F414F03825115E5400F2811C /* AAAdTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF4D25115E5300F2811C /* AAAdTimeline.swift */; };
 		F414F03B25115E5400F2811C /* AAPayloadTrackingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF5025115E5300F2811C /* AAPayloadTrackingResponse.swift */; };
 		F414F04125115E5400F2811C /* AABatchEventRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF5625115E5300F2811C /* AABatchEventRequest.swift */; };
@@ -54,7 +58,6 @@
 		F414F0D825115E5400F2811C /* AAAdAdaptedAdProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EFF225115E5300F2811C /* AAAdAdaptedAdProvider.swift */; };
 		F44F2F6B251900FB00B96C8C /* AdContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F6A251900FB00B96C8C /* AdContent.swift */; };
 		F44F2F712519078A00B96C8C /* AAZoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F702519078A00B96C8C /* AAZoneView.swift */; };
-		F44F2F772519081A00B96C8C /* AAAbstractAdProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F762519081A00B96C8C /* AAAbstractAdProvider.swift */; };
 		F44F2F87251915D000B96C8C /* AADetailedListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F86251915D000B96C8C /* AADetailedListItem.swift */; };
 		F44F2F9125191F2F00B96C8C /* AAHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F2F9025191F2F00B96C8C /* AAHelper.swift */; };
 		F45E204A2530AF7C0023F54F /* AASwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46A656624E19DA1007CCE6B /* AASwiftSDK.framework */; };
@@ -88,7 +91,6 @@
 		F4730AB6252E2ED9003E7C52 /* AASwiftSDK in Resources */ = {isa = PBXBuildFile; fileRef = F4730AB5252E2ED9003E7C52 /* AASwiftSDK */; };
 		F474EEB825474491002439FD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F474EEB725474491002439FD /* Constants.swift */; };
 		F480BDF6255486C40098899A /* NotificationCenterWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480BDF5255486C40098899A /* NotificationCenterWrapper.swift */; };
-		F480BDFE255493D00098899A /* MockNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480BDFD255493D00098899A /* MockNotificationCenter.swift */; };
 		F480BE062554A4710098899A /* RegistrarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480BE052554A4710098899A /* RegistrarTests.swift */; };
 		F4838C5D25534C7D004E26B4 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4838C5C25534C7D004E26B4 /* LoggerTests.swift */; };
 		F484BA19251CF043007C19DD /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F484BA18251CF043007C19DD /* WebKit.framework */; };
@@ -150,6 +152,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DF047431270B8DBF0007BBF8 /* mock_init_response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mock_init_response.json; sourceTree = "<group>"; };
+		DF047433270B8E4C0007BBF8 /* mock_init_request.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mock_init_request.json; sourceTree = "<group>"; };
+		DF05DC7C270F823D00AEF1E0 /* MockAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAd.swift; sourceTree = "<group>"; };
 		DF33FD5626DE99AE00AC9A68 /* AAZoneViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAZoneViewTests.swift; sourceTree = "<group>"; };
 		DF3F97DD26DE8F93000240FD /* OffScreenAdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffScreenAdController.swift; sourceTree = "<group>"; };
 		F414EF4D25115E5300F2811C /* AAAdTimeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAAdTimeline.swift; sourceTree = "<group>"; };
@@ -197,7 +202,6 @@
 		F414EFF225115E5300F2811C /* AAAdAdaptedAdProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAAdAdaptedAdProvider.swift; sourceTree = "<group>"; };
 		F44F2F6A251900FB00B96C8C /* AdContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdContent.swift; sourceTree = "<group>"; };
 		F44F2F702519078A00B96C8C /* AAZoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAZoneView.swift; sourceTree = "<group>"; };
-		F44F2F762519081A00B96C8C /* AAAbstractAdProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAAbstractAdProvider.swift; sourceTree = "<group>"; };
 		F44F2F86251915D000B96C8C /* AADetailedListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AADetailedListItem.swift; sourceTree = "<group>"; };
 		F44F2F9025191F2F00B96C8C /* AAHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AAHelper.swift; path = AASwiftSDK/Public/AAHelper.swift; sourceTree = SOURCE_ROOT; };
 		F4626470251BABFE004B8176 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -299,6 +303,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF047430270B8D890007BBF8 /* MockJson */ = {
+			isa = PBXGroup;
+			children = (
+				DF047431270B8DBF0007BBF8 /* mock_init_response.json */,
+				DF047433270B8E4C0007BBF8 /* mock_init_request.json */,
+			);
+			path = MockJson;
+			sourceTree = "<group>";
+		};
 		F46A655C24E19DA1007CCE6B = {
 			isa = PBXGroup;
 			children = (
@@ -429,19 +442,10 @@
 				F414EF9825115E5300F2811C /* AAKeywordIntercept.swift */,
 				F414EFC425115E5300F2811C /* AAKeywordInterceptManager.swift */,
 				F414EF8C25115E5300F2811C /* AAWebAdView.swift */,
-				F46DB58024EADEE300A81CBF /* AdProviders */,
+				F414EFF225115E5300F2811C /* AAAdAdaptedAdProvider.swift */,
 				F46DB58124EAE0D600A81CBF /* Popup */,
 			);
 			path = AdObjects;
-			sourceTree = "<group>";
-		};
-		F46DB58024EADEE300A81CBF /* AdProviders */ = {
-			isa = PBXGroup;
-			children = (
-				F44F2F762519081A00B96C8C /* AAAbstractAdProvider.swift */,
-				F414EFF225115E5300F2811C /* AAAdAdaptedAdProvider.swift */,
-			);
-			path = AdProviders;
 			sourceTree = "<group>";
 		};
 		F46DB58124EAE0D600A81CBF /* Popup */ = {
@@ -587,6 +591,8 @@
 			children = (
 				F48E009A2550A00B00AA8388 /* MockAAConnector.swift */,
 				F46B151E2559D11900E982FA /* MockAASDKObserver.swift */,
+				DF05DC7C270F823D00AEF1E0 /* MockAd.swift */,
+				DF047430270B8D890007BBF8 /* MockJson */,
 				F480BDFD255493D00098899A /* MockNotificationCenter.swift */,
 			);
 			path = Mocks;
@@ -738,6 +744,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF047432270B8DBF0007BBF8 /* mock_init_response.json in Resources */,
+				DF047434270B8E4C0007BBF8 /* mock_init_request.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -797,7 +805,6 @@
 				F414F05B25115E5400F2811C /* AAUpdateAdsResponse.swift in Sources */,
 				F414F07525115E5400F2811C /* AAWebAdView.swift in Sources */,
 				F414F04E25115E5400F2811C /* AACollectableErrorResponse.swift in Sources */,
-				F44F2F772519081A00B96C8C /* AAAbstractAdProvider.swift in Sources */,
 				F414F08925115E5400F2811C /* AARequestBlockHolder.swift in Sources */,
 				F46907F32549D2620097288C /* Logger.swift in Sources */,
 				F414F06725115E5400F2811C /* AAAdZone.swift in Sources */,
@@ -860,10 +867,11 @@
 				F46C5266255B32C700339092 /* AdContentTests.swift in Sources */,
 				F46B151F2559D11900E982FA /* MockAASDKObserver.swift in Sources */,
 				F4838C5D25534C7D004E26B4 /* LoggerTests.swift in Sources */,
-				F480BDFE255493D00098899A /* MockNotificationCenter.swift in Sources */,
 				F48E009025509E6700AA8388 /* AASDKTests.swift in Sources */,
+				DF05DC7D270F823D00AEF1E0 /* MockAd.swift in Sources */,
 				F46C525E255AFC5000339092 /* AAContentPayloadTests.swift in Sources */,
 				DF33FD5726DE99AE00AC9A68 /* AAZoneViewTests.swift in Sources */,
+				DF79442926FA663F00CBBDFE /* MockNotificationCenter.swift in Sources */,
 				F480BE062554A4710098899A /* RegistrarTests.swift in Sources */,
 				F48E009625509F1E00AA8388 /* ReportManagerTests.swift in Sources */,
 				F48E009B2550A00B00AA8388 /* MockAAConnector.swift in Sources */,
@@ -1070,6 +1078,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0.2.3;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = E4LB8UE2WX;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1087,7 +1096,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.7;
+				MARKETING_VERSION = 0.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.AASwiftSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = NO;
@@ -1106,6 +1115,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0.2.3;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = E4LB8UE2WX;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1123,7 +1133,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.7;
+				MARKETING_VERSION = 0.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.AASwiftSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = NO;
@@ -1148,6 +1158,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.AASwiftSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1167,6 +1179,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.AASwiftSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

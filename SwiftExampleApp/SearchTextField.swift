@@ -145,7 +145,7 @@ import AASwiftSDK
     fileprivate var timer: Timer? = nil
     fileprivate var placeholderLabel: UILabel?
     fileprivate static let cellIdentifier = "APSearchTextFieldCell"
-    fileprivate let indicator = UIActivityIndicatorView(style: .gray)
+    fileprivate let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
     fileprivate var maxTableViewSize: CGFloat = 0
     
     fileprivate var filteredResults = [SearchTextFieldItem]()

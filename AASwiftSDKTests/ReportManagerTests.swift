@@ -9,8 +9,8 @@
 import XCTest
 @testable import AASwiftSDK
 
-class ReportManagerTests: XCTestCase {
-    let mockConnector = MockAAConnector()
+final class ReportManagerTests: XCTestCase {
+    private let mockConnector = MockAAConnector()
     
     override func setUp() {
         ReportManager.createInstance(connector: mockConnector)

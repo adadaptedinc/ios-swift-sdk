@@ -15,7 +15,8 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver, AASDKDebugObserver {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        //AASDK.disableAdTracking() turn on and off IDFA tracking
+
+        // AASDK.disableAdTracking() turn on and off IDFA tracking
         let options = [
             AASDK.OPTION_TEST_MODE:true,
             AASDK.OPTION_KEYWORD_INTERCEPT:true]
@@ -41,13 +42,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver, AASDKDebug
             // Fallback on earlier versions
             return true
         }
-        
-         //iOS api key
+
+         // iOS api key
         AASDK.startSession(withAppID: "NWY0NTZIODZHNWY0", registerListenersFor: self, options: options)
-        
+
         var debug = [AnyHashable]()
         debug.append(AASDK.DEBUG_ALL)
-        
+
         AASDK.registerDebugListeners(for: self, forMessageTypes: debug)
         
         return true

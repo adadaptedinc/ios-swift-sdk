@@ -13,9 +13,11 @@ class OffScreenAdContoller: UIViewController, UIScrollViewDelegate, AAZoneViewOw
 
     @IBOutlet weak var offScreenScrollView: UIScrollView!
     @IBOutlet weak var offScreenZoneView: AdAdaptedZoneView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        offScreenZoneView.setAdZoneVisibility(isViewable: false)
         offScreenScrollView.delegate = self
         offScreenZoneView.setZoneOwner(self)
     }
@@ -34,24 +36,17 @@ class OffScreenAdContoller: UIViewController, UIScrollViewDelegate, AAZoneViewOw
         print("Zone loading failed")
     }
 
+    // determines if view is visible on screen
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if offScreenScrollView != nil {
-            let onScreen = isVisible(view: offScreenZoneView)
-            // Set ad zone visibility here for accurate tracking of off screen ads
-            offScreenZoneView.setAdZoneVisibility(isViewable: onScreen)
-        }
-    }
+            let viewFrame = scrollView.convert(offScreenZoneView.bounds, from: offScreenZoneView)
+            if viewFrame.intersects(scrollView.bounds) {
+                // Set ad zone visibility here for accurate tracking of off screen ads
+                offScreenZoneView.setAdZoneVisibility(isViewable: true)
+            } else {
+                offScreenZoneView.setAdZoneVisibility(isViewable: false)
 
-    // determines if view is visible on screen
-    func isVisible(view: UIView) -> Bool {
-        func isVisible(view: UIView, onScreen: UIView?) -> Bool {
-            guard let onScreen = onScreen else { return true }
-            let adFrame = onScreen.convert(view.bounds, from: view)
-            if adFrame.intersects(onScreen.bounds) {
-                return isVisible(view: view, onScreen: onScreen.superview)
             }
-            return false
         }
-        return isVisible(view: view, onScreen: view.superview)
     }
 }

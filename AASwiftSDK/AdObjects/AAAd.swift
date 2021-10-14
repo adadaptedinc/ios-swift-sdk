@@ -42,19 +42,20 @@ public class AAAd: NSObject {
     var advertiserId: String?
     var creativeId: String?
     var trackingHTML: String?
-    
+
     private var orientations: UIInterfaceOrientationMask!
-    
+    private var isImpressionTracked = false
+
     class func dicOfZonesWithAds(fromJSONDic response: [AnyHashable : Any]?) -> [AnyHashable : Any]? {
         guard let response = response else {
             return nil
         }
 
         var returnDic: [AnyHashable : Any] = [:]
-        
+
         for zoneWrapper in response.enumerated() {
             let zone = zoneWrapper.element.value as! [String : AnyObject]
-            
+
             let zoneId = zone["id"] as? String ?? ""
             let aaZone = AAAdZone()
             aaZone.zoneId = zoneId
@@ -84,12 +85,12 @@ public class AAAd: NSObject {
 
         return returnDic
     }
-    
+
     class func adFromJSONDictionary(adDic: [AnyHashable : Any]?) -> AAAd? {
         if adDic == nil {
-            
+
         }
-        
+
         var errorString = ""
         let ad = AAAd.init()
 
@@ -102,16 +103,16 @@ public class AAAd: NSObject {
         ad.hideAfterInteraction = (adDic?[AA_KEY_HIDE_AFTER_CLICK] as? Bool) ?? false
         ad.adURL = (adDic?[AA_KEY_AD_URL] as? String) ?? ""
         ad.trackingHTML = (adDic?[AA_KEY_TRACKING_HTML] as? String) ?? ""
-        
+
         if ad.refreshIntervalSeconds < 1 {
             let message = String(format: "Invalid refresh rate %i - using 30 sec - ad %@ in zone %@", ad.refreshIntervalSeconds, ad.adID ?? "", ad.zoneId ?? "")
             Logger.consoleLogError(nil, withMessage: message, suppressTracking: true)
             errorString += "\n\(message)"
             ad.refreshIntervalSeconds = 30
         }
-        
+
         var jsonPayload = adDic?["json"]
-        
+
         if jsonPayload != nil && jsonPayload is [AnyHashable: Any] {
             ad.jsonAdPayload = jsonPayload as? [AnyHashable : Any] ?? [:]
             if ad.jsonAdPayload?.count == 0 {
@@ -120,7 +121,7 @@ public class AAAd: NSObject {
                 errorString += "\n\(message)"
             }
         }
-        
+
         jsonPayload = adDic?["payload"]
         if jsonPayload != nil && (jsonPayload is [AnyHashable : Any]) {
             ad.jsonContentPayload = jsonPayload as? [AnyHashable : Any] ?? [:]
@@ -146,7 +147,7 @@ public class AAAd: NSObject {
                 }
             }
         }
-        
+
         ad.type = AdTypeAndSource.kTypeUnsupportedAd
         _str = (adDic?[AA_KEY_AD_TYPE] as? String) ?? ""
         if !_str.isEmpty {
@@ -158,13 +159,13 @@ public class AAAd: NSObject {
                 ad.type = AdTypeAndSource.kAdAdaptedJSONAd
             }
         }
-        
+
         if ad.type == AdTypeAndSource.kTypeUnsupportedAd {
             let message = "ad \(ad.adID ?? "") in zone \(ad.zoneId ?? "") bad ad type '\(_str)'"
             Logger.consoleLogError(nil, withMessage: message, suppressTracking: true)
             errorString = "\(errorString)\n\(message)"
         }
-        
+
         if let popup = adDic?["popup"] as? [String: Any] {
             if !popup.isEmpty {
                 ad.popupType = popup["type"] as? String
@@ -177,7 +178,7 @@ public class AAAd: NSObject {
                 ad.popupBackColor = popup[AA_KEY_BACK_COLOR] as? String
             }
         }
-        
+
         var images: [Any] = []
         if let imageGroups = adDic?["images"] as? [String: Any] {
             if UIScreen.main.scale >= 2.0 {
@@ -186,9 +187,9 @@ public class AAAd: NSObject {
                 images = (imageGroups["standard"] as? [AnyObject]) ?? []
             }
         }
-        
+
         ad.orientations = UIInterfaceOrientationMask.init(rawValue: UInt(UIInterfaceOrientation.unknown.rawValue))
-        
+
         for i in images {
             if let image = i as? [String: Any] {
                 let orientation = image["orientation"] as? String
@@ -202,11 +203,11 @@ public class AAAd: NSObject {
                 }
             }
         }
-        
+
         if !errorString.isEmpty {
             AASDK.trackAnomalyAdConfiguration(ad, message: errorString)
         }
-        
+
         return ad
     }
 
@@ -269,6 +270,19 @@ public class AAAd: NSObject {
         let str = "WARNING - don't have any URL for ad \(adID ?? "").  returning nil."
         AASDK.logDebugMessage(str, type: AASDK.DEBUG_GENERAL)
         return nil
+    }
+
+// MARK: Visibility
+    func setImpressionTracked() {
+        isImpressionTracked = true
+    }
+
+    func resetImpressionTracking() {
+        isImpressionTracked = false
+    }
+
+    func impressionWasTracked() -> Bool {
+        return isImpressionTracked
     }
 
 // MARK: - NSObject

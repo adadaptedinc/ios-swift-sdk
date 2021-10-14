@@ -11,19 +11,27 @@ import XCTest
 
 class AdContentTests: XCTestCase {
     var mockAAAd = AAAd()
-    
+    let mockConnector = MockAAConnector()
+    var itemsArray = [AnyHashable: Any]()
+    var basicListItems = [AnyHashable]()
+
+    let richItem = [PRODUCT_TITLE: "testDetailItemTitle",
+                    PRODUCT_IMAGE: "testDetailItemImage",
+                    PRODUCT_DESCRIPTION: "testDetailItemImage"]
+
     override func setUp() {
         mockAAAd.actionType = "test"
         mockAAAd.adID = "testAdId"
+        ReportManager.createInstance(connector: mockConnector)
+        itemsArray = [AnyHashable: Any]()
+        basicListItems = [AnyHashable]()
     }
     
     func testNilDictionaryAd() {
-        XCTAssert((AdContent.parse(fromDictionary: nil, ad: mockAAAd) == nil))
+        XCTAssertNil(AdContent.parse(fromDictionary: nil, ad: mockAAAd))
     }
     
     func testParseBasicListItemsArray() {
-        var itemsArray = [AnyHashable: Any]()
-        var basicListItems = [AnyHashable]()
         basicListItems.append("testBasicItem")
         itemsArray["list-items"] = basicListItems
         
@@ -34,7 +42,6 @@ class AdContentTests: XCTestCase {
     }
     
     func testParseBasicListItemsDictionary() {
-        var itemsArray = [AnyHashable: Any]()
         var basicListItemsDic = [AnyHashable : Any]()
         basicListItemsDic[PRODUCT_TITLE] = "testDetailItemTitle"
         basicListItemsDic[PRODUCT_IMAGE] = "testDetailItemImage"
@@ -49,12 +56,6 @@ class AdContentTests: XCTestCase {
     }
     
     func testParseRichListItemsDictionary() {
-        var itemsArray = [AnyHashable: Any]()
-        var basicListItems = [AnyHashable]()
-        let richItem = [PRODUCT_TITLE: "testDetailItemTitle",
-                        PRODUCT_IMAGE: "testDetailItemImage",
-                        PRODUCT_DESCRIPTION: "testDetailItemImage"]
-        
         basicListItems.append(richItem)
         itemsArray["rich-list-items"] = basicListItems
         
@@ -66,12 +67,6 @@ class AdContentTests: XCTestCase {
     }
     
     func testParseDetailedListItemsDictionary() {
-        var itemsArray = [AnyHashable: Any]()
-        var basicListItems = [AnyHashable]()
-        let richItem = [PRODUCT_TITLE: "testDetailItemTitle",
-                        PRODUCT_IMAGE: "testDetailItemImage",
-                        PRODUCT_DESCRIPTION: "testDetailItemImage"]
-        
         basicListItems.append(richItem)
         itemsArray[DETAILED_LIST_ITEMS] = basicListItems
         
@@ -83,10 +78,6 @@ class AdContentTests: XCTestCase {
     }
     
     func testAcknowledge() {
-        let mockConnector = MockAAConnector()
-        ReportManager.createInstance(connector: mockConnector)
-        var itemsArray = [AnyHashable: Any]()
-        var basicListItems = [AnyHashable]()
         basicListItems.append("testBasicItem")
         itemsArray["list-items"] = basicListItems
         
@@ -100,10 +91,6 @@ class AdContentTests: XCTestCase {
     }
     
     func testFailure() {
-        let mockConnector = MockAAConnector()
-        ReportManager.createInstance(connector: mockConnector)
-        var itemsArray = [AnyHashable: Any]()
-        var basicListItems = [AnyHashable]()
         basicListItems.append("testBasicItem")
         itemsArray["list-items"] = basicListItems
         
@@ -111,6 +98,7 @@ class AdContentTests: XCTestCase {
         resultAdContent?.failure("testFailure")
         let result = mockConnector.storedCollectableErrors.first??.asDictionary()
         let errorMessage = result!["error_message"] as! String
+        
         XCTAssertEqual("testFailure", errorMessage)
     }
 }

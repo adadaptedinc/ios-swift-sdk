@@ -26,7 +26,7 @@ var lastCame: Date?
     @objc public static let KEY_AD_CONTENT = "AD_CONTENT"
     @objc public static let KEY_KI_REPLACEMENT_TEXT = "KI_REPLACEMENT_TEXT"
     @objc public static let KEY_ZONE_VIEW = "ZONE_VIEW"
-    
+
     /// Log types to pass into registerDebugListenersFor:forMessageTypes:
     @objc public static let DEBUG_GENERAL = "GENERAL"
     @objc public static let DEBUG_NETWORK = "NETWORK"
@@ -34,7 +34,7 @@ var lastCame: Date?
     @objc public static let DEBUG_USER_INTERACTION = "USER_INTERACTION"
     @objc public static let DEBUG_AD_LAYOUT = "AD_LAYOUT"
     @objc public static let DEBUG_ALL = "ALL"
-    
+
     /// keys used to report details in NSNotifications
     @objc public static let KEY_ZONE_ID = "ZONE_ID"
     @objc public static let KEY_ZONE_IDS = "ZONE_IDS"
@@ -42,7 +42,7 @@ var lastCame: Date?
     @objc public static let KEY_MESSAGE = "MESSAGE"
     @objc public static let KEY_TYPE = "TYPE"
     @objc public static let KEY_RECOVERY_SUGGESTION = "RECOVERY_SUGGESTION"
-    
+
     private var appID: String?
     private var connector: AAConnector?
     private var closeImage: UIImageView?
@@ -55,7 +55,7 @@ var lastCame: Date?
     private var disableAdvertising = false
     private var serverRoot: String = ""
     private var serverVersion: String?
-    
+
     var shouldUseCachedImages = false
     private weak var observer: AASDKObserver?
     private var options: [AnyHashable: Any]?
@@ -74,7 +74,7 @@ var lastCame: Date?
     private var payloadTrackers: [AnyHashable: Any]?
     private var lastPayloadCheck: Date?
     private var appInitParams: [AnyHashable: Any]?
-    
+
 // MARK: - notfications
     @objc public class func registerListeners(for observer: AASDKObserver?) {
         if observer == nil {
@@ -197,7 +197,7 @@ var lastCame: Date?
             }
         }
     }
-    
+
     @objc public class func reportItems(_ items: [String], crossedOffList list: String?) {
         for itemName in items {
             AASDK.reportItem(itemName, crossedOffList: list)
@@ -259,13 +259,13 @@ var lastCame: Date?
             return false
         }
     }
-    
+
     @objc public class func disableAdTracking() {
         let preferences = UserDefaults.standard
         preferences.set(true, forKey: AASDK_TRACKING_DISABLED_KEY)
         preferences.synchronize()
     }
-    
+
     @objc public class func enableAdTracking() {
         let preferences = UserDefaults.standard
         preferences.set(false, forKey: AASDK_TRACKING_DISABLED_KEY)
@@ -295,7 +295,7 @@ var lastCame: Date?
             _aasdk?.userDebugMessageTypes = []
         }
     }
-   
+
 // MARK: - Keyword Intercept
     @objc public class func keywordIntercept(for userInput: String?) -> [AnyHashable : Any]? {
         if _aasdk?.kiManager != nil {
@@ -303,7 +303,7 @@ var lastCame: Date?
         }
         return nil
     }
-    
+
     @objc public class func keywordInterceptPresented() {
         if _aasdk?.kiManager != nil {
             _aasdk?.kiManager?.reportPresented()
@@ -346,11 +346,11 @@ var lastCame: Date?
             _aasdk?.serverVersion = AA_API_VERSION
             _aasdk?.payloadTrackers = [AnyHashable : Any](minimumCapacity: 0)
             _aasdk?.appInitParams = nil
-            
+
             initializeComponents()
         }
     }
-    
+
     private class func initializeComponents() {
         ReportManager.createInstance(connector: AAConnector())
         NotificationCenterWrapper.createInstance(notificationCenter: NotificationCenter())
@@ -458,7 +458,7 @@ var lastCame: Date?
 
         let responseWasReceivedBlock =  { response, forRequest in
             let initResponse = response as! AAInitResponse
-            _aasdk?.sessionExpiresAtUTC = initResponse.sessionExpiresAt 
+            _aasdk?.sessionExpiresAtUTC = initResponse.sessionExpiresAt
             _aasdk?.pollingIntervalInMS = initResponse.pollingIntervalMS
             _aasdk?.cacheAds(inAdsDic: initResponse.zones, completeNotificationName: AASDK_NOTIFICATION_INIT_COMPLETE_NAME, shouldUseCachedImages: AASDK.shouldUseCachedImages(), shouldReplaceCurrent: true)
             _aasdk?.startUpdateTimer()
@@ -1038,11 +1038,14 @@ extension AASDK {
         AASDK.logDebugMessage(String(format: "Enqueued END tracking for %lu ads", displayedImagesCount), type: DEBUG_NETWORK)
     }
 
-    class func trackImpressionStarted(for ad: AAAd?) {
+    class func trackImpressionStarted(for ad: AAAd?, isVisible: Bool = true) {
         if ad == nil {
             return
         }
-        _aasdk?.fireTrackEventOf(.aa_EVENT_IMPRESSION_STARTED, for: ad)
+        if isVisible {
+            _aasdk?.fireTrackEventOf(.aa_EVENT_IMPRESSION_STARTED, for: ad)
+            print("AdAdapted impression tracked for: \(String(describing: ad?.adID))")
+        }
         AASDK.add(toCurrentlyDisplayedImages: ad)
     }
 
@@ -1050,7 +1053,7 @@ extension AASDK {
         if ad == nil {
             return
         }
-        print("")
+        print("AdAdapted invisible impression tracked for: \(String(describing: ad?.adID))")
         _aasdk?.fireTrackEventOf(.aa_EVENT_INSIVIBLE_IMPRESSION, for: ad)
     }
 
@@ -1071,6 +1074,7 @@ extension AASDK {
         }
         if AASDK.remove(fromCurrentlyDisplayedImages: ad) {
             _aasdk?.fireTrackEventOf(.aa_EVENT_IMPRESSION_END, for: ad)
+            print("AdAdapted impression end tracked for: \(String(describing: ad?.adID))")
         }
     }
 

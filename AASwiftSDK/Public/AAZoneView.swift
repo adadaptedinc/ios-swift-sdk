@@ -25,10 +25,9 @@ import WebKit
 
     @IBInspectable public var zoneId: String? = ""
     var isAdVisible = true
-    var impressionTracked = false
     internal weak var zoneOwner: AAZoneViewOwner?
     private(set) var type: AdTypeAndSource?
-    private var provider: AAAbstractAdProvider?
+    private var provider: AAAdAdaptedAdProvider?
     private var currentAdView: UIView?
 
     init(frame: CGRect, forZone zoneId: String?, zoneType type: AdTypeAndSource, delegate: AAZoneViewOwner?) {
@@ -37,7 +36,7 @@ import WebKit
         sharedInit()
         AASDK.logDebugFrame(self.frame, message: "AAZoneView \(zoneId ?? "") initWithFrame")
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -48,7 +47,7 @@ import WebKit
         sharedInit()
         AASDK.logDebugFrame(frame, message: "AAZoneView initWithCoder")
     }
-    
+
     deinit {
         removeListeners()
     }
@@ -112,7 +111,7 @@ import WebKit
     }
 
     func closePopup(withCompletionHandler handler: @escaping () -> Void) -> Bool {
-        return adProvider()?.closePopup(withCompletionHandler: handler) ?? false
+        return adProvider()?.closePopup(completionHandler: handler) ?? false
     }
 
     func setZoneType(_ value: NSNumber?) {
@@ -139,7 +138,7 @@ import WebKit
 
     func wasUnHidden() {
         if let provider = provider {
-            if let ad = adProvider()?.currentAd() {
+            if let ad = adProvider()?.currentAd {
                 AASDK.fireHTMLTracker(incomingAd: ad, incomingView: zoneOwner?.viewControllerForPresentingModalView()?.view)
                 provider.adWasUnHidden()
             }
@@ -148,20 +147,10 @@ import WebKit
 
     @objc public func setAdZoneVisibility(isViewable: Bool) {
         isAdVisible = isViewable
-
-        if isAdVisible {
-            adBecameVisible()
-        }
+        provider?.onAdVisibilityChange(isAdVisible: isAdVisible)
     }
 
-    func adBecameVisible() {
-        if !impressionTracked {
-            AASDK.trackImpressionStarted(for: provider?.currentAd())
-            impressionTracked = true
-        }
-    }
-
-// MARK: - <AAZoneRenderer> used by the AAAbstractAdProvider
+// MARK: - <AAZoneRenderer> used by the AAAdAdaptedAdProvider
     func containerSize() -> CGSize {
         let size = frame.size
         AASDK.logDebugMessage(String(format: "AAZoneView returning ad size of (%0.0f, %0.0f) in intrinsicContentSize", size.width, size.height), type: AASDK.DEBUG_AD_LAYOUT)
@@ -172,14 +161,10 @@ import WebKit
         return zoneOwner?.viewControllerForPresentingModalView()
     }
 
-    func provider(_ provider: AAAbstractAdProvider?, didLoadAdView adView: UIView?, for ad: AAAd?) {
+    func provider(_ provider: AAAdAdaptedAdProvider?, didLoadAdView adView: UIView?, for ad: AAAd?) {
         pointView(to: adView)
         AASDK.fireHTMLTracker(incomingAd: ad, incomingView: zoneOwner?.viewControllerForPresentingModalView()?.view)
-        impressionTracked = false
 
-        if isAdVisible {
-            AASDK.trackImpressionStarted(for: ad)
-        }
         if zoneOwner?.responds(to: #selector(AAZoneViewOwner.zoneViewDidLoadZone(_:))) ?? false {
             zoneOwner?.zoneViewDidLoadZone?(self)
         }
@@ -189,7 +174,7 @@ import WebKit
         AASDK.fireHTMLTracker(incomingAd: ad, incomingView: zoneOwner?.viewControllerForPresentingModalView()?.view)
     }
 
-    func provider(_ provider: AAAbstractAdProvider?, didFailToLoadZone zone: String?, ofType type: AdTypeAndSource, message: String?) {
+    func provider(_ provider: AAAdAdaptedAdProvider?, didFailToLoadZone zone: String?, ofType type: AdTypeAndSource, message: String?) {
         if currentAdView != nil {
             pointView(to: nil)
         }
@@ -297,11 +282,11 @@ import WebKit
 }
 
 extension AAZoneView {
-    func adProvider() -> AAAbstractAdProvider? {
+    func adProvider() -> AAAdAdaptedAdProvider? {
         return provider
     }
 
-    func setAdProvider(_ adProvider: AAAbstractAdProvider?) {
+    func setAdProvider(_ adProvider: AAAdAdaptedAdProvider?) {
         provider = adProvider
     }
 
@@ -326,7 +311,7 @@ extension AAZoneView {
 
         switch self.type {
             case .kAdAdaptedImageAd, .kAdAdaptedJSONAd:
-                provider = AAAdAdaptedAdProvider(zoneRenderer: self, zone: self.zoneId, andType: self.type!)
+            self.setAdProvider(AAAdAdaptedAdProvider(zoneRenderer: self, zone: self.zoneId, andType: self.type!, zoneView: self))
                 advanceToNextAd()
             default:
                 break

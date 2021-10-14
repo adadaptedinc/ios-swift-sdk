@@ -9,9 +9,35 @@
 import Foundation
 import UIKit
 
+protocol AAZoneRenderer: NSObjectProtocol {
+    var zoneId: String? { get set }
+    var zoneOwner: AAZoneViewOwner? { get set }
+    func containerSize() -> CGSize
+    func viewControllerForPresentingModalView() -> UIViewController?
+    func provider(_ provider: AAAdAdaptedAdProvider?, didLoadAdView adView: UIView?, for ad: AAAd?)
+    func provider(_ provider: AAAdAdaptedAdProvider?, didFailToLoadZone zone: String?, ofType type: AdTypeAndSource, message: String?)
+    func popupWillShow()
+    func popupDidHide()
+    func userLeavingApplication()
+    func userDidInteract(withInternalURLString urlString: String?)
+    func deliverAdPayload()
+    func handleCallToActionForZone()
+    func handleReloadOf(_ ad: AAAd?)
+    func invalidateContentView()
+    func clientZoneView() -> AAZoneView?
+}
+
 @objcMembers
-class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopupDelegate {
+class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
     var currentAd: AAAd?
+    var type: AdTypeAndSource?
+    var zoneId: String?
+    var isDisplayingPopup = false
+
+    weak var targetView: UIView?
+    weak var zoneView: AAZoneView?
+    weak var zoneRenderer: AAZoneRenderer?
+
     private var currentWebAdView: AAWebAdView?
     private var adLoaded = false
     private var useCachedImages = false
@@ -21,10 +47,18 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
     private var timer: Timer?
     private var targetOrientation: UIInterfaceOrientation!
 
-// MARK: - Overriding Abstract Methods
-    override init(zoneRenderer: AAZoneRenderer?, zone zoneId: String?, andType type: AdTypeAndSource) {
-        super.init(zoneRenderer: zoneRenderer, zone: zoneId, andType: type)
-        // depandcy injection would be cleaner here
+    init(zoneRenderer: AAZoneRenderer?, zone zoneId: String?, andType type: AdTypeAndSource, zoneView: AAZoneView?) {
+        super.init()
+
+        if zoneId == nil || (zoneId?.count ?? 0) == 0 {
+            print("Error - attempting to create AAAdAdaptedAdProvider with nil or empty zoneId.")
+        }
+
+        self.zoneView = zoneView
+        self.zoneRenderer = zoneRenderer
+        self.zoneId = zoneId
+        self.type = type
+
         useCachedImages = AASDK.shouldUseCachedImages()
         adLoaded = false
         isHidden = false
@@ -45,13 +79,31 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
             object: nil)
     }
 
-    override func adSize(for orientation: UIInterfaceOrientation) -> CGSize {
+    func getCurrentAd() -> AAAd? {
+        return currentAd
+    }
+
+    func adSize(for orientation: UIInterfaceOrientation) -> CGSize {
         return AASDK.sizeOfZone(zoneId, for: orientation)
     }
 
-    /// there is a lot of logic here, but it allows us to rotate 
+    // Visibility
+    func onAdVisibilityChange(isAdVisible: Bool) {
+        guard let currentAd = currentAd else { return }
+        if !currentAd.impressionWasTracked() {
+            trackImpression(currentAd, isAdVisible)
+        }
+    }
+
+    func trackImpression(_ ad: AAAd?, _ isAdVisible: Bool) {
+        if !isAdVisible { return }
+        AASDK.trackImpressionStarted(for: ad, isVisible: isAdVisible)
+        ad?.setImpressionTracked()
+    }
+
+    /// there is a lot of logic here, but it allows us to rotate
     /// different types of AdAdapted ads in the same zone without issue
-    override func renderNext() {
+    func renderNext() {
         renderNextForceReload(false)
     }
 
@@ -61,11 +113,12 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
         }
 
         let oldAd = currentAd
-        
+
         currentAd = AASDK.ad(forZone: zoneId, withAltImage: nil)
+        currentAd?.resetImpressionTracking()
 
         if let oldAd = oldAd {
-            if zoneView?.isAdVisible == false {
+            if zoneView?.isAdVisible == false && !oldAd.impressionWasTracked() {
                 AASDK.trackInvisibleImpression(for: oldAd)
             }
             AASDK.trackImpressionEnded(for: oldAd)
@@ -79,6 +132,12 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
             AASDK.logDebugMessage("AdAdapted Zone \(String(describing: zoneId)) reload not needed.", type: AASDK.DEBUG_GENERAL)
             //zoneRenderer.handleReload(of: currentAd)
         } else if currentAd != nil {
+
+            if let zoneView = zoneView, let currentAd = currentAd {
+                if !currentAd.impressionWasTracked() {
+                    trackImpression(currentAd, zoneView.isAdVisible)
+                }
+            }
 
             switch currentAd!.type {
             case .kAdAdaptedJSONAd:
@@ -94,7 +153,7 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
                         AASDK.logDebugMessage("Web Zone \(String(describing: zoneId)) being loaded", type: AASDK.DEBUG_GENERAL)
                     }
 
-                    
+
                     if currentAd?.adURL != nil && (currentAd?.adURL?.count ?? 0) > 0 {
                         currentWebAdView = AAWebAdView(
                             url: URL(string: currentAd?.adURL ?? ""),
@@ -134,12 +193,16 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
         fireTimer()
     }
 
-    override func destroy() {
+    func destroy() {
         stopTimer()
+
         if zoneView?.isAdVisible == false {
-            AASDK.trackInvisibleImpression(for: currentAd)
+            if let currentAd = currentAd, !currentAd.impressionWasTracked() {
+                AASDK.trackInvisibleImpression(for: currentAd)
+            }
+        } else {
+            AASDK.trackImpressionEnded(for: currentAd)
         }
-        AASDK.trackImpressionEnded(for: currentAd)
 
         if currentAd?.type == AdTypeAndSource.kAdAdaptedHTMLAd && currentWebAdView != nil {
             currentWebAdView?.destroy()
@@ -162,13 +225,13 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
         NotificationCenterWrapper.notifier.removeObserver(self)
     }
 
-    override func rotate(to newOrientation: UIInterfaceOrientation) {
+    func rotate(to newOrientation: UIInterfaceOrientation) {
         targetOrientation = newOrientation
         renderNextForceReload(true)
     }
 
     /// only used by external calls
-    override func closePopup() -> Bool {
+    func closePopup() -> Bool {
         if allowPopupClose && isDisplayingPopup {
             dismissPopup(nil)
             return true
@@ -184,12 +247,12 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
         return false
     }
 
-    override func userInteractedWithAd() {
+    func userInteractedWithAd() {
         AASDK.logDebugMessage("AdProvider: userInteractedWithAd enter", type: AASDK.DEBUG_USER_INTERACTION)
         takeActionForAd()
     }
 
-    override func adWasHidden() {
+    func adWasHidden() {
         isHidden = true
         if let currentAd = currentAd {
             AASDK.trackImpressionEnded(for: currentAd)
@@ -197,17 +260,17 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
         stopTimer()
     }
 
-    override func adWasUnHidden() {
+    func adWasUnHidden() {
         if isHidden {
-            if let currentAd = currentAd {
-                AASDK.trackImpressionStarted(for: currentAd)
+            if let currentAd = currentAd, let zoneView = zoneView {
+                trackImpression(currentAd, zoneView.isAdVisible)
                 isHidden = false
                 fireTimer()
             }
         }
     }
 
-    override func renderCustomView(_ view: UIView?) {
+    func renderCustomView(_ view: UIView?) {
         zoneRenderer!.provider(self, didLoadAdView: view, for: currentAd)
     }
 
@@ -224,12 +287,12 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
             }
         }
 
-        if currentAd != nil && currentAd?.hideAfterInteraction != nil {
+        if currentAd != nil && currentAd?.hideAfterInteraction == true {
             if let currentAd = currentAd {
                 AASDK.remove(currentAd, fromZone: zoneId)
             }
         }
-        
+
         if let currentAd = currentAd {
             AASDK.trackInteraction(with: currentAd)
         }
@@ -354,8 +417,8 @@ class AAAdAdaptedAdProvider: AAAbstractAdProvider, AAImageAdViewDelegate, AAPopu
 
     @objc func coming(toForeground notification: Notification?) {
         if !isHidden {
-            if let currentAd = currentAd {
-                    AASDK.trackImpressionStarted(for: currentAd)
+            if let currentAd = currentAd, let zoneView = zoneView {
+                trackImpression(currentAd, zoneView.isAdVisible)
             }
         }
         fireTimer()

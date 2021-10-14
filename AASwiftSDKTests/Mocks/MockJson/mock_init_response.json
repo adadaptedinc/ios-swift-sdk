@@ -1,0 +1,179 @@
+{
+    "session_id": "AEE91F45C7541A0ACF941D5878DE02B4607E3A4A",
+    "active_campaigns": true,
+    "will_serve_ads": true,
+    "polling_interval_ms": 300000,
+    "zones": {
+        "101942": {
+            "id": "101942",
+            "port_width": -1,
+            "land_height": 72,
+            "port_height": 72,
+            "land_width": -1,
+            "ads": [
+                    {
+                    "impression_id": "101942::76F635E0607E3A4A",
+                    "tracking_html": "<html></html>",
+                    "action_type": "e",
+                    "action_path": "https://www.example.com",
+                    "popup": {
+                        "hide_browser_nav": false,
+                        "alt_close_btn": "",
+                        "hide_close_btn": false,
+                        "background_color": "",
+                        "title_text": "",
+                        "type": "",
+                        "hide_banner": false,
+                        "text_color": ""
+                        },
+                    "creative_url": "https://sandbox.adadapted.com/a/NWY0NTZIODZHNWY0;101942;45449?session_id=AEE91F45C7541A0ACF941D5878DE02B4607E3A4A&amp;udid=00000000-0000-0000-0000-000000000000",
+                    "refresh_time": 60,
+                    "hide_after_interaction": false,
+                    "type": "html",
+                    "ad_id": "45449"
+                    },
+                    {
+                    "impression_id": "101942::B5D84C15607E3A4A",
+                    "tracking_html": "<html></html>",
+                    "action_type": "c",
+                    "action_path": "",
+                    "popup": {
+                        "hide_browser_nav": false,
+                        "alt_close_btn": "",
+                        "hide_close_btn": false,
+                        "background_color": "",
+                        "title_text": "",
+                        "type": "",
+                        "hide_banner": false,
+                        "text_color": ""
+                        },
+                    "creative_url": "https://sandbox.adadapted.com/a/NWY0NTZIODZHNWY0;101942;45566?session_id=AEE91F45C7541A0ACF941D5878DE02B4607E3A4A&amp;udid=00000000-0000-0000-0000-000000000000",
+                    "refresh_time": 60,
+                    "hide_after_interaction": false,
+                    "type": "html",
+                    "ad_id": "45566"
+                    },
+                    {
+                    "impression_id": "101942::5F225F6A607E3A4A",
+                    "tracking_html": "<html></html>",
+                    "action_type": "c",
+                    "action_path": "",
+                    "popup": {
+                        "hide_browser_nav": false,
+                        "alt_close_btn": "",
+                        "hide_close_btn": false,
+                        "background_color": "",
+                        "title_text": "",
+                        "type": "",
+                        "hide_banner": false,
+                        "text_color": ""
+                        },
+                    "creative_url": "https://sandbox.adadapted.com/a/NWY0NTZIODZHNWY0;101942;45446?session_id=AEE91F45C7541A0ACF941D5878DE02B4607E3A4A&amp;udid=00000000-0000-0000-0000-000000000000",
+                    "payload": {
+                        "detailed_list_items": [
+                            {
+                            "product_barcode": "041143510018",
+                            "product_brand": "Melange",
+                            "product_image": "https://images.adadapted.com/20200810_163018_SunMaid_SmoresBites_Hero_400x400.png",
+                            "product_category": "Snacks",
+                            "product_sku": "99802039923",
+                            "product_discount": "major_deals",
+                            "product_title": "Spice"
+                            },
+                            {
+                            "product_barcode": "041143510019",
+                            "product_brand": "Melange",
+                            "product_image": "https://images.adadapted.com/20200810_163018_SunMaid_SmoresBites_Hero_400x400.png",
+                            "product_category": "Snacks",
+                            "product_sku": "",
+                            "product_discount": "",
+                            "product_title": "Spice2"
+                            }
+                        ]
+                    },
+                    "refresh_time": 60,
+                    "hide_after_interaction": false,
+                    "type": "html",
+                    "ad_id": "45446"
+                    },
+                    {
+                    "impression_id": "101942::9A0D3145607E3A4A",
+                    "tracking_html": "<html></html>",
+                    "action_type": "c",
+                    "action_path": "",
+                    "popup": {
+                        "hide_browser_nav": false,
+                        "alt_close_btn": "",
+                        "hide_close_btn": false,
+                        "background_color": "",
+                        "title_text": "",
+                        "type": "",
+                        "hide_banner": false,
+                        "text_color": ""
+                    },
+                    "creative_url": "https://sandbox.adadapted.com/a/NWY0NTZIODZHNWY0;101942;45445?session_id=AEE91F45C7541A0ACF941D5878DE02B4607E3A4A&amp;udid=00000000-0000-0000-0000-000000000000",
+                    "payload": {
+                        "detailed_list_items": [
+                            {
+                            "product_barcode": "041143510018",
+                            "product_brand": "Sun-Maid",
+                            "product_image": "https://images.adadapted.com/20200810_163018_SunMaid_SmoresBites_Hero_400x400.png",
+                            "product_category": "Snacks",
+                            "product_sku": "",
+                            "product_discount": "",
+                            "product_title": "Sun-Maid S’mores Bites"
+                            }
+                        ]
+                    },
+                    "refresh_time": 60,
+                    "hide_after_interaction": false,
+                    "type": "html",
+                    "ad_id": "45445"
+                    },
+                    {
+                    "impression_id": "101942::16A0F7D5607E3A4A",
+                    "tracking_html": "<html></html>",
+                    "action_type": "p",
+                    "action_path": "https://assets.adadapted.com/circular-test/index.ios_in_app.html",
+                    "popup": {
+                        "hide_browser_nav": true,
+                        "alt_close_btn": "",
+                        "hide_close_btn": false,
+                        "background_color": "",
+                        "title_text": "Featured",
+                        "type": "fullscreen",
+                        "hide_banner": false,
+                        "text_color": ""
+                    },
+                    "creative_url": "https://sandbox.adadapted.com/a/NWY0NTZIODZHNWY0;101942;45450?session_id=AEE91F45C7541A0ACF941D5878DE02B4607E3A4A&amp;udid=00000000-0000-0000-0000-000000000000",
+                    "refresh_time": 60,
+                    "hide_after_interaction": false,
+                    "type": "html",
+                    "ad_id": "45450"
+                    },
+                    {
+                    "impression_id": "101942::7763EF53607E3A4A",
+                    "tracking_html": "<html></html>",
+                    "action_type": "p",
+                    "action_path": "https://www.example.com",
+                    "popup": {
+                        "hide_browser_nav": true,
+                        "alt_close_btn": "",
+                        "hide_close_btn": false,
+                        "background_color": "",
+                        "title_text": "Featured",
+                        "type": "fullscreen",
+                        "hide_banner": false,
+                        "text_color": ""
+                    },
+                    "creative_url": "https://sandbox.adadapted.com/a/NWY0NTZIODZHNWY0;101942;45448?session_id=AEE91F45C7541A0ACF941D5878DE02B4607E3A4A&amp;udid=00000000-0000-0000-0000-000000000000",
+                    "refresh_time": 60,
+                    "hide_after_interaction": false,
+                    "type": "html",
+                    "ad_id": "45448"
+                    }
+            ]
+        }
+    },
+    "session_expires_at": 1618899594
+}
