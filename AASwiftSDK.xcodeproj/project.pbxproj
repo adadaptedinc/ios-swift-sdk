@@ -13,6 +13,8 @@
 		DF33FD5726DE99AE00AC9A68 /* AAZoneViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF33FD5626DE99AE00AC9A68 /* AAZoneViewTests.swift */; };
 		DF3F97DE26DE8F93000240FD /* OffScreenAdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3F97DD26DE8F93000240FD /* OffScreenAdController.swift */; };
 		DF79442926FA663F00CBBDFE /* MockNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480BDFD255493D00098899A /* MockNotificationCenter.swift */; };
+		DFA7D43627397B95006F15A2 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA7D43527397B95006F15A2 /* QueueTests.swift */; };
+		DFA7D438273981F8006F15A2 /* AAAdZoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA7D437273981F8006F15A2 /* AAAdZoneTests.swift */; };
 		F414F03825115E5400F2811C /* AAAdTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF4D25115E5300F2811C /* AAAdTimeline.swift */; };
 		F414F03B25115E5400F2811C /* AAPayloadTrackingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF5025115E5300F2811C /* AAPayloadTrackingResponse.swift */; };
 		F414F04125115E5400F2811C /* AABatchEventRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414EF5625115E5300F2811C /* AABatchEventRequest.swift */; };
@@ -157,6 +159,8 @@
 		DF05DC7C270F823D00AEF1E0 /* MockAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAd.swift; sourceTree = "<group>"; };
 		DF33FD5626DE99AE00AC9A68 /* AAZoneViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAZoneViewTests.swift; sourceTree = "<group>"; };
 		DF3F97DD26DE8F93000240FD /* OffScreenAdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffScreenAdController.swift; sourceTree = "<group>"; };
+		DFA7D43527397B95006F15A2 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
+		DFA7D437273981F8006F15A2 /* AAAdZoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAAdZoneTests.swift; sourceTree = "<group>"; };
 		F414EF4D25115E5300F2811C /* AAAdTimeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAAdTimeline.swift; sourceTree = "<group>"; };
 		F414EF5025115E5300F2811C /* AAPayloadTrackingResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAPayloadTrackingResponse.swift; sourceTree = "<group>"; };
 		F414EF5625115E5300F2811C /* AABatchEventRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AABatchEventRequest.swift; sourceTree = "<group>"; };
@@ -363,6 +367,8 @@
 				F48E009925509FFA00AA8388 /* Mocks */,
 				F480BE052554A4710098899A /* RegistrarTests.swift */,
 				F48E009525509F1E00AA8388 /* ReportManagerTests.swift */,
+				DFA7D43527397B95006F15A2 /* QueueTests.swift */,
+				DFA7D437273981F8006F15A2 /* AAAdZoneTests.swift */,
 			);
 			path = AASwiftSDKTests;
 			sourceTree = "<group>";
@@ -865,6 +871,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F46C5266255B32C700339092 /* AdContentTests.swift in Sources */,
+				DFA7D438273981F8006F15A2 /* AAAdZoneTests.swift in Sources */,
+				DFA7D43627397B95006F15A2 /* QueueTests.swift in Sources */,
 				F46B151F2559D11900E982FA /* MockAASDKObserver.swift in Sources */,
 				F4838C5D25534C7D004E26B4 /* LoggerTests.swift in Sources */,
 				F48E009025509E6700AA8388 /* AASDKTests.swift in Sources */,

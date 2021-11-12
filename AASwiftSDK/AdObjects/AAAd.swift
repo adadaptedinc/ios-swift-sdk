@@ -59,10 +59,10 @@ public class AAAd: NSObject {
             let zoneId = zone["id"] as? String ?? ""
             let aaZone = AAAdZone()
             aaZone.zoneId = zoneId
-            aaZone.portZoneWidth = zone["port_width"] as? Float ?? 0.0
-            aaZone.portZoneHeight = zone["port_height"] as? Float ?? 0.0
-            aaZone.landZoneWidth = zone["land_width"] as? Float ?? 0.0
-            aaZone.landZoneHeight = zone["land_height"] as? Float ?? 0.0
+            aaZone.portZoneWidth = zone["port_width"] as? Double ?? 0.0
+            aaZone.portZoneHeight = zone["port_height"] as? Double ?? 0.0
+            aaZone.landZoneWidth = zone["land_width"] as? Double ?? 0.0
+            aaZone.landZoneHeight = zone["land_height"] as? Double ?? 0.0
 
             let adData = zone[AA_KEY_ADS] as? [AnyHashable]
             var ads: [AnyHashable] = []

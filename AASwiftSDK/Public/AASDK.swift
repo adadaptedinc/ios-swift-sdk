@@ -1044,7 +1044,7 @@ extension AASDK {
         }
         if isVisible {
             _aasdk?.fireTrackEventOf(.aa_EVENT_IMPRESSION_STARTED, for: ad)
-            print("AdAdapted impression tracked for: \(String(describing: ad?.adID))")
+            AASDK.logDebugMessage("AdAdapted impression tracked for: \(String(describing: ad?.adID))", type: AASDK.DEBUG_USER_INTERACTION)
         }
         AASDK.add(toCurrentlyDisplayedImages: ad)
     }
@@ -1053,7 +1053,7 @@ extension AASDK {
         if ad == nil {
             return
         }
-        print("AdAdapted invisible impression tracked for: \(String(describing: ad?.adID))")
+        AASDK.logDebugMessage("AdAdapted invisible impression tracked for: \(String(describing: ad?.adID))", type: AASDK.DEBUG_USER_INTERACTION)
         _aasdk?.fireTrackEventOf(.aa_EVENT_INSIVIBLE_IMPRESSION, for: ad)
     }
 
@@ -1074,7 +1074,7 @@ extension AASDK {
         }
         if AASDK.remove(fromCurrentlyDisplayedImages: ad) {
             _aasdk?.fireTrackEventOf(.aa_EVENT_IMPRESSION_END, for: ad)
-            print("AdAdapted impression end tracked for: \(String(describing: ad?.adID))")
+            AASDK.logDebugMessage("AdAdapted impression end tracked for: \(String(describing: ad?.adID))", type: AASDK.DEBUG_USER_INTERACTION)
         }
     }
 
