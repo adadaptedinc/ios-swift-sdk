@@ -1,11 +1,3 @@
-//
-//  AAZoneViewTests.swift
-//  AASwiftSDKTests
-//
-//  Created by Matthew Kruk on 8/31/21.
-//  Copyright © 2021 AdAdapted. All rights reserved.
-//
-
 @testable import AASwiftSDK
 import XCTest
 
@@ -38,8 +30,8 @@ final class AAZoneViewTests: XCTestCase {
         XCTAssertEqual(viewController.zoneView?.isAdVisible, true)
         XCTAssertEqual(viewController.zoneView?.isAdVisible, viewController.zoneView?.adProvider()?.zoneView?.isAdVisible)
 
-        if let currentAd = viewController.zoneView?.adProvider()?.currentAd() {
-            XCTAssertEqual(AASDK.ad(forZone: "101942", withAltImage: nil)?.adID, currentAd.adID)
+        if let currentAd = viewController.zoneView?.adProvider()?.getCurrentAd {
+            XCTAssertEqual(AASDK.ad(forZone: "101942", withAltImage: nil)?.adID, currentAd()?.adID)
         }
 
         viewController.zoneView?.setAdZoneVisibility(isViewable: false)

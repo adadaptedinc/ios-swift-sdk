@@ -185,7 +185,7 @@ class AAHelper: NSObject {
     }
 
     class func bundleVersion() -> String? {
-        return Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
+        return Bundle.main.infoDictionary!["CFBundleVersion"] as? String
     }
 
     class func bundleID() -> String? {
@@ -230,6 +230,8 @@ class AAHelper: NSObject {
             return "c"
         case .kActionDelegate:
             return "d"
+        case .kActionContentPopup:
+            return "cp"
         }
     }
 
@@ -246,6 +248,8 @@ class AAHelper: NSObject {
             return .kActionDelegate
         } else if string == "c" {
             return .kActionContent
+        } else if string == "cp" {
+            return .kActionContentPopup
         }
 
         print("bad action type string requested '\(string ?? "")' - should be found in AASDKActionType: taking no action")

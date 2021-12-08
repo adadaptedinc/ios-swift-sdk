@@ -13,6 +13,7 @@ enum AASDKActionType : Int {
     case kActionNone
     case kActionDelegate
     case kActionContent
+    case kActionContentPopup
 }
 
 enum AASDKState : Int {

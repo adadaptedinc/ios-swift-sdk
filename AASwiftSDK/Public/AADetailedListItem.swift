@@ -1,11 +1,3 @@
-//
-//  AADetailedListItem.swift
-//  AASwiftSDK
-//
-//  Created by Brett Clifton on 9/21/20.
-//  Copyright © 2020 AdAdapted. All rights reserved.
-//
-
 import Foundation
 
 @objc public class AADetailedListItem: NSObject {
@@ -24,6 +16,7 @@ import Foundation
     class func parse(fromItemDictionary dictionary: [AnyHashable : Any]?, forPayload payloadId: String) -> AADetailedListItem? {
         let trackingId = dictionary?[AA_KEY_TRACKING_ID] as? String
         let productTitle = dictionary?[PRODUCT_TITLE] as? String
+        
         if trackingId != nil && productTitle != nil && (trackingId?.count ?? 0) > 0 && (productTitle?.count ?? 0) > 0 {
             let returnItem = AADetailedListItem()
             returnItem.trackingId = trackingId!
