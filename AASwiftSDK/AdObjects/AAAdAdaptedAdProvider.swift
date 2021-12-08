@@ -298,6 +298,7 @@ class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
         }
 
         switch AAHelper.actionType(from: currentAd?.actionType) {
+
         case AASDKActionType.kActionAppDownload, AASDKActionType.kActionLink:
             zoneRenderer!.userLeavingApplication()
                 if let actionPath = currentAd?.actionPath {
@@ -317,6 +318,7 @@ class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
                 if let actionPath = currentAd?.actionPath {
                     UIApplication.shared.open(actionPath)
                 }
+
         case AASDKActionType.kActionPopup:
                 if popupView == nil {
                     popupView = AAPopupViewController(for: currentAd, delegate: self)
@@ -324,7 +326,6 @@ class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
                     popupView?.setCurrentAd(currentAd)
                     popupView?.resetToRootURL()
                 }
-
                 allowPopupClose = false
             AASDK.logDebugMessage("Zone \(String(describing: zoneId)) displaying popup from delegate", type: AASDK.DEBUG_GENERAL)
             zoneRenderer!.popupWillShow()
@@ -332,23 +333,27 @@ class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
                 if let popupView = popupView {
                     zoneRenderer!.viewControllerForPresentingModalView()!.present(popupView, animated: true)
                 }
+
         case AASDKActionType.kActionDelegate:
                 zoneRenderer!.handleCallToActionForZone()
+
         case AASDKActionType.kActionContent:
                 if let jsonContentPayload = currentAd?.jsonContentPayload {
                     AASDK.deliverContent(jsonContentPayload, from: currentAd, andZoneView: zoneRenderer!.clientZoneView())
                 }
+
         case AASDKActionType.kActionNone:
                 fallthrough
-            default:
-                var message: String? = nil
-                if let actionType = currentAd?.actionType {
-                    message = "ad.actionType not supported \(actionType)"
-                }
-                //AASDK.consoleLogError(nil, withMessage: message, surpressTracking: true)
-                if let currentAd = currentAd {
-                    AASDK.trackAnomalyAdConfiguration(currentAd, message: message)
-                }
+
+        default:
+            var message: String? = nil
+            if let actionType = currentAd?.actionType {
+                message = "ad.actionType not supported \(actionType)"
+            }
+            // AASDK.consoleLogError(nil, withMessage: message, surpressTracking: true)
+            if let currentAd = currentAd {
+                AASDK.trackAnomalyAdConfiguration(currentAd, message: message)
+            }
         }
         renderNext()
     }

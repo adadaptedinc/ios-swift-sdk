@@ -1,11 +1,3 @@
-//
-//  AAPopup.h
-//  AASDK
-//
-//  Created by Brett Clifton on 9/16/20.
-//  Copyright © 2020 AdAdapted. All rights reserved.
-//
-
 import UIKit
 import WebKit
 
@@ -129,8 +121,13 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
 
     private var _webView: WKWebView?
     private var webView: WKWebView? {
+        let configuration = WKWebViewConfiguration()
+        configuration.allowsInlineMediaPlayback = true
+        configuration.mediaTypesRequiringUserActionForPlayback = .audio
+        
         if _webView == nil {
-            _webView = WKWebView()
+
+            _webView = WKWebView(frame: .zero, configuration: configuration)
             _webView?.translatesAutoresizingMaskIntoConstraints = false
             _webView?.backgroundColor = UIColor.gray
             _webView?.contentMode = UIView.ContentMode.scaleAspectFit

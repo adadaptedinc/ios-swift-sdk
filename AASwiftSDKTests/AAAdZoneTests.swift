@@ -16,7 +16,7 @@ final class AAADZoneTests: XCTestCase {
     
     func testSetupAdZone() {
 
-        let url1 = "http://www.pornimage.com"
+        let url1 = "http://www.portimage.com"
         let url2 = "http://www.landimageurl.com"
         ad1?.portImgURL = url1
         ad1?.landImgURL = url2
@@ -45,9 +45,7 @@ final class AAADZoneTests: XCTestCase {
         adZone.setupZoneAndShouldUseCachedImages(false)
         XCTAssertEqual(adZone.currentAdsCount(), 3)
 
-        print("ads1: \(adZone.currentIndex)")
         adZone.inject(ad1)
-        print("ads2: \(adZone.currentIndex)")
         XCTAssertEqual(adZone.currentAdsCount(), 4)
 
         adZone.remove(adZone.ads?[0] as? AAAd)
@@ -119,7 +117,7 @@ final class AAADZoneTests: XCTestCase {
     }
 
     func testOrientationSupport() {
-        ad1?.portImgURL = "www.pornimage.url"
+        ad1?.portImgURL = "www.portimage.url"
         adZone.ads?.remove(at: 0)
         adZone.ads?.insert(ad1, at: 0)
         adZone.setupZoneAndShouldUseCachedImages(false)

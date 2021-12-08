@@ -1,11 +1,3 @@
-//
-//  AAZoneViewTests.swift
-//  AASwiftSDKTests
-//
-//  Created by Matthew Kruk on 8/31/21.
-//  Copyright © 2021 AdAdapted. All rights reserved.
-//
-
 @testable import AASwiftSDK
 import XCTest
 

@@ -1,11 +1,3 @@
-//
-//  AAWebAdView.swift
-//  AASDK
-//
-//  Created by Brett Clifton on 9/16/20.
-//  Copyright © 2020 AdAdapted. All rights reserved.
-//
-
 import Foundation
 import UIKit
 import WebKit
@@ -53,13 +45,12 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
 
     func sharedInit() {
         AASDK.logDebugMessage("WebAdView: sharedInit enter", type: AASDK.DEBUG_USER_INTERACTION)
-        webView = WKWebView()
-        alpha = 0.0
+        let configuration = WKWebViewConfiguration()
+        configuration.allowsInlineMediaPlayback = true
+        configuration.mediaTypesRequiringUserActionForPlayback = .audio
 
-        if let webView = webView {
-            addSubview(webView)
-        }
-        
+        webView = WKWebView(frame: .zero, configuration: configuration)
+        webView?.accessibilityIdentifier = "web_view"
         webView?.isUserInteractionEnabled = true
         webView?.scrollView.isScrollEnabled = false
         webView?.scrollView.bounces = false
@@ -78,6 +69,11 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
         tap.numberOfTapsRequired = 1
         tap.delegate = self
         webView?.addGestureRecognizer(tap)
+
+        if let webView = webView {
+            alpha = 0.0
+            addSubview(webView)
+        }
 
         var viewsDictionary: [String: WKWebView?]?
         if let webView = webView {

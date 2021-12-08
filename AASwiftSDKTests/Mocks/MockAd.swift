@@ -1,11 +1,3 @@
-//
-//  MockAd.swift
-//  AASwiftSDKTests
-//
-//  Created by Matthew Kruk on 10/7/21.
-//  Copyright © 2021 AdAdapted. All rights reserved.
-//
-
 @testable import AASwiftSDK
 import Foundation
 
