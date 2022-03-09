@@ -34,7 +34,7 @@ class AAKeywordIntercept: NSObject {
             intercept.replacementText = term[AA_KEY_KI_REPLACEMENT] as? String
             intercept.iconURL = term[AA_KEY_KI_ICON] as? String
             intercept.taglineText = term[AA_KEY_KI_TAGLINE] as? String
-            intercept.priority = (term[AA_KEY_KI_PRIORITY] as? NSNumber)!.intValue
+            intercept.priority = (term[AA_KEY_KI_PRIORITY] as? NSNumber)?.intValue ?? 0
             
             array.append(intercept)
         }

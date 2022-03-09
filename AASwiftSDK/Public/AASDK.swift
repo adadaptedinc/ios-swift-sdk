@@ -18,10 +18,12 @@ var cacheEventName: String?
 var imagesToLoad = 0
 var imagesLoaded = 0
 var lastCame: Date?
+var _customId: String?
 
 @objc public class AASDK: NSObject {
     @objc public static let OPTION_TEST_MODE = "TEST_MODE"
     @objc public static let OPTION_KEYWORD_INTERCEPT = "KEYWORD_INTERCEPT"
+    @objc public static let OPTION_CUSTOM_ID = "CUSTOM_ID"
     @objc public static let KEY_CONTENT_PAYLOADS = "CONTENT_PAYLOADS"
     @objc public static let KEY_AD_CONTENT = "AD_CONTENT"
     @objc public static let KEY_KI_REPLACEMENT_TEXT = "KI_REPLACEMENT_TEXT"
@@ -392,6 +394,11 @@ var lastCame: Date?
                 _aasdk!.inTestMode = true
             } else {
                 _aasdk!.inTestMode = false
+            }
+
+            let customId = opDic?[OPTION_CUSTOM_ID] as? String
+            if customId != nil {
+                _customId = customId
             }
 
             let disableAdvertising = opDic?[AASDK_OPTION_DISABLE_ADVERTISING] as? NSNumber
@@ -1238,6 +1245,12 @@ extension AASDK {
             }
             zone.reset()
         }
+    }
+
+    class func getUdid() -> String? {
+        let preferences = UserDefaults.standard
+        let udid = preferences.value(forKey: AASDK_UDID_KEY)
+        return udid as? String
     }
 
 // MARK: - keyword intercept
