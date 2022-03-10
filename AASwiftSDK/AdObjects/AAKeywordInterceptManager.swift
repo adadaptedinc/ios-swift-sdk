@@ -13,12 +13,20 @@ let DISPATCH_TIMER_INTERVAL = 5.0
 
 @objcMembers
 class AAKeywordInterceptManager: NSObject, WKUIDelegate {
+
+    var events: [AnyHashable]?
+    var keywordIntercepts: [AnyHashable]?
+    var lastUserInput: String?
+    private var dispatchTimer: Timer?
+    private var lastKeywordIntercept: AAKeywordIntercept?
+    private var minMatchLength = 0
+    private weak var connector: AAConnector?
+
     init(connector: AAConnector?, minMatchLength minMatch: Int) {
-        
         super.init()
         events = []
-        self.connector = connector
         minMatchLength = minMatch
+        self.connector = connector
     }
     
     func loadKeywordIntercepts(_ keywordIntercepts: [AnyHashable]?) {
@@ -28,7 +36,7 @@ class AAKeywordInterceptManager: NSObject, WKUIDelegate {
         compileCachableAssetsAndNotify()
     }
     
-    func matchUserInput(_ userInput: String?) -> [AnyHashable : Any]? {
+    func matchUserInput(_ userInput: String?) -> [AnyHashable: Any]? {
         if (userInput?.count ?? 0) < minMatchLength {
             lastKeywordIntercept = nil
             return nil
@@ -54,17 +62,11 @@ class AAKeywordInterceptManager: NSObject, WKUIDelegate {
         fileEvent(forUserInput: lastUserInput, with: lastKeywordIntercept, andType: AASDK_KI_EVENT_TYPE_SELECTED)
     }
     
-    private var minMatchLength = 0
-    private var keywordIntercepts: [AnyHashable]?
-    private var dispatchTimer: Timer?
-    private var events: [AnyHashable]?
-    private var lastUserInput: String?
-    private var lastKeywordIntercept: AAKeywordIntercept?
-    private weak var connector: AAConnector?
-    
     // MARK: - PRIVATE
     func matchKeywordIntercept(withUserInput userInput: String?) -> AAKeywordIntercept? {
+        print("userInput 1: \(String(describing: userInput))")
         for intercept in keywordIntercepts ?? [] {
+            print("intercept 1: \(intercept)")
             guard let intercept = intercept as? AAKeywordIntercept else {
                 continue
             }
@@ -75,7 +77,8 @@ class AAKeywordInterceptManager: NSObject, WKUIDelegate {
         return nil
     }
     
-    func getMatchFor(_ keywordIntercept: AAKeywordIntercept?) -> [AnyHashable : Any]? {
+    func getMatchFor(_ keywordIntercept: AAKeywordIntercept?) -> [AnyHashable: Any]? {
+        print("getMatchFor intercept: \(String(describing: keywordIntercept))")
         return [
             AASDK_KEY_KI_REPLACEMENT_ID: keywordIntercept?.hashValue ?? "",
             AASDK.KEY_KI_REPLACEMENT_TEXT: keywordIntercept?.replacementText ?? "",
@@ -84,7 +87,7 @@ class AAKeywordInterceptManager: NSObject, WKUIDelegate {
         ] as [String : Any]
     }
     
-    func handleNoMatch(forUserInput userInput: String?) -> [AnyHashable : Any]? {
+    func handleNoMatch(forUserInput userInput: String?) -> [AnyHashable: Any]? {
         fileEvent(forUserInput: userInput, with: nil, andType: AASDK_KI_EVENT_TYPE_NOT_MATCHED)
         return nil
     }
@@ -139,7 +142,7 @@ class AAKeywordInterceptManager: NSObject, WKUIDelegate {
     }
     
     func compileCachableAssetsAndNotify() {
-        var mdic : [AnyHashable : Any] = [:]
+        var mdic: [AnyHashable: Any] = [:]
         for ki in keywordIntercepts ?? [] {
             guard let ki = ki as? AAKeywordIntercept else {
                 continue

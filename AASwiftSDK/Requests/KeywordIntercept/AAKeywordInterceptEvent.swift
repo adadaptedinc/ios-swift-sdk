@@ -15,6 +15,12 @@ let AASDK_KI_EVENT_TYPE_SELECTED = "selected"
 
 @objcMembers
 class AAKeywordInterceptEvent: NSObject {
+    
+    private var params: [AnyHashable : Any]?
+    private var type: String?
+    private var userInput: String?
+    private var keywordIntercept: AAKeywordIntercept?
+
     init(type: String?, userInput: String?, with keywordIntercept: AAKeywordIntercept?) {
         super.init()
         params = [AnyHashable : Any](minimumCapacity: 10)
@@ -49,11 +55,6 @@ class AAKeywordInterceptEvent: NSObject {
     func getUserInput() -> String? {
         return userInput
     }
-
-    private var params: [AnyHashable : Any]?
-    private var type: String?
-    private var userInput: String?
-    private var keywordIntercept: AAKeywordIntercept?
 
 // MARK: - PRIVATE
     func setParamValue(_ value: NSObject?, forKey param: String?) {
