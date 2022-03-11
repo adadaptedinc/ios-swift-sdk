@@ -288,13 +288,6 @@ class AAHelper: NSObject {
         preferences.set(sessionId, forKey: AASDK_SESSION_ID_KEY)
         preferences.synchronize()
     }
-
-    class func generateUUID() {
-        let id = UUID().uuidString.replacingOccurrences(of: "-", with: "")
-
-        let preferences = UserDefaults.standard
-        preferences.setValue(id, forKey: AASDK_UDID_KEY)
-    }
     
     // checks if IDFA tracking is disabled
     class func isTrackingDisabled() -> Bool {
@@ -306,22 +299,14 @@ class AAHelper: NSObject {
         }
     }
 
-    // Grabs the IDFA if enabled otherwise generates an alternate id
     class func udid() -> String? {
-        let preferences = UserDefaults.standard
-        let id = ASIdentifierManager.shared().advertisingIdentifier.uuidString
-
-        if _customId == nil {
-            if isAdTrackingEnabled() {
-                preferences.setValue(id, forKey: AASDK_UDID_KEY)
-                return id
-            } else if preferences.object(forKey: AASDK_UDID_KEY) == nil {
-                generateUUID()
-                return preferences.value(forKey: AASDK_UDID_KEY) as? String
-            }
+        if _customId != nil {
+            return _customId
+        } else if isAdTrackingEnabled() {
+            return ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        } else {
+            return UIDevice.current.identifierForVendor?.uuidString
         }
-
-        return preferences.value(forKey: AASDK_UDID_KEY) as? String
     }
 
     // Checking if ad tracking is enabled on the device
