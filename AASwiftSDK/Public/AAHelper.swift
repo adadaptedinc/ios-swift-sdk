@@ -305,7 +305,12 @@ class AAHelper: NSObject {
         } else if isAdTrackingEnabled() {
             return ASIdentifierManager.shared().advertisingIdentifier.uuidString
         } else {
-            return UIDevice.current.identifierForVendor?.uuidString
+            let preferences = UserDefaults.standard
+
+            if preferences.value(forKey: AA_KEY_UDID) == nil {
+                preferences.setValue(UUID().uuidString.replacingOccurrences(of: "-", with: ""), forKey: AA_KEY_UDID)
+            }
+            return preferences.value(forKey: AA_KEY_UDID) as? String
         }
     }
 
