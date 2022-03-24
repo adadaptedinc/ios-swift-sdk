@@ -300,12 +300,14 @@ class AAHelper: NSObject {
     }
 
     class func udid() -> String? {
+        let preferences = UserDefaults.standard
+
         if _customId != nil {
+            preferences.setValue(_customId, forKey: AA_KEY_UDID)
             return _customId
         } else if isAdTrackingEnabled() {
             return ASIdentifierManager.shared().advertisingIdentifier.uuidString
         } else {
-            let preferences = UserDefaults.standard
 
             if preferences.value(forKey: AA_KEY_UDID) == nil {
                 preferences.setValue(UUID().uuidString.replacingOccurrences(of: "-", with: ""), forKey: AA_KEY_UDID)

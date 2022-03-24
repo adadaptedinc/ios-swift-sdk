@@ -254,12 +254,12 @@ var _customId: String?
     }
 
     @objc public class func zoneAvailable(_ zoneId: String?) -> Bool {
-        let zone = _aasdk?.zones?[zoneId ?? ""] as? AAAdZone
-        if zone != nil && zone?.hasAdsAvailable != nil {
-            return zone?.isCacheComplete ?? false
-        } else {
-            return false
+        if let zone = (_aasdk?.zones?[zoneId ?? ""] as? AAAdZone) {
+            if zone.hasAdsAvailable() == true {
+                return zone.isCacheComplete
+            }
         }
+        return false
     }
 
     @objc public class func disableAdTracking() {
