@@ -134,4 +134,9 @@ final class AAADZoneTests: XCTestCase {
         XCTAssertEqual(adZone.isEqual(adZone), true)
         XCTAssertEqual(adZone.isEqual("taco"), false)
     }
+
+    func testHasAdsAvailalbe() {
+        adZone.setupZoneAndShouldUseCachedImages(false)
+        XCTAssertTrue(adZone.hasAdsAvailable())
+    }
 }

@@ -47,7 +47,7 @@ class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
     private var timer: Timer?
     private var targetOrientation: UIInterfaceOrientation!
 
-    init(zoneRenderer: AAZoneRenderer?, zone zoneId: String?, andType type: AdTypeAndSource, zoneView: AAZoneView?) {
+    init(zoneRenderer: AAZoneRenderer?, zone zoneId: String?, adType type: AdTypeAndSource, zoneView: AAZoneView?) {
         super.init()
 
         if zoneId == nil || (zoneId?.count ?? 0) == 0 {
