@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver, AASDKDebug
         // AASDK.disableAdTracking() turn on and off IDFA tracking
         let options = [
             AASDK.OPTION_TEST_MODE:true,
-            AASDK.OPTION_KEYWORD_INTERCEPT:true]
+            AASDK.OPTION_KEYWORD_INTERCEPT:true,
+            AASDK.OPTION_CUSTOM_ID:"CustomIdTest::\(Int.random(in: 100..<999))"]
             as [String : Any]
 
         // Ad tracking dialog
