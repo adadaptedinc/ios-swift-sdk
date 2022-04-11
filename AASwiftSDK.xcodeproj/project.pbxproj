@@ -10,6 +10,7 @@
 		DF047432270B8DBF0007BBF8 /* mock_init_response.json in Resources */ = {isa = PBXBuildFile; fileRef = DF047431270B8DBF0007BBF8 /* mock_init_response.json */; };
 		DF047434270B8E4C0007BBF8 /* mock_init_request.json in Resources */ = {isa = PBXBuildFile; fileRef = DF047433270B8E4C0007BBF8 /* mock_init_request.json */; };
 		DF05DC7D270F823D00AEF1E0 /* MockAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF05DC7C270F823D00AEF1E0 /* MockAd.swift */; };
+		DF102E5428047D3F00933C1D /* AACollectableEventRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF102E5328047D3F00933C1D /* AACollectableEventRequestTests.swift */; };
 		DF33FD5726DE99AE00AC9A68 /* AAZoneViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF33FD5626DE99AE00AC9A68 /* AAZoneViewTests.swift */; };
 		DF3F97DE26DE8F93000240FD /* OffScreenAdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3F97DD26DE8F93000240FD /* OffScreenAdController.swift */; };
 		DF4FDD65278624440094AB3D /* AAKeywordInterceptManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4FDD64278624440094AB3D /* AAKeywordInterceptManagerTests.swift */; };
@@ -159,6 +160,7 @@
 		DF047431270B8DBF0007BBF8 /* mock_init_response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mock_init_response.json; sourceTree = "<group>"; };
 		DF047433270B8E4C0007BBF8 /* mock_init_request.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mock_init_request.json; sourceTree = "<group>"; };
 		DF05DC7C270F823D00AEF1E0 /* MockAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAd.swift; sourceTree = "<group>"; };
+		DF102E5328047D3F00933C1D /* AACollectableEventRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AACollectableEventRequestTests.swift; sourceTree = "<group>"; };
 		DF33FD5626DE99AE00AC9A68 /* AAZoneViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAZoneViewTests.swift; sourceTree = "<group>"; };
 		DF3F97DD26DE8F93000240FD /* OffScreenAdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffScreenAdController.swift; sourceTree = "<group>"; };
 		DF4FDD64278624440094AB3D /* AAKeywordInterceptManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAKeywordInterceptManagerTests.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				DFA7D437273981F8006F15A2 /* AAAdZoneTests.swift */,
 				DFA7D439273ED3D2006F15A2 /* AADetailedListItemTests.swift */,
 				DF4FDD64278624440094AB3D /* AAKeywordInterceptManagerTests.swift */,
+				DF102E5328047D3F00933C1D /* AACollectableEventRequestTests.swift */,
 			);
 			path = AASwiftSDKTests;
 			sourceTree = "<group>";
@@ -885,6 +888,7 @@
 				F48E009025509E6700AA8388 /* AASDKTests.swift in Sources */,
 				DF05DC7D270F823D00AEF1E0 /* MockAd.swift in Sources */,
 				F46C525E255AFC5000339092 /* AAContentPayloadTests.swift in Sources */,
+				DF102E5428047D3F00933C1D /* AACollectableEventRequestTests.swift in Sources */,
 				DF33FD5726DE99AE00AC9A68 /* AAZoneViewTests.swift in Sources */,
 				DF79442926FA663F00CBBDFE /* MockNotificationCenter.swift in Sources */,
 				F480BE062554A4710098899A /* RegistrarTests.swift in Sources */,
@@ -1094,7 +1098,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0.2.5;
+				CURRENT_PROJECT_VERSION = 0.2.7;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = E4LB8UE2WX;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1112,7 +1116,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.5;
+				MARKETING_VERSION = 0.2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.AASwiftSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = NO;
@@ -1131,7 +1135,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0.2.5;
+				CURRENT_PROJECT_VERSION = 0.2.7;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = E4LB8UE2WX;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1149,7 +1153,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.5;
+				MARKETING_VERSION = 0.2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.AASwiftSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = NO;
