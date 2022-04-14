@@ -302,7 +302,7 @@ class AAHelper: NSObject {
     class func udid() -> String? {
         let preferences = UserDefaults.standard
 
-        if _customId != nil && preferences.value(forKey: AA_KEY_UDID) == nil {
+        if _customId != nil && (preferences.value(forKey: AA_KEY_UDID) as? String != _customId) {
             preferences.setValue(_customId, forKey: AA_KEY_UDID)
             return _customId
         } else if isAdTrackingEnabled() {
