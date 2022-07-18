@@ -307,8 +307,6 @@ extension AAZoneView {
             adProvider()?.destroy()
         }
 
-        AASDK.reportZoneLoaded(self.zoneId)
-
         switch self.type {
             case .kAdAdaptedImageAd, .kAdAdaptedJSONAd:
             self.setAdProvider(AAAdAdaptedAdProvider(zoneRenderer: self, zone: self.zoneId, adType: self.type!, zoneView: self))
