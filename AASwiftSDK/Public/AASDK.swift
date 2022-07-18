@@ -654,7 +654,6 @@ var _customId: String?
         if appID == nil || (appID?.count ?? 0) == 0 {
             return
         }
-        AASDK.trackAppStopped()
         stopUpdateTimer()
         connector?.dispatchCachedMessages()
     }
@@ -664,7 +663,6 @@ var _customId: String?
             return
         }
         lastCame = Date()
-        AASDK.trackAppStarted()
         startUpdateTimer()
         updateTimerFired()
         AASDK.checkForPayloads()
@@ -1096,14 +1094,6 @@ extension AASDK {
         _aasdk?.fireTrackEventOf(.aa_EVENT_POPUP_END, for: ad)
     }
 
-    class func trackAppStarted() {
-        _aasdk?.connector?.addCollectableEvent(forDispatch: AACollectableEvent.internalEvent(withName: AA_EC_APP_OPEN, andPayload: nil))
-    }
-
-    class func trackAppStopped() {
-        _aasdk?.connector?.addCollectableEvent(forDispatch: AACollectableEvent.internalEvent(withName: AA_EC_APP_CLOSED, andPayload: nil))
-    }
-
     class func trackAppExit(from ad: AAAd?, withPath path: String?) {
         _aasdk?.fireTrackEventOf(.aa_EVENT_APP_EXIT, for: ad, withEventPath: path, details: nil)
     }
@@ -1277,16 +1267,6 @@ extension AASDK {
                 AASDK.reportItem(string, addedToList: list, from: ad)
             }
         }
-    }
-
-    class func reportZoneLoaded(_ zoneId: String?) {
-        if zoneId == nil {
-            return
-        }
-        let payload = [
-            "zone_id": zoneId ?? ""
-        ]
-        ReportManager.getInstance().reportInternalEvent(eventName: AA_EC_ZONE_LOADED, payload: payload)
     }
 
     class func reportAddToListFailure(withMessage message: String?, from ad: AAAd) {

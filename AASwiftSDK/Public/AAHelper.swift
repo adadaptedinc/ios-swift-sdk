@@ -152,8 +152,6 @@ let AA_KEY_ERROR_TIMESTAMP = "error_timestamp"
 let AA_KEY_ERROR_PARAMS = "error_params"
 
 // MARK: - Event Collection Service EVENTS
-let AA_EC_APP_OPEN = "app_opened"
-let AA_EC_APP_CLOSED = "app_closed"
 let AA_EC_ATL_ADDED_TO_LIST = "atl_added_to_list"
 let AA_EC_ATL_ADDED_TO_LIST_FAILED = "atl_added_to_list_failed"
 let AA_EC_USER_ADDED_TO_LIST = "user_added_to_list"
