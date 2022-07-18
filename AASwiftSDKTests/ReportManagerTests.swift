@@ -71,12 +71,4 @@ final class ReportManagerTests: XCTestCase {
         let errorCode = result!["error_code"] as! String
         XCTAssertEqual("testErrorCode", errorCode)
     }
-    
-    func testReportInternalEvent() {
-        ReportManager.getInstance().reportInternalEvent(eventName: "testEvent", payload: ["test": "testValue"])
-        let result = mockConnector.storedCollectableEvents.first??.asDictionary()
-        let eventParams = result!["event_params"] as! [AnyHashable: Any]?
-        let payload = eventParams!["test"] as! String
-        XCTAssertEqual("testValue", payload)
-    }
 }
