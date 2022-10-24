@@ -124,7 +124,7 @@ var _customId: String?
         registerListenersFor observer: AASDKObserver?,
         options opDic: [AnyHashable : Any]?
     ) {
-        print("AdAdapted iOS SDK v\(AAHelper.sdkVersion() ?? "") initialized.")
+        print("AdAdapted iOS SDK v\(AAHelper.sdkVersion()) initialized.")
         initializeSDK()
         _aasdk?.observer = observer
         _aasdk?.options = opDic
