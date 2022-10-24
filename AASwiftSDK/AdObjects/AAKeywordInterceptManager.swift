@@ -64,9 +64,7 @@ class AAKeywordInterceptManager: NSObject, WKUIDelegate {
     
     // MARK: - PRIVATE
     func matchKeywordIntercept(withUserInput userInput: String?) -> AAKeywordIntercept? {
-        print("userInput 1: \(String(describing: userInput))")
         for intercept in keywordIntercepts ?? [] {
-            print("intercept 1: \(intercept)")
             guard let intercept = intercept as? AAKeywordIntercept else {
                 continue
             }
@@ -78,7 +76,6 @@ class AAKeywordInterceptManager: NSObject, WKUIDelegate {
     }
     
     func getMatchFor(_ keywordIntercept: AAKeywordIntercept?) -> [AnyHashable: Any]? {
-        print("getMatchFor intercept: \(String(describing: keywordIntercept))")
         return [
             AASDK_KEY_KI_REPLACEMENT_ID: keywordIntercept?.hashValue ?? "",
             AASDK.KEY_KI_REPLACEMENT_TEXT: keywordIntercept?.replacementText ?? "",

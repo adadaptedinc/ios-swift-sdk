@@ -177,16 +177,16 @@ let kEventInvisibleImpression = "invisible_impression"
 var _screenSize = CGSize.zero
 
 class AAHelper: NSObject {
-    class func sdkVersion() -> String? {
-        return Bundle(for: self).infoDictionary!["CFBundleShortVersionString"] as? String
+    class func sdkVersion() -> String {
+        return "0.2.9"
     }
 
-    class func bundleVersion() -> String? {
-        return Bundle.main.infoDictionary!["CFBundleVersion"] as? String
+    class func bundleVersion() -> String {
+        return "0.2.9"
     }
 
-    class func bundleID() -> String? {
-        return Bundle.main.bundleIdentifier
+    class func bundleID() -> String {
+        return "com.adadapted.swift_sdk"
     }
     
     class func currentTimezone() -> String? {
