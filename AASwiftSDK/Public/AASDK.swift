@@ -778,6 +778,7 @@ var _customId: String?
             if initResponse?.zones != nil {
                 _aasdk?.sessionExpiresAtUTC = initResponse?.sessionExpiresAt ?? 0
                 _aasdk?.pollingIntervalInMS = initResponse?.pollingIntervalMS ?? 0
+                _aasdk?.checkIfReCacheNeeded(initResponse?.zones)
                 AASDK.resetImpressionCounters()
             }
             _aasdk?.startUpdateTimer()
