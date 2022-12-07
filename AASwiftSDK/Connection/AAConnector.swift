@@ -135,7 +135,7 @@ class AAConnector: NSObject, URLSessionDelegate {
             // Request is GET request
         } else if aaRequest is AAUpdateAdsRequest || aaRequest is AAKeywordInterceptInitRequest {
             let tURL = try! aaRequest?.targetURL()
-            let qURL = "?aid=\(appID ?? "")&uid=\(udid ?? "")&sid=\(sessionID ?? "")&sdk=\(AAHelper.sdkVersion() ?? "")"
+            let qURL = "?aid=\(appID ?? "")&uid=\(udid ?? "")&sid=\(sessionID ?? "")&sdk=\(AAHelper.sdkVersion())"
             url = URL(string: (tURL?.absoluteString ?? "") + qURL)
             aaRequest = nil //drop request body
             methodType = "GET"
