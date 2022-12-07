@@ -14,9 +14,7 @@
     <a href="https://docs.adadapted.com/#/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://gitlab.com/adadapted/ios_swift_sdk/-/issues">Report Bug</a>
-    ·
-    <a href="https://gitlab.com/adadapted/ios_swift_sdk/-/issues">Request Feature</a>
+    <a href="https://github.com/adadaptedinc/ios-swift-sdk/issues">Report Bug or Request Feature</a>
   </p>
 </p>
 

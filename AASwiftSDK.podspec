@@ -7,7 +7,7 @@ Pod::Spec.new do |spec|
   spec.description  = <<-DESC
   This SDK allows you to utilize AdAdapted's service platform for displaying ads, keyword intercepts, tracking events, and more.
                    DESC
-  spec.homepage     = "https://gitlab.com/adadapted/ios_swift_sdk"
+  spec.homepage     = "https://github.com/adadaptedinc/ios-swift-sdk"
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.license      = { :type => "MIT", :file => "LICENSE" }
@@ -21,7 +21,7 @@ Pod::Spec.new do |spec|
   spec.swift_version = "5.2"
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  spec.source       = { :git => "https://gitlab.com/adadapted/ios_swift_sdk.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/adadaptedinc/ios-swift-sdk.git", :tag => "#{spec.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
