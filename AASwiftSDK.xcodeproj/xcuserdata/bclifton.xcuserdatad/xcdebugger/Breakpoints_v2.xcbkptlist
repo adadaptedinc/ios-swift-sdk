@@ -39,22 +39,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "45CA482D-F6BC-4542-8E7E-BCB2E65F46AC"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AASwiftSDK/Connection/AAConnector.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "dispatchCachedMessages()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "28FE75E2-373B-4554-A993-A5C85D4D517D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -143,9 +127,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "182"
-            endingLineNumber = "182"
-            landmarkName = "nextIndexAndIncrement()"
-            landmarkType = "7">
+            endingLineNumber = "182">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -159,9 +141,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "186"
-            endingLineNumber = "186"
-            landmarkName = "populateCurrentAds()"
-            landmarkType = "7">
+            endingLineNumber = "186">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -180,14 +160,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "E0D53435-502C-4B18-BB69-CA74610D1403 - 3e409c1e960ce405"
+                  uuid = "E0D53435-502C-4B18-BB69-CA74610D1403 - 9ebe17b973143ae1"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "SwiftExampleApp.SearchTextField.filter(forceShowAll: Swift.Bool) -&gt; ()"
                   moduleName = "SwiftExampleApp"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bclifton/Documents/GitHub/ios_swift_sdk/SwiftExampleApp/SearchTextField.swift"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/SwiftExampleApp/SearchTextField.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "468"
@@ -195,14 +175,14 @@
                   offsetFromSymbolStart = "5150">
                </Location>
                <Location
-                  uuid = "E0D53435-502C-4B18-BB69-CA74610D1403 - 3e409c1e960ce405"
+                  uuid = "E0D53435-502C-4B18-BB69-CA74610D1403 - 9ebe17b973143ae1"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "SwiftExampleApp.SearchTextField.filter(forceShowAll: Swift.Bool) -&gt; ()"
                   moduleName = "SwiftExampleApp"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bclifton/Documents/GitHub/ios_swift_sdk/SwiftExampleApp/SearchTextField.swift"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/SwiftExampleApp/SearchTextField.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "468"
@@ -241,6 +221,86 @@
             startingLineNumber = "19"
             endingLineNumber = "19"
             landmarkName = "targetURL()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "356D4705-032A-4F98-BA17-EFE6417868B1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftExampleApp/AppDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "aaSDKCacheUpdated(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C70D5028-F442-4533-BB54-CF94C8F94915"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftExampleApp/AppDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "aaSDKCacheUpdated(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4DD4CF2A-F480-4C1D-ABD9-6FB72B1CCCD0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftExampleApp/AppDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "aaSDKCacheUpdated(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5A68DBC9-CE98-4DD8-AB85-967A8C322862"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftExampleApp/AppDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "aaSDKCacheUpdated(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "83737F16-C3FF-4665-9CFC-760B806B488D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftExampleApp/AppDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "aaSDKInitComplete(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
