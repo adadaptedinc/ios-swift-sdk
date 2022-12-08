@@ -78,6 +78,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver, AASDKDebug
         }
     }
     
+    func aaSDKCacheUpdated(_ notification: Notification) {
+        print("ad cache updated")
+        let ids = AASDK.availableZoneIDs()
+
+        // Check for valid zone IDs
+        if (ids.isEmpty) {
+            print("No ad zones available after refresh")
+            // Don't try to load any ads
+        }
+        else {
+            // Check valid zone IDs for available ads
+            for id in ids {
+                if (AASDK.zoneAvailable(id as? String)) {
+                    print("Zone \(id) is available after refresh")
+                    // Show/Hide ads based on ad availability
+                }
+            }
+        }
+    }
+    
     func aaDebugNotification(_ notification: Notification) {
         print("debug: " +  notification.debugDescription)
     }
