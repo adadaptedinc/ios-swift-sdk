@@ -26,7 +26,7 @@ jobs:
           echo "----"
           echo "Info.plist for target: ${PRODUCT_SETTINGS_PATH}"
 
-          buildNum=$(/usr/libexec/Plistbuddy -c "Print CFBundleVersion" "${PRODUCT_SETTINGS_PATH}")
+          buildNum=$(/usr/libexec/Plistbuddy -c "Print Bundle version" "${PRODUCT_SETTINGS_PATH}")
           echo "Current build #: $buildNum"
 
           if [ -z "$buildNum" ]; then
@@ -36,7 +36,7 @@ jobs:
 
           buildNum=$(expr $buildNum + 1)
           echo "Build # incremented to: $buildNum"
-          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $buildNum" "$PRODUCT_SETTINGS_PATH"
+          /usr/libexec/PlistBuddy -c "Set :Bundle version $buildNum" "$PRODUCT_SETTINGS_PATH"
           echo "----"
           exit 0 
           
