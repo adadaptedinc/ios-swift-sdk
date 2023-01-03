@@ -635,6 +635,7 @@
 				F46A656224E19DA1007CCE6B /* Sources */,
 				F46A656324E19DA1007CCE6B /* Frameworks */,
 				F46A656424E19DA1007CCE6B /* Resources */,
+				F4BB043A2964CDBE00E8326C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -794,7 +795,7 @@
 		DFAA529A26C2D2D50039C15C /* Generate version number */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -809,6 +810,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/sh\nset -o errexit\nset -o nounset\n\nINFO_PLIST=\"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Info\"\n\n# Use the latest version tag for CFBundleShortVersionString.\nMARKETING_VERSION=$(git --git-dir=\"${PROJECT_DIR}/.git\" --work-tree=\"${PROJECT_DIR}\" describe --abbrev=0)\n\n# Use the commit count to auto increase CFBundleVersion.\nVERSION=$(git --git-dir=\"${PROJECT_DIR}/.git\" --work-tree=\"${PROJECT_DIR}\" rev-list master | wc -l)\n\ndefaults write $INFO_PLIST CFBundleShortVersionString $MARKETING_VERSION\ndefaults write $INFO_PLIST CFBundleVersion $VERSION\n";
+		};
+		F4BB043A2964CDBE00E8326C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\n# To make executable, use: chmod u+x Build-Versioning-Scripts/Increment_Build_Number.sh\n# to locate your target's info.plist use\n# ${PRODUCT_SETTINGS_PATH}\n\necho \"----\"\necho \"Info.plist for target: ${PRODUCT_SETTINGS_PATH}\"\n\nbuildNum=$(/usr/libexec/Plistbuddy -c \"Print CFBundleVersion\" \"${PRODUCT_SETTINGS_PATH}\")\necho \"Current build #: $buildNum\"\n\nif [ -z \"$buildNum\" ]; then\necho \"No build number found in $PRODUCT_SETTINGS_PATH\"\nexit 2\nfi\n\nbuildNum=$(expr $buildNum + 1)\necho \"Build # incremented to: $buildNum\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNum\" \"$PRODUCT_SETTINGS_PATH\"\necho \"----\"\nexit 0 \n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
