@@ -304,5 +304,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "29F0C8C5-0B54-4293-99C9-D2D780DD0588"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AASwiftSDK/Public/AAHelper.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "sdkVersion()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "29F0C8C5-0B54-4293-99C9-D2D780DD0588 - 22c4ca7f09444eaa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static AASwiftSDK.AAHelper.sdkVersion() -&gt; Swift.String"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AAHelper.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "182"
+                  endingLineNumber = "182"
+                  offsetFromSymbolStart = "570">
+               </Location>
+               <Location
+                  uuid = "29F0C8C5-0B54-4293-99C9-D2D780DD0588 - 22c4ca7f09444eaa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static AASwiftSDK.AAHelper.sdkVersion() -&gt; Swift.String"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AAHelper.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "182"
+                  endingLineNumber = "182"
+                  offsetFromSymbolStart = "1178">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
