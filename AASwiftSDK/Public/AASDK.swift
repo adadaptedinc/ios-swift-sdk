@@ -59,6 +59,7 @@ var _customId: String?
     private var serverVersion: String?
 
     var shouldUseCachedImages = false
+    var isTimerStopped = false
     private weak var observer: AASDKObserver?
     private var options: [AnyHashable: Any]?
     private weak var debugObserver: AASDKDebugObserver?
@@ -338,7 +339,7 @@ var _customId: String?
             _aasdk?.impressionCounters = [AnyHashable : Any](minimumCapacity: 10)
             _aasdk?.userDebugMessageTypes = []
             _aasdk?.rootURLString = AA_PROD_ROOT
-            _aasdk?.pollingIntervalInMS = 600000
+            _aasdk?.pollingIntervalInMS = 300000
             _aasdk?.updateTimerLastFired = AAHelper.nowAsUTCLong() / 1000
             _aasdk?.unloadAdAfterOne = false
             _currentState = .kUninitialized
@@ -348,6 +349,7 @@ var _customId: String?
             _aasdk?.serverVersion = AA_API_VERSION
             _aasdk?.payloadTrackers = [AnyHashable : Any](minimumCapacity: 0)
             _aasdk?.appInitParams = nil
+            _aasdk?.isTimerStopped = false
 
             initializeComponents()
         }
@@ -576,6 +578,7 @@ var _customId: String?
         } else if useCached && imagesToLoad == 0 {
             cacheComplete()
         }
+        _currentState = .kIdle
     }
 
     func cacheComplete() {
@@ -662,6 +665,11 @@ var _customId: String?
         if appID == nil || (appID?.count ?? 0) == 0 || (lastCame != nil && abs(Int(lastCame?.timeIntervalSinceNow ?? 0)) < 5) {
             return
         }
+
+        if (lastCame != nil && abs(Int(lastCame?.timeIntervalSinceNow ?? 0)) < 300) {
+            let notification = Notification(name: NSNotification.Name("app_unbackgrounded"), object: nil)
+            AASDK.postDelayedNotification(notification)
+        }
         lastCame = Date()
         startUpdateTimer()
         updateTimerFired()
@@ -683,6 +691,7 @@ var _customId: String?
     func stopUpdateTimer() {
         if let updateTimer = updateTimer {
             updateTimer.invalidate()
+            _aasdk?.isTimerStopped = true
         }
     }
 
@@ -697,6 +706,7 @@ var _customId: String?
                         userInfo: nil,
                         repeats: true)
                 }
+                _aasdk?.isTimerStopped = false
             }
         })
     }
@@ -731,7 +741,7 @@ var _customId: String?
         let responseWasReceivedBlock = { [self] response, forRequest in
             let updateResponse = response as? AAUpdateAdsResponse
             pollingIntervalInMS = updateResponse?.pollingIntervalInMS ?? 0
-            checkIfReCacheNeeded(updateResponse?.zones)
+            recacheAds(updateResponse?.zones)
         } as AAResponseWasReceivedBlock
 
         let responseWasErrorBlock = { response, forRequest, error in
@@ -757,11 +767,9 @@ var _customId: String?
 
     }
 
-    func checkIfReCacheNeeded(_ zones: [AnyHashable : Any]?) {
-        if !((zones as NSDictionary?)?.isEqual(self.zones) ?? false) {
-            AASDK.logDebugMessage("new ad Dictionary doesn't match old one: UPDATE CACHE starting", type: AASDK.DEBUG_NETWORK)
-            cacheAds(inAdsDic: zones, completeNotificationName: AASDK_CACHE_UPDATED, shouldUseCachedImages: AASDK.shouldUseCachedImages() , shouldReplaceCurrent: true)
-        }
+    func recacheAds(_ zones: [AnyHashable : Any]?) {
+        _aasdk?.shouldUseCachedImages = false
+        cacheAds(inAdsDic: zones, completeNotificationName: AASDK_CACHE_UPDATED, shouldUseCachedImages: AASDK.shouldUseCachedImages() , shouldReplaceCurrent: true)
     }
 
     func reinitSession() {
@@ -778,7 +786,7 @@ var _customId: String?
             if initResponse?.zones != nil {
                 _aasdk?.sessionExpiresAtUTC = initResponse?.sessionExpiresAt ?? 0
                 _aasdk?.pollingIntervalInMS = initResponse?.pollingIntervalMS ?? 0
-                _aasdk?.checkIfReCacheNeeded(initResponse?.zones)
+                _aasdk?.recacheAds(initResponse?.zones)
                 AASDK.resetImpressionCounters()
             }
             _aasdk?.startUpdateTimer()

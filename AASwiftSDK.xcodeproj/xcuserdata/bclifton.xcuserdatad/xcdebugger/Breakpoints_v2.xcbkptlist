@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E19AC3F6-8A07-4AF6-9A3F-DDFDDA54E64D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AASwiftSDK/AdObjects/AAAdZone.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "setupZoneAndShouldUseCachedImages(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "8B4B3696-450D-423D-BCFB-C5398E8B4D77"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -50,38 +34,6 @@
             endingLineNumber = "576"
             landmarkName = "webView(_:decidePolicyFor:decisionHandler:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B1871003-50EB-4D62-A610-D7604A836CE0"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AASwiftSDK/Public/AASDK.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "384"
-            endingLineNumber = "384"
-            landmarkName = "privateStartSession(withAppID:registerListenersFor:options:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "57AB53D3-6925-42F1-B81D-AF966EDE91FF"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AASwiftSDK/Public/AASDK.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
-            landmarkName = "AASDK"
-            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -227,22 +179,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "356D4705-032A-4F98-BA17-EFE6417868B1"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftExampleApp/AppDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "aaSDKCacheUpdated(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "C70D5028-F442-4533-BB54-CF94C8F94915"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -252,38 +188,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "87"
             endingLineNumber = "87"
-            landmarkName = "aaSDKCacheUpdated(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4DD4CF2A-F480-4C1D-ABD9-6FB72B1CCCD0"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftExampleApp/AppDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "aaSDKCacheUpdated(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5A68DBC9-CE98-4DD8-AB85-967A8C322862"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftExampleApp/AppDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
             landmarkName = "aaSDKCacheUpdated(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -307,47 +211,341 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "29F0C8C5-0B54-4293-99C9-D2D780DD0588"
+            uuid = "3A402CE9-F281-4737-8998-3AE36822B74E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AASwiftSDK/Public/AAHelper.swift"
+            filePath = "AASwiftSDK/Public/AASDK.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
-            landmarkName = "sdkVersion()"
+            startingLineNumber = "1032"
+            endingLineNumber = "1032"
+            landmarkName = "trackImpressionStartedForAllDisplayedImages()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "29F0C8C5-0B54-4293-99C9-D2D780DD0588 - 22c4ca7f09444eaa"
+                  uuid = "3A402CE9-F281-4737-8998-3AE36822B74E - 7fea3aeb99d94346"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "static AASwiftSDK.AAHelper.sdkVersion() -&gt; Swift.String"
+                  symbolName = "static AASwiftSDK.AASDK.trackImpressionStartedForAllDisplayedImages() -&gt; ()"
                   moduleName = "AASwiftSDK"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AAHelper.swift"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "182"
-                  endingLineNumber = "182"
-                  offsetFromSymbolStart = "570">
+                  startingLineNumber = "1032"
+                  endingLineNumber = "1032"
+                  offsetFromSymbolStart = "1191">
                </Location>
                <Location
-                  uuid = "29F0C8C5-0B54-4293-99C9-D2D780DD0588 - 22c4ca7f09444eaa"
+                  uuid = "3A402CE9-F281-4737-8998-3AE36822B74E - 7fea3aeb99d94329"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "static AASwiftSDK.AAHelper.sdkVersion() -&gt; Swift.String"
+                  symbolName = "static AASwiftSDK.AASDK.trackImpressionStartedForAllDisplayedImages() -&gt; ()"
                   moduleName = "AASwiftSDK"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AAHelper.swift"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "182"
-                  endingLineNumber = "182"
-                  offsetFromSymbolStart = "1178">
+                  startingLineNumber = "1035"
+                  endingLineNumber = "1035"
+                  offsetFromSymbolStart = "1191">
+               </Location>
+               <Location
+                  uuid = "3A402CE9-F281-4737-8998-3AE36822B74E - 7fea3aeb99d94308"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static AASwiftSDK.AASDK.trackImpressionStartedForAllDisplayedImages() -&gt; ()"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1034"
+                  endingLineNumber = "1034"
+                  offsetFromSymbolStart = "1191">
+               </Location>
+               <Location
+                  uuid = "3A402CE9-F281-4737-8998-3AE36822B74E - 7fea3aeb99d942ca"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static AASwiftSDK.AASDK.trackImpressionStartedForAllDisplayedImages() -&gt; ()"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1036"
+                  endingLineNumber = "1036"
+                  offsetFromSymbolStart = "1191">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "594B7D64-BF48-46C8-B093-5B076341008F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AASwiftSDK/Public/AASDK.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1060"
+            endingLineNumber = "1060"
+            landmarkName = "trackImpressionStarted(for:isVisible:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "594B7D64-BF48-46C8-B093-5B076341008F - 268c6a85ec3b527b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static AASwiftSDK.AASDK.trackImpressionStarted(for: Swift.Optional&lt;AASwiftSDK.AAAd&gt;, isVisible: Swift.Bool) -&gt; ()"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1060"
+                  endingLineNumber = "1060"
+                  offsetFromSymbolStart = "196">
+               </Location>
+               <Location
+                  uuid = "594B7D64-BF48-46C8-B093-5B076341008F - 268c6a85ec3b52dc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static AASwiftSDK.AASDK.trackImpressionStarted(for: Swift.Optional&lt;AASwiftSDK.AAAd&gt;, isVisible: Swift.Bool) -&gt; ()"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1063"
+                  endingLineNumber = "1063"
+                  offsetFromSymbolStart = "196">
+               </Location>
+               <Location
+                  uuid = "594B7D64-BF48-46C8-B093-5B076341008F - 268c6a85ec3b523d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static AASwiftSDK.AASDK.trackImpressionStarted(for: Swift.Optional&lt;AASwiftSDK.AAAd&gt;, isVisible: Swift.Bool) -&gt; ()"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1062"
+                  endingLineNumber = "1062"
+                  offsetFromSymbolStart = "196">
+               </Location>
+               <Location
+                  uuid = "594B7D64-BF48-46C8-B093-5B076341008F - 268c6a85ec3b52ff"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static AASwiftSDK.AASDK.trackImpressionStarted(for: Swift.Optional&lt;AASwiftSDK.AAAd&gt;, isVisible: Swift.Bool) -&gt; ()"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1064"
+                  endingLineNumber = "1064"
+                  offsetFromSymbolStart = "196">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DCFDEA95-716D-459C-9CCE-CE3DE4893D61"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AASwiftSDK/Public/AASDK.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "737"
+            endingLineNumber = "737"
+            landmarkName = "updateTimerFired()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DCFDEA95-716D-459C-9CCE-CE3DE4893D61 - 92a0ac4b93afe295"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AASwiftSDK.AASDK.updateTimerFired() -&gt; ()"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "733"
+                  endingLineNumber = "733"
+                  offsetFromSymbolStart = "2354">
+               </Location>
+               <Location
+                  uuid = "DCFDEA95-716D-459C-9CCE-CE3DE4893D61 - 92a0ac4b93afe295"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AASwiftSDK.AASDK.updateTimerFired() -&gt; ()"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "733"
+                  endingLineNumber = "733"
+                  offsetFromSymbolStart = "1949">
+               </Location>
+               <Location
+                  uuid = "DCFDEA95-716D-459C-9CCE-CE3DE4893D61 - 92a0ac4b93affd30"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AASwiftSDK.AASDK.updateTimerFired() -&gt; ()"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "736"
+                  endingLineNumber = "736"
+                  offsetFromSymbolStart = "1949">
+               </Location>
+               <Location
+                  uuid = "DCFDEA95-716D-459C-9CCE-CE3DE4893D61 - 92a0ac4b93affd53"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AASwiftSDK.AASDK.updateTimerFired() -&gt; ()"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "735"
+                  endingLineNumber = "735"
+                  offsetFromSymbolStart = "1949">
+               </Location>
+               <Location
+                  uuid = "DCFDEA95-716D-459C-9CCE-CE3DE4893D61 - 92a0ac4b93affd11"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AASwiftSDK.AASDK.updateTimerFired() -&gt; ()"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "737"
+                  endingLineNumber = "737"
+                  offsetFromSymbolStart = "1949">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B1B3689C-EEC6-4AE4-BC24-AF3275209A87"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AASwiftSDK/Public/AASDK.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "671"
+            endingLineNumber = "671"
+            landmarkName = "coming(toForeground:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B1B3689C-EEC6-4AE4-BC24-AF3275209A87 - cb2bec771a6ac50e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AASwiftSDK.AASDK.coming(toForeground: Swift.Optional&lt;Foundation.Notification&gt;) -&gt; ()"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "669"
+                  endingLineNumber = "669"
+                  offsetFromSymbolStart = "3151">
+               </Location>
+               <Location
+                  uuid = "B1B3689C-EEC6-4AE4-BC24-AF3275209A87 - cb2bec771a6ac569"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AASwiftSDK.AASDK.coming(toForeground: Swift.Optional&lt;Foundation.Notification&gt;) -&gt; ()"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "670"
+                  endingLineNumber = "670"
+                  offsetFromSymbolStart = "3954">
+               </Location>
+               <Location
+                  uuid = "B1B3689C-EEC6-4AE4-BC24-AF3275209A87 - cb2bec771a6ac569"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AASwiftSDK.AASDK.coming(toForeground: Swift.Optional&lt;Foundation.Notification&gt;) -&gt; ()"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "670"
+                  endingLineNumber = "670"
+                  offsetFromSymbolStart = "3957">
+               </Location>
+               <Location
+                  uuid = "B1B3689C-EEC6-4AE4-BC24-AF3275209A87 - cb2bec771a6ac569"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AASwiftSDK.AASDK.coming(toForeground: Swift.Optional&lt;Foundation.Notification&gt;) -&gt; ()"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "670"
+                  endingLineNumber = "670"
+                  offsetFromSymbolStart = "3154">
+               </Location>
+               <Location
+                  uuid = "B1B3689C-EEC6-4AE4-BC24-AF3275209A87 - cb2bec771a6ac548"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AASwiftSDK.AASDK.coming(toForeground: Swift.Optional&lt;Foundation.Notification&gt;) -&gt; ()"
+                  moduleName = "AASwiftSDK"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/AASwiftSDK/Public/AASDK.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "671"
+                  endingLineNumber = "671"
+                  offsetFromSymbolStart = "3154">
                </Location>
             </Locations>
          </BreakpointContent>
