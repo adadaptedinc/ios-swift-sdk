@@ -77,6 +77,16 @@ class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
             selector: #selector(coming(toForeground:)),
             name: UIApplication.didBecomeActiveNotification,
             object: nil)
+        
+        NotificationCenterWrapper.notifier.addObserver(
+            self,
+            selector: #selector(unbackgrounded(_:)),
+            name: NSNotification.Name(rawValue: "app_unbackgrounded"),
+            object: nil)
+    }
+    
+    @objc func unbackgrounded(_ notification: Notification) {
+        renderNext()
     }
 
     func getCurrentAd() -> AAAd? {
@@ -130,7 +140,6 @@ class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
 
         if oldAd == currentAd && !forceReload {
             AASDK.logDebugMessage("AdAdapted Zone \(String(describing: zoneId)) reload not needed.", type: AASDK.DEBUG_GENERAL)
-            //zoneRenderer.handleReload(of: currentAd)
         } else if currentAd != nil {
 
             if let zoneView = zoneView, let currentAd = currentAd {
@@ -459,6 +468,8 @@ class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
     }
 
     @objc func timerFired(_ timer: Timer?) {
-        renderNext()
+        if (_aasdk?.isTimerStopped == false) {
+            renderNext()
+        }
     }
 }
