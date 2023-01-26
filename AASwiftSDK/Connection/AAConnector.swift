@@ -159,6 +159,7 @@ class AAConnector: NSObject, URLSessionDelegate {
             request = URLRequest(url: url)
         }
         request?.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request?.setValue(appID, forHTTPHeaderField: "X-API-KEY")
         request?.httpMethod = methodType ?? ""
         request?.httpBody = jsonMessage
         
