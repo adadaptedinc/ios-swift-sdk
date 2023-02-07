@@ -23,6 +23,7 @@ var _customId: String?
 @objc public class AASDK: NSObject {
     @objc public static let OPTION_TEST_MODE = "TEST_MODE"
     @objc public static let OPTION_KEYWORD_INTERCEPT = "KEYWORD_INTERCEPT"
+    @objc public static let OPTION_EXTERNAL_PAYLOADS = "EXTERNAL_PAYLOADS"
     @objc public static let OPTION_CUSTOM_ID = "CUSTOM_ID"
     @objc public static let KEY_CONTENT_PAYLOADS = "CONTENT_PAYLOADS"
     @objc public static let KEY_AD_CONTENT = "AD_CONTENT"
@@ -72,6 +73,7 @@ var _customId: String?
     private var deviceLocation: CLLocation?
     private var unloadAdAfterOne = false
     private var isKeywordInterceptOn = false
+    private var isPayloadEnabled = false
     private var kiManager: AAKeywordInterceptManager?
     private var impressionCounters: [AnyHashable: Any]?
     private var payloadTrackers: [AnyHashable: Any]?
@@ -345,6 +347,7 @@ var _customId: String?
             _currentState = .kUninitialized
             _aasdk?.disableAdvertising = false
             _aasdk?.isKeywordInterceptOn = false
+            _aasdk?.isPayloadEnabled = false
             _aasdk?.serverRoot = AA_PROD_ROOT
             _aasdk?.serverVersion = AA_API_VERSION
             _aasdk?.payloadTrackers = [AnyHashable : Any](minimumCapacity: 0)
@@ -447,6 +450,7 @@ var _customId: String?
             }
 
             _aasdk?.isKeywordInterceptOn = (opDic?[OPTION_KEYWORD_INTERCEPT] ?? false) as! Bool
+            _aasdk?.isPayloadEnabled = (opDic?[OPTION_EXTERNAL_PAYLOADS] ?? false) as! Bool
             _aasdk?.appInitParams = opDic?[AASDK_OPTION_INIT_PARAMS] as? [AnyHashable : Any]
         }
 
@@ -1284,7 +1288,7 @@ extension AASDK {
 
 // MARK: - Internal NSNotificationCenter
     class func checkForPayloads() {
-        if _aasdk?.lastPayloadCheck != nil && (abs(Int(_aasdk?.lastPayloadCheck?.timeIntervalSinceNow ?? 0)) < Int(minPayloadIntervalSec)) {
+        if _aasdk?.lastPayloadCheck != nil && _aasdk?.isPayloadEnabled == false && (abs(Int(_aasdk?.lastPayloadCheck?.timeIntervalSinceNow ?? 0)) < Int(minPayloadIntervalSec)) {
             return
         }
         _aasdk?.lastPayloadCheck = Date()
