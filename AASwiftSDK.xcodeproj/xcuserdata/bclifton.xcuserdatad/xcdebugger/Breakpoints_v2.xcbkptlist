@@ -189,7 +189,7 @@
             startingLineNumber = "88"
             endingLineNumber = "88"
             landmarkName = "aaSDKCacheUpdated(_:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -205,7 +205,7 @@
             startingLineNumber = "68"
             endingLineNumber = "68"
             landmarkName = "aaSDKInitComplete(_:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -290,7 +290,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "594B7D64-BF48-46C8-B093-5B076341008F"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AASwiftSDK/Public/AASDK.swift"
@@ -584,7 +584,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "777E223E-7931-4B85-A913-0F4841882FE2"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AASwiftSDK/Public/AASDK.swift"
@@ -600,7 +600,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "2B1D295B-7095-43B8-8AC7-97D841B5F4DB"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AASwiftSDK/Public/AASDK.swift"
