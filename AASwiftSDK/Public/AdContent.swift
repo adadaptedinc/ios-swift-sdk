@@ -125,7 +125,7 @@ import Foundation
         }
     }
 
-    public func failure(_ message: String?) {
+    @objc public func failure(_ message: String?) {
         AASDK.reportAddToListFailure(withMessage: message, from: (ad as? AAAd)!)
     }
 }
