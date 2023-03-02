@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class AAConnector: NSObject, URLSessionDelegate {
-    let kDefaultBatchDispatchIntervalSeconds = 10.0
+    let kDefaultBatchDispatchIntervalSeconds = 5.0
     
     var inTestMode = false
     private var isOnline = false

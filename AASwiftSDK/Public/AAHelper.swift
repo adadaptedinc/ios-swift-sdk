@@ -178,11 +178,11 @@ var _screenSize = CGSize.zero
 
 class AAHelper: NSObject {
     class func sdkVersion() -> String {
-        return "1.1.1"
+        return "1.1.2"
     }
 
     class func bundleVersion() -> String {
-        return "1.1.1"
+        return Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
     }
 
     class func bundleID() -> String {
