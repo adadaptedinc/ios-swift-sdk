@@ -1072,7 +1072,7 @@ extension AASDK {
             return
         }
         AASDK.logDebugMessage("AdAdapted invisible impression tracked for: \(String(describing: ad?.adID))", type: AASDK.DEBUG_USER_INTERACTION)
-        _aasdk?.fireTrackEventOf(.aa_EVENT_INSIVIBLE_IMPRESSION, for: ad)
+        _aasdk?.fireTrackEventOf(.aa_EVENT_INVISIBLE_IMPRESSION, for: ad)
     }
 
     class func trackInteraction(with ad: AAAd?, withPath eventPath: String?) {

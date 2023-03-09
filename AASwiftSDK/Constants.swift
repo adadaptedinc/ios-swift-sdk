@@ -38,7 +38,7 @@ enum AAEventType : Int {
     case aa_EVENT_APP_EXIT
     case aa_EVENT_CUSTOM_EVENT
     case aa_EVENT_ANOMALY
-    case aa_EVENT_INSIVIBLE_IMPRESSION
+    case aa_EVENT_INVISIBLE_IMPRESSION
 }
 
 /// enumeration to describe the type and source of the ad data

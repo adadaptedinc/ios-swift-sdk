@@ -178,7 +178,7 @@ var _screenSize = CGSize.zero
 
 class AAHelper: NSObject {
     class func sdkVersion() -> String {
-        return "1.1.3"
+        return "1.2.0"
     }
 
     class func bundleVersion() -> String {
@@ -275,7 +275,7 @@ class AAHelper: NSObject {
             return kEventCustomEvent
         case .aa_EVENT_ANOMALY:
             return kEventAnomaly
-        case .aa_EVENT_INSIVIBLE_IMPRESSION:
+        case .aa_EVENT_INVISIBLE_IMPRESSION:
             return kEventInvisibleImpression
         }
     }
