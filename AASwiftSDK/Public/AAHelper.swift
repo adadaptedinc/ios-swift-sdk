@@ -178,7 +178,7 @@ var _screenSize = CGSize.zero
 
 class AAHelper: NSObject {
     class func sdkVersion() -> String {
-        return "1.1.2"
+        return "1.1.3"
     }
 
     class func bundleVersion() -> String {
@@ -186,7 +186,7 @@ class AAHelper: NSObject {
     }
 
     class func bundleID() -> String {
-        return "com.adadapted.swift_sdk"
+        return Bundle.main.bundleIdentifier ?? ""
     }
     
     class func currentTimezone() -> String? {
