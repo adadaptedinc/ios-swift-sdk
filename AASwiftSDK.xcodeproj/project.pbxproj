@@ -103,6 +103,7 @@
 		F48E009025509E6700AA8388 /* AASDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48E008F25509E6700AA8388 /* AASDKTests.swift */; };
 		F48E009625509F1E00AA8388 /* ReportManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48E009525509F1E00AA8388 /* ReportManagerTests.swift */; };
 		F48E009B2550A00B00AA8388 /* MockAAConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48E009A2550A00B00AA8388 /* MockAAConnector.swift */; };
+		F49F834F2A040B52005AE9D3 /* ZoneContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49F834E2A040B52005AE9D3 /* ZoneContext.swift */; };
 		F4A2046C24E2EFB4003F909D /* cropped-AdAdapted-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A2046B24E2EFB4003F909D /* cropped-AdAdapted-Logo.png */; };
 		F4A2046D24E2EFB4003F909D /* cropped-AdAdapted-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A2046B24E2EFB4003F909D /* cropped-AdAdapted-Logo.png */; };
 		F4A2047224E2F03C003F909D /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2047124E2F03C003F909D /* SearchTextField.swift */; };
@@ -264,6 +265,7 @@
 		F48E008F25509E6700AA8388 /* AASDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AASDKTests.swift; sourceTree = "<group>"; };
 		F48E009525509F1E00AA8388 /* ReportManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportManagerTests.swift; sourceTree = "<group>"; };
 		F48E009A2550A00B00AA8388 /* MockAAConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAAConnector.swift; sourceTree = "<group>"; };
+		F49F834E2A040B52005AE9D3 /* ZoneContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoneContext.swift; sourceTree = "<group>"; };
 		F4A2046B24E2EFB4003F909D /* cropped-AdAdapted-Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cropped-AdAdapted-Logo.png"; sourceTree = "<group>"; };
 		F4A2047124E2F03C003F909D /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		F4A2047324E2F07C003F909D /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
@@ -441,6 +443,7 @@
 				F44F2F702519078A00B96C8C /* AAZoneView.swift */,
 				F414EFB625115E5300F2811C /* AdAdaptedZoneView.swift */,
 				F44F2F6A251900FB00B96C8C /* AdContent.swift */,
+				F49F834E2A040B52005AE9D3 /* ZoneContext.swift */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -839,6 +842,7 @@
 				F414F05F25115E5400F2811C /* AAKeywordInterceptInitResponse.swift in Sources */,
 				F44F2F712519078A00B96C8C /* AAZoneView.swift in Sources */,
 				F414F0C225115E5400F2811C /* AACollectableError.swift in Sources */,
+				F49F834F2A040B52005AE9D3 /* ZoneContext.swift in Sources */,
 				F414F05525115E5400F2811C /* AAPopupViewController.swift in Sources */,
 				F414F0D825115E5400F2811C /* AAAdAdaptedAdProvider.swift in Sources */,
 				F414F05D25115E5400F2811C /* AACollectableEventResponse.swift in Sources */,

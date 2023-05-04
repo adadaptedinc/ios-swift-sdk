@@ -9,6 +9,9 @@ import Foundation
 
 @objcMembers
 class AAUpdateAdsRequest: AAGenericRequest {
+    var zoneId = ""
+    var contextId = ""
+    
 // MARK: - AARequest Overrides
     override func targetURL() -> URL? {
         return super.url(forEndpoint: "ads/retrieve")
