@@ -107,8 +107,7 @@ class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
     
     func onZoneContextChanged(zoneId: String, contextId: String) {
         //force an ads refresh
-        _aasdk?.refreshAds(zoneId, contextId)
-        //RECIPE renderNextForceReload(true) might need to do this? or find a way to cycle next ad immediately.
+        _aasdk?.refreshAds(zoneId, contextId, self)//pass in self to render next ad on context changes
     }
 
     func trackImpression(_ ad: AAAd?, _ isAdVisible: Bool) {

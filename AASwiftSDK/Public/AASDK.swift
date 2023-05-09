@@ -744,7 +744,7 @@ var _customId: String?
         refreshAds(zoneContext.zoneId, zoneContext.contextId)
     }
     
-    func refreshAds(_ zoneID: String = "", _ contextID: String = "") {
+    func refreshAds(_ zoneID: String = "", _ contextID: String = "", _ adProvider: AAAdAdaptedAdProvider? = nil) {
         let request = AAUpdateAdsRequest()
         request.zoneId = zoneID
         request.contextId = contextID
@@ -753,6 +753,9 @@ var _customId: String?
             let updateResponse = response as? AAUpdateAdsResponse
             pollingIntervalInMS = updateResponse?.pollingIntervalInMS ?? 0
             recacheAds(updateResponse?.zones)
+            if (adProvider != nil) {
+                adProvider?.renderNext()
+            }
         } as AAResponseWasReceivedBlock
 
         let responseWasErrorBlock = { response, forRequest, error in
