@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  spec.name         = "AASwiftSDK"
+  spec.name         = "AASwiftSDK-recipe-beta"
   spec.version      = "1.2.1-recipe"
   spec.summary      = "Official AdAdapted iOS Swift SDK"
   spec.description  = <<-DESC
