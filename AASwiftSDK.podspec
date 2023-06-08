@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.name         = "AASwiftSDK"
-  spec.version      = "1.2.0"
+  spec.version      = "1.2.1-recipe"
   spec.summary      = "Official AdAdapted iOS Swift SDK"
   spec.description  = <<-DESC
   This SDK allows you to utilize AdAdapted's service platform for displaying ads, keyword intercepts, tracking events, and more.
