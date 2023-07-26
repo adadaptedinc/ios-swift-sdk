@@ -123,7 +123,7 @@ public class AAAd: NSObject {
         }
 
         jsonPayload = adDic?["payload"]
-        if jsonPayload != nil && (jsonPayload is [AnyHashable : Any]) {
+        if ad.actionType != "e" && jsonPayload != nil && (jsonPayload is [AnyHashable : Any]) {
             ad.jsonContentPayload = jsonPayload as? [AnyHashable : Any] ?? [:]
             if ad.jsonContentPayload?.count == 0 {
                 let message = "JSON content payload contained no items for ad \(ad.adID ?? "") in zone \(ad.zoneId ?? "")"
