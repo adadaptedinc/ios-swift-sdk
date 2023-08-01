@@ -129,7 +129,7 @@ class ViewController:
             if (searchTextField.text == "clear") {
                 adAdaptedZoneView.clearAdZoneContext()
             } else {
-                adAdaptedZoneView.setAdZoneContext(contextID: "berry-smoothie-bowl")
+                adAdaptedZoneView.setAdZoneContext(contextID: "1201") //berry-smoothie-bowl
             }
             // END RECIPE TEST
             
