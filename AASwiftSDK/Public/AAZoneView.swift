@@ -29,6 +29,7 @@ import WebKit
     private(set) var type: AdTypeAndSource?
     private var provider: AAAdAdaptedAdProvider?
     private var currentAdView: UIView?
+    private var reportAdView: UIButton = UIButton(type: .custom)
 
     init(frame: CGRect, forZone zoneId: String?, zoneType type: AdTypeAndSource, delegate: AAZoneViewOwner?) {
         super.init(frame: frame)
@@ -145,6 +146,12 @@ import WebKit
         }
     }
 
+    @objc
+    func reportAdAction(sender: UIButton) {
+        guard let reportAdUrl = URL(string: "https://feedback.add-it.io") else { return }
+        UIApplication.shared.open(reportAdUrl)
+    }
+
     @objc public func setAdZoneVisibility(isViewable: Bool) {
         isAdVisible = isViewable
         provider?.onAdVisibilityChange(isAdVisible: isAdVisible)
@@ -215,6 +222,7 @@ import WebKit
     func invalidateContentView() {
         if let currentAdView = currentAdView {
             currentAdView.removeFromSuperview()
+            reportAdView.removeFromSuperview()
         }
     }
 
@@ -242,12 +250,23 @@ import WebKit
         }
         currentAdView = newAdView
 
-        if let currentAdView = currentAdView {
-            addSubview(currentAdView)
-        }
         AASDK.logDebugFrame(self.frame, message: "AAZoneView \(zoneId ?? "") rendering ad. The AAZoneView's frame is")
         let frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
         currentAdView?.frame = frame
+
+        reportAdView.setImage(UIImage(named: "reportAdIcon"), for: .normal)
+        reportAdView.addTarget(self, action: #selector(reportAdAction), for: .touchUpInside)
+        reportAdView.frame = CGRect(x: (Int(frame.width)) - 25, y: (Int(frame.height) - (Int(frame.height) - 10)), width: 14, height: 14)
+        reportAdView.backgroundColor = .clear
+        reportAdView.clipsToBounds = true
+        reportAdView.setNeedsLayout()
+        reportAdView.layoutIfNeeded()
+
+        if let currentAdView = currentAdView {
+            self.addSubview(currentAdView)
+            self.addSubview(reportAdView)
+        }
+
         AASDK.logDebugFrame(currentAdView!.frame, message: "AAZoneView \(zoneId ?? "") rendering ad. The ad's frame is")
     }
 
