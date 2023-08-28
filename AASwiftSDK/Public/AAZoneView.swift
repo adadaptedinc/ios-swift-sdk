@@ -254,7 +254,7 @@ import WebKit
         let frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
         currentAdView?.frame = frame
 
-        reportAdView.setImage(UIImage(named: "reportAdIcon"), for: .normal)
+        reportAdView.setImage(UIImage(named: "reportAdIcon", in: Bundle(for: AAZoneView.self), compatibleWith: nil), for: .normal)
         reportAdView.addTarget(self, action: #selector(reportAdAction), for: .touchUpInside)
         reportAdView.frame = CGRect(x: (Int(frame.width)) - 25, y: (Int(frame.height) - (Int(frame.height) - 10)), width: 14, height: 14)
         reportAdView.backgroundColor = .clear
