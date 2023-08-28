@@ -30,6 +30,7 @@ import WebKit
     private var provider: AAAdAdaptedAdProvider?
     private var currentAdView: UIView?
     private var reportAdView: UIButton = UIButton(type: .custom)
+    private var reportAdUrl: String = ""
 
     init(frame: CGRect, forZone zoneId: String?, zoneType type: AdTypeAndSource, delegate: AAZoneViewOwner?) {
         super.init(frame: frame)
@@ -148,7 +149,7 @@ import WebKit
 
     @objc
     func reportAdAction(sender: UIButton) {
-        guard let reportAdUrl = URL(string: "https://feedback.add-it.io") else { return }
+        guard let reportAdUrl = URL(string: reportAdUrl) else { return }
         UIApplication.shared.open(reportAdUrl)
     }
 
@@ -169,7 +170,7 @@ import WebKit
     }
 
     func provider(_ provider: AAAdAdaptedAdProvider?, didLoadAdView adView: UIView?, for ad: AAAd?) {
-        pointView(to: adView)
+        pointView(to: adView, ad: ad)
         AASDK.fireHTMLTracker(incomingAd: ad, incomingView: zoneOwner?.viewControllerForPresentingModalView()?.view)
 
         if zoneOwner?.responds(to: #selector(AAZoneViewOwner.zoneViewDidLoadZone(_:))) ?? false {
@@ -183,7 +184,7 @@ import WebKit
 
     func provider(_ provider: AAAdAdaptedAdProvider?, didFailToLoadZone zone: String?, ofType type: AdTypeAndSource, message: String?) {
         if currentAdView != nil {
-            pointView(to: nil)
+            pointView(to: nil, ad: nil)
         }
 
         if zoneOwner?.responds(to: #selector(AAZoneViewOwner.zoneViewDidFail(toLoadZone:))) ?? false {
@@ -233,7 +234,7 @@ import WebKit
     }
 
 // MARK: - Ad Rendering
-    func pointView(to newAdView: UIView?) {
+    func pointView(to newAdView: UIView?, ad: AAAd?) {
         if newAdView == nil {
             UIView.animate(
                 withDuration: AD_FADE_SECONDS,
@@ -255,6 +256,10 @@ import WebKit
         currentAdView?.frame = frame
 
         reportAdView.setImage(UIImage(named: "reportAdIcon", in: Bundle(for: AAZoneView.self), compatibleWith: nil), for: .normal)
+
+        if let adId = ad?.adID, let uid = UserDefaults.standard.value(forKey: AA_KEY_UDID) {
+            reportAdUrl = "https://feedback.add-it.io/?aid=\(adId)$uid=\(uid)"
+        }
         reportAdView.addTarget(self, action: #selector(reportAdAction), for: .touchUpInside)
         reportAdView.frame = CGRect(x: (Int(frame.width)) - 25, y: (Int(frame.height) - (Int(frame.height) - 10)), width: 14, height: 14)
         reportAdView.backgroundColor = .clear
