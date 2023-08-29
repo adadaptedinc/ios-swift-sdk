@@ -261,8 +261,7 @@ import WebKit
             let queryItems = [URLQueryItem(name: "aid", value: adId.addingPercentEncoding(withAllowedCharacters: .alphanumerics)), URLQueryItem(name: "uid", value: uid.addingPercentEncoding(withAllowedCharacters: .alphanumerics))]
             reportAdUrlComponents.scheme = "https"
             reportAdUrlComponents.path = _aasdk?.testMode() == true ? AA_REPORT_AD_DEV : AA_REPORT_AD_BASE
-            reportAdUrlComponents.queryItems = _aasdk?.testMode() == true ? nil : queryItems
-            print(reportAdUrlComponents.url?.absoluteString as Any)
+            reportAdUrlComponents.queryItems = queryItems
         }
 
         reportAdView.addTarget(self, action: #selector(reportAdAction), for: .touchUpInside)
