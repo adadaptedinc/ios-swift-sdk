@@ -30,7 +30,7 @@ import WebKit
     private var provider: AAAdAdaptedAdProvider?
     private var currentAdView: UIView?
     private var reportAdView: UIButton = UIButton(type: .custom)
-    private var reportAdUrl: String = ""
+    private var reportAdUrlComponents = URLComponents()
 
     init(frame: CGRect, forZone zoneId: String?, zoneType type: AdTypeAndSource, delegate: AAZoneViewOwner?) {
         super.init(frame: frame)
@@ -149,7 +149,7 @@ import WebKit
 
     @objc
     func reportAdAction(sender: UIButton) {
-        guard let reportAdUrl = URL(string: reportAdUrl) else { return }
+        guard let reportAdUrl = reportAdUrlComponents.url else { return }
         UIApplication.shared.open(reportAdUrl)
     }
 
@@ -257,9 +257,14 @@ import WebKit
 
         reportAdView.setImage(UIImage(named: "reportAdIcon", in: Bundle(for: AAZoneView.self), compatibleWith: nil), for: .normal)
 
-        if let adId = ad?.adID, let uid = UserDefaults.standard.value(forKey: AA_KEY_UDID) {
-            reportAdUrl = "https://feedback.add-it.io/?aid=\(adId)$uid=\(uid)"
+        if let adId = ad?.adID, let uid = UserDefaults.standard.string(forKey: AA_KEY_UDID) {
+            let queryItems = [URLQueryItem(name: "aid", value: adId.addingPercentEncoding(withAllowedCharacters: .alphanumerics)), URLQueryItem(name: "uid", value: uid.addingPercentEncoding(withAllowedCharacters: .alphanumerics))]
+            reportAdUrlComponents.scheme = "https"
+            reportAdUrlComponents.path = _aasdk?.testMode() == true ? AA_REPORT_AD_DEV : AA_REPORT_AD_BASE
+            reportAdUrlComponents.queryItems = _aasdk?.testMode() == true ? nil : queryItems
+            print(reportAdUrlComponents.url?.absoluteString as Any)
         }
+
         reportAdView.addTarget(self, action: #selector(reportAdAction), for: .touchUpInside)
         reportAdView.frame = CGRect(x: (Int(frame.width)) - 25, y: (Int(frame.height) - (Int(frame.height) - 10)), width: 14, height: 14)
         reportAdView.backgroundColor = .clear

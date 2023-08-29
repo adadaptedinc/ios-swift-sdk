@@ -77,6 +77,10 @@ let AA_PROD_ROOT = "https://ads.adadapted.com/v"
 let AA_SANDBOX_ROOT = "https://sandbox.adadapted.com/v"
 let AA_UNIVERSAL_LINK_ROOT = "ul.adadapted.com"
 
+/// report ad URLs
+let AA_REPORT_AD_BASE = "feedback.add-it.io/"
+let AA_REPORT_AD_DEV = "dev.feedback.add-it.io/"
+
 /// version of the API. used in conjuntion with AA_SERVER_ROOT to build request base URLs.
 let AA_API_VERSION = "0.9.5"
 let AA_TEST_API_VERSION = "0.9.5"

@@ -820,6 +820,10 @@ var _customId: String?
         _aasdk?.connector?.enqueueRequest(request, responseWasErrorBlock: responseWasErrorBlock, responseWasReceivedBlock: responseWasReceivedBlock)
     }
 
+    public func testMode() -> Bool? {
+        return _aasdk?.inTestMode
+    }
+
 // MARK: - Event message enqueing
     func fireTrackEventOf(_ type: AAEventType, for ad: AAAd?, withEventPath eventPath: String?, details: String?) {
         _aasdk?.connector?.addEvent(forBatchDispatch: AAReportableSessionEvent.reportableEventOf(type, for: ad, session: _aasdk?.connector?.sessionId(), eventPath: eventPath, detailedName: details))
