@@ -22,7 +22,7 @@
         AASDK.OPTION_KEYWORD_INTERCEPT:@YES
        };
 
-    [AASDK startSessionWithAppID:@"NWY0NTZIODZHNWY0" registerListenersFor:self options:options];
+    [AASDK startSessionWithAppID:@"7D58810X6333241C" registerListenersFor:self options:options];
     
     return YES;
 }
