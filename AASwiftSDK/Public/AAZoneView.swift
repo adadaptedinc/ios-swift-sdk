@@ -52,8 +52,8 @@ import WebKit
 
     deinit {
         removeListeners()
-        //RECIPE call clear context?
-        //clearAdZoneContext()
+        //clear recipe context automatically
+        clearAdZoneContext()
     }
 
     public override func awakeFromNib() {

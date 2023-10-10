@@ -145,7 +145,7 @@ class AAConnector: NSObject, URLSessionDelegate {
             let zoneId = (aaRequest as? AAUpdateAdsRequest)?.zoneId
             let contextId = (aaRequest as? AAUpdateAdsRequest)?.contextId
             let tURL = try! aaRequest?.targetURL()
-            let qURL = "?aid=\(appID ?? "")&uid=\(udid ?? "")&sid=\(sessionID ?? "")&sdk=\(AAHelper.sdkVersion())&zoneId=\(zoneId ?? "")&contextId=\(contextId ?? "")"
+            let qURL = "?aid=\(appID ?? "")&uid=\(udid ?? "")&sid=\(sessionID ?? "")&sdk=\(AAHelper.sdkVersion())&zoneID=\(zoneId ?? "")&contextID=\(contextId ?? "")"
             url = URL(string: (tURL?.absoluteString ?? "") + qURL)
             aaRequest = nil //drop request body
             methodType = "GET"
