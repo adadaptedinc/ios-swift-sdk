@@ -157,6 +157,16 @@ import WebKit
         isAdVisible = isViewable
         provider?.onAdVisibilityChange(isAdVisible: isAdVisible)
     }
+    
+    @objc public func setAdZoneContext(contextID: String) {
+        _aasdk?.zoneContext.setProps(zoneId ?? "", contextID) //set contextual zone properties
+        provider?.onZoneContextChanged(zoneId: _aasdk?.zoneContext.zoneId ?? "", contextId: _aasdk?.zoneContext.contextId ?? "")
+    }
+    
+    @objc public func clearAdZoneContext() {
+        _aasdk?.zoneContext.setProps("", "") //clear contextual zone properties
+        provider?.onZoneContextChanged(zoneId: _aasdk?.zoneContext.zoneId ?? "", contextId: _aasdk?.zoneContext.contextId ?? "")
+    }
 
 // MARK: - <AAZoneRenderer> used by the AAAdAdaptedAdProvider
     func containerSize() -> CGSize {
