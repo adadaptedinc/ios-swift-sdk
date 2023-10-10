@@ -74,8 +74,8 @@ let AASDK_KEY_KI_REPLACEMENT_TAGLINE = "KI_REPLACEMENT_TAGLINE"
 
 /// root of the server the framework talks to - don't allow them to pass in arbitrary ones
 let AA_PROD_ROOT = "https://ads.adadapted.com/v"
-//let AA_SANDBOX_ROOT = "https://sandbox.adadapted.com/v"
-let AA_SANDBOX_ROOT = "https://ads.dev.adadapted.dev/v"
+let AA_SANDBOX_ROOT = "https://sandbox.adadapted.com/v"
+//let AA_SANDBOX_ROOT = "https://ads.dev.adadapted.dev/v" previous recipe test
 let AA_UNIVERSAL_LINK_ROOT = "ul.adadapted.com"
 
 /// report ad URLs
