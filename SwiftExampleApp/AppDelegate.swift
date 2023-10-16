@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver, AASDKDebug
         }
 
          // iOS api key
-        AASDK.startSession(withAppID: "846ACA0X62F13A62", registerListenersFor: self, options: options) //7D58810X6333241C
+        AASDK.startSession(withAppID: "7D58810X6333241C", registerListenersFor: self, options: options) //7D58810X6333241C
 
         var debug = [AnyHashable]()
         debug.append(AASDK.DEBUG_ALL)
