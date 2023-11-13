@@ -134,21 +134,6 @@ import WebKit
         }
     }
 
-    func wasHidden() {
-        if let provider = provider {
-            provider.adWasHidden()
-        }
-    }
-
-    func wasUnHidden() {
-        if let provider = provider {
-            if let ad = adProvider()?.currentAd {
-                AASDK.fireHTMLTracker(incomingAd: ad, incomingView: zoneOwner?.viewControllerForPresentingModalView()?.view)
-                provider.adWasUnHidden()
-            }
-        }
-    }
-
     @objc
     func reportAdAction(sender: UIButton) {
         guard let reportAdUrl = reportAdUrlComponents.url else { return }

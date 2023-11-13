@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "81EC4CE3-F4CE-438C-92B0-B122E7D5F9DB"
+            uuid = "10AC9BE8-B125-406B-9FD4-310C669F0E9F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AASwiftSDK/Public/AAHelper.swift"
+            filePath = "AASwiftSDK/AdObjects/AAAdAdaptedAdProvider.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
-            landmarkName = "deviceCarrier()"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "trackImpression(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
