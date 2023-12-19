@@ -122,7 +122,17 @@ class ViewController:
     }
     
     @IBAction func addItemToList(_ sender: UIButton) {
+        //
         if searchTextField.text != nil && !searchTextField.text!.isEmpty {
+            //RECIPE test call to get recipe ads
+            var test = searchTextField.text
+            if (searchTextField.text == "clear") {
+                adAdaptedZoneView.clearAdZoneContext()
+            } else {
+                adAdaptedZoneView.setAdZoneContext(contextID: "1201") //berry-smoothie-bowl
+            }
+            // END RECIPE TEST
+            
             appendListItem(itemName: searchTextField.text!)
         }
     }

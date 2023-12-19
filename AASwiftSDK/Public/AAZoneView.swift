@@ -52,6 +52,8 @@ import WebKit
 
     deinit {
         removeListeners()
+        //clear recipe context automatically
+        clearAdZoneContext()
     }
 
     public override func awakeFromNib() {
@@ -132,21 +134,6 @@ import WebKit
         }
     }
 
-    func wasHidden() {
-        if let provider = provider {
-            provider.adWasHidden()
-        }
-    }
-
-    func wasUnHidden() {
-        if let provider = provider {
-            if let ad = adProvider()?.currentAd {
-                AASDK.fireHTMLTracker(incomingAd: ad, incomingView: zoneOwner?.viewControllerForPresentingModalView()?.view)
-                provider.adWasUnHidden()
-            }
-        }
-    }
-
     @objc
     func reportAdAction(sender: UIButton) {
         guard let reportAdUrl = reportAdUrlComponents.url else { return }
@@ -156,6 +143,16 @@ import WebKit
     @objc public func setAdZoneVisibility(isViewable: Bool) {
         isAdVisible = isViewable
         provider?.onAdVisibilityChange(isAdVisible: isAdVisible)
+    }
+    
+    @objc public func setAdZoneContext(contextID: String) {
+        _aasdk?.zoneContext.setProps(zoneId ?? "", contextID) //set contextual zone properties
+        provider?.onZoneContextChanged(zoneId: _aasdk?.zoneContext.zoneId ?? "", contextId: _aasdk?.zoneContext.contextId ?? "")
+    }
+    
+    @objc public func clearAdZoneContext() {
+        _aasdk?.zoneContext.setProps("", "") //clear contextual zone properties
+        provider?.onZoneContextChanged(zoneId: _aasdk?.zoneContext.zoneId ?? "", contextId: _aasdk?.zoneContext.contextId ?? "")
     }
 
 // MARK: - <AAZoneRenderer> used by the AAAdAdaptedAdProvider

@@ -5,42 +5,67 @@ import WebKit
 class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WKNavigationDelegate, WKUIDelegate {
     weak var delegate: AAImageAdViewDelegate?
     weak var ad: AAAd?
+    var isWebViewLoaded: Bool = false
+    var isWebViewVisible: Bool = true
     
     private var url: URL?
+    private var html: String?
     private var webView: WKWebView?
 
-    init(url: URL?, with delegate: AAImageAdViewDelegate?, ad: AAAd?) {
+    init(url: URL?, with delegate: AAImageAdViewDelegate?, ad: AAAd?, isVisible: Bool) {
         super.init(frame: .zero)
         self.url = url
         self.delegate = delegate
         self.ad = ad
+        self.isWebViewVisible = isVisible
 
         sharedInit()
-
-        var requestObj: URLRequest?
-        
-        if let url = url {
-            requestObj = URLRequest(url: url)
-        }
-        
-        if let requestObj = requestObj {
-            webView?.load(requestObj)
-        }
+        self.loadWebViewByUrl()
     }
 
-    init(html: String?, with delegate: AAImageAdViewDelegate?, ad: AAAd?) {
+    init(html: String?, with delegate: AAImageAdViewDelegate?, ad: AAAd?, isVisible: Bool) {
         super.init(frame: .zero)
         self.delegate = delegate
+        self.html = html
         self.ad = ad
+        self.isWebViewVisible = isVisible
 
         sharedInit()
         DispatchQueue.main.async {
-            self.webView?.loadHTMLString(html ?? "", baseURL: nil)
+            self.loadWebViewByHtml()
         }
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    private func loadWebViewByUrl() {
+        if(isWebViewVisible) {
+            if let url = url {
+                let requestObj = URLRequest(url: url)
+                isWebViewLoaded = true
+                webView?.load(requestObj)
+            }
+        }
+    }
+    
+    private func loadWebViewByHtml() {
+        if(isWebViewVisible) {
+            isWebViewLoaded = true
+            webView?.loadHTMLString(html ?? "", baseURL: nil)
+        }
+    }
+    
+    func onAdVisibilityChanged(isAdVisible: Bool) {
+        isWebViewVisible = isAdVisible
+        if !isWebViewLoaded {
+            if url != nil {
+                loadWebViewByUrl()
+            } else if let html = html, !html.isEmpty {
+                loadWebViewByHtml()
+            }
+        }
     }
 
     func sharedInit() {

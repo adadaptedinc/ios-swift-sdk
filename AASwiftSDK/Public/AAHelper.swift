@@ -195,8 +195,8 @@ class AAHelper: NSObject {
     }
 
     class func deviceCarrier() -> String? {
-        let info = CTTelephonyNetworkInfo()
-        let carrier = info.subscriberCellularProvider
+        let netInfo = CTTelephonyNetworkInfo()
+        let carrier = netInfo.serviceSubscriberCellularProviders?.filter({ $0.value.carrierName != nil }).first?.value
         return carrier?.carrierName
     }
     

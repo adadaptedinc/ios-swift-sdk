@@ -99,10 +99,16 @@ class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
 
     // Visibility
     func onAdVisibilityChange(isAdVisible: Bool) {
+        currentWebAdView?.onAdVisibilityChanged(isAdVisible: isAdVisible)
         guard let currentAd = currentAd else { return }
         if !currentAd.impressionWasTracked() {
             trackImpression(currentAd, isAdVisible)
         }
+    }
+    
+    func onZoneContextChanged(zoneId: String, contextId: String) {
+        //force an ads refresh
+        _aasdk?.refreshAds(zoneId, contextId, self)//pass in self to render next ad on context changes
     }
 
     func trackImpression(_ ad: AAAd?, _ isAdVisible: Bool) {
@@ -167,12 +173,14 @@ class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
                         currentWebAdView = AAWebAdView(
                             url: URL(string: currentAd?.adURL ?? ""),
                             with: self,
-                            ad: currentAd)
+                            ad: currentAd,
+                            isVisible: zoneView?.isAdVisible ?? true)
                     } else {
                         currentWebAdView = AAWebAdView(
                             html: currentAd?.adHTML,
                             with: self,
-                            ad: currentAd)
+                            ad: currentAd,
+                            isVisible: zoneView?.isAdVisible ?? true)
                     }
             case .kAdAdaptedImageAd:
                     var adView: AAImageAdView?
@@ -259,24 +267,6 @@ class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
     func userInteractedWithAd() {
         AASDK.logDebugMessage("AdProvider: userInteractedWithAd enter", type: AASDK.DEBUG_USER_INTERACTION)
         takeActionForAd()
-    }
-
-    func adWasHidden() {
-        isHidden = true
-        if let currentAd = currentAd {
-            AASDK.trackImpressionEnded(for: currentAd)
-        }
-        stopTimer()
-    }
-
-    func adWasUnHidden() {
-        if isHidden {
-            if let currentAd = currentAd, let zoneView = zoneView {
-                trackImpression(currentAd, zoneView.isAdVisible)
-                isHidden = false
-                fireTimer()
-            }
-        }
     }
 
     func renderCustomView(_ view: UIView?) {

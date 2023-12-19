@@ -61,6 +61,7 @@ var _customId: String?
 
     var shouldUseCachedImages = false
     var isTimerStopped = false
+    var zoneContext = ZoneContext()
     private weak var observer: AASDKObserver?
     private var options: [AnyHashable: Any]?
     private weak var debugObserver: AASDKDebugObserver?
@@ -739,13 +740,22 @@ var _customId: String?
         }
 
         AASDK.logDebugMessage("Grabbing updated ads for zones", type: AASDK.DEBUG_GENERAL)
-
+        
+        refreshAds(zoneContext.zoneId, zoneContext.contextId)
+    }
+    
+    func refreshAds(_ zoneID: String = "", _ contextID: String = "", _ adProvider: AAAdAdaptedAdProvider? = nil) {
         let request = AAUpdateAdsRequest()
+        request.zoneId = zoneID
+        request.contextId = contextID
 
         let responseWasReceivedBlock = { [self] response, forRequest in
             let updateResponse = response as? AAUpdateAdsResponse
             pollingIntervalInMS = updateResponse?.pollingIntervalInMS ?? 0
             recacheAds(updateResponse?.zones)
+            if (adProvider != nil) {
+                adProvider?.renderNext()
+            }
         } as AAResponseWasReceivedBlock
 
         let responseWasErrorBlock = { response, forRequest, error in
@@ -768,7 +778,6 @@ var _customId: String?
         } as AAResponseWasErrorBlock
 
         _aasdk?.connector?.enqueueRequest(request, responseWasErrorBlock: responseWasErrorBlock, responseWasReceivedBlock: responseWasReceivedBlock)
-
     }
 
     func recacheAds(_ zones: [AnyHashable : Any]?) {
