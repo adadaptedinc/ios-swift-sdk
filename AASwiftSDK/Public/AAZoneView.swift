@@ -53,7 +53,7 @@ import WebKit
     deinit {
         removeListeners()
         //clear recipe context automatically
-        clearAdZoneContext()
+        clearAdZonesContext()
     }
 
     public override func awakeFromNib() {
@@ -146,13 +146,23 @@ import WebKit
     }
     
     @objc public func setAdZoneContext(contextID: String) {
-        _aasdk?.zoneContext.setProps(zoneId ?? "", contextID) //set contextual zone properties
-        provider?.onZoneContextChanged(zoneId: _aasdk?.zoneContext.zoneId ?? "", contextId: _aasdk?.zoneContext.contextId ?? "")
+        _aasdk?.zoneContext.addZone(zoneId ?? "", contextID) //set contextual zone properties
+        provider?.onZoneContextChanged(zoneIds: _aasdk?.zoneContext.getZoneIdsAsString() ?? "", contextId: _aasdk?.zoneContext.getContextId() ?? "")
     }
     
-    @objc public func clearAdZoneContext() {
-        _aasdk?.zoneContext.setProps("", "") //clear contextual zone properties
-        provider?.onZoneContextChanged(zoneId: _aasdk?.zoneContext.zoneId ?? "", contextId: _aasdk?.zoneContext.contextId ?? "")
+    @objc public func removeAdZoneContext() {
+        _aasdk?.zoneContext.removeZone(zoneId ?? "" ) //remove this specific zone context
+        provider?.onZoneContextChanged(zoneIds: _aasdk?.zoneContext.getZoneIdsAsString() ?? "", contextId: _aasdk?.zoneContext.getContextId() ?? "")
+    }
+    
+    @objc public func clearAdZonesContext() {
+        _aasdk?.zoneContext.clearContext() //clear all zone context
+        provider?.onZoneContextChanged(zoneIds: _aasdk?.zoneContext.getZoneIdsAsString() ?? "", contextId: _aasdk?.zoneContext.getContextId() ?? "")
+    }
+    
+    @objc public func setAdZoneContextTwo(contextID: String) { //testing only
+        _aasdk?.zoneContext.addZone("12345", contextID) //set contextual zone properties
+        provider?.onZoneContextChanged(zoneIds: _aasdk?.zoneContext.getZoneIdsAsString() ?? "", contextId: _aasdk?.zoneContext.getContextId() ?? "")
     }
 
 // MARK: - <AAZoneRenderer> used by the AAAdAdaptedAdProvider

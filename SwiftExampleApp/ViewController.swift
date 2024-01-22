@@ -127,9 +127,16 @@ class ViewController:
             //RECIPE test call to get recipe ads
             var test = searchTextField.text
             if (searchTextField.text == "clear") {
-                adAdaptedZoneView.clearAdZoneContext()
-            } else {
+                adAdaptedZoneView.clearAdZonesContext()
+            }
+            if (searchTextField.text == "remove") {
+                adAdaptedZoneView.removeAdZoneContext()
+            }
+            if (searchTextField.text == "recipe") {
                 adAdaptedZoneView.setAdZoneContext(contextID: "1201") //berry-smoothie-bowl
+            }
+            if (searchTextField.text == "twozones") {
+                adAdaptedZoneView.setAdZoneContextTwo(contextID: "1201")
             }
             // END RECIPE TEST
             

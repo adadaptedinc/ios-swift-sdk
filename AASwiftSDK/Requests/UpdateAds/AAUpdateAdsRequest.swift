@@ -9,7 +9,7 @@ import Foundation
 
 @objcMembers
 class AAUpdateAdsRequest: AAGenericRequest {
-    var zoneId = ""
+    var zoneIds = ""
     var contextId = ""
     
 // MARK: - AARequest Overrides

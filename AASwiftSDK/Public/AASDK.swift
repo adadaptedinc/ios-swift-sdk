@@ -741,12 +741,12 @@ var _customId: String?
 
         AASDK.logDebugMessage("Grabbing updated ads for zones", type: AASDK.DEBUG_GENERAL)
         
-        refreshAds(zoneContext.zoneId, zoneContext.contextId)
+        refreshAds(zoneContext.getZoneIdsAsString(), zoneContext.getContextId())
     }
     
-    func refreshAds(_ zoneID: String = "", _ contextID: String = "", _ adProvider: AAAdAdaptedAdProvider? = nil) {
+    func refreshAds(_ zoneIDs: String = "", _ contextID: String = "", _ adProvider: AAAdAdaptedAdProvider? = nil) {
         let request = AAUpdateAdsRequest()
-        request.zoneId = zoneID
+        request.zoneIds = zoneIDs
         request.contextId = contextID
 
         let responseWasReceivedBlock = { [self] response, forRequest in

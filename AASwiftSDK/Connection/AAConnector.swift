@@ -142,10 +142,10 @@ class AAConnector: NSObject, URLSessionDelegate {
         }
             
         else if aaRequest is AAUpdateAdsRequest {
-            let zoneId = (aaRequest as? AAUpdateAdsRequest)?.zoneId
+            let zoneIds = (aaRequest as? AAUpdateAdsRequest)?.zoneIds
             let contextId = (aaRequest as? AAUpdateAdsRequest)?.contextId
             let tURL = try! aaRequest?.targetURL()
-            let qURL = "?aid=\(appID ?? "")&uid=\(udid ?? "")&sid=\(sessionID ?? "")&sdk=\(AAHelper.sdkVersion())&zoneID=\(zoneId ?? "")&contextID=\(contextId ?? "")"
+            let qURL = "?aid=\(appID ?? "")&uid=\(udid ?? "")&sid=\(sessionID ?? "")&sdk=\(AAHelper.sdkVersion())&zoneID=\(zoneIds ?? "")&contextID=\(contextId ?? "")"
             url = URL(string: (tURL?.absoluteString ?? "") + qURL)
             aaRequest = nil //drop request body
             methodType = "GET"

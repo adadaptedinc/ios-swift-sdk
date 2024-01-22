@@ -39,33 +39,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2D199464-4868-4B5A-964D-8F98530C1AFE"
+            uuid = "7C5E40DC-9B9E-483A-B710-BA09EA56C508"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AASwiftSDK/Public/AASDK.swift"
+            filePath = "AASwiftSDK/Connection/AAConnector.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "590"
-            endingLineNumber = "590"
-            landmarkName = "cacheComplete()"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "sendNextMessage()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F0AF6E7E-AA3E-4CC5-8027-C4EBA36D1DB5"
+            uuid = "4BEFCEE1-A432-4B1B-8A10-AB9BDA5CB83A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AASwiftSDK/Public/AASDK.swift"
+            filePath = "SwiftExampleApp/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "586"
-            endingLineNumber = "586"
-            landmarkName = "cacheAds(inAdsDic:completeNotificationName:shouldUseCachedImages:shouldReplaceCurrent:)"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "addItemToList(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4BEFCEE1-A432-4B1B-8A10-AB9BDA5CB83A - 95428c6836de62ae"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftExampleApp.ViewController.addItemToList(__C.UIButton) -&gt; ()"
+                  moduleName = "SwiftExampleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/SwiftExampleApp/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "136"
+                  endingLineNumber = "136"
+                  offsetFromSymbolStart = "4394">
+               </Location>
+               <Location
+                  uuid = "4BEFCEE1-A432-4B1B-8A10-AB9BDA5CB83A - 95428c6836de62ae"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftExampleApp.ViewController.addItemToList(__C.UIButton) -&gt; ()"
+                  moduleName = "SwiftExampleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/SwiftExampleApp/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "136"
+                  endingLineNumber = "136"
+                  offsetFromSymbolStart = "4347">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
