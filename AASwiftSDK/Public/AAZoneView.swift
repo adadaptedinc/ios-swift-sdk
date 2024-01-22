@@ -146,23 +146,18 @@ import WebKit
     }
     
     @objc public func setAdZoneContext(contextID: String) {
-        _aasdk?.zoneContext.addZone(zoneId ?? "", contextID) //set contextual zone properties
-        provider?.onZoneContextChanged(zoneIds: _aasdk?.zoneContext.getZoneIdsAsString() ?? "", contextId: _aasdk?.zoneContext.getContextId() ?? "")
+        _aasdk?.addZoneContext(zoneId: zoneId ?? "", contextId: contextID) //set contextual zone properties
+        provider?.onZoneContextChanged(zoneContexts: _aasdk?.zoneContexts ?? [])
     }
     
     @objc public func removeAdZoneContext() {
-        _aasdk?.zoneContext.removeZone(zoneId ?? "" ) //remove this specific zone context
-        provider?.onZoneContextChanged(zoneIds: _aasdk?.zoneContext.getZoneIdsAsString() ?? "", contextId: _aasdk?.zoneContext.getContextId() ?? "")
+        _aasdk?.removeZoneContext(zoneId: zoneId ?? "")
+        provider?.onZoneContextChanged(zoneContexts: _aasdk?.zoneContexts ?? [])
     }
     
     @objc public func clearAdZonesContext() {
-        _aasdk?.zoneContext.clearContext() //clear all zone context
-        provider?.onZoneContextChanged(zoneIds: _aasdk?.zoneContext.getZoneIdsAsString() ?? "", contextId: _aasdk?.zoneContext.getContextId() ?? "")
-    }
-    
-    @objc public func setAdZoneContextTwo(contextID: String) { //testing only
-        _aasdk?.zoneContext.addZone("12345", contextID) //set contextual zone properties
-        provider?.onZoneContextChanged(zoneIds: _aasdk?.zoneContext.getZoneIdsAsString() ?? "", contextId: _aasdk?.zoneContext.getContextId() ?? "")
+        _aasdk?.clearZoneContext() //clear all zone context
+        provider?.onZoneContextChanged(zoneContexts: _aasdk?.zoneContexts ?? [])
     }
 
 // MARK: - <AAZoneRenderer> used by the AAAdAdaptedAdProvider

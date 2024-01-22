@@ -106,9 +106,9 @@ class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
         }
     }
     
-    func onZoneContextChanged(zoneIds: String, contextId: String) {
+    func onZoneContextChanged(zoneContexts: [ZoneContext]) {
         //force an ads refresh
-        _aasdk?.refreshAds(zoneIds, contextId, self)//pass in self to render next ad on context changes
+        _aasdk?.refreshAds(zoneContexts, self)//pass in self to render next ad on context changes
     }
 
     func trackImpression(_ ad: AAAd?, _ isAdVisible: Bool) {

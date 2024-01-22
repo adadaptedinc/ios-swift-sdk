@@ -9,33 +9,35 @@
 import Foundation
 
 @objc public class ZoneContext: NSObject {
-    private var zoneIds = [String]()
+    private var zoneId = ""
     private var contextId = ""
     
-    func addZone(_ zoneID: String, _ contextID: String) {
-        if !zoneIds.contains(zoneID) {
-            zoneIds.append(zoneID)
-        }
-        contextId = contextID
+    init(zoneId: String = "", contextId: String = "") {
+        self.zoneId = zoneId
+        self.contextId = contextId
     }
     
-    func removeZone(_ zoneID: String) {
-        zoneIds.removeAll { $0 == zoneID }
-        if zoneIds.isEmpty {
-            contextId = ""
-        }
+    func setValues(_ zoneID: String, _ contextID: String) {
+        self.zoneId = zoneID
+        self.contextId = contextID
     }
     
     func clearContext() {
-        self.zoneIds = [String]()
+        self.zoneId = ""
         self.contextId = ""
     }
     
-    func getZoneIdsAsString() -> String {
-        return zoneIds.joined(separator: ",")
+    func getZoneId() -> String {
+        return self.zoneId
     }
     
     func getContextId() -> String {
-        return contextId
+        return self.contextId
+    }
+}
+
+extension Array where Element: ZoneContext {
+    func getZoneIdsAsString(separator: String = ",") -> String {
+        return map { $0.getZoneId() }.joined(separator: separator)
     }
 }
