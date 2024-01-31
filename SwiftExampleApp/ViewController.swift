@@ -35,7 +35,7 @@ class ViewController:
         adAdaptedZoneView.setZoneOwner(self)
         AASDK.registerContentListeners(for: self)
         
-        adAdaptedZoneViewTwo = AdAdaptedZoneView(frame: .zero, forZone: "123456", delegate: self)
+        adAdaptedZoneViewTwo = AdAdaptedZoneView(frame: .zero, forZone: "110002", delegate: self)
         
         listData = ["Eggs", "Bread"]
         searchTextField.theme.font = UIFont.systemFont(ofSize: 15)
@@ -133,10 +133,10 @@ class ViewController:
                 adAdaptedZoneView.clearAdZonesContext()
             }
             if (searchTextField.text == "recipe") {
-                adAdaptedZoneView.setAdZoneContext(contextID: "1201") //berry-smoothie-bowl
+                adAdaptedZoneView.setAdZoneContext(contextID: "organic")
             }
             if (searchTextField.text == "twozones") {
-                adAdaptedZoneViewTwo.setAdZoneContext(contextID: "1201")
+                adAdaptedZoneViewTwo.setAdZoneContext(contextID: "organic")
             }
             // END RECIPE TEST
             
