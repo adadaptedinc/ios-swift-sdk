@@ -61,7 +61,7 @@ var _customId: String?
 
     var shouldUseCachedImages = false
     var isTimerStopped = false
-    var zoneContext = ZoneContext()
+    var zoneContexts = [ZoneContext]()
     private weak var observer: AASDKObserver?
     private var options: [AnyHashable: Any]?
     private weak var debugObserver: AASDKDebugObserver?
@@ -276,6 +276,23 @@ var _customId: String?
         let preferences = UserDefaults.standard
         preferences.set(false, forKey: AASDK_TRACKING_DISABLED_KEY)
         preferences.synchronize()
+    }
+    
+    func addZoneContext(zoneId: String, contextId: String) {
+        if !zoneContexts.contains(where: { $0.getZoneId() == zoneId }) {
+            let newZoneContext = ZoneContext(zoneId: zoneId, contextId: contextId)
+            self.zoneContexts.append(newZoneContext)
+        }
+    }
+    
+    func removeZoneContext(zoneId: String) {
+        if let index = zoneContexts.firstIndex(where: { $0.getZoneId() == zoneId }) {
+            zoneContexts.remove(at: index)
+        }
+    }
+    
+    func clearZoneContext() {
+        self.zoneContexts = [ZoneContext]()
     }
 
 // MARK: - debugging
@@ -741,13 +758,14 @@ var _customId: String?
 
         AASDK.logDebugMessage("Grabbing updated ads for zones", type: AASDK.DEBUG_GENERAL)
         
-        refreshAds(zoneContext.zoneId, zoneContext.contextId)
+        refreshAds(zoneContexts)
     }
     
-    func refreshAds(_ zoneID: String = "", _ contextID: String = "", _ adProvider: AAAdAdaptedAdProvider? = nil) {
+    func refreshAds(_ zoneContexts: [ZoneContext], _ adProvider: AAAdAdaptedAdProvider? = nil) {
         let request = AAUpdateAdsRequest()
-        request.zoneId = zoneID
-        request.contextId = contextID
+        
+        request.zoneIds = zoneContexts.getZoneIdsAsString()
+        request.contextId = zoneContexts.first?.getContextId() ?? ""
 
         let responseWasReceivedBlock = { [self] response, forRequest in
             let updateResponse = response as? AAUpdateAdsResponse

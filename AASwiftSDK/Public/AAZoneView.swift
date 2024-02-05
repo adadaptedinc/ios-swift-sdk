@@ -53,7 +53,7 @@ import WebKit
     deinit {
         removeListeners()
         //clear recipe context automatically
-        clearAdZoneContext()
+        clearAdZonesContext()
     }
 
     public override func awakeFromNib() {
@@ -146,13 +146,18 @@ import WebKit
     }
     
     @objc public func setAdZoneContext(contextID: String) {
-        _aasdk?.zoneContext.setProps(zoneId ?? "", contextID) //set contextual zone properties
-        provider?.onZoneContextChanged(zoneId: _aasdk?.zoneContext.zoneId ?? "", contextId: _aasdk?.zoneContext.contextId ?? "")
+        _aasdk?.addZoneContext(zoneId: zoneId ?? "", contextId: contextID) //set contextual zone properties
+        provider?.onZoneContextChanged(zoneContexts: _aasdk?.zoneContexts ?? [])
     }
     
-    @objc public func clearAdZoneContext() {
-        _aasdk?.zoneContext.setProps("", "") //clear contextual zone properties
-        provider?.onZoneContextChanged(zoneId: _aasdk?.zoneContext.zoneId ?? "", contextId: _aasdk?.zoneContext.contextId ?? "")
+    @objc public func removeAdZoneContext() {
+        _aasdk?.removeZoneContext(zoneId: zoneId ?? "")
+        provider?.onZoneContextChanged(zoneContexts: _aasdk?.zoneContexts ?? [])
+    }
+    
+    @objc public func clearAdZonesContext() {
+        _aasdk?.clearZoneContext() //clear all zone context
+        provider?.onZoneContextChanged(zoneContexts: _aasdk?.zoneContexts ?? [])
     }
 
 // MARK: - <AAZoneRenderer> used by the AAAdAdaptedAdProvider

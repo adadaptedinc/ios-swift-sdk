@@ -9,11 +9,35 @@
 import Foundation
 
 @objc public class ZoneContext: NSObject {
-    var zoneId = ""
-    var contextId = ""
+    private var zoneId = ""
+    private var contextId = ""
     
-    func setProps(_ zoneID: String, _ contextID: String) {
-        zoneId = zoneID
-        contextId = contextID
+    init(zoneId: String = "", contextId: String = "") {
+        self.zoneId = zoneId
+        self.contextId = contextId
+    }
+    
+    func setValues(_ zoneID: String, _ contextID: String) {
+        self.zoneId = zoneID
+        self.contextId = contextID
+    }
+    
+    func clearContext() {
+        self.zoneId = ""
+        self.contextId = ""
+    }
+    
+    func getZoneId() -> String {
+        return self.zoneId
+    }
+    
+    func getContextId() -> String {
+        return self.contextId
+    }
+}
+
+extension Array where Element: ZoneContext {
+    func getZoneIdsAsString(separator: String = ",") -> String {
+        return map { $0.getZoneId() }.joined(separator: separator)
     }
 }

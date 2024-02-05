@@ -22,6 +22,7 @@ class ViewController:
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet weak var searchTextField: SearchTextField!
+    var adAdaptedZoneViewTwo: AdAdaptedZoneView!
     
     var listData = [String]()
     
@@ -33,6 +34,8 @@ class ViewController:
         listTableView.dataSource = self
         adAdaptedZoneView.setZoneOwner(self)
         AASDK.registerContentListeners(for: self)
+        
+        adAdaptedZoneViewTwo = AdAdaptedZoneView(frame: .zero, forZone: "110002", delegate: self)
         
         listData = ["Eggs", "Bread"]
         searchTextField.theme.font = UIFont.systemFont(ofSize: 15)
@@ -127,9 +130,13 @@ class ViewController:
             //RECIPE test call to get recipe ads
             var test = searchTextField.text
             if (searchTextField.text == "clear") {
-                adAdaptedZoneView.clearAdZoneContext()
-            } else {
-                adAdaptedZoneView.setAdZoneContext(contextID: "1201") //berry-smoothie-bowl
+                adAdaptedZoneView.clearAdZonesContext()
+            }
+            if (searchTextField.text == "recipe") {
+                adAdaptedZoneView.setAdZoneContext(contextID: "organic")
+            }
+            if (searchTextField.text == "twozones") {
+                adAdaptedZoneViewTwo.setAdZoneContext(contextID: "organic")
             }
             // END RECIPE TEST
             
