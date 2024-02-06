@@ -62,6 +62,7 @@ var _customId: String?
     var shouldUseCachedImages = false
     var isTimerStopped = false
     var zoneContexts = [ZoneContext]()
+    var backgroundedPastRefresh = false
     private weak var observer: AASDKObserver?
     private var options: [AnyHashable: Any]?
     private weak var debugObserver: AASDKDebugObserver?
@@ -688,9 +689,8 @@ var _customId: String?
             return
         }
 
-        if (lastCame != nil && abs(Int(lastCame?.timeIntervalSinceNow ?? 0)) < 300) {
-            let notification = Notification(name: NSNotification.Name("app_unbackgrounded"), object: nil)
-            AASDK.postDelayedNotification(notification)
+        if (lastCame != nil && abs(Int(lastCame?.timeIntervalSinceNow ?? 0)) > 300) {
+            backgroundedPastRefresh = true
         }
         lastCame = Date()
         startUpdateTimer()
@@ -773,6 +773,10 @@ var _customId: String?
             recacheAds(updateResponse?.zones)
             if (adProvider != nil) {
                 adProvider?.renderNext()
+            } else if backgroundedPastRefresh {
+                let notification = Notification(name: NSNotification.Name("app_unbackgrounded"), object: nil)
+                AASDK.postDelayedNotification(notification)
+                backgroundedPastRefresh = false
             }
         } as AAResponseWasReceivedBlock
 
