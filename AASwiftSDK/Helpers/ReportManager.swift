@@ -107,4 +107,11 @@ class ReportManager {
     func reportAnomaly(withCode errorCode: String?, message: String?, params: [AnyHashable: Any]?) {
         connector.addCollectableError(forDispatch: AACollectableError(code: errorCode, message: message, params: params))
     }
+    
+    func reportRecipeContextEvent(contextId: String, zoneId: String) {
+        var payload = [AnyHashable: Any](minimumCapacity: 2)
+        payload[CONTEXT_ID] = contextId
+        payload[ZONE_ID] = zoneId
+        connector.addCollectableEvent(forDispatch: AACollectableEvent.internalEvent(withName: RECIPE_CONTEXT, andPayload: payload))
+    }
 }

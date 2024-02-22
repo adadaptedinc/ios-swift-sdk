@@ -148,6 +148,7 @@ import WebKit
     @objc public func setAdZoneContext(contextID: String) {
         _aasdk?.addZoneContext(zoneId: zoneId ?? "", contextId: contextID) //set contextual zone properties
         provider?.onZoneContextChanged(zoneContexts: _aasdk?.zoneContexts ?? [])
+        ReportManager.getInstance().reportRecipeContextEvent(contextId: contextID, zoneId: zoneId ?? "")
     }
     
     @objc public func removeAdZoneContext() {

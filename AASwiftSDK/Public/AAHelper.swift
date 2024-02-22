@@ -161,6 +161,11 @@ let AA_EC_ADDIT_ADDED_TO_LIST = "addit_added_to_list"
 let AA_EC_ADDIT_APP_OPENED = "addit_app_opened"
 let AA_EC_ADDIT_URL_RECEIVED = "deeplink_url_received"
 
+// MARK: - Keys for recipe context events
+let CONTEXT_ID = "context_id"
+let ZONE_ID = "zone_id"
+let RECIPE_CONTEXT = "recipe_context"
+
 // MARK: - Private
 let kEventImpressionStarted = "impression"
 let kEventInteraction = "interaction"
