@@ -114,6 +114,7 @@
 		F4A2047C24E323F8003F909D /* KeywordInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A2047B24E323F8003F909D /* KeywordInterceptor.m */; };
 		F4A2047F24E324C5003F909D /* ObjCSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2047E24E324C5003F909D /* ObjCSearchTextField.swift */; };
 		F4A2048124E3264B003F909D /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2048024E3264B003F909D /* Toast.swift */; };
+		F4D394022BB47EB300D6576D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = F4D394012BB47EB300D6576D /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -279,6 +280,7 @@
 		F4A2047D24E324C4003F909D /* ObjCExampleApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjCExampleApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4A2047E24E324C5003F909D /* ObjCSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjCSearchTextField.swift; sourceTree = "<group>"; };
 		F4A2048024E3264B003F909D /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		F4D394012BB47EB300D6576D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -362,6 +364,7 @@
 				F46DB57E24EADE8200A81CBF /* Public */,
 				F46DB58424EAE2EB00A81CBF /* Requests */,
 				DF9F16D32A9CF21D007512D5 /* Assets.xcassets */,
+				F4D394012BB47EB300D6576D /* PrivacyInfo.xcprivacy */,
 			);
 			path = AASwiftSDK;
 			sourceTree = "<group>";
@@ -757,6 +760,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4D394022BB47EB300D6576D /* PrivacyInfo.xcprivacy in Resources */,
 				DF9F16D42A9CF21D007512D5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -990,7 +994,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.3.2;
+				CURRENT_PROJECT_VERSION = 1.3.3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1054,7 +1058,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.3.2;
+				CURRENT_PROJECT_VERSION = 1.3.3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1084,7 +1088,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.3.2;
+				CURRENT_PROJECT_VERSION = 1.3.3;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = E4LB8UE2WX;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1102,7 +1106,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.AASwiftSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = NO;
@@ -1120,7 +1124,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.3.2;
+				CURRENT_PROJECT_VERSION = 1.3.3;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = E4LB8UE2WX;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1138,7 +1142,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adadapted.AASwiftSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = NO;
