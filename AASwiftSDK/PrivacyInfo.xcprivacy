@@ -2,27 +2,45 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPrivacyTrackingDomains</key>
-	<array>
-		<string>https://track.adadapted.com</string>
-	</array>
 	<key>NSPrivacyCollectedDataTypes</key>
 	<array>
+		<dict>
+			<key>NSPrivacyCollectedDataType</key>
+			<string>NSPrivacyCollectedDataTypeProductInteraction</string>
+			<key>NSPrivacyCollectedDataTypeLinked</key>
+			<false/>
+			<key>NSPrivacyCollectedDataTypeTracking</key>
+			<false/>
+			<key>NSPrivacyCollectedDataTypePurposes</key>
+			<array>
+				<string>NSPrivacyCollectedDataTypePurposeAnalytics</string>
+			</array>
+		</dict>
+		<dict>
+			<key>NSPrivacyCollectedDataType</key>
+			<string>NSPrivacyCollectedDataTypeAdvertisingData</string>
+			<key>NSPrivacyCollectedDataTypeLinked</key>
+			<false/>
+			<key>NSPrivacyCollectedDataTypeTracking</key>
+			<false/>
+			<key>NSPrivacyCollectedDataTypePurposes</key>
+			<array>
+				<string>NSPrivacyCollectedDataTypePurposeAnalytics</string>
+			</array>
+		</dict>
 		<dict>
 			<key>NSPrivacyCollectedDataType</key>
 			<string>NSPrivacyCollectedDataTypeDeviceID</string>
 			<key>NSPrivacyCollectedDataTypeLinked</key>
 			<false/>
 			<key>NSPrivacyCollectedDataTypeTracking</key>
-			<true/>
+			<false/>
 			<key>NSPrivacyCollectedDataTypePurposes</key>
 			<array>
-				<string>NSPrivacyCollectedDataTypePurposeThirdPartyAdvertising</string>
+				<string>NSPrivacyCollectedDataTypePurposeDeveloperAdvertising</string>
 			</array>
 		</dict>
 	</array>
-	<key>NSPrivacyTracking</key>
-	<true/>
 	<key>NSPrivacyAccessedAPITypes</key>
 	<array>
 		<dict>
@@ -34,5 +52,11 @@
 			<string>NSPrivacyAccessedAPICategoryUserDefaults</string>
 		</dict>
 	</array>
+	<key>NSPrivacyTrackingDomains</key>
+	<array>
+		<string>https://track.adadapted.com</string>
+	</array>
+	<key>NSPrivacyTracking</key>
+	<true/>
 </dict>
 </plist>
