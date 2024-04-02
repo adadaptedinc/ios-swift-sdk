@@ -19,7 +19,7 @@ class AAKeywordIntercept: NSObject {
     var priority = 0
 
     class func keywordIntercepts(fromJSONDic dic: [AnyHashable]?, withSearchId searchId: String?) -> [AnyHashable]? {
-        var array = [AnyHashable](repeating: 0, count: 10)
+        var array = [AnyHashable]()
         
         for term in dic ?? [] {
             guard let term = term as? [AnyHashable : Any] else {
