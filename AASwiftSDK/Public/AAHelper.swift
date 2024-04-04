@@ -26,7 +26,6 @@ let AA_KEY_BUNDLE_ID = "bundle_id"
 let AA_KEY_SDK_VERSION = "sdk_version"
 let AA_KEY_BUNDLE_VERSION = "bundle_version"
 let AA_KEY_ALLOW_RETARGETING = "allow_retargeting"
-let AA_KEY_VENDOR_ID = "AdAdaptedDevice"
 
 // device info
 let AA_KEY_DEVICE_ID = "device_udid"
@@ -291,16 +290,6 @@ class AAHelper: NSObject {
         preferences.set(sessionId, forKey: AASDK_SESSION_ID_KEY)
         preferences.synchronize()
     }
-    
-    // checks if IDFA tracking is disabled
-    class func isTrackingDisabled() -> Bool {
-        let preferences = UserDefaults.standard
-        if preferences.object(forKey: AASDK_TRACKING_DISABLED_KEY) == nil {
-            return false
-        } else {
-            return preferences.value(forKey: AASDK_TRACKING_DISABLED_KEY) as! Bool
-        }
-    }
 
     class func udid() -> String? {
         let preferences = UserDefaults.standard
@@ -308,22 +297,11 @@ class AAHelper: NSObject {
         if _customId != nil && (preferences.value(forKey: AA_KEY_UDID) as? String != _customId) {
             preferences.setValue(_customId, forKey: AA_KEY_UDID)
             return _customId
-        } else if isAdTrackingEnabled() {
-            return ASIdentifierManager.shared().advertisingIdentifier.uuidString
         } else {
             if preferences.value(forKey: AA_KEY_UDID) == nil {
-                preferences.setValue(AA_KEY_VENDOR_ID, forKey: AA_KEY_UDID)
+                preferences.setValue(UUID().uuidString.replacingOccurrences(of: "-", with: ""), forKey: AA_KEY_UDID)
             }
             return preferences.value(forKey: AA_KEY_UDID) as? String
-        }
-    }
-
-    // Checking if ad tracking is enabled on the device
-    class func isAdTrackingEnabled() -> Bool {
-        if #available(iOS 14, *) {
-            return ATTrackingManager.trackingAuthorizationStatus == .authorized
-        } else {
-            return ASIdentifierManager.shared().isAdvertisingTrackingEnabled
         }
     }
 

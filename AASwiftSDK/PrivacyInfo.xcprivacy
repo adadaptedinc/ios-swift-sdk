@@ -52,11 +52,7 @@
 			<string>NSPrivacyAccessedAPICategoryUserDefaults</string>
 		</dict>
 	</array>
-	<key>NSPrivacyTrackingDomains</key>
-	<array>
-		<string>https://track.adadapted.com</string>
-	</array>
 	<key>NSPrivacyTracking</key>
-	<true/>
+	<false/>
 </dict>
 </plist>

@@ -20,30 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver, AASDKDebug
         let options = [
             AASDK.OPTION_TEST_MODE:true,
             AASDK.OPTION_KEYWORD_INTERCEPT:true,
-            AASDK.OPTION_EXTERNAL_PAYLOADS:true,
-            AASDK.OPTION_CUSTOM_ID:"CustomIdTest::112"]
+            AASDK.OPTION_EXTERNAL_PAYLOADS:true]
+            //AASDK.OPTION_CUSTOM_ID:"CustomIdTest::112"]
             as [String : Any]
-
-        // Ad tracking dialog
-        if #available(iOS 14, *) {
-            ATTrackingManager.requestTrackingAuthorization { status in
-                switch status {
-                case .notDetermined:
-                    break
-                case .restricted:
-                    break
-                case .denied:
-                    break
-                case .authorized:
-                    break
-                @unknown default:
-                    break
-                }
-            }
-        } else {
-            // Fallback on earlier versions
-            return true
-        }
 
          // iOS api key
         AASDK.startSession(withAppID: "7D58810X6333241C", registerListenersFor: self, options: options) //7D58810X6333241C

@@ -45,7 +45,7 @@ class AAReportableAnomalyEvent: NSObject {
         setParamValue(AAHelper.deviceWidth() as NSObject?, forKey: AA_KEY_DEVICE_WIDTH)
         setParamValue(AAHelper.deviceHeight() as NSObject?, forKey: AA_KEY_DEVICE_HEIGHT)
         setParamValue(AAHelper.deviceModelName() as NSObject?, forKey: AA_KEY_DEVICE_MODEL)
-        setParamValue(NSNumber(value: AAHelper.isAdTrackingEnabled()), forKey: AA_KEY_ALLOW_RETARGETING)
+        setParamValue(NSNumber(value: 0), forKey: AA_KEY_ALLOW_RETARGETING)
         setParamValue(AAHelper.currentTimezone() as NSObject?, forKey: AA_KEY_TIMEZONE)
 
         // optional

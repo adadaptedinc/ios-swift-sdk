@@ -18,53 +18,6 @@
             endingLineNumber = "136"
             landmarkName = "addItemToList(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "4BEFCEE1-A432-4B1B-8A10-AB9BDA5CB83A - 95428c6836de62ae"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SwiftExampleApp.ViewController.addItemToList(__C.UIButton) -&gt; ()"
-                  moduleName = "SwiftExampleApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/SwiftExampleApp/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "136"
-                  endingLineNumber = "136"
-                  offsetFromSymbolStart = "4394">
-               </Location>
-               <Location
-                  uuid = "4BEFCEE1-A432-4B1B-8A10-AB9BDA5CB83A - 95428c6836de62ae"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SwiftExampleApp.ViewController.addItemToList(__C.UIButton) -&gt; ()"
-                  moduleName = "SwiftExampleApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/SwiftExampleApp/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "136"
-                  endingLineNumber = "136"
-                  offsetFromSymbolStart = "4347">
-               </Location>
-               <Location
-                  uuid = "4BEFCEE1-A432-4B1B-8A10-AB9BDA5CB83A - 95428c6836de62ae"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SwiftExampleApp.ViewController.addItemToList(__C.UIButton) -&gt; ()"
-                  moduleName = "SwiftExampleApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bclifton/Documents/GitHub/ios-swift-sdk/SwiftExampleApp/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "136"
-                  endingLineNumber = "136"
-                  offsetFromSymbolStart = "3306">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -96,22 +49,6 @@
             startingLineNumber = "89"
             endingLineNumber = "89"
             landmarkName = "unbackgrounded(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "275BF56A-348A-484C-A079-EF766ED7549C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AASwiftSDK/AdObjects/AAKeywordIntercept.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "keywordIntercepts(fromJSONDic:withSearchId:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
