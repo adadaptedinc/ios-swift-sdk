@@ -16,7 +16,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver, AASDKDebugObserver {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        // AASDK.disableAdTracking() turn on and off IDFA tracking
         let options = [
             AASDK.OPTION_TEST_MODE:true,
             AASDK.OPTION_KEYWORD_INTERCEPT:true,
