@@ -344,10 +344,6 @@ class AAHelper: NSObject {
         return String(bytes: Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
     }
 
-    class func deviceIdentifier() -> String? {
-        return UIDevice.current.identifierForVendor?.uuidString
-    }
-
     class func deviceOS() -> String? {
         return "iPhone OS"
     }
