@@ -37,7 +37,7 @@
 			<false/>
 			<key>NSPrivacyCollectedDataTypePurposes</key>
 			<array>
-				<string>NSPrivacyCollectedDataTypePurposeDeveloperAdvertising</string>
+				<string>Fraud Detection Purposes</string>
 			</array>
 		</dict>
 	</array>

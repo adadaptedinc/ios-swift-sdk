@@ -19,7 +19,7 @@ class AAInitRequest: AAGenericRequest {
         setParamValue(AAHelper.sdkVersion() as NSObject?, forKey: AA_KEY_SDK_VERSION)
         setParamValue(AAHelper.bundleVersion() as NSObject?, forKey: AA_KEY_BUNDLE_VERSION)
         setParamValue(AAHelper.deviceModelName() as NSObject, forKey: AA_KEY_DEVICE_MODEL)
-        setParamValue(AAHelper.udid() as NSObject?, forKey: AA_KEY_DEVICE_ID)
+        setParamValue(AAHelper.deviceIdentifier() as NSObject?, forKey: AA_KEY_DEVICE_ID)
         setParamValue(AAHelper.deviceOS() as NSObject?, forKey: AA_KEY_OS_NAME)
         setParamValue(AAHelper.deviceOSVersion() as NSObject?, forKey: AA_KEY_OS_VERSION)
         setParamValue(AAHelper.deviceLocale() as NSObject?, forKey: AA_KEY_LOCALE)
