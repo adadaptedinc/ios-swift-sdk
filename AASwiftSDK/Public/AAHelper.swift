@@ -183,7 +183,7 @@ var _screenSize = CGSize.zero
 
 class AAHelper: NSObject {
     class func sdkVersion() -> String {
-        return "1.3.3"
+        return "1.3.4"
     }
 
     class func bundleVersion() -> String {
@@ -290,16 +290,6 @@ class AAHelper: NSObject {
         preferences.set(sessionId, forKey: AASDK_SESSION_ID_KEY)
         preferences.synchronize()
     }
-    
-    // checks if IDFA tracking is disabled
-    class func isTrackingDisabled() -> Bool {
-        let preferences = UserDefaults.standard
-        if preferences.object(forKey: AASDK_TRACKING_DISABLED_KEY) == nil {
-            return false
-        } else {
-            return preferences.value(forKey: AASDK_TRACKING_DISABLED_KEY) as! Bool
-        }
-    }
 
     class func udid() -> String? {
         let preferences = UserDefaults.standard
@@ -307,22 +297,11 @@ class AAHelper: NSObject {
         if _customId != nil && (preferences.value(forKey: AA_KEY_UDID) as? String != _customId) {
             preferences.setValue(_customId, forKey: AA_KEY_UDID)
             return _customId
-        } else if isAdTrackingEnabled() {
-            return ASIdentifierManager.shared().advertisingIdentifier.uuidString
         } else {
             if preferences.value(forKey: AA_KEY_UDID) == nil {
                 preferences.setValue(UUID().uuidString.replacingOccurrences(of: "-", with: ""), forKey: AA_KEY_UDID)
             }
             return preferences.value(forKey: AA_KEY_UDID) as? String
-        }
-    }
-
-    // Checking if ad tracking is enabled on the device
-    class func isAdTrackingEnabled() -> Bool {
-        if #available(iOS 14, *) {
-            return ATTrackingManager.trackingAuthorizationStatus == .authorized
-        } else {
-            return ASIdentifierManager.shared().isAdvertisingTrackingEnabled
         }
     }
 
@@ -364,7 +343,7 @@ class AAHelper: NSObject {
         uname(&sysinfo) // ignore return value
         return String(bytes: Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
     }
-
+    
     class func deviceIdentifier() -> String? {
         return UIDevice.current.identifierForVendor?.uuidString
     }

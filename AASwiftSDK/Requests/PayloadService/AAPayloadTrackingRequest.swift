@@ -34,7 +34,7 @@ class AAPayloadTrackingRequest: AAGenericRequest {
         setParamValue(AAHelper.deviceModelName() as NSObject?, forKey: AA_KEY_DEVICE_MODEL)
         setParamValue(AAHelper.sdkVersion() as NSObject?, forKey: AA_KEY_SDK_VERSION)
         setParamValue(AAHelper.bundleVersion() as NSObject?, forKey: AA_KEY_BUNDLE_VERSION)
-        setParamValue(NSNumber(value: AAHelper.isAdTrackingEnabled() ? 1 : 0) as NSObject?, forKey: AA_KEY_ALLOW_RETARGETING)
+        setParamValue(NSNumber(value: 0) as NSObject?, forKey: AA_KEY_ALLOW_RETARGETING)
         setParamValue(AAHelper.nowAsUTCNumber(), forKey: "timestamp")
 
         var array = [[String: Any]]()

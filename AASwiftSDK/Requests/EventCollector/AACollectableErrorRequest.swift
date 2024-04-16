@@ -32,7 +32,7 @@ class AACollectableErrorRequest: AAGenericRequest {
         setParamValue(AAHelper.currentTimezone() as NSObject?, forKey: AA_KEY_TIMEZONE)
         setParamValue(AAHelper.deviceLocale() as NSObject?, forKey: AA_KEY_LOCALE)
         setParamValue(AAHelper.deviceModelName() as NSObject?, forKey: AA_KEY_DEVICE_MODEL)
-        setParamValue(NSNumber(value: AAHelper.isAdTrackingEnabled() ? 1 : 0) as NSObject?, forKey: AA_KEY_ALLOW_RETARGETING)
+        setParamValue(NSNumber(value: 0) as NSObject?, forKey: AA_KEY_ALLOW_RETARGETING)
 
         let loc = AASDK.deviceLocationOrNil()
         if let loc = loc {

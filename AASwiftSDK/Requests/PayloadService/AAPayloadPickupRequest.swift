@@ -19,7 +19,7 @@ class AAPayloadPickupRequest: AAGenericRequest {
         setParamValue(AAHelper.currentTimezone() as NSObject?, forKey: AA_KEY_TIMEZONE)
         setParamValue(AAHelper.deviceLocale() as NSObject?, forKey: AA_KEY_LOCALE)
         setParamValue(AAHelper.deviceModelName() as NSObject?, forKey: AA_KEY_DEVICE_MODEL)
-        setParamValue(NSNumber(value: AAHelper.isAdTrackingEnabled() ? 1 : 0) as NSObject?, forKey: AA_KEY_ALLOW_RETARGETING)
+        setParamValue(NSNumber(value: 0) as NSObject?, forKey: AA_KEY_ALLOW_RETARGETING)
         setParamValue(AAHelper.nowAsUTCNumber(), forKey: "timestamp")
 
         let loc = AASDK.deviceLocationOrNil()

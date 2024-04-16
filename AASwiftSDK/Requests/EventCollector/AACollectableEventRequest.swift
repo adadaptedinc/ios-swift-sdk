@@ -33,7 +33,7 @@ class AACollectableEventRequest: AAGenericRequest {
         setParamValue(AAHelper.currentTimezone() as NSObject?, forKey: AA_KEY_EVENT_TIMEZONE)
         setParamValue(AAHelper.deviceLocale() as NSObject?, forKey: AA_KEY_EVENT_LOCALE)
         setParamValue(AAHelper.deviceModelName() as NSObject?, forKey: AA_KEY_EVENT_DEVICE_MODEL)
-        setParamValue(NSNumber(value: AAHelper.isAdTrackingEnabled() ? 1 : 0) as NSObject?, forKey: AA_KEY_ALLOW_RETARGETING)
+        setParamValue(NSNumber(value: 0) as NSObject?, forKey: AA_KEY_ALLOW_RETARGETING)
         
         let loc = AASDK.deviceLocationOrNil()
         if let loc = loc {

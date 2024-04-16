@@ -28,7 +28,7 @@ class AAInitRequest: AAGenericRequest {
         setParamValue(AAHelper.deviceHeightNumber(), forKey: AA_KEY_DEVICE_HEIGHT)
         setParamValue(AAHelper.deviceWidthNumber(), forKey: AA_KEY_DEVICE_WIDTH)
         setParamValue(AAHelper.deviceScreenDensity() as NSObject?, forKey: AA_KEY_DEVICE_DENSITY)
-        setParamValue(NSNumber(value: AAHelper.isAdTrackingEnabled()), forKey: AA_KEY_ALLOW_RETARGETING)
+        setParamValue(NSNumber(value: 0), forKey: AA_KEY_ALLOW_RETARGETING)
 
 
         // optional
