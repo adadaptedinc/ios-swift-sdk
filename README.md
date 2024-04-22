@@ -9,10 +9,11 @@
   <h3 align="center">AdAdapted Swift iOS SDK</h3>
 
   <p align="center">
-    New swift edition of the iOS SDK for AdAdapted.
+    Legacy swift/obj c edition of the iOS SDK for AdAdapted.
+    <br />
+    <a href="https://github.com/adadaptedinc/adadapted-swift-sdk"><strong>Try the new Swift Package Library »</strong></a>
     <br />
     <a href="https://docs.adadapted.com/#/"><strong>Explore the docs »</strong></a>
-    <br />
     <br />
     <a href="https://github.com/adadaptedinc/ios-swift-sdk/issues">Report Bug or Request Feature</a>
   </p>
