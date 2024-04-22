@@ -40,7 +40,7 @@ class AAAdAdaptedJSONZoneView: AAZoneView {
                 AASDK.trackAnomalyAdConfiguration(self.adProvider()?.getCurrentAd(), message: message)
                 self.adProvider()?.zoneRenderer!.provider(self.adProvider(), didFailToLoadZone: self.zoneId, ofType: AdTypeAndSource.kAdAdaptedJSONAd, message: "JSON ad payload missing")
             } else {
-                layoutAssets(self.adProvider()?.getCurrentAd()!.jsonAdPayload)
+                self.layoutAssets(self.adProvider()?.getCurrentAd()!.jsonAdPayload)
             }
         })
     }
