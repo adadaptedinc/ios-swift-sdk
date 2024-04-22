@@ -31,8 +31,8 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
         self.isWebViewVisible = isVisible
 
         sharedInit()
-        DispatchQueue.main.async {
-            self.loadWebViewByHtml()
+        DispatchQueue.main.async { [weak self] in
+            self?.loadWebViewByHtml()
         }
     }
     

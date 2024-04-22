@@ -515,9 +515,9 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
         }
         requestObj?.setValue("Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3", forHTTPHeaderField: "User-Agent")
 
-        DispatchQueue.main.async(execute: {
+        DispatchQueue.main.async(execute: { [weak self] in
             if let requestObj = requestObj {
-                self.webView?.load(requestObj as URLRequest)
+                self?.webView?.load(requestObj as URLRequest)
             }
         })
     }
@@ -643,23 +643,24 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
         }
 
         if didSetupConstraints {
-            DispatchQueue.main.async(execute: { [self] in
-                if !showHeader || !showCloseButton {
+            DispatchQueue.main.async(execute: { [weak self] in
+                guard let self = self else { return }
+                if !self.showHeader || !self.showCloseButton {
                     removeConstraints(constraints)
-                    if !showHeader {
-                        if let header = header {
+                    if !self.showHeader {
+                        if let header = self.header {
                             addSubview(header)
                         }
                     }
-                    if !showCloseButton {
-                        if let closeButtonImageView = closeButtonImageView {
-                            header?.addSubview(closeButtonImageView)
+                    if !self.showCloseButton {
+                        if let closeButtonImageView = self.closeButtonImageView {
+                            self.header?.addSubview(closeButtonImageView)
                         }
                     }
 
-                    showHeader = true
-                    showCloseButton = true
-                    didSetupConstraints = false
+                    self.showHeader = true
+                    self.showCloseButton = true
+                    self.didSetupConstraints = false
                     setNeedsUpdateConstraints()
                 }
             })

@@ -706,13 +706,14 @@ var _customId: String?
     }
 
     func startUpdateTimer() {
-        DispatchQueue.main.async(execute: { [self] in
-            if appID != nil && (appID?.count ?? 0) > 0 {
-                if updateTimer == nil {
+        DispatchQueue.main.async(execute: { [weak self] in
+            guard let self = self else { return }
+            if self.appID != nil && (self.appID?.count ?? 0) > 0 {
+                if self.updateTimer == nil {
                     updateTimer = Timer.scheduledTimer(
                         timeInterval: 30,
                         target: self,
-                        selector: #selector(updateTimerFired),
+                        selector: #selector(self.updateTimerFired),
                         userInfo: nil,
                         repeats: true)
                 }
