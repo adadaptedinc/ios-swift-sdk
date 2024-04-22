@@ -710,7 +710,7 @@ var _customId: String?
             guard let self = self else { return }
             if self.appID != nil && (self.appID?.count ?? 0) > 0 {
                 if self.updateTimer == nil {
-                    updateTimer = Timer.scheduledTimer(
+                    self.updateTimer = Timer.scheduledTimer(
                         timeInterval: 30,
                         target: self,
                         selector: #selector(self.updateTimerFired),
