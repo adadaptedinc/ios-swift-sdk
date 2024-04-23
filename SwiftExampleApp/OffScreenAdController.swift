@@ -17,6 +17,11 @@ class OffScreenAdContoller: UIViewController, UIScrollViewDelegate, AAZoneViewOw
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        manual creation
+//        let manualCreation = AdAdaptedZoneView(frame: .zero, forZone: "zoneID", delegate: self, isVisible: false)
+//        manualCreation.setAdZoneContext(contextID: "organic")
+//        manualCreation.setAdZoneVisibility(isViewable: true)
+        
         offScreenZoneView.setAdZoneVisibility(isViewable: false)
         offScreenScrollView.delegate = self
         offScreenZoneView.setZoneOwner(self)

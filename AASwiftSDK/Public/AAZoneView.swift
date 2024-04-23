@@ -32,8 +32,11 @@ import WebKit
     private var reportAdView: UIButton = UIButton(type: .custom)
     private var reportAdUrlComponents = URLComponents()
 
-    init(frame: CGRect, forZone zoneId: String?, zoneType type: AdTypeAndSource, delegate: AAZoneViewOwner?) {
+    init(frame: CGRect, forZone zoneId: String?, zoneType type: AdTypeAndSource, delegate: AAZoneViewOwner?, isVisible: Bool) {
         super.init(frame: frame)
+        if(isVisible == false) {
+            setAdZoneVisibility(isViewable: isVisible)
+        }
         setZoneId(zoneId, zoneType: type, delegate: delegate)
         sharedInit()
         AASDK.logDebugFrame(self.frame, message: "AAZoneView \(zoneId ?? "") initWithFrame")

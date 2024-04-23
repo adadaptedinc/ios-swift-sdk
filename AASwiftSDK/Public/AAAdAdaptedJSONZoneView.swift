@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class AAAdAdaptedJSONZoneView: AAZoneView {
-    init(frame: CGRect, forZone zoneId: String?, delegate: AAZoneViewOwner?) {
-        super.init(frame: frame, forZone: zoneId, zoneType: .kAdAdaptedJSONAd, delegate: delegate)
+    init(frame: CGRect, forZone zoneId: String?, delegate: AAZoneViewOwner?, isVisible: Bool = true) {
+        super.init(frame: frame, forZone: zoneId, zoneType: .kAdAdaptedJSONAd, delegate: delegate, isVisible: isVisible)
     }
 
     func layoutAssets(_ adAssets: [AnyHashable : Any]?) {
