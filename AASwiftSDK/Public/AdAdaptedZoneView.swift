@@ -9,8 +9,8 @@
 import UIKit
 
 @objc public class AdAdaptedZoneView: AAZoneView {
-    @objc public init(frame: CGRect, forZone zoneId: String?, delegate: AAZoneViewOwner?) {
-        super.init(frame: frame, forZone: zoneId, zoneType: .kAdAdaptedImageAd, delegate: delegate)
+    @objc public init(frame: CGRect, forZone zoneId: String?, delegate: AAZoneViewOwner?, isVisible: Bool = true) {
+        super.init(frame: frame, forZone: zoneId, zoneType: .kAdAdaptedImageAd, delegate: delegate, isVisible: isVisible)
     }
 
     public override func awakeFromNib() {
