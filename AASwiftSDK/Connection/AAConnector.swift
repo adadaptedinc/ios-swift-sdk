@@ -18,10 +18,10 @@ class AAConnector: NSObject, URLSessionDelegate {
     private var appID: String?
     private var sessionID: String?
     private var immediateQueue = Queue<AARequestBlockHolder>()
-    private var events = [AnyHashable]()
-    private var eventsV2 = [AnyHashable]()
-    private var collectableEvents = [AnyHashable]()
-    private var collectableErrorEvents = [AnyHashable]()
+    private var events: Set<AnyHashable> = []
+    private var eventsV2: Set<AnyHashable> = []
+    private var collectableEvents: Set<AnyHashable> = []
+    private var collectableErrorEvents: Set<AnyHashable> = []
     private var backgroundUpdateTask: UIBackgroundTaskIdentifier! = .invalid
     private var timer: Timer?
     private var session: URLSession?
@@ -61,7 +61,7 @@ class AAConnector: NSObject, URLSessionDelegate {
 
     func addEvent(forBatchDispatch event: AAReportableSessionEvent?) {
         if let event = event {
-            events.append(event)
+            events.insert(event)
         }
     }
 
@@ -75,19 +75,19 @@ class AAConnector: NSObject, URLSessionDelegate {
         }
 
         if let event = event {
-            eventsV2.append(event)
+            eventsV2.insert(event)
         }
     }
 
     func addCollectableEvent(forDispatch event: AACollectableEvent?) {
         if let event = event {
-            collectableEvents.append(event)
+            collectableEvents.insert(event)
         }
     }
 
     func addCollectableError(forDispatch event: AACollectableError?) {
         if let event = event {
-            collectableErrorEvents.append(event)
+            collectableErrorEvents.insert(event)
         }
     }
 

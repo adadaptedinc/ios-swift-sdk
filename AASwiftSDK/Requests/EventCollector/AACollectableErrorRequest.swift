@@ -9,7 +9,7 @@ import Foundation
 
 @objcMembers
 class AACollectableErrorRequest: AAGenericRequest {
-    init(events: [AnyHashable]?) {
+    init(events: Set<AnyHashable>?) {
         super.init()
         if let events = events {
             self.events = events
@@ -41,7 +41,7 @@ class AACollectableErrorRequest: AAGenericRequest {
         }
     }
 
-    private var events: [AnyHashable]?
+    private var events: Set<AnyHashable>?
 
     override func asJSON() -> String? {
         if let bytes = asData() {

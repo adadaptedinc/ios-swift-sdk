@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AASDKObserver, AASDKDebug
         let options = [
             AASDK.OPTION_TEST_MODE:true,
             AASDK.OPTION_KEYWORD_INTERCEPT:true,
-            AASDK.OPTION_EXTERNAL_PAYLOADS:true]
-            //AASDK.OPTION_CUSTOM_ID:"CustomIdTest::112"]
+            AASDK.OPTION_EXTERNAL_PAYLOADS:true,
+            AASDK.OPTION_CUSTOM_ID:"SwiftLegacyTestApp"]
             as [String : Any]
 
          // iOS api key
