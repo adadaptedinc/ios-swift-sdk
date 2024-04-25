@@ -187,7 +187,7 @@ class AAHelper: NSObject {
     }
 
     class func bundleVersion() -> String {
-        return Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
+        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     }
 
     class func bundleID() -> String {
