@@ -11,7 +11,7 @@ import Foundation
 class AABatchEventRequest: AAGenericRequest {
     private var version = 0
     
-    init(events: [AnyHashable]?, forVersion version: Int) {
+    init(events: Set<AnyHashable>?, forVersion version: Int) {
         super.init()
         self.version = version
         var dics: [Any] = []
@@ -29,7 +29,7 @@ class AABatchEventRequest: AAGenericRequest {
         setParamValue(dics as NSObject, forKey: "events")
     }
     
-    convenience init(events: [AnyHashable]?) {
+    convenience init(events: Set<AnyHashable>?) {
         self.init(events: events, forVersion: 1)
     }
 

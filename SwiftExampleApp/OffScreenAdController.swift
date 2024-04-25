@@ -13,18 +13,21 @@ class OffScreenAdContoller: UIViewController, UIScrollViewDelegate, AAZoneViewOw
 
     @IBOutlet weak var offScreenScrollView: UIScrollView!
     @IBOutlet weak var offScreenZoneView: AdAdaptedZoneView!
+    var manualCreation: AdAdaptedZoneView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
 //        manual creation
-//        let manualCreation = AdAdaptedZoneView(frame: .zero, forZone: "zoneID", delegate: self, isVisible: false)
-//        manualCreation.setAdZoneContext(contextID: "organic")
-//        manualCreation.setAdZoneVisibility(isViewable: true)
+        //manualCreation = AdAdaptedZoneView(frame: .init(x: 0, y: 0, width: 350, height: 100), forZone: "102110", delegate: self, isVisible: false)
+        //manualCreation.setAdZoneContext(contextID: "organic")
+        //manualCreation.setAdZoneVisibility(isViewable: true)
         
         offScreenZoneView.setAdZoneVisibility(isViewable: false)
         offScreenScrollView.delegate = self
         offScreenZoneView.setZoneOwner(self)
+        
+        //offScreenScrollView.addSubview(manualCreation)
     }
 
     func viewControllerForPresentingModalView() -> UIViewController? {
