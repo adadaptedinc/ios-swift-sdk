@@ -48,6 +48,7 @@ protocol AASDKObserverInternal: AASDKObserver {
     /// e.g. The data can be retrieved with: `NSDictionary *payload = [[notification userInfo] objectForKey:AASDK_KEY_AD_CONTENT];`
     /// See: \ref ad_content for more details.
     @objc optional func aaContentNotification(_ notification: Notification)
+    @objc optional func aaNonContentNotification(_ notification: Notification)
     /// \brief Payload Service Content Delivery
     /// \param notification The NSNotification has a `userInfo` dictionary with `AASDK_KEY_CONTENT_PAYLOADS` key.
     /// e.g. The data can be retrieved with: `NSDictionary *payload = [[notification userInfo] objectForKey:AASDK_KEY_CONTENT_PAYLOADS];`

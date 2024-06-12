@@ -49,6 +49,17 @@ class ViewController:
         return self
     }
     
+    //for ads that link to external pages or do not have items/payloads etc.
+    func aaNonContentNotification(_ notification: Notification) {
+        print("In-app non-content notification available")
+        
+        guard let userinfo = notification.userInfo else {
+            print("userinfo is nil")
+            return
+        }
+    }
+    
+    //for ads with items/payloads
     func aaContentNotification(_ notification: Notification) {
         print("In-app content available")
         
