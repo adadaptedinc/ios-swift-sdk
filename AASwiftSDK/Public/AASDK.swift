@@ -198,11 +198,6 @@ var _customId: String?
         for string in items ?? [] {
             AASDK.reportItem(string, addedToList: list)
         }
-        do {
-            for string in items ?? [] {
-                AASDK.reportItem(string, addedToList: list)
-            }
-        }
     }
 
     @objc public class func reportItems(_ items: [String], crossedOffList list: String?) {
@@ -1256,6 +1251,29 @@ extension AASDK {
             userInfo: dic)
 
         AASDK.logDebugMessage("AASDK: deliverContent:fromAd:andZoneView posting content event", type: DEBUG_USER_INTERACTION)
+        NotificationCenterWrapper.notifier.post(notification)
+    }
+    
+    // MARK: - non-content stuff
+    class func deliverNonContentNotification(from ad: AAAd?, andZoneView zoneView: AAZoneView?) {
+        var dic: [AnyHashable: Any]?
+        
+        if let zoneId = ad?.zoneId, let zoneView = zoneView {
+            dic = [
+                AA_KEY_AD_ID: ad?.adID ?? "",
+                KEY_ZONE_ID: zoneId,
+                KEY_ZONE_VIEW: zoneView
+            ]
+        }
+        
+        AASDK.logDebugMessage("AASDK: deliverNonContent:fromAd:andZoneView enter", type: DEBUG_USER_INTERACTION)
+        
+        let notification = Notification(
+            name: Notification.Name(rawValue: AASDK_NOTIFICATION_NON_CONTENT_DELIVERY),
+            object: nil,
+            userInfo: dic)
+        
+        AASDK.logDebugMessage("AASDK: deliverNonContent:fromAd:andZoneView posting non-content event", type: DEBUG_USER_INTERACTION)
         NotificationCenterWrapper.notifier.post(notification)
     }
 

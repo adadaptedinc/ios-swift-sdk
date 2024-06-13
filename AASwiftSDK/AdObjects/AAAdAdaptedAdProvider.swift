@@ -317,6 +317,7 @@ class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
                 if let actionPath = currentAd?.actionPath {
                     UIApplication.shared.open(actionPath)
                 }
+            AASDK.deliverNonContentNotification(from: currentAd, andZoneView: zoneRenderer!.clientZoneView())
 
         case AASDKActionType.kActionPopup:
                 if popupView == nil {
@@ -332,6 +333,7 @@ class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
                 if let popupView = popupView {
                     zoneRenderer!.viewControllerForPresentingModalView()!.present(popupView, animated: true)
                 }
+            AASDK.deliverNonContentNotification(from: currentAd, andZoneView: zoneRenderer!.clientZoneView())
 
         case AASDKActionType.kActionDelegate:
                 zoneRenderer!.handleCallToActionForZone()

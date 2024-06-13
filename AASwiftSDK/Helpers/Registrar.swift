@@ -49,6 +49,11 @@ class Registrar {
             removeObserver(observerName: delegate, notificationName: AASDK_NOTIFICATION_CONTENT_DELIVERY)
             addObserver(observerName: delegate, selectorName: #selector(AASDKContentDelegate.aaContentNotification(_:)), notificationName: AASDK_NOTIFICATION_CONTENT_DELIVERY)
         }
+        
+        if delegate.responds(to: #selector(AASDKContentDelegate.aaNonContentNotification(_:))) {
+            removeObserver(observerName: delegate, notificationName: AASDK_NOTIFICATION_NON_CONTENT_DELIVERY)
+            addObserver(observerName: delegate, selectorName: #selector(AASDKContentDelegate.aaNonContentNotification(_:)), notificationName: AASDK_NOTIFICATION_NON_CONTENT_DELIVERY)
+        }
 
         if delegate.responds(to: #selector(AASDKContentDelegate.aaPayloadNotification(_:))) {
             removeObserver(observerName: delegate, notificationName: AASDK_NOTIFICATION_CONTENT_PAYLOADS_INBOUND)
@@ -58,6 +63,7 @@ class Registrar {
     
     class func clearContentListeners(delegate: AASDKContentDelegate) {
         removeObserver(observerName: delegate, notificationName: AASDK_NOTIFICATION_CONTENT_DELIVERY)
+        removeObserver(observerName: delegate, notificationName: AASDK_NOTIFICATION_NON_CONTENT_DELIVERY)
         removeObserver(observerName: delegate, notificationName: AASDK_NOTIFICATION_CONTENT_PAYLOADS_INBOUND)
     }
     
