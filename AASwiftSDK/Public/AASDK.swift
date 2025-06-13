@@ -173,7 +173,7 @@ var _customId: String?
 
     class func setDeviceLocation(_ location: CLLocation?) {
         if let location = location {
-            AASDK.logDebugMessage("AASDK location set \(location.coordinate.latitude) \(location.coordinate.longitude)", type: DEBUG_GENERAL)
+            AASDK.logDebugMessage("AASDK location set successfully", type: DEBUG_GENERAL)
             _aasdk?.deviceLocation = location
         } else {
             AASDK.logDebugMessage("Location set to nil", type: DEBUG_GENERAL)
