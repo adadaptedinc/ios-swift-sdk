@@ -1,0 +1,18 @@
+# Satisfies the "validation" status check required by the main branch ruleset.
+
+name: Validation
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  validation:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Validate
+      run: echo "No validation steps configured."
