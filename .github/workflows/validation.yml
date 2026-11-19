@@ -1,18 +1,77 @@
 # Satisfies the "validation" status check required by the main branch ruleset.
+# Mirrors adadapted-swift-sdk's validation workflow.
 
-name: Validation
-
+name: validation
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
-
+  push:
+    branches: [main, master]
 jobs:
   validation:
-
-    runs-on: ubuntu-latest
-
+    runs-on: macos-latest
+    permissions:
+      contents: read
     steps:
-    - name: Validate
-      run: echo "No validation steps configured."
+      - uses: actions/checkout@v4
+
+      # Resolved at run time rather than pinned to a device name, since the runner image drops
+      # older iPhone models as Xcode versions roll forward
+      - name: Select an iOS simulator
+        id: simulator
+        run: |
+          udid=$(xcrun simctl list devices available -j \
+            | jq -r 'first(.devices | to_entries[] | select(.key | test("iOS")) | .value[] | select(.name | startswith("iPhone")) | .udid)')
+          if [ -z "$udid" ] || [ "$udid" = "null" ]; then
+            echo "::error::No available iPhone simulator on this runner"
+            xcrun simctl list devices available
+            exit 1
+          fi
+          xcrun simctl list devices available | grep "$udid"
+          echo "udid=$udid" >> "$GITHUB_OUTPUT"
+
+      - name: Boot the simulator
+        run: |
+          xcrun simctl boot "${{ steps.simulator.outputs.udid }}" || true
+          xcrun simctl bootstatus "${{ steps.simulator.outputs.udid }}"
+
+      # Serial, with a failing test retried in a fresh process; only a test that fails every attempt
+      # fails the run.
+      - name: Run unit tests
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project AASwiftSDK.xcodeproj \
+            -scheme AASwiftSDK \
+            -destination "id=${{ steps.simulator.outputs.udid }}" \
+            -parallel-testing-enabled NO \
+            -retry-tests-on-failure \
+            -test-iterations 3 \
+            -test-repetition-relaunch-enabled YES \
+            -resultBundlePath TestResults.xcresult \
+            CODE_SIGNING_ALLOWED=NO \
+            | tee xcodebuild.log
+
+      # A test that only passes on a retry exits 0; surface it as a warning so flakes stay visible.
+      - name: Warn on tests that needed a retry
+        if: always()
+        run: |
+          [ -f xcodebuild.log ] || exit 0
+          attempts=$(grep -oE "Test Case '-\[[^]]*\]' failed" xcodebuild.log \
+            | sed -E "s/^Test Case '-\[(.*)\]' failed\$/\1/" | sort -u || true)
+          if [ -z "$attempts" ]; then
+            echo "No test needed more than one attempt."
+            exit 0
+          fi
+          echo "$attempts" | while read -r test; do
+            echo "::warning::Test needed more than one attempt: $test"
+          done
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: TestResults
+          path: |
+            TestResults.xcresult
+            xcodebuild.log
+          retention-days: 7

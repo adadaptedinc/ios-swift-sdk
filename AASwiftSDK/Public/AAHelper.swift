@@ -183,7 +183,7 @@ var _screenSize = CGSize.zero
 
 class AAHelper: NSObject {
     class func sdkVersion() -> String {
-        return "1.3.8"
+        return "1.3.9"
     }
 
     class func bundleVersion() -> String {
@@ -468,4 +468,26 @@ class AAHelper: NSObject {
     }
 }
 
-extension String: Error {}
+// Fully qualified so the retroactive-conformance warning is silenced on every Swift compiler
+extension Swift.String: Swift.Error {}
+
+// MARK: - Scene-based UIApplication state
+/// Replaces `statusBarOrientation` / `isStatusBarHidden`, which are deprecated and no-ops on iOS 27+.
+extension UIApplication {
+    var aaInterfaceOrientation: UIInterfaceOrientation {
+        guard #available(iOS 13.0, *) else { return statusBarOrientation }
+        let orientation = aaActiveWindowScene?.interfaceOrientation ?? .unknown
+        return orientation == .unknown ? .portrait : orientation
+    }
+
+    var aaIsStatusBarHidden: Bool {
+        guard #available(iOS 13.0, *) else { return isStatusBarHidden }
+        return aaActiveWindowScene?.statusBarManager?.isStatusBarHidden ?? false
+    }
+
+    @available(iOS 13.0, *)
+    private var aaActiveWindowScene: UIWindowScene? {
+        let scenes = connectedScenes.compactMap { $0 as? UIWindowScene }
+        return scenes.first { $0.activationState == .foregroundActive } ?? scenes.first
+    }
+}

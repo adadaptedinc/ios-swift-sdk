@@ -14,6 +14,8 @@ class AACollectableEventRequestTests: XCTestCase {
 
         ReportManager.createInstance(connector: mockConnector!)
         NotificationCenterWrapper.createInstance(notificationCenter: mockNotificationCenter!)
+        // A session left initializing by an earlier test makes startSession ignore TEST_MODE
+        _currentState = .kUninitialized
     }
 
     func testInitParams() {
