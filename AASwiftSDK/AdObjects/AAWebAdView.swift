@@ -161,7 +161,7 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
     }
 
     override var intrinsicContentSize: CGSize {
-        let size = AASDK.sizeOfZone(ad?.zoneId, for: UIApplication.shared.aaInterfaceOrientation)
+        let size = AASDK.sizeOfZone(ad?.zoneId, for: UIApplication.shared.aaInterfaceOrientation(for: self))
         return size
     }
 

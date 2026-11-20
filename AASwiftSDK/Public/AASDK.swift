@@ -214,7 +214,7 @@ var _customId: String?
 
 // MARK: - programatic layout conveniences
     class func sizeOfZone(_ zoneId: String?) -> CGSize {
-        return AASDK.sizeOfZone(zoneId, for: UIApplication.shared.aaInterfaceOrientation)
+        return AASDK.sizeOfZone(zoneId, for: UIApplication.shared.aaInterfaceOrientation())
     }
 
     class func sizeOfZone(_ zoneId: String?, for orientation: UIInterfaceOrientation) -> CGSize {

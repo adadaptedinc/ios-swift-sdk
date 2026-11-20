@@ -265,7 +265,7 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
 
             var height: NSNumber?
 
-            if UIApplication.shared.aaIsStatusBarHidden {
+            if UIApplication.shared.aaIsStatusBarHidden(for: self) {
                 height = NSNumber(value: 37)
             } else {
                 height = NSNumber(value: 57)

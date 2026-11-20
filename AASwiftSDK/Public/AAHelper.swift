@@ -473,21 +473,44 @@ extension Swift.String: Swift.Error {}
 
 // MARK: - Scene-based UIApplication state
 /// Replaces `statusBarOrientation` / `isStatusBarHidden`, which are deprecated and no-ops on iOS 27+.
+/// Pass the view that will display the result so multi-window apps read the scene that actually hosts it.
 extension UIApplication {
-    var aaInterfaceOrientation: UIInterfaceOrientation {
-        guard #available(iOS 13.0, *) else { return statusBarOrientation }
-        let orientation = aaActiveWindowScene?.interfaceOrientation ?? .unknown
+    func aaInterfaceOrientation(for view: UIView? = nil) -> UIInterfaceOrientation {
+        var orientation = UIInterfaceOrientation.unknown
+        if #available(iOS 13.0, *), let scene = aaWindowScene(for: view) {
+            orientation = scene.interfaceOrientation
+        }
+        if orientation == .unknown, aaLegacyStateAvailable {
+            orientation = statusBarOrientation
+        }
         return orientation == .unknown ? .portrait : orientation
     }
 
-    var aaIsStatusBarHidden: Bool {
-        guard #available(iOS 13.0, *) else { return isStatusBarHidden }
-        return aaActiveWindowScene?.statusBarManager?.isStatusBarHidden ?? false
+    func aaIsStatusBarHidden(for view: UIView? = nil) -> Bool {
+        if #available(iOS 13.0, *), let statusBarManager = aaWindowScene(for: view)?.statusBarManager {
+            return statusBarManager.isStatusBarHidden
+        }
+        return aaLegacyStateAvailable ? isStatusBarHidden : false
     }
 
+    /// The legacy app-wide APIs still return real values before iOS 27, so they remain a valid
+    /// fallback when no window scene is available (e.g. early in launch).
+    private var aaLegacyStateAvailable: Bool {
+        if #available(iOS 27.0, *) { return false }
+        return true
+    }
+
+    /// Prefers the scene hosting `view`. For views not yet in a window, falls back to the
+    /// foreground-active scene holding the key window, then any foreground-active scene, then any scene.
     @available(iOS 13.0, *)
-    private var aaActiveWindowScene: UIWindowScene? {
+    private func aaWindowScene(for view: UIView?) -> UIWindowScene? {
+        if let scene = view?.window?.windowScene {
+            return scene
+        }
         let scenes = connectedScenes.compactMap { $0 as? UIWindowScene }
-        return scenes.first { $0.activationState == .foregroundActive } ?? scenes.first
+        let active = scenes.filter { $0.activationState == .foregroundActive }
+        return active.first { scene in scene.windows.contains { $0.isKeyWindow } }
+            ?? active.first
+            ?? scenes.first
     }
 }
