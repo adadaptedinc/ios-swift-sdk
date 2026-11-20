@@ -161,7 +161,7 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
     }
 
     override var intrinsicContentSize: CGSize {
-        let size = AASDK.sizeOfZone(ad?.zoneId, for: UIApplication.shared.statusBarOrientation)
+        let size = AASDK.sizeOfZone(ad?.zoneId, for: UIApplication.shared.aaInterfaceOrientation(for: self))
         return size
     }
 
@@ -182,8 +182,6 @@ class AAWebAdView: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate, WK
     }
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-
         var str: String? = nil
         if let adID = ad?.adID, let zoneId = ad?.zoneId {
             str = "ERROR - HTML ad: \(adID) in zone: \(zoneId) failed to load: \n\((error as NSError).userInfo)"
