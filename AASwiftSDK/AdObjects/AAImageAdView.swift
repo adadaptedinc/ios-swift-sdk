@@ -73,7 +73,7 @@ class AAImageAdView: UIImageView {
     }
 
     override var intrinsicContentSize: CGSize {
-        return AASDK.sizeOfZone(ad?.zoneId ?? "", for: UIApplication.shared.statusBarOrientation)
+        return AASDK.sizeOfZone(ad?.zoneId ?? "", for: UIApplication.shared.aaInterfaceOrientation(for: self))
     }
 
 // MARK: - factory methods

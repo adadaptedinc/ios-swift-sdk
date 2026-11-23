@@ -1,4 +1,8 @@
 <!-- PROJECT LOGO -->
+> [!WARNING]
+> **This SDK is deprecated and no longer receiving updates.** Version 1.3.9 is the final release of `AASwiftSDK`.
+> All new and existing integrations should move to the [AdAdapted Swift Package SDK](https://github.com/adadaptedinc/adadapted-swift-sdk), distributed via Swift Package Manager.
+
 <br />
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
@@ -9,13 +13,12 @@
   <h3 align="center">AdAdapted Swift iOS SDK</h3>
 
   <p align="center">
-    Legacy swift/obj c edition of the iOS SDK for AdAdapted.
+    <strong>Deprecated</strong> legacy Swift/Obj-C edition of the iOS SDK for AdAdapted. No longer receiving updates.
     <br />
-    <a href="https://github.com/adadaptedinc/adadapted-swift-sdk"><strong>Try the new Swift Package Library »</strong></a>
+    <a href="https://github.com/adadaptedinc/adadapted-swift-sdk"><strong>Use the new Swift Package SDK »</strong></a>
     <br />
     <a href="https://docs.adadapted.com/#/"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="https://github.com/adadaptedinc/ios-swift-sdk/issues">Report Bug or Request Feature</a>
   </p>
 </p>
 
@@ -23,6 +26,8 @@
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
+* [Deprecation Notice](#deprecation-notice)
+* [Migrating to the Swift Package SDK](#migrating-to-the-swift-package-sdk)
 * [About the Project](#about-the-project)
 * [Getting Started](#getting-started)
 * [CoCoa Pod](#cocoa-pod)
@@ -31,6 +36,36 @@
 * [Contact](#contact)
 
 
+<!-- DEPRECATION NOTICE -->
+## Deprecation Notice
+
+`AASwiftSDK` (this repository and the `AASwiftSDK` CocoaPod) has reached end of life:
+
+* **1.3.9 is the final release.** It includes compatibility fixes for iOS 27 so existing integrations keep working, but no further fixes, features, or OS compatibility updates are planned.
+* **New feature requests and bug reports will not be addressed here.** Please direct them to the [Swift Package SDK](https://github.com/adadaptedinc/adadapted-swift-sdk/issues).
+* **CocoaPods distribution is frozen.** The pod will remain available for existing apps, but it will not be updated.
+
+<!-- MIGRATION -->
+## Migrating to the Swift Package SDK
+
+The replacement SDK lives at [adadaptedinc/adadapted-swift-sdk](https://github.com/adadaptedinc/adadapted-swift-sdk) and is installed with Swift Package Manager.
+
+1. Remove `pod 'AASwiftSDK'` from your `Podfile` and run `pod install` (or remove the pod integration entirely if it was your only pod).
+2. In Xcode, choose **File → Add Package Dependencies…** and enter:
+   ```
+   https://github.com/adadaptedinc/adadapted-swift-sdk
+   ```
+   Select the latest release version.
+3. Replace `import AASwiftSDK` with:
+   ```swift
+   import adadapted_swift_sdk
+   ```
+4. Update your session start, ad view, and keyword intercept calls to the new API by following the [iOS Getting Started guide](https://docs.adadapted.com/#/docs/ios-getting-started).
+
+Note that the Swift Package SDK requires iOS 13 or later (this SDK requires iOS 15 as of 1.3.9).
+
+A reference implementation using the new SDK is available in [SwiftAdapted](https://github.com/adadaptedinc/swift-adapted).
+
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -38,6 +73,8 @@ This SDK is used for implementing the AdAdapted ad views, keyword interception, 
 
 <!-- GETTING STARTED -->
 ## Getting Started
+
+> These instructions are kept for reference by existing integrations only. New integrations should use the [Swift Package SDK](#migrating-to-the-swift-package-sdk).
 
 To get a local copy up and running simply download the source code and run it through one of the target sample apps (SwiftExample and ObjcExample). You'll also need to input your own API key in the example app AppDelegates respectively. After that, you should start seeing ads and intercepts on the following 'List Page' of the sample apps (assuming your API key has a corresponding ad campaign enabled).
 
@@ -48,9 +85,11 @@ AASDK.startSession(withAppID: "YOUR_API_KEY", registerListenersFor: self, option
 <!-- COCOA POD -->
 ## CoCoa Pod
 
+> The `AASwiftSDK` pod is frozen at 1.3.9 and will not receive further updates.
+
 Alternatively the SDK is available via CoCoa Pod and can be directly imported and used within your own apps. 
 
-Once you have CoCoa Pods installed and integrated with your project, you can udpate your podfile to include the 'AASwiftSDK' pod:
+Once you have CoCoa Pods installed and integrated with your project, you can update your podfile to include the 'AASwiftSDK' pod:
 
 ```sh
 # Uncomment the next line to define a global platform for your project
@@ -70,7 +109,7 @@ Then after opening the `.xcworkspace` version of your project, you should see th
 <!-- CONTRIBUTING -->
 ## Contributing
 
-When contributing please follow the guidelines below:
+This repository is no longer accepting feature contributions. Please contribute to the [Swift Package SDK](https://github.com/adadaptedinc/adadapted-swift-sdk) instead. The guidelines below are retained for historical reference.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)

@@ -183,7 +183,7 @@ var _screenSize = CGSize.zero
 
 class AAHelper: NSObject {
     class func sdkVersion() -> String {
-        return "1.3.8"
+        return "1.3.9"
     }
 
     class func bundleVersion() -> String {
@@ -468,4 +468,57 @@ class AAHelper: NSObject {
     }
 }
 
-extension String: Error {}
+// Fully qualified so the retroactive-conformance warning is silenced on every Swift compiler
+extension Swift.String: Swift.Error {}
+
+/// Reads the deprecated app-wide properties through a protocol so the pre-iOS 27 fallback
+/// below compiles without deprecation warnings.
+private protocol AALegacyApplicationState {
+    var statusBarOrientation: UIInterfaceOrientation { get }
+    var isStatusBarHidden: Bool { get }
+}
+extension UIApplication: AALegacyApplicationState {}
+
+// MARK: - Scene-based UIApplication state
+/// Replaces `statusBarOrientation` / `isStatusBarHidden`, which are deprecated and no-ops on iOS 27+.
+/// Pass the view that will display the result so multi-window apps read the scene that actually hosts it.
+extension UIApplication {
+    func aaInterfaceOrientation(for view: UIView? = nil) -> UIInterfaceOrientation {
+        var orientation = UIInterfaceOrientation.unknown
+        if #available(iOS 13.0, *), let scene = aaWindowScene(for: view) {
+            orientation = scene.interfaceOrientation
+        }
+        if orientation == .unknown, aaLegacyStateAvailable {
+            orientation = (self as AALegacyApplicationState).statusBarOrientation
+        }
+        return orientation == .unknown ? .portrait : orientation
+    }
+
+    func aaIsStatusBarHidden(for view: UIView? = nil) -> Bool {
+        if #available(iOS 13.0, *), let statusBarManager = aaWindowScene(for: view)?.statusBarManager {
+            return statusBarManager.isStatusBarHidden
+        }
+        return aaLegacyStateAvailable ? (self as AALegacyApplicationState).isStatusBarHidden : false
+    }
+
+    /// The legacy app-wide APIs still return real values before iOS 27, so they remain a valid
+    /// fallback when no window scene is available (e.g. early in launch).
+    private var aaLegacyStateAvailable: Bool {
+        if #available(iOS 27.0, *) { return false }
+        return true
+    }
+
+    /// Prefers the scene hosting `view`. For views not yet in a window, falls back to the
+    /// foreground-active scene holding the key window, then any foreground-active scene, then any scene.
+    @available(iOS 13.0, *)
+    private func aaWindowScene(for view: UIView?) -> UIWindowScene? {
+        if let scene = view?.window?.windowScene {
+            return scene
+        }
+        let scenes = connectedScenes.compactMap { $0 as? UIWindowScene }
+        let active = scenes.filter { $0.activationState == .foregroundActive }
+        return active.first { scene in scene.windows.contains { $0.isKeyWindow } }
+            ?? active.first
+            ?? scenes.first
+    }
+}

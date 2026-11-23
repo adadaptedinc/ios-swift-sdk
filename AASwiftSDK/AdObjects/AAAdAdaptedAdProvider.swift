@@ -64,7 +64,7 @@ class AAAdAdaptedAdProvider: NSObject, AAImageAdViewDelegate, AAPopupDelegate {
         isHidden = false
         allowPopupClose = false
 
-        targetOrientation = UIApplication.shared.statusBarOrientation
+        targetOrientation = UIApplication.shared.aaInterfaceOrientation(for: zoneView)
 
         NotificationCenterWrapper.notifier.addObserver(
             self,

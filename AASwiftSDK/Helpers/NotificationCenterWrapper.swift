@@ -12,7 +12,7 @@ class NotificationCenterWrapper {
     private static var instance: NotificationCenterWrapper? =  nil
     private var _notificationCenter: NotificationCenter = NotificationCenter()
     
-    static var notifier = instance!._notificationCenter
+    static var notifier: NotificationCenter { instance!._notificationCenter }
     
     class func createInstance(notificationCenter: NotificationCenter) {
         instance = NotificationCenterWrapper(notificationCenter: notificationCenter)

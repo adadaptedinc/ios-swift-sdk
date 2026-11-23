@@ -265,7 +265,7 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
 
             var height: NSNumber?
 
-            if UIApplication.shared.isStatusBarHidden {
+            if UIApplication.shared.aaIsStatusBarHidden(for: self) {
                 height = NSNumber(value: 37)
             } else {
                 height = NSNumber(value: 57)
@@ -552,7 +552,6 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == .other {
             // this is entered when you're initially loading the webview
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             if let adID = ad?.adID {
                 AASDK.logDebugMessage("Popup for ad \(adID) navigating to \(navigationAction.request.url?.absoluteString ?? "")", type: AASDK.DEBUG_GENERAL)
             }
@@ -591,7 +590,6 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
                 delegate?.contentActionTaken(with: (rawString as NSString?)?.substring(from: 8))
                 decisionHandler(WKNavigationActionPolicy.cancel)
             } else {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = true
                 decisionHandler(WKNavigationActionPolicy.cancel)
             }
         }
@@ -600,8 +598,6 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         previousButton?.isEnabled = self.webView?.canGoBack ?? false
         nextButton?.isEnabled = self.webView?.canGoForward ?? false
-
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
 
         UIView.animate(
             withDuration: 0.5,
@@ -620,8 +616,6 @@ class AAPopupView: UIView, WKNavigationDelegate, WKUIDelegate {
         }
 
         popupLoadProblem = true
-
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
 
         var url = "unkown"
         if (error as NSError).userInfo["NSErrorFailingURLStringKey"] != nil {

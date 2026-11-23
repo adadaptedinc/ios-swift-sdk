@@ -19,5 +19,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    # A build needs no booted device, so no simulator has to exist or be named here
     - name: Build
-      run: xcodebuild build -project AASwiftSDK.xcodeproj -scheme AASwiftSDK
+      run: xcodebuild build -project AASwiftSDK.xcodeproj -scheme AASwiftSDK -destination 'generic/platform=iOS Simulator'
