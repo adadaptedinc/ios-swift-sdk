@@ -471,6 +471,14 @@ class AAHelper: NSObject {
 // Fully qualified so the retroactive-conformance warning is silenced on every Swift compiler
 extension Swift.String: Swift.Error {}
 
+/// Reads the deprecated app-wide properties through a protocol so the pre-iOS 27 fallback
+/// below compiles without deprecation warnings.
+private protocol AALegacyApplicationState {
+    var statusBarOrientation: UIInterfaceOrientation { get }
+    var isStatusBarHidden: Bool { get }
+}
+extension UIApplication: AALegacyApplicationState {}
+
 // MARK: - Scene-based UIApplication state
 /// Replaces `statusBarOrientation` / `isStatusBarHidden`, which are deprecated and no-ops on iOS 27+.
 /// Pass the view that will display the result so multi-window apps read the scene that actually hosts it.
@@ -481,7 +489,7 @@ extension UIApplication {
             orientation = scene.interfaceOrientation
         }
         if orientation == .unknown, aaLegacyStateAvailable {
-            orientation = statusBarOrientation
+            orientation = (self as AALegacyApplicationState).statusBarOrientation
         }
         return orientation == .unknown ? .portrait : orientation
     }
@@ -490,7 +498,7 @@ extension UIApplication {
         if #available(iOS 13.0, *), let statusBarManager = aaWindowScene(for: view)?.statusBarManager {
             return statusBarManager.isStatusBarHidden
         }
-        return aaLegacyStateAvailable ? isStatusBarHidden : false
+        return aaLegacyStateAvailable ? (self as AALegacyApplicationState).isStatusBarHidden : false
     }
 
     /// The legacy app-wide APIs still return real values before iOS 27, so they remain a valid

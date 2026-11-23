@@ -62,7 +62,7 @@ The replacement SDK lives at [adadaptedinc/adadapted-swift-sdk](https://github.c
    ```
 4. Update your session start, ad view, and keyword intercept calls to the new API by following the [iOS Getting Started guide](https://docs.adadapted.com/#/docs/ios-getting-started).
 
-Note that the Swift Package SDK requires iOS 13 or later (this SDK supported iOS 12).
+Note that the Swift Package SDK requires iOS 13 or later (this SDK requires iOS 15 as of 1.3.9).
 
 A reference implementation using the new SDK is available in [SwiftAdapted](https://github.com/adadaptedinc/swift-adapted).
 
